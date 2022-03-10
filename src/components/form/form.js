@@ -1,12 +1,19 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const INITIAL_STATE = { username: "", password: "" };
 
 export const FormLogin = () => {
   const [values, setValues] = React.useState(INITIAL_STATE);
   const [response, setResponse] = React.useState(null);
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    response?.id && navigate(`/reservation/${response.id}`);
+  }, [response]);
 
   const handleChange = (event) => {
     setValues((prevState) => ({
