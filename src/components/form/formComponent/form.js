@@ -1,37 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import PropTypes from "prop-types";
 
-const INITIAL_STATE = { username: "", password: "" };
-
-export const FormLogin = () => {
-  const [values, setValues] = React.useState(INITIAL_STATE);
-  const [response, setResponse] = React.useState(null);
-
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    response?.id && navigate(`/reservation/${response.id}`);
-  }, [response]);
-
-  const handleChange = (event) => {
-    setValues((prevState) => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    axios
-      .post("http://localhost:4000/users/login", values)
-      .then((res) => setResponse(res.data));
-
-    setValues(INITIAL_STATE);
-  };
-
+export const FormLogin = ({ values, response, handleSubmit, handleChange }) => {
   return (
     <div className="container m-2">
       <form onSubmit={handleSubmit}>
@@ -75,4 +46,11 @@ export const FormLogin = () => {
       )}
     </div>
   );
+};
+
+FormLogin.propTypes = {
+  values: PropTypes.object,
+  response: PropTypes.object,
+  handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
 };

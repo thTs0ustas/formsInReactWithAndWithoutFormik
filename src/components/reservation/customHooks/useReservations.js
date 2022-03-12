@@ -1,27 +1,62 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+
 import axios from "axios";
 
-export const useReservations = (userId) => {
-  const [movies, setMovies] = useState([]);
-  const navigate = useNavigate();
+const INITIAL_STATE = {
+  cinema: "",
+  auditorium: "",
+  movie: "",
+  screening: "",
+  seat: "",
+};
+const BASE_URL = "http://localhost:4000";
+export const useReservations = () => {
+  const [values, setValues] = React.useState(() => INITIAL_STATE);
+  const [response, setResponse] = React.useState(null);
+  const [cinema, setCinema] = React.useState([]);
+  const [movies, setMovies] = React.useState([]);
 
-  useEffect(() => {
-    if (!window.sessionStorage.getItem("token")) {
-      navigate("/");
+  // const price = seats.reduce((sum, value) => sum + value).toFixed(2);
+
+  console.log(values);
+  React.useEffect(() => {
+    axios.get(`${BASE_URL}/cinema`).then((response) => {
+      setCinema(response.data);
+    });
+    if (values.cinema) {
+      axios.get(`${BASE_URL}/movies`).then((response) => {
+        setMovies(response.data);
+      });
     }
-    console.log(1);
-    axios
-      .get("http://localhost:4000/movies", {
-        params: {
-          id: userId,
-        },
-        headers: {
-          authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
-        },
-      })
-      .then(({ data }) => setMovies(data));
-  }, [userId]);
+  }, [values]);
 
-  return { movies };
+  const handleChange = (event) => {
+    setValues((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .post("http://localhost:4000/users/create", values)
+      .then((res) => setResponse(res.data));
+
+    setValues(INITIAL_STATE);
+  };
+
+  return {
+    values,
+    handleChange,
+    cinema,
+    movies,
+    handleSubmit,
+    response,
+    // price
+    // auditorium,
+    // screening,
+    // seats,
+  };
 };

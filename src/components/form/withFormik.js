@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const ContactUsForm = () => {
-  const [response, setResponse] = useState(null);
+  const [state, setState] = useState(null);
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -15,14 +15,19 @@ export const ContactUsForm = () => {
       const username = window.sessionStorage.getItem("username");
       username && navigate(`/users/${username}/reservation`);
     }
-    if (response?.accessToken) {
-      window.sessionStorage.setItem("token", response.accessToken);
-      window.sessionStorage.setItem("username", response?.username);
-      navigate(`/users/${response?.username}/reservation`);
-    }
-  }, [response]);
 
-  console.log(response);
+    if (state?.accessToken && state?.username) {
+      const username = state?.username;
+      const accessToken = state?.accessToken;
+
+      window.sessionStorage.setItem("token", accessToken);
+      window.sessionStorage.setItem("username", username);
+
+      navigate(`/users/${username}/reservation`);
+    }
+  }, [state]);
+
+  console.log(state);
   return (
     <>
       <Formik
@@ -33,9 +38,9 @@ export const ContactUsForm = () => {
               username: values.username,
               password: values.password,
             })
-            .then(({ data }) => {
-              setResponse(data);
+            .then((res) => {
               resetForm();
+              setState(res.data);
             })
             .then(() => setSubmitting(false));
         }}
@@ -114,7 +119,7 @@ export const ContactUsForm = () => {
           </Form>
         )}
       </Formik>
-      <div>{response ? (response.message ? response.message : null) : ""}</div>
+      <div>{state ? (state.message ? state.message : null) : ""}</div>
     </>
   );
 };

@@ -1,1 +1,1 @@
-export { Reservation } from "./reservation";
+export { default as Reservation } from "./Container/ReservationContainer";
