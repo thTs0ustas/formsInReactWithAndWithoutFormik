@@ -7,6 +7,7 @@ export const Reservation = ({
   values,
   price,
   cinema,
+  setScreeningString,
   handleChange,
   movies,
   auditorium,
@@ -26,7 +27,7 @@ export const Reservation = ({
           </label>
           <select
             name="cinema"
-            className="form-select d-inline-block mx-auto h-25 w-25"
+            className="form-select d-inline-block mx-auto h-25 w-50"
             id="cinema"
             aria-label=""
             onChange={handleChange}
@@ -48,7 +49,7 @@ export const Reservation = ({
           </label>
           <select
             name="movie"
-            className="form-select d-inline-block mx-auto h-25 w-25"
+            className="form-select d-inline-block mx-auto h-25 w-50"
             id="movie"
             aria-label=""
             onChange={handleChange}
@@ -71,7 +72,7 @@ export const Reservation = ({
           </label>
           <select
             name="auditorium"
-            className="form-select d-inline-block mx-auto h-25 w-25"
+            className="form-select d-inline-block mx-auto h-25 w-50"
             id="auditorium"
             aria-label=""
             onChange={handleChange}
@@ -93,7 +94,7 @@ export const Reservation = ({
             Screening:
           </label>
           <select
-            className="form-select d-inline-block mx-auto h-25 w-25"
+            className="form-select d-inline-block mx-auto h-25 w-50"
             id="screening"
             aria-label=""
             onChange={handleChange}
@@ -103,7 +104,11 @@ export const Reservation = ({
             <option value="">Choose...</option>
             {screening.map((a) => (
               <option key={a.id} value={a.id}>
-                {`${new Date(a["movie_starts"])}`}
+                {setScreeningString(
+                  a["movie_starts"],
+                  a["movie_ends"],
+                  a["movie_date"]
+                )}
               </option>
             ))}
           </select>

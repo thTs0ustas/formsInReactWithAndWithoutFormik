@@ -4,6 +4,7 @@ import { Reservation } from "../presentational/reservation";
 import axios from "axios";
 
 const BASE_URL = "http://localhost:4000";
+
 const INITIAL_STATE = {
   cinema: "",
   auditorium: "",
@@ -14,21 +15,27 @@ const INITIAL_STATE = {
 
 function ReservationContainer(WrapComponent) {
   return function WC() {
-    const [values, setValues] = React.useState(() => INITIAL_STATE);
-    const [response, setResponse] = React.useState(() => null);
-    const [cinema, setCinema] = React.useState(() => []);
-    const [movies, setMovies] = React.useState(() => []);
-    const [auditorium, setAuditorium] = React.useState(() => []);
-    const [screening, setScreening] = React.useState(() => []);
-    const [seats, setSeats] = React.useState(() => []);
+    const [values, setValues] = React.useState(INITIAL_STATE);
+    const [response, setResponse] = React.useState(null);
+    const [cinema, setCinema] = React.useState([]);
+    const [movies, setMovies] = React.useState([]);
+    const [auditorium, setAuditorium] = React.useState([]);
+    const [screening, setScreening] = React.useState([]);
+    const [seats, setSeats] = React.useState([]);
 
     const navigate = useNavigate();
-
     const { username } = useParams();
 
     const price = (
       values.seat ? seats.find((seat) => seat.id == values.seat).cost : 0
     ).toFixed(2);
+
+    const setScreeningString = (start, end, date) => {
+      return `
+      ${new Date(date).toDateString()}
+      ${new Date(start).toISOString().split("T")[1].slice(0, 5)} - 
+      ${new Date(end).toISOString().split("T")[1].slice(0, 5)}`;
+    };
 
     const prevItemIdRef = useRef({});
 
@@ -101,11 +108,13 @@ function ReservationContainer(WrapComponent) {
 
       setValues(INITIAL_STATE);
     };
+
     const props = {
       handleSubmit,
       movies,
       cinema,
       handleChange,
+      setScreeningString,
       response,
       values,
       price,
