@@ -1,2 +1,2 @@
-export { default as FormLogin } from "./formComponent/formContainer";
+export { FormLogin } from "./formComponent/form";
 export { ContactUsForm } from "./withFormik";

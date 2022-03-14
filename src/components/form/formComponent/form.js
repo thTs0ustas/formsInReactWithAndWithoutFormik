@@ -1,8 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import PropTypes from "prop-types";
+import { useForm } from "./useForm";
 
-export const FormLogin = ({ values, response, handleSubmit, handleChange }) => {
+export const FormLogin = () => {
+  const { values, state, handleSubmit, handleChange } = useForm();
   return (
     <div className="container m-2">
       <form onSubmit={handleSubmit}>
@@ -39,9 +41,9 @@ export const FormLogin = ({ values, response, handleSubmit, handleChange }) => {
           </button>
         </div>
       </form>
-      {response && (
+      {state && (
         <div>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
+          <pre>{JSON.stringify(state, null, 2)}</pre>
         </div>
       )}
     </div>
@@ -49,8 +51,8 @@ export const FormLogin = ({ values, response, handleSubmit, handleChange }) => {
 };
 
 FormLogin.propTypes = {
-  values: PropTypes.object,
-  response: PropTypes.object,
+  values: PropTypes.array,
+  state: PropTypes.array,
   handleSubmit: PropTypes.func,
   handleChange: PropTypes.func,
 };
