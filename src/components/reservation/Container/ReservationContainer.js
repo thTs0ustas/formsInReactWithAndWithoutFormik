@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Reservation } from "../presentational/reservation";
 import axios from "axios";
@@ -23,39 +23,48 @@ function ReservationContainer(WrapComponent) {
     const [seats, setSeats] = React.useState(() => []);
 
     const navigate = useNavigate();
+
     const { username } = useParams();
 
     const price = (
       values.seat ? seats.find((seat) => seat.id == values.seat).cost : 0
     ).toFixed(2);
 
-    React.useEffect(() => {
+    const prevItemIdRef = useRef({});
+
+    useEffect(() => {
+      prevItemIdRef.current = values;
+    }, [cinema, movies, auditorium, screening]);
+
+    useEffect(() => {
       if (!window.sessionStorage.getItem("token")) {
-        navigate("/login");
-      } else {
-        axios.get(`${BASE_URL}/cinema`).then((response) => {
-          setCinema(response.data);
+        navigate("/");
+      }
+      axios.get(`${BASE_URL}/cinema`).then((response) => {
+        setCinema(response.data);
+      });
+    }, []);
+
+    React.useEffect(() => {
+      if (values.cinema !== prevItemIdRef.current.cinema) {
+        axios.get(`${BASE_URL}/movies`).then((response) => {
+          setMovies(response.data);
         });
-        if (values.cinema) {
-          axios.get(`${BASE_URL}/movies`).then((response) => {
-            setMovies(response.data);
-          });
-        }
-        if (values.movie) {
-          axios.get(`${BASE_URL}/auditorium`).then((response) => {
-            setAuditorium(response.data);
-          });
-        }
-        if (values.auditorium) {
-          axios.get(`${BASE_URL}/screenings`).then((response) => {
-            setScreening(response.data);
-          });
-        }
-        if (values.screening) {
-          axios.get(`${BASE_URL}/seats`).then((response) => {
-            setSeats(response.data);
-          });
-        }
+      }
+      if (values.movie !== prevItemIdRef.current.movie) {
+        axios.get(`${BASE_URL}/auditorium`).then((response) => {
+          setAuditorium(response.data);
+        });
+      }
+      if (values.auditorium !== prevItemIdRef.current.auditorium) {
+        axios.get(`${BASE_URL}/screenings`).then((response) => {
+          setScreening(response.data);
+        });
+      }
+      if (values.screening !== prevItemIdRef.current.screening) {
+        axios.get(`${BASE_URL}/seats`).then((response) => {
+          setSeats(response.data);
+        });
       }
     }, [values]);
 
@@ -63,7 +72,9 @@ function ReservationContainer(WrapComponent) {
       () =>
         response &&
         navigate(`/users/${username}/reservation/ticket`, {
-          state: { reservationId: response.Reservations.at(-1).id },
+          state: {
+            reservationId: response.Reservations.at(-1).id,
+          },
         }),
       [response]
     );
@@ -78,18 +89,15 @@ function ReservationContainer(WrapComponent) {
     const handleSubmit = async (event) => {
       event.preventDefault();
 
-      const { data } = await axios.post(
-        `http://localhost:4000/reservations/users/${username}/new`,
-        {
+      await axios
+        .post(`http://localhost:4000/reservations/users/${username}/new`, {
           data: {
             screening_id: +values.screening,
             price: 15,
             seats: [{ id: +values.seat, discount_type: "adult", cost: 15 }],
           },
-        }
-      );
-      console.log(data);
-      setResponse(data);
+        })
+        .then(({ data }) => setResponse(data));
 
       setValues(INITIAL_STATE);
     };
