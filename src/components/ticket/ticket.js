@@ -12,7 +12,7 @@ const Ticket = () => {
 
   useEffect(() => {
     if (!window.sessionStorage.getItem("token")) {
-      navigate("/");
+      navigate("/login");
     } else {
       axios
         .get(

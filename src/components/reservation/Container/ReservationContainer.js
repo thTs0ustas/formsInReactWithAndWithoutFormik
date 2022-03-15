@@ -45,7 +45,7 @@ function ReservationContainer(WrapComponent) {
 
     useEffect(() => {
       if (!window.sessionStorage.getItem("token")) {
-        navigate("/");
+        navigate("/login");
       }
       axios.get(`${BASE_URL}/cinema`).then((response) => {
         setCinema(response.data);

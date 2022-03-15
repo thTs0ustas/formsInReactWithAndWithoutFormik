@@ -5,12 +5,14 @@ import { Routes, Route } from "react-router-dom";
 import { Reservation } from "./components/reservation";
 import { FormContainer } from "./components/formContainer";
 import { Ticket } from "./components/ticket/ticket";
+import HomePageLayout from "./layouts/homePage/homePageLayout";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/" element={<FormContainer />} />
+        <Route exact path="/" element={<HomePageLayout />} />
+        <Route path="/login" element={<FormContainer />} />
         <Route path="/users/:username/reservation" element={<Reservation />} />
         <Route
           path="/users/:username/reservation/ticket"
