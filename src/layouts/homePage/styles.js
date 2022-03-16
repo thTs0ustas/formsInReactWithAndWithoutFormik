@@ -30,7 +30,35 @@ const VideoWallDiv = styled.div`
   min-height: 400px;
   max-height: 1000px;
   height: 40vw;
-  background-color: aquamarine;
+  background-color: #27faa5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const VideoWallInfo = styled.div`
+  background-color: crimson;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & p {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+    margin: 0;
+  }
+  & h2 {
+    margin: 10px 0 20px 0;
+    //line-height: calc(26px + 6 * ((100vw - 320px) / 680));
+    font-size: calc(26px + 6 * ((100vw - 320px) / 680));
+  }
+
+  & a {
+    padding: 5px;
+    border: 0;
+    border-top: 1px solid black;
+  }
 `;
 
 const Features = styled.div`
@@ -88,9 +116,9 @@ const PromoCard = styled.div`
   min-height: 120px;
   max-height: 500px;
   border: 1px solid #000;
-  width: 40vw;
+  width: 42vw;
   min-width: 250px;
-  max-width: 550px;
+  max-width: 650px;
 
   @media (max-width: 576px) {
     width: 90vw;
@@ -109,6 +137,7 @@ export {
   Nav,
   NavItem,
   VideoWallDiv,
+  VideoWallInfo,
   Features,
   Footer,
   ComingUp,

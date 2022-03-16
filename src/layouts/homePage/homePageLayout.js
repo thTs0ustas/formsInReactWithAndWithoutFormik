@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import {
+  VideoWallInfo,
   HomeDiv,
   NavDiv,
   VideoWallDiv,
@@ -31,6 +32,11 @@ const HomePageLayout = () => {
             <NavItem>7</NavItem>
           </Nav>
         </NavDiv>
+        <VideoWallInfo>
+          <p>Small Description</p>
+          <h2>Movie Title</h2>
+          <a>BOOK TICKETS</a>
+        </VideoWallInfo>
       </VideoWallDiv>
       <div>
         <Features>
@@ -67,6 +73,12 @@ const HomePageLayout = () => {
           </Typography>
           <Archive>
             <Row>
+              <Col sm={6}>
+                <PromoCard />
+              </Col>
+              <Col sm={6}>
+                <PromoCard />
+              </Col>
               <Col sm={6}>
                 <PromoCard />
               </Col>

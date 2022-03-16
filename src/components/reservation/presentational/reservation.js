@@ -4,25 +4,18 @@ import PropTypes from "prop-types";
 
 export const Reservation = ({
   handleSubmit,
-  values,
-  price,
-  cinema,
-  setScreeningString,
   handleChange,
-  movies,
-  auditorium,
-  screening,
-  seats,
+  setScreeningString,
+  requests,
+  price,
+  inputValues,
 }) => {
   return (
     <div className="container m-2">
       <h4 className="text-decoration-underline">Reservation Form</h4>
       <form className="inline-form" onSubmit={handleSubmit}>
         <div>
-          <label
-            className="w-25 d-inline-block form-label mt-4"
-            htmlFor="cinema"
-          >
+          <label className="w-25 d-inline-block form-label mt-4" htmlFor="cinema">
             Cinema:
           </label>
           <select
@@ -33,7 +26,7 @@ export const Reservation = ({
             onChange={handleChange}
           >
             <option value="">Choose...</option>
-            {cinema.map((cin) => (
+            {requests.cinemas.map((cin) => (
               <option key={cin.id} value={cin.address}>
                 {cin.address}
               </option>
@@ -41,10 +34,7 @@ export const Reservation = ({
           </select>
         </div>
         <div>
-          <label
-            className="w-25 d-inline-block form-label mt-4"
-            htmlFor="movie"
-          >
+          <label className="w-25 d-inline-block form-label mt-4" htmlFor="movie">
             Movie:
           </label>
           <select
@@ -53,10 +43,10 @@ export const Reservation = ({
             id="movie"
             aria-label=""
             onChange={handleChange}
-            disabled={!values.cinema}
+            disabled={!inputValues.cinema}
           >
             <option value="">Choose...</option>
-            {movies.map((movie) => (
+            {requests.movies.map((movie) => (
               <option key={movie.id} value={movie.title}>
                 {movie.title}
               </option>
@@ -64,10 +54,7 @@ export const Reservation = ({
           </select>
         </div>
         <div>
-          <label
-            className="w-25 d-inline-block form-label mt-4"
-            htmlFor="auditorium"
-          >
+          <label className="w-25 d-inline-block form-label mt-4" htmlFor="auditorium">
             Auditorium:
           </label>
           <select
@@ -76,10 +63,10 @@ export const Reservation = ({
             id="auditorium"
             aria-label=""
             onChange={handleChange}
-            disabled={!values.movie}
+            disabled={!inputValues.movie}
           >
             <option value="">Choose...</option>
-            {auditorium.map((a) => (
+            {requests.auditoriums.map((a) => (
               <option key={a.id} value={a["hall_num"]}>
                 {`Hall ${a["hall_num"]}`}
               </option>
@@ -87,10 +74,7 @@ export const Reservation = ({
           </select>
         </div>
         <div>
-          <label
-            className="w-25 d-inline-block form-label mt-4"
-            htmlFor="screening"
-          >
+          <label className="w-25 d-inline-block form-label mt-4" htmlFor="screening">
             Screening:
           </label>
           <select
@@ -98,17 +82,13 @@ export const Reservation = ({
             id="screening"
             aria-label=""
             onChange={handleChange}
-            disabled={!values.auditorium}
+            disabled={!inputValues.auditorium}
             name="screening"
           >
             <option value="">Choose...</option>
-            {screening.map((a) => (
+            {requests.screenings.map((a) => (
               <option key={a.id} value={a.id}>
-                {setScreeningString(
-                  a["movie_starts"],
-                  a["movie_ends"],
-                  a["movie_date"]
-                )}
+                {setScreeningString(a["movie_starts"], a["movie_ends"], a["movie_date"])}
               </option>
             ))}
           </select>
@@ -123,10 +103,10 @@ export const Reservation = ({
             id="seat"
             aria-label=""
             onChange={handleChange}
-            disabled={!values.screening}
+            disabled={!inputValues.screening}
           >
             <option value="">Choose...</option>
-            {seats.map((a) => (
+            {requests.seats.map((a) => (
               <option key={a.id} value={a.id}>
                 {`${a["row_letter"]}-${a["seat_num"]}`}
               </option>
@@ -140,16 +120,10 @@ export const Reservation = ({
           <p className="border-0 d-inline-block mx-auto h-25 w-25">{`${price} €`}</p>
         </div>
         <div>
-          <button
-            className="btn btn-primary btn-outline-dark mt-4 me-1"
-            type="submit"
-          >
+          <button className="btn btn-primary btn-outline-dark mt-4 me-1" type="submit">
             Submit
           </button>
-          <button
-            className="btn btn-warning btn-outline-dark mt-4 ms-1"
-            type="reset"
-          >
+          <button className="btn btn-warning btn-outline-dark mt-4 ms-1" type="reset">
             Reset
           </button>
         </div>
@@ -161,11 +135,11 @@ export const Reservation = ({
 Reservation.propTypes = {
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
-  values: PropTypes.object,
-  cinema: PropTypes.array,
-  movies: PropTypes.array,
+  inputValues: PropTypes.object,
   price: PropTypes.string,
-  auditorium: PropTypes.array,
-  screening: PropTypes.array,
-  seats: PropTypes.array,
+  // cinema: PropTypes.array,
+  // movies: PropTypes.array,
+  // auditorium: PropTypes.array,
+  // screening: PropTypes.array,
+  // seats: PropTypes.array,
 };

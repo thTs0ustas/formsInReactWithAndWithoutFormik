@@ -1,79 +1,77 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Reservation } from "../presentational/reservation";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:4000";
-
-const INITIAL_STATE = {
-  cinema: "",
-  auditorium: "",
-  movie: "",
-  screening: "",
-  seat: "",
-};
+import { Reservation } from "../presentational/reservation";
+import { reservationReducer } from "../customHooks/Reducer";
+import { BASE_URL, INITIAL_STATE } from "../constants";
 
 function ReservationContainer(WrapComponent) {
   return function WC() {
-    const [values, setValues] = React.useState(INITIAL_STATE);
-    const [response, setResponse] = React.useState(null);
-    const [cinema, setCinema] = React.useState([]);
-    const [movies, setMovies] = React.useState([]);
-    const [auditorium, setAuditorium] = React.useState([]);
-    const [screening, setScreening] = React.useState([]);
-    const [seats, setSeats] = React.useState([]);
-
     const navigate = useNavigate();
     const { username } = useParams();
+    const [{ inputValues, requests, response }, dispatch] = useReducer(
+      reservationReducer,
+      INITIAL_STATE
+    );
 
     const price = (
-      values.seat ? seats.find((seat) => seat.id == values.seat).cost : 0
+      inputValues.seat ? requests.seats.find((seat) => seat.id == inputValues.seat).cost : 0
     ).toFixed(2);
 
-    const setScreeningString = (start, end, date) => {
-      return `
+    const setScreeningString = (start, end, date) => `
       ${new Date(date).toDateString()}
       ${new Date(start).toISOString().split("T")[1].slice(0, 5)} - 
       ${new Date(end).toISOString().split("T")[1].slice(0, 5)}`;
-    };
 
     const prevItemIdRef = useRef({});
-
-    useEffect(() => {
-      prevItemIdRef.current = values;
-    }, [cinema, movies, auditorium, screening]);
 
     useEffect(() => {
       if (!window.sessionStorage.getItem("token")) {
         navigate("/login");
       }
-      axios.get(`${BASE_URL}/cinema`).then((response) => {
-        setCinema(response.data);
-      });
+      axios.get(`${BASE_URL}/cinema`).then((response) =>
+        dispatch({
+          type: "REQUEST",
+          payload: { key: "cinemas", value: response.data },
+        })
+      );
     }, []);
 
     React.useEffect(() => {
-      if (values.cinema !== prevItemIdRef.current.cinema) {
-        axios.get(`${BASE_URL}/movies`).then((response) => {
-          setMovies(response.data);
-        });
+      if (inputValues.cinema !== prevItemIdRef.current.cinema) {
+        axios.get(`${BASE_URL}/movies`).then((response) =>
+          dispatch({
+            type: "REQUEST",
+            payload: { key: "movies", value: response.data },
+          })
+        );
       }
-      if (values.movie !== prevItemIdRef.current.movie) {
-        axios.get(`${BASE_URL}/auditorium`).then((response) => {
-          setAuditorium(response.data);
-        });
+      if (inputValues.movie !== prevItemIdRef.current.movie) {
+        axios.get(`${BASE_URL}/auditorium`).then((response) =>
+          dispatch({
+            type: "REQUEST",
+            payload: { key: "auditoriums", value: response.data },
+          })
+        );
       }
-      if (values.auditorium !== prevItemIdRef.current.auditorium) {
-        axios.get(`${BASE_URL}/screenings`).then((response) => {
-          setScreening(response.data);
-        });
+      if (inputValues.auditorium !== prevItemIdRef.current.auditorium) {
+        axios.get(`${BASE_URL}/screenings`).then((response) =>
+          dispatch({
+            type: "REQUEST",
+            payload: { key: "screenings", value: response.data },
+          })
+        );
       }
-      if (values.screening !== prevItemIdRef.current.screening) {
-        axios.get(`${BASE_URL}/seats`).then((response) => {
-          setSeats(response.data);
-        });
+      if (inputValues.screening !== prevItemIdRef.current.screening) {
+        axios.get(`${BASE_URL}/seats`).then((response) =>
+          dispatch({
+            type: "REQUEST",
+            payload: { key: "seats", value: response.data },
+          })
+        );
       }
-    }, [values]);
+    }, [inputValues]);
 
     useEffect(
       () =>
@@ -87,40 +85,38 @@ function ReservationContainer(WrapComponent) {
     );
 
     const handleChange = (event) => {
-      setValues((prevState) => ({
-        ...prevState,
-        [event.target.name]: event.target.value,
-      }));
+      prevItemIdRef.current = inputValues;
+      dispatch({
+        type: "INPUT_CHANGE",
+        payload: event.target,
+      });
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
       event.preventDefault();
-
-      await axios
+      axios
         .post(`http://localhost:4000/reservations/users/${username}/new`, {
           data: {
-            screening_id: +values.screening,
+            screening_id: +inputValues.screening,
             price: 15,
-            seats: [{ id: +values.seat, discount_type: "adult", cost: 15 }],
+            seats: [{ id: +inputValues.seat, discount_type: "adult", cost: 15 }],
           },
         })
-        .then(({ data }) => setResponse(data));
-
-      setValues(INITIAL_STATE);
+        .then(({ data }) =>
+          dispatch({
+            type: "RESPONSE",
+            payload: data,
+          })
+        );
     };
 
     const props = {
       handleSubmit,
-      movies,
-      cinema,
       handleChange,
       setScreeningString,
-      response,
-      values,
+      inputValues,
+      requests,
       price,
-      auditorium,
-      screening,
-      seats,
     };
 
     return <WrapComponent {...props} />;
