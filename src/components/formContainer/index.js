@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+
 import { ContactUsForm, FormLogin } from "../form";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export const FormContainer = () => {
   const [type, setType] = useState(true);

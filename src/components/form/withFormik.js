@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export const ContactUsForm = () => {
   const [state, setState] = useState(null);
@@ -54,10 +55,7 @@ export const ContactUsForm = () => {
         {(formik) => (
           <Form className="w-100">
             <div>
-              <label
-                className="w-25 d-inline-block form-label"
-                htmlFor="username"
-              >
+              <label className="w-25 d-inline-block form-label" htmlFor="username">
                 Name:
               </label>
               <Field
@@ -72,17 +70,12 @@ export const ContactUsForm = () => {
                 type="text"
               />
               {formik.touched.username && formik.errors.username ? (
-                <div className=" invalid-feedback">
-                  {formik.errors.username}
-                </div>
+                <div className=" invalid-feedback">{formik.errors.username}</div>
               ) : null}
             </div>
 
             <div>
-              <label
-                className="form-label w-25 d-inline-block"
-                htmlFor="password"
-              >
+              <label className="form-label w-25 d-inline-block" htmlFor="password">
                 Password:
               </label>
               <Field

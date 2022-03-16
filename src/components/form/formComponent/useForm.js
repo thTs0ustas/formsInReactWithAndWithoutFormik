@@ -40,9 +40,7 @@ export const useForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios
-      .post("http://localhost:4000/users/login", values)
-      .then((res) => setState(res.data));
+    axios.post("http://localhost:4000/users/login", values).then((res) => setState(res.data));
 
     setValues(INITIAL_STATE);
   };

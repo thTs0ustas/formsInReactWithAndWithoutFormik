@@ -137,9 +137,4 @@ Reservation.propTypes = {
   handleSubmit: PropTypes.func,
   inputValues: PropTypes.object,
   price: PropTypes.string,
-  // cinema: PropTypes.array,
-  // movies: PropTypes.array,
-  // auditorium: PropTypes.array,
-  // screening: PropTypes.array,
-  // seats: PropTypes.array,
 };

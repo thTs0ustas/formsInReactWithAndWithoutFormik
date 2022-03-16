@@ -15,9 +15,7 @@ const Ticket = () => {
       navigate("/login");
     } else {
       axios
-        .get(
-          `${BASE_URL}/reservations/users/${username}/ticket/${state.reservationId}`
-        )
+        .get(`${BASE_URL}/reservations/users/${username}/ticket/${state.reservationId}`)
         .then(({ data }) => setResponse(data));
     }
   }, []);

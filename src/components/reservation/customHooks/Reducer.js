@@ -8,7 +8,6 @@ const reservationReducer = (state, { type, payload }) => {
           [payload.key]: payload.value,
         },
       };
-
     case "INPUT_CHANGE":
       return {
         ...state,
