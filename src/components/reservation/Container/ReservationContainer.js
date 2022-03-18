@@ -1,11 +1,11 @@
-import React, { useEffect, useReducer, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import { Reservation } from "../presentational/reservation";
 // import { ReservationForm } from "../../_reservationWithClone";
-import { reservationReducer } from "../customHooks/Reducer";
-import { BASE_URL, INITIAL_STATE } from "../constants";
+import { useReservations } from "../customHooks/Reducer";
+import { BASE_URL } from "../constants";
 
 function ReservationContainer(WrapComponent) {
   return function WC() {
@@ -14,31 +14,33 @@ function ReservationContainer(WrapComponent) {
     const navigate = useNavigate();
     const { username } = useParams();
 
-    const [{ inputValues, requests, response }, dispatch] = useReducer(
-      reservationReducer,
-      INITIAL_STATE
-    );
+    const { state, dispatch } = useReservations();
+    const { inputValues, requests, response } = state;
+    const price = (
+      inputValues.seat ? inputValues.seat.reduce((sum, seat) => sum + seat.cost, 0) : 0
+    ).toFixed(2);
 
     useEffect(() => {
       if (!window.sessionStorage.getItem("token")) {
         navigate("/login");
       }
-      axios.get(`${BASE_URL}/cinema`).then((response) =>
+      prevItemIdRef.current = inputValues;
+      axios.get(`${BASE_URL}/cinema`).then((response) => {
         dispatch({
           type: "REQUEST",
           payload: { key: "cinemas", value: response.data },
-        })
-      );
+        });
+      });
     }, []);
 
     React.useEffect(() => {
       if (inputValues.cinema !== prevItemIdRef.current.cinema) {
-        axios.get(`${BASE_URL}/movies`).then((response) =>
+        axios.get(`${BASE_URL}/movies`).then((response) => {
           dispatch({
             type: "REQUEST",
             payload: { key: "movies", value: response.data },
-          })
-        );
+          });
+        });
       }
       if (inputValues.movie !== prevItemIdRef.current.movie) {
         axios.get(`${BASE_URL}/auditorium`).then((response) =>
@@ -63,6 +65,12 @@ function ReservationContainer(WrapComponent) {
             payload: { key: "seats", value: response.data },
           })
         );
+        axios.get(`${BASE_URL}/reservedSeats`).then((response) =>
+          dispatch({
+            type: "REQUEST",
+            payload: { key: "reservedSeats", value: response.data },
+          })
+        );
       }
     }, [inputValues]);
 
@@ -77,7 +85,22 @@ function ReservationContainer(WrapComponent) {
       [response]
     );
 
-    const handleChange = (event) => {
+    const handleSeatAdd = (seat) => {
+      prevItemIdRef.current = inputValues;
+      dispatch({
+        type: "SEAT_ADD",
+        payload: { name: "seat", value: seat },
+      });
+    };
+    const handleSeatRemove = (id) => {
+      prevItemIdRef.current = inputValues;
+      dispatch({
+        type: "SEAT_REMOVE",
+        payload: { name: "seat", value: id },
+      });
+    };
+
+    const handleChange = (event, seat) => {
       prevItemIdRef.current = inputValues;
       dispatch({
         type: "INPUT_CHANGE",
@@ -91,8 +114,12 @@ function ReservationContainer(WrapComponent) {
         .post(`http://localhost:4000/reservations/users/${username}/new`, {
           data: {
             screening_id: +inputValues.screening,
-            price: 15,
-            seats: [{ id: +inputValues.seat, discount_type: "adult", cost: 15 }],
+            price: +price,
+            seats: inputValues.seat.map((seat) => ({
+              id: seat.id,
+              discount_type: "adult",
+              cost: seat.cost,
+            })),
           },
         })
         .then(({ data }) =>
@@ -102,10 +129,6 @@ function ReservationContainer(WrapComponent) {
           })
         );
     };
-
-    const price = (
-      inputValues.seat ? requests.seats.find((seat) => seat.id == inputValues.seat).cost : 0
-    ).toFixed(2);
 
     const setScreeningString = (start, end, date) => `
       ${new Date(date).toDateString()}
@@ -119,6 +142,9 @@ function ReservationContainer(WrapComponent) {
       inputValues,
       requests,
       price,
+      state,
+      handleSeatRemove,
+      handleSeatAdd,
     };
 
     return <WrapComponent {...props} />;

@@ -17,6 +17,7 @@ export const FormContainer = () => {
             role="switch"
             id="flexSwitchCheckDefault"
             checked={type}
+            aria-checked={type}
           />
           <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
             Toggle this to switch form

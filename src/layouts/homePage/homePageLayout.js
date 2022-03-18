@@ -36,7 +36,7 @@ const HomePageLayout = () => {
         <VideoWallInfo>
           <p>Small Description</p>
           <h2>Movie Title</h2>
-          <a>BOOK TICKETS</a>
+          <button>BOOK TICKETS</button>
         </VideoWallInfo>
       </VideoWallDiv>
       <div>

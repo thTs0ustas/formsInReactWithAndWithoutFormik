@@ -1,6 +1,7 @@
 import React from "react";
 
 import PropTypes from "prop-types";
+import SeatMatrix from "../../seatsGrid/seatsGrid";
 
 export const Reservation = ({
   handleSubmit,
@@ -9,6 +10,9 @@ export const Reservation = ({
   requests,
   price,
   inputValues,
+  state,
+  handleSeatRemove,
+  handleSeatAdd,
 }) => {
   return (
     <div className="container m-2">
@@ -93,25 +97,33 @@ export const Reservation = ({
             ))}
           </select>
         </div>
-        <div>
+        <div className="w-100">
           <label className="w-25 d-inline-block form-label mt-4" htmlFor="seat">
             Seat:
           </label>
-          <select
-            name="seat"
-            className="form-select d-inline-block mx-auto h-25 w-25"
-            id="seat"
-            aria-label=""
-            onChange={handleChange}
-            disabled={!inputValues.screening}
-          >
-            <option value="">Choose...</option>
-            {requests.seats.map((a) => (
-              <option key={a.id} value={a.id}>
-                {`${a["row_letter"]}-${a["seat_num"]}`}
-              </option>
-            ))}
-          </select>
+          {inputValues.screening && (
+            <SeatMatrix
+              state={state}
+              seats={requests.seats}
+              handleSeatRemove={handleSeatRemove}
+              handleSeatAdd={handleSeatAdd}
+            />
+          )}
+          {/*<select*/}
+          {/*  name="seat"*/}
+          {/*  className="form-select d-inline-block mx-auto h-25 w-25"*/}
+          {/*  id="seat"*/}
+          {/*  aria-label=""*/}
+          {/*  onChange={handleChange}*/}
+          {/*  disabled={!inputValues.screening}*/}
+          {/*>*/}
+          {/*  <option value="">Choose...</option>*/}
+          {/*  {requests.seats.map((a) => (*/}
+          {/*    <option key={a.id} value={a.id}>*/}
+          {/*      {`${a["row_letter"]}-${a["seat_num"]}`}*/}
+          {/*    </option>*/}
+          {/*  ))}*/}
+          {/*</select>*/}
         </div>
 
         <div className="border-bottom">

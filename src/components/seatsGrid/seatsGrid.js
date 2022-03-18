@@ -1,48 +1,35 @@
-import React, { useState } from "react";
-import { MdEventSeat } from "react-icons/md";
+import React from "react";
+import { SeatsContainer, Col, Container, SeatDiv, Screen } from "./styles";
+import { Seat } from "./Seat";
 
-import { SeatsContainer, Col, Container, IconDiv, SeatDiv, Screen } from "./styles";
+import { groupBy, map } from "lodash";
 
-const Seat = () => {
-  const [selected, setSelected] = useState(false);
-  const onSelect = () => setSelected(!selected);
-
-  return (
-    <IconDiv onClick={onSelect}>
-      <MdEventSeat size={25} color={selected ? "crimson" : "black"} />
-    </IconDiv>
-  );
-};
-
-const GenerateSeats = (seatNumbers) => {
+const GenerateSeats = (seatNumbers, handleSeatRemove, handleSeatAdd, state) => {
   return (
     <SeatDiv>
       {seatNumbers.map((seatNumber) => (
-        <Seat key={seatNumber} />
+        <Seat
+          state={state}
+          key={seatNumber.id}
+          seat={seatNumber}
+          handleSeatRemove={handleSeatRemove}
+          handleSeatAdd={handleSeatAdd}
+        />
       ))}
     </SeatDiv>
   );
 };
 
-const SeatMatrix = () => {
+const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd, state }) => {
+  const seatsCol = (seats) => map(groupBy(seats, "row_letter"));
+  console.log(seatsCol(seats));
   return (
     <Container>
       <Screen>Screen</Screen>
       <SeatsContainer>
-        <Col>
-          {GenerateSeats([1, 2, 3, 4])}
-          {GenerateSeats([5, 6, 7, 8])}
-        </Col>
-        <Col>
-          {GenerateSeats([13, 14, 15, 16, 17])}
-          {GenerateSeats([18, 19, 20, 21, 22])}
-          {GenerateSeats([23, 24, 25, 26, 27])}
-          {GenerateSeats([28, 29, 30, 31, 32])}
-        </Col>
-        <Col>
-          {GenerateSeats([33, 34, 35, 36])}
-          {GenerateSeats([37, 38, 39, 40])}
-        </Col>
+        {seatsCol(seats).map((seatArr, index) => (
+          <Col key={index}>{GenerateSeats(seatArr, handleSeatRemove, handleSeatAdd, state)}</Col>
+        ))}
       </SeatsContainer>
     </Container>
   );

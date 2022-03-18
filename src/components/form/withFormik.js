@@ -17,9 +17,9 @@ export const ContactUsForm = () => {
       username && navigate(`/users/${username}/reservation`);
     }
 
-    if (state?.accessToken && state?.username) {
-      const username = state?.username;
-      const accessToken = state?.accessToken;
+    if (state && state.accessToken && state.username) {
+      const username = state.username;
+      const accessToken = state.accessToken;
 
       window.sessionStorage.setItem("token", accessToken);
       window.sessionStorage.setItem("username", username);

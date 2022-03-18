@@ -10,8 +10,10 @@ const Screen = styled.div`
 `;
 
 const Container = styled.div`
-  height: 50vh;
-  background-color: #dc9678;
+  //height: 50vh;
+  padding: 10px 0;
+  width: 50%;
+  //background-color: #dc9678;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,10 +25,10 @@ const IconDiv = styled.button`
   border: 0;
   border-radius: 10px;
   padding: 2px 5px;
-  background-color: #dc9678;
+  background-color: ${({ disabled }) => (!disabled ? "#dc9678" : "#464444")};
   transition: 0.05s linear;
   &:active {
-    transform: scale(1.2);
+    transform: ${({ disabled }) => !disabled && "scale(1.2)"};
   }
 `;
 

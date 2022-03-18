@@ -16,9 +16,9 @@ export const useForm = () => {
       username && navigate(`/users/${username}/reservation`);
     }
 
-    if (state?.accessToken && state?.username) {
-      const username = state?.username;
-      const accessToken = state?.accessToken;
+    if (state.accessToken && state.username) {
+      const username = state.username;
+      const accessToken = state.accessToken;
 
       window.sessionStorage.setItem("token", accessToken);
       window.sessionStorage.setItem("username", username);
@@ -27,7 +27,7 @@ export const useForm = () => {
     }
   }, [state]);
   useEffect(() => {
-    state?.username && navigate(`/users/${state.username}/reservation`);
+    state.username && navigate(`/users/${state.username}/reservation`);
   }, [state]);
 
   const handleChange = (event) => {
