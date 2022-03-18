@@ -17,7 +17,7 @@ import {
   Nav,
   NavItem,
 } from "./styles";
-
+// import "./styles.css";
 const HomePageLayout = () => {
   return (
     <HomeDiv>

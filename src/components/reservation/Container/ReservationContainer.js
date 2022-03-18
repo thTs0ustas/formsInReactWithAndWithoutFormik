@@ -3,28 +3,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import { Reservation } from "../presentational/reservation";
+// import { ReservationForm } from "../../_reservationWithClone";
 import { reservationReducer } from "../customHooks/Reducer";
 import { BASE_URL, INITIAL_STATE } from "../constants";
 
 function ReservationContainer(WrapComponent) {
   return function WC() {
+    const prevItemIdRef = useRef({});
+
     const navigate = useNavigate();
     const { username } = useParams();
+
     const [{ inputValues, requests, response }, dispatch] = useReducer(
       reservationReducer,
       INITIAL_STATE
     );
-
-    const price = (
-      inputValues.seat ? requests.seats.find((seat) => seat.id == inputValues.seat).cost : 0
-    ).toFixed(2);
-
-    const setScreeningString = (start, end, date) => `
-      ${new Date(date).toDateString()}
-      ${new Date(start).toISOString().split("T")[1].slice(0, 5)} - 
-      ${new Date(end).toISOString().split("T")[1].slice(0, 5)}`;
-
-    const prevItemIdRef = useRef({});
 
     useEffect(() => {
       if (!window.sessionStorage.getItem("token")) {
@@ -110,6 +103,15 @@ function ReservationContainer(WrapComponent) {
         );
     };
 
+    const price = (
+      inputValues.seat ? requests.seats.find((seat) => seat.id == inputValues.seat).cost : 0
+    ).toFixed(2);
+
+    const setScreeningString = (start, end, date) => `
+      ${new Date(date).toDateString()}
+      ${new Date(start).toISOString().split("T")[1].slice(0, 5)} - 
+      ${new Date(end).toISOString().split("T")[1].slice(0, 5)}`;
+
     const props = {
       handleSubmit,
       handleChange,
@@ -123,3 +125,4 @@ function ReservationContainer(WrapComponent) {
   };
 }
 export default ReservationContainer(Reservation);
+// export default ReservationContainer(ReservationForm);

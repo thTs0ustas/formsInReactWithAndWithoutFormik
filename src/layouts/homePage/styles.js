@@ -30,13 +30,14 @@ const VideoWallDiv = styled.div`
   min-height: 400px;
   max-height: 1000px;
   height: 40vw;
-  background-color: #27faa5;
+  background-color: #a5f1d2;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const VideoWallInfo = styled.div`
+  position: relative;
   background-color: crimson;
   height: fit-content;
   display: flex;
