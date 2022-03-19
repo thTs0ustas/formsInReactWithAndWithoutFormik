@@ -1,5 +1,5 @@
 import React from "react";
-import { SeatsContainer, Col, Container, SeatDiv, Screen } from "./styles";
+import { Col, Container, Screen, SeatDiv, SeatsContainer } from "./styledComp";
 import { Seat } from "./Seat";
 
 import { groupBy, map } from "lodash";
@@ -22,7 +22,7 @@ const GenerateSeats = (seatNumbers, handleSeatRemove, handleSeatAdd, state) => {
 
 const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd, state }) => {
   const seatsCol = (seats) => map(groupBy(seats, "row_letter"));
-  console.log(seatsCol(seats));
+
   return (
     <Container>
       <Screen>Screen</Screen>

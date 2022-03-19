@@ -3,28 +3,27 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import { Reservation } from "../presentational/reservation";
-// import { ReservationForm } from "../../_reservationWithClone";
-import { useReservations } from "../customHooks/Reducer";
-import { BASE_URL } from "../constants";
+import { map, reduce } from "lodash";
+import { useProvider } from "../../../model";
 
 function ReservationContainer(WrapComponent) {
   return function WC() {
-    const prevItemIdRef = useRef({});
+    const historyState = useRef({});
+    const [state, dispatch] = useProvider();
+    const { inputValues, requests, response, BASE_URL } = state;
 
     const navigate = useNavigate();
     const { username } = useParams();
 
-    const { state, dispatch } = useReservations();
-    const { inputValues, requests, response } = state;
     const price = (
-      inputValues.seat ? inputValues.seat.reduce((sum, seat) => sum + seat.cost, 0) : 0
+      inputValues.seat ? reduce(inputValues.seat, (sum, seat) => sum + seat.cost, 0) : 0
     ).toFixed(2);
 
     useEffect(() => {
       if (!window.sessionStorage.getItem("token")) {
         navigate("/login");
       }
-      prevItemIdRef.current = inputValues;
+      historyState.current = inputValues;
       axios.get(`${BASE_URL}/cinema`).then((response) => {
         dispatch({
           type: "REQUEST",
@@ -34,7 +33,7 @@ function ReservationContainer(WrapComponent) {
     }, []);
 
     React.useEffect(() => {
-      if (inputValues.cinema !== prevItemIdRef.current.cinema) {
+      if (inputValues.cinema !== historyState.current.cinema) {
         axios.get(`${BASE_URL}/movies`).then((response) => {
           dispatch({
             type: "REQUEST",
@@ -42,7 +41,7 @@ function ReservationContainer(WrapComponent) {
           });
         });
       }
-      if (inputValues.movie !== prevItemIdRef.current.movie) {
+      if (inputValues.movie !== historyState.current.movie) {
         axios.get(`${BASE_URL}/auditorium`).then((response) =>
           dispatch({
             type: "REQUEST",
@@ -50,7 +49,7 @@ function ReservationContainer(WrapComponent) {
           })
         );
       }
-      if (inputValues.auditorium !== prevItemIdRef.current.auditorium) {
+      if (inputValues.auditorium !== historyState.current.auditorium) {
         axios.get(`${BASE_URL}/screenings`).then((response) =>
           dispatch({
             type: "REQUEST",
@@ -58,16 +57,16 @@ function ReservationContainer(WrapComponent) {
           })
         );
       }
-      if (inputValues.screening !== prevItemIdRef.current.screening) {
-        axios.get(`${BASE_URL}/seats`).then((response) =>
+      if (inputValues.screening !== historyState.current.screening) {
+        axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) =>
           dispatch({
             type: "REQUEST",
             payload: { key: "seats", value: response.data },
           })
         );
-        axios.get(`${BASE_URL}/reservedSeats`).then((response) =>
+        axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) =>
           dispatch({
-            type: "REQUEST",
+            type: "RESERV_SEATS",
             payload: { key: "reservedSeats", value: response.data },
           })
         );
@@ -86,22 +85,22 @@ function ReservationContainer(WrapComponent) {
     );
 
     const handleSeatAdd = (seat) => {
-      prevItemIdRef.current = inputValues;
+      historyState.current = inputValues;
       dispatch({
         type: "SEAT_ADD",
         payload: { name: "seat", value: seat },
       });
     };
     const handleSeatRemove = (id) => {
-      prevItemIdRef.current = inputValues;
+      historyState.current = inputValues;
       dispatch({
         type: "SEAT_REMOVE",
-        payload: { name: "seat", value: id },
+        payload: id,
       });
     };
 
-    const handleChange = (event, seat) => {
-      prevItemIdRef.current = inputValues;
+    const handleChange = (event) => {
+      historyState.current = inputValues;
       dispatch({
         type: "INPUT_CHANGE",
         payload: event.target,
@@ -115,10 +114,11 @@ function ReservationContainer(WrapComponent) {
           data: {
             screening_id: +inputValues.screening,
             price: +price,
-            seats: inputValues.seat.map((seat) => ({
+            seats: map(inputValues.seat, (seat) => ({
               id: seat.id,
               discount_type: "adult",
               cost: seat.cost,
+              screening_id: inputValues.screening,
             })),
           },
         })
@@ -130,18 +130,11 @@ function ReservationContainer(WrapComponent) {
         );
     };
 
-    const setScreeningString = (start, end, date) => `
-      ${new Date(date).toDateString()}
-      ${new Date(start).toISOString().split("T")[1].slice(0, 5)} - 
-      ${new Date(end).toISOString().split("T")[1].slice(0, 5)}`;
-
     const props = {
       handleSubmit,
       handleChange,
-      setScreeningString,
       inputValues,
       requests,
-      price,
       state,
       handleSeatRemove,
       handleSeatAdd,

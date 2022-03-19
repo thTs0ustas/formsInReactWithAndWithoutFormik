@@ -1,5 +1,9 @@
-const BASE_URL = "http://localhost:4000";
 const INITIAL_STATE = {
+  BASE_URL: "http://localhost:4000",
+  user: {
+    username: "",
+    token: "",
+  },
   inputValues: {
     cinema: "",
     auditorium: "",
@@ -17,4 +21,4 @@ const INITIAL_STATE = {
   response: null,
 };
 
-export { BASE_URL, INITIAL_STATE };
+export { INITIAL_STATE };

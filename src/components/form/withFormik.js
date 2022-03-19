@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Formik, Field, Form } from "formik";
+import { Field, Form, Formik } from "formik";
 import { Button } from "react-bootstrap";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useProvider } from "../../model";
+import { actionTypes } from "../../model";
 
 export const ContactUsForm = () => {
   const [state, setState] = useState(null);
+  const [, dispatch] = useProvider();
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -16,15 +19,18 @@ export const ContactUsForm = () => {
       const username = window.sessionStorage.getItem("username");
       username && navigate(`/users/${username}/reservation`);
     }
+    // if (model.userInfo && model.userInfo.token && model.userInfo.username) {
+    //   navigate(`/users/${model.userInfo.username}/reservation`);
+    // }
 
     if (state && state.accessToken && state.username) {
-      const username = state.username;
-      const accessToken = state.accessToken;
-
-      window.sessionStorage.setItem("token", accessToken);
-      window.sessionStorage.setItem("username", username);
-
-      navigate(`/users/${username}/reservation`);
+      window.sessionStorage.setItem("token", state.accessToken);
+      window.sessionStorage.setItem("username", state.username);
+      dispatch({
+        type: actionTypes.userLogin,
+        payload: { username: state.username, token: state.accessToken },
+      });
+      navigate(`/users/${state.username}/reservation`);
     }
   }, [state]);
 

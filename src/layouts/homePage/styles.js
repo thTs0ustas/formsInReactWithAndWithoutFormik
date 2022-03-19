@@ -51,7 +51,6 @@ const VideoWallInfo = styled.div`
   }
   & h2 {
     margin: 10px 0 20px 0;
-    //line-height: calc(26px + 6 * ((100vw - 320px) / 680));
     font-size: calc(26px + 6 * ((100vw - 320px) / 680));
   }
 

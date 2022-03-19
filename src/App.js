@@ -1,7 +1,7 @@
 import "./App.css";
 
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import { Reservation } from "./components/reservation";
 import { FormContainer } from "./components/formContainer";

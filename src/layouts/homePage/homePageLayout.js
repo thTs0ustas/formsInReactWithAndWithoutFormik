@@ -2,22 +2,22 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 import {
-  VideoWallInfo,
-  HomeDiv,
-  NavDiv,
-  VideoWallDiv,
+  Archive,
+  Card,
+  ComingUp,
   Features,
   Footer,
-  ComingUp,
-  Archive,
-  Typography,
-  Card,
+  HomeDiv,
+  Nav,
+  NavDiv,
+  NavItem,
   PromoCard,
   Promos,
-  Nav,
-  NavItem,
+  Typography,
+  VideoWallDiv,
+  VideoWallInfo,
 } from "./styles";
-// import "./styles.css";
+
 const HomePageLayout = () => {
   return (
     <HomeDiv>

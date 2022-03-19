@@ -12,7 +12,7 @@ const Screen = styled.div`
 const Container = styled.div`
   //height: 50vh;
   padding: 10px 0;
-  width: 50%;
+  width: 100%;
   //background-color: #dc9678;
   display: flex;
   flex-direction: column;

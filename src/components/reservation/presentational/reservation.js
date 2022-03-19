@@ -2,20 +2,20 @@ import React from "react";
 
 import PropTypes from "prop-types";
 import SeatMatrix from "../../seatsGrid/seatsGrid";
+import { isEmpty } from "lodash";
+import { price, setScreeningString } from "../helpers";
 
 export const Reservation = ({
   handleSubmit,
   handleChange,
-  setScreeningString,
   requests,
-  price,
   inputValues,
   state,
   handleSeatRemove,
   handleSeatAdd,
 }) => {
   return (
-    <div className="container m-2">
+    <div className="text-center container-fluid flex-column m-2">
       <h4 className="text-decoration-underline">Reservation Form</h4>
       <form className="inline-form" onSubmit={handleSubmit}>
         <div>
@@ -71,7 +71,7 @@ export const Reservation = ({
           >
             <option value="">Choose...</option>
             {requests.auditoriums.map((a) => (
-              <option key={a.id} value={a["hall_num"]}>
+              <option key={a.id} value={a.id}>
                 {`Hall ${a["hall_num"]}`}
               </option>
             ))}
@@ -109,30 +109,20 @@ export const Reservation = ({
               handleSeatAdd={handleSeatAdd}
             />
           )}
-          {/*<select*/}
-          {/*  name="seat"*/}
-          {/*  className="form-select d-inline-block mx-auto h-25 w-25"*/}
-          {/*  id="seat"*/}
-          {/*  aria-label=""*/}
-          {/*  onChange={handleChange}*/}
-          {/*  disabled={!inputValues.screening}*/}
-          {/*>*/}
-          {/*  <option value="">Choose...</option>*/}
-          {/*  {requests.seats.map((a) => (*/}
-          {/*    <option key={a.id} value={a.id}>*/}
-          {/*      {`${a["row_letter"]}-${a["seat_num"]}`}*/}
-          {/*    </option>*/}
-          {/*  ))}*/}
-          {/*</select>*/}
         </div>
 
         <div className="border-bottom">
           <span className="w-25 d-inline-block form-label mt-4">Price:</span>
-
-          <p className="border-0 d-inline-block mx-auto h-25 w-25">{`${price} €`}</p>
+          <p className="border-0 d-inline-block mx-auto h-25 w-25">{`${price(
+            inputValues.seat
+          )} €`}</p>
         </div>
         <div>
-          <button className="btn btn-primary btn-outline-dark mt-4 me-1" type="submit">
+          <button
+            disabled={!inputValues.seat || isEmpty(inputValues.seat)}
+            className="btn btn-primary btn-outline-dark mt-4 me-1"
+            type="submit"
+          >
             Submit
           </button>
           <button className="btn btn-warning btn-outline-dark mt-4 ms-1" type="reset">
