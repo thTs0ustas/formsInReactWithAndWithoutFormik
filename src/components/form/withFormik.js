@@ -17,11 +17,13 @@ export const ContactUsForm = () => {
   useEffect(() => {
     if (window.sessionStorage.getItem("token")) {
       const username = window.sessionStorage.getItem("username");
+      // overkill
+      dispatch({
+        type: actionTypes.userLogin,
+        payload: { username: username, token: window.sessionStorage.getItem("token") },
+      });
       username && navigate(`/users/${username}/reservation`);
     }
-    // if (model.userInfo && model.userInfo.token && model.userInfo.username) {
-    //   navigate(`/users/${model.userInfo.username}/reservation`);
-    // }
 
     if (state && state.accessToken && state.username) {
       window.sessionStorage.setItem("token", state.accessToken);

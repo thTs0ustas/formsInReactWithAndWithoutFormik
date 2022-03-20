@@ -1,8 +1,9 @@
 import { reservationReducer } from "../reducer/modelReducer";
 import { INITIAL_STATE } from "../constants/constants";
 import React from "react";
-
-const Model = React.createContext({});
+import { createContext, useContextSelector } from "use-context-selector";
+import { isEmpty, get, reduce } from "lodash";
+const Model = createContext({});
 
 const Provider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reservationReducer, INITIAL_STATE, (item) => item);
@@ -12,12 +13,24 @@ const Provider = ({ children }) => {
   return <Model.Provider value={value}>{children}</Model.Provider>;
 };
 
-const useProvider = () => {
-  const context = React.useContext(Model);
-  if (!context) {
+const useProvider = (partOfState = []) => {
+  const state = useContextSelector(Model, (state) =>
+    isEmpty(partOfState)
+      ? state[0]
+      : reduce(
+          partOfState,
+          (st, item) => ({
+            ...st,
+            [item.split(".")[1] ? item.split(".").at(-1) : item]: get(state[0], item),
+          }),
+          {}
+        )
+  );
+  const dispatch = useContextSelector(Model, (v) => v[1]);
+  if (!state) {
     throw new Error("Component is outside the context provider");
   }
-  return context;
+  return [state, dispatch];
 };
 
 export { Provider, useProvider };

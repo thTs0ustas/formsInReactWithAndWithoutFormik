@@ -16,48 +16,75 @@ const reservationReducer = (state, { type, payload }) => {
     case actionTypes.request:
       return {
         ...state,
-        requests: {
-          ...state.requests,
-          [payload.key]: payload.value,
+        reservation: {
+          ...state.reservation,
+          requests: {
+            ...state.reservation.requests,
+            [payload.key]: payload.value,
+          },
         },
       };
     case actionTypes.addSeat:
       return {
         ...state,
-        inputValues: {
-          ...state.inputValues,
-          seat: { ...state.inputValues.seat, [payload.value.id]: payload.value },
+        reservation: {
+          ...state.reservation,
+          inputValues: {
+            ...state.reservation.inputValues,
+            seat: { ...state.reservation.inputValues.seat, [payload.value.id]: payload.value },
+          },
         },
       };
     case actionTypes.removeSeat:
       return {
         ...state,
-        inputValues: {
-          ...state.inputValues,
-          seat: omit(state.inputValues.seat, [`${payload}`]), //.inputValues.seat.filter((s) => s.id === payload.id),
+        reservation: {
+          ...state.reservation,
+          inputValues: {
+            ...state.reservation.inputValues,
+            seat: omit(state.reservation.inputValues.seat, [`${payload}`]), //.inputValues.seat.filter((s) => s.id === payload.id),
+          },
         },
       };
     case actionTypes.reservedSeats:
       return {
         ...state,
-        requests: {
-          ...state.requests,
-          reservedSeats: [...payload.value],
+        reservation: {
+          ...state.reservation,
+          requests: {
+            ...state.reservation.requests,
+            reservedSeats: [...payload.value],
+          },
         },
       };
     case actionTypes.inputChange:
       return {
         ...state,
-        inputValues: {
-          ...state.inputValues,
-          [payload.name]: payload.value,
+        reservation: {
+          ...state.reservation,
+          inputValues: {
+            ...state.reservation.inputValues,
+            [payload.name]: payload.value,
+          },
         },
       };
 
     case actionTypes.response:
-      return { ...state, response: payload };
+      return {
+        ...state,
+        reservation: {
+          ...state.reservation,
+          response: payload,
+        },
+      };
     case actionTypes.newTicket:
-      return { ...state, ticket: payload };
+      return {
+        ...state,
+        reservation: {
+          ...state.reservation,
+          ticket: payload,
+        },
+      };
     default:
       return state;
   }

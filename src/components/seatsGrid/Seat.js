@@ -1,14 +1,18 @@
 import React from "react";
 import { IconDiv } from "./styledComp";
 import { MdEventSeat } from "react-icons/md";
+import { useProvider } from "../../model";
 
-export const Seat = ({ handleSeatRemove, handleSeatAdd, seat, state }) => {
-  const { inputValues, requests } = state;
+export const Seat = ({ handleSeatRemove, handleSeatAdd, seatInfo }) => {
+  const [state] = useProvider([
+    "reservation.inputValues.seat",
+    "reservation.requests.reservedSeats",
+  ]);
+  const { seat, reservedSeats } = state;
+  const exists = !!seat[seatInfo.id];
 
-  const exists = inputValues.seat[seat.id] && inputValues.seat[seat.id];
-
-  const isAlready =
-    requests.reservedSeats && requests.reservedSeats.find((item) => item["seats_id"] === seat.id);
+  console.log(exists);
+  const isAlready = reservedSeats && reservedSeats.find((item) => item["seats_id"] === seatInfo.id);
 
   return (
     <IconDiv
@@ -16,7 +20,7 @@ export const Seat = ({ handleSeatRemove, handleSeatAdd, seat, state }) => {
       disabled={isAlready}
       onClick={(event) => {
         event.preventDefault();
-        exists ? handleSeatRemove(seat.id) : handleSeatAdd(seat);
+        exists ? handleSeatRemove(seatInfo.id) : handleSeatAdd(seatInfo);
       }}
     >
       <MdEventSeat size={25} color={exists || isAlready ? "crimson" : "black"} />

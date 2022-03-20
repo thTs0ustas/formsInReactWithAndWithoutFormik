@@ -8,7 +8,7 @@ const Ticket = () => {
   const { state } = useLocation();
 
   useTicket(username, state.reservationId);
-  const [model] = useProvider();
+  const [model] = useProvider(["reservation.ticket", "reservation.response"]);
 
   return (
     <div>

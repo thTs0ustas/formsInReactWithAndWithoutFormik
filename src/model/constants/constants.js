@@ -1,22 +1,20 @@
 const INITIAL_STATE = {
   BASE_URL: "http://localhost:4000",
-  user: {
-    username: "",
-    token: "",
-  },
-  inputValues: {
-    cinema: "",
-    auditorium: "",
-    movie: "",
-    screening: "",
-    seat: "",
-  },
-  requests: {
-    cinemas: [],
-    auditoriums: [],
-    movies: [],
-    screenings: [],
-    seats: [],
+  reservation: {
+    inputValues: {
+      cinema: "",
+      auditorium: "",
+      movie: "",
+      screening: "",
+      seat: {},
+    },
+    requests: {
+      cinemas: [],
+      auditoriums: [],
+      movies: [],
+      screenings: [],
+      seats: [],
+    },
   },
   response: null,
 };

@@ -9,8 +9,8 @@ export const Reservation = ({
   handleSubmit,
   handleChange,
   requests,
-  inputValues,
-  state,
+  inputValues: { cinema, movie, auditorium, seat, screening },
+  state: { reservation },
   handleSeatRemove,
   handleSeatAdd,
 }) => {
@@ -30,9 +30,9 @@ export const Reservation = ({
             onChange={handleChange}
           >
             <option value="">Choose...</option>
-            {requests.cinemas.map((cin) => (
-              <option key={cin.id} value={cin.address}>
-                {cin.address}
+            {requests.cinemas.map(({ id, address }) => (
+              <option key={id} value={address}>
+                {address}
               </option>
             ))}
           </select>
@@ -47,12 +47,12 @@ export const Reservation = ({
             id="movie"
             aria-label=""
             onChange={handleChange}
-            disabled={!inputValues.cinema}
+            disabled={!cinema}
           >
             <option value="">Choose...</option>
-            {requests.movies.map((movie) => (
-              <option key={movie.id} value={movie.title}>
-                {movie.title}
+            {requests.movies.map(({ id, title }) => (
+              <option key={id} value={title}>
+                {title}
               </option>
             ))}
           </select>
@@ -67,12 +67,12 @@ export const Reservation = ({
             id="auditorium"
             aria-label=""
             onChange={handleChange}
-            disabled={!inputValues.movie}
+            disabled={!movie}
           >
             <option value="">Choose...</option>
-            {requests.auditoriums.map((a) => (
-              <option key={a.id} value={a.id}>
-                {`Hall ${a["hall_num"]}`}
+            {requests.auditoriums.map(({ id, hall_num }) => (
+              <option key={id} value={id}>
+                {`Hall ${hall_num}`}
               </option>
             ))}
           </select>
@@ -86,13 +86,13 @@ export const Reservation = ({
             id="screening"
             aria-label=""
             onChange={handleChange}
-            disabled={!inputValues.auditorium}
+            disabled={!auditorium}
             name="screening"
           >
             <option value="">Choose...</option>
-            {requests.screenings.map((a) => (
-              <option key={a.id} value={a.id}>
-                {setScreeningString(a["movie_starts"], a["movie_ends"], a["movie_date"])}
+            {requests.screenings.map(({ id, movie_starts, movie_ends, movie_date }) => (
+              <option key={id} value={id}>
+                {setScreeningString(movie_starts, movie_ends, movie_date)}
               </option>
             ))}
           </select>
@@ -101,9 +101,9 @@ export const Reservation = ({
           <label className="w-25 d-inline-block form-label mt-4" htmlFor="seat">
             Seat:
           </label>
-          {inputValues.screening && (
+          {screening && (
             <SeatMatrix
-              state={state}
+              state={reservation}
               seats={requests.seats}
               handleSeatRemove={handleSeatRemove}
               handleSeatAdd={handleSeatAdd}
@@ -113,13 +113,11 @@ export const Reservation = ({
 
         <div className="border-bottom">
           <span className="w-25 d-inline-block form-label mt-4">Price:</span>
-          <p className="border-0 d-inline-block mx-auto h-25 w-25">{`${price(
-            inputValues.seat
-          )} €`}</p>
+          <p className="border-0 d-inline-block mx-auto h-25 w-25">{`${price(seat)} €`}</p>
         </div>
         <div>
           <button
-            disabled={!inputValues.seat || isEmpty(inputValues.seat)}
+            disabled={isEmpty(seat)}
             className="btn btn-primary btn-outline-dark mt-4 me-1"
             type="submit"
           >

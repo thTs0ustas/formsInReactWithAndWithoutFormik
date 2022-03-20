@@ -1,15 +1,21 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { map, reduce } from "lodash";
 import axios from "axios";
 
 import { Reservation } from "../presentational/reservation";
-import { map, reduce } from "lodash";
-import { useProvider } from "../../../model";
+import { useProvider, actionTypes } from "../../../model";
 
 function ReservationContainer(WrapComponent) {
   return function WC() {
     const historyState = useRef({});
-    const [state, dispatch] = useProvider();
+    const [state, dispatch] = useProvider([
+      "reservation.inputValues",
+      "reservation.requests",
+      "reservation.response",
+      "BASE_URL",
+    ]);
+    console.log();
     const { inputValues, requests, response, BASE_URL } = state;
 
     const navigate = useNavigate();
@@ -23,10 +29,11 @@ function ReservationContainer(WrapComponent) {
       if (!window.sessionStorage.getItem("token")) {
         navigate("/login");
       }
+
       historyState.current = inputValues;
       axios.get(`${BASE_URL}/cinema`).then((response) => {
         dispatch({
-          type: "REQUEST",
+          type: actionTypes.request,
           payload: { key: "cinemas", value: response.data },
         });
       });
@@ -36,7 +43,7 @@ function ReservationContainer(WrapComponent) {
       if (inputValues.cinema !== historyState.current.cinema) {
         axios.get(`${BASE_URL}/movies`).then((response) => {
           dispatch({
-            type: "REQUEST",
+            type: actionTypes.request,
             payload: { key: "movies", value: response.data },
           });
         });
@@ -44,7 +51,7 @@ function ReservationContainer(WrapComponent) {
       if (inputValues.movie !== historyState.current.movie) {
         axios.get(`${BASE_URL}/auditorium`).then((response) =>
           dispatch({
-            type: "REQUEST",
+            type: actionTypes.request,
             payload: { key: "auditoriums", value: response.data },
           })
         );
@@ -52,7 +59,7 @@ function ReservationContainer(WrapComponent) {
       if (inputValues.auditorium !== historyState.current.auditorium) {
         axios.get(`${BASE_URL}/screenings`).then((response) =>
           dispatch({
-            type: "REQUEST",
+            type: actionTypes.request,
             payload: { key: "screenings", value: response.data },
           })
         );
@@ -60,13 +67,13 @@ function ReservationContainer(WrapComponent) {
       if (inputValues.screening !== historyState.current.screening) {
         axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) =>
           dispatch({
-            type: "REQUEST",
+            type: actionTypes.request,
             payload: { key: "seats", value: response.data },
           })
         );
         axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) =>
           dispatch({
-            type: "RESERV_SEATS",
+            type: actionTypes.reservedSeats,
             payload: { key: "reservedSeats", value: response.data },
           })
         );
@@ -87,14 +94,15 @@ function ReservationContainer(WrapComponent) {
     const handleSeatAdd = (seat) => {
       historyState.current = inputValues;
       dispatch({
-        type: "SEAT_ADD",
+        type: actionTypes.addSeat,
         payload: { name: "seat", value: seat },
       });
     };
+
     const handleSeatRemove = (id) => {
       historyState.current = inputValues;
       dispatch({
-        type: "SEAT_REMOVE",
+        type: actionTypes.removeSeat,
         payload: id,
       });
     };
@@ -102,7 +110,7 @@ function ReservationContainer(WrapComponent) {
     const handleChange = (event) => {
       historyState.current = inputValues;
       dispatch({
-        type: "INPUT_CHANGE",
+        type: actionTypes.inputChange,
         payload: event.target,
       });
     };
@@ -124,7 +132,7 @@ function ReservationContainer(WrapComponent) {
         })
         .then(({ data }) =>
           dispatch({
-            type: "RESPONSE",
+            type: actionTypes.response,
             payload: data,
           })
         );
@@ -144,4 +152,3 @@ function ReservationContainer(WrapComponent) {
   };
 }
 export default ReservationContainer(Reservation);
-// export default ReservationContainer(ReservationForm);
