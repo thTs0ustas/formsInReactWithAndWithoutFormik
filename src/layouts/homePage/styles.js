@@ -1,11 +1,46 @@
 import styled from "styled-components";
 
+const SignUpBar = styled.div`
+  background-color: black;
+  display: flex;
+  padding: 0 40px;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const SignUpButton = styled.button`
+  height: 30px;
+  width: 100px;
+  background-color: black;
+  color: aliceblue;
+  border: 0;
+  transition: 0.1s linear;
+  margin-right: 5px;
+
+  &:hover {
+    color: #9d9d9d;
+  }
+`;
+
+const SignInButton = styled.button`
+  height: 30px;
+  width: 100px;
+  background-color: #b09661;
+  border: 0;
+  transition: 0.1s linear;
+  margin-right: 5px;
+
+  &:hover {
+    background-color: #ffebc6;
+  }
+`;
+
 const HomeDiv = styled.div`
   background-color: blueviolet;
 `;
 
 const NavDiv = styled.div`
-  top: 20px;
+  top: 0;
   position: absolute;
   height: 100px;
   width: 100%;
@@ -133,10 +168,13 @@ const Footer = styled.div`
 
 export {
   HomeDiv,
+  SignUpBar,
+  SignUpButton,
   NavDiv,
   Nav,
   NavItem,
   VideoWallDiv,
+  SignInButton,
   VideoWallInfo,
   Features,
   Footer,

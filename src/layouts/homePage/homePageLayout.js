@@ -14,13 +14,22 @@ import {
   PromoCard,
   Promos,
   Typography,
+  SignUpBar,
+  SignUpButton,
+  SignInButton,
   VideoWallDiv,
   VideoWallInfo,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const HomePageLayout = () => {
+  const navigate = useNavigate();
   return (
     <HomeDiv>
+      <SignUpBar>
+        <SignUpButton>Sign Up</SignUpButton>
+        <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
+      </SignUpBar>
       <VideoWallDiv>
         <NavDiv>
           <Nav>
