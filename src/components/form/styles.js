@@ -61,7 +61,7 @@ export const FormOuterDiv = styled.div`
   width: 100%;
   & h1 {
     font-size: 40px;
-    color: #c2ad83;
+    color: #ffebc6;
   }
   & p {
     margin-top: 20px;

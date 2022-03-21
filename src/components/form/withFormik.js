@@ -79,7 +79,7 @@ export const LoginForm = () => {
                 type="text"
               />
               {formik.touched.username && formik.errors.username ? (
-                <div className=" invalid-feedback">{formik.errors.username}</div>
+                <div className="invalid-feedback text-black fw-bold ">{formik.errors.username}</div>
               ) : null}
             </div>
 
@@ -98,7 +98,7 @@ export const LoginForm = () => {
                 type="password"
               />
               {formik.touched.password && formik.errors.password ? (
-                <div className="invalid-feedback">{formik.errors.password}</div>
+                <div className="invalid-feedback text-black fw-bold">{formik.errors.password}</div>
               ) : null}
             </div>
 
