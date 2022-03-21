@@ -1,8 +1,8 @@
 import React from "react";
+import { groupBy, map } from "lodash";
+
 import { Col, Container, Screen, SeatDiv, SeatsContainer } from "./styledComp";
 import { Seat } from "./Seat";
-
-import { groupBy, map } from "lodash";
 
 const GenerateSeats = (seatNumbers, handleSeatRemove, handleSeatAdd) => {
   return (

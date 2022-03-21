@@ -1,6 +1,7 @@
 import React from "react";
-import { IconDiv } from "./styledComp";
 import { MdEventSeat } from "react-icons/md";
+
+import { IconDiv } from "./styledComp";
 import { useProvider } from "../../model";
 
 export const Seat = ({ handleSeatRemove, handleSeatAdd, seatInfo }) => {

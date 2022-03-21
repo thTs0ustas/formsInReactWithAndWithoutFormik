@@ -1,8 +1,8 @@
 import React from "react";
-
 import PropTypes from "prop-types";
-import SeatMatrix from "../../seatsGrid/seatsGrid";
 import { isEmpty } from "lodash";
+
+import SeatMatrix from "../../seatsGrid/seatsGrid";
 import { price, setScreeningString } from "../helpers";
 
 export const Reservation = ({

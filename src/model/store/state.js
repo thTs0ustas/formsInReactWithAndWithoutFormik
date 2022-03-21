@@ -11,6 +11,7 @@ const Provider = ({ children }) => {
   const value = [state, dispatch];
   return <Model.Provider value={value}>{children}</Model.Provider>;
 };
+Provider.displayName = "Model";
 
 const useProvider = (partOfState = []) => {
   const state = useContextSelector(Model, (state) =>

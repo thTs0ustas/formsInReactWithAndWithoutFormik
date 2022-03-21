@@ -1,7 +1,8 @@
 import React from "react";
+import { useLocation, useParams } from "react-router-dom";
+
 import { useTicket } from "./hooks/useTicket";
 import { useProvider } from "../../model";
-import { useLocation, useParams } from "react-router-dom";
 
 const Ticket = () => {
   const { username } = useParams();
