@@ -9,18 +9,20 @@ import { useProvider, actionTypes } from "../../../model";
 function ReservationContainer(WrapComponent) {
   return function WC() {
     const historyState = useRef({});
+
     const [state, dispatch] = useProvider([
       "reservation.inputValues",
       "reservation.requests",
       "reservation.response",
       "BASE_URL",
     ]);
-    console.log();
+
+    // const [state, dispatch] = useProvider(["search"]);
+
     const { inputValues, requests, response, BASE_URL } = state;
 
     const navigate = useNavigate();
     const { username } = useParams();
-
     const price = (
       inputValues.seat ? reduce(inputValues.seat, (sum, seat) => sum + seat.cost, 0) : 0
     ).toFixed(2);

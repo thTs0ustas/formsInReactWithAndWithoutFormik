@@ -1,18 +1,22 @@
-import { omit } from "lodash";
+import { omit, set } from "lodash";
 import { actionTypes } from "../actions/action";
 
-const reservationReducer = (state, { type, payload }) => {
+const userReducer = (state, action) => {
+  const { type, payload } = action;
   switch (type) {
     case actionTypes.userLogin:
-      return {
-        ...state,
-        userInfo: payload,
-      };
+      return set(state, "userInfo", payload);
     case actionTypes.userLogout:
-      return {
-        ...state,
-        userInfo: {},
-      };
+      return set(state, "userInfo", {});
+    default:
+      return state;
+  }
+};
+
+const reservationReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
     case actionTypes.request:
       return {
         ...state,
@@ -24,6 +28,7 @@ const reservationReducer = (state, { type, payload }) => {
           },
         },
       };
+
     case actionTypes.addSeat:
       return {
         ...state,
@@ -35,6 +40,7 @@ const reservationReducer = (state, { type, payload }) => {
           },
         },
       };
+
     case actionTypes.removeSeat:
       return {
         ...state,
@@ -46,6 +52,7 @@ const reservationReducer = (state, { type, payload }) => {
           },
         },
       };
+
     case actionTypes.reservedSeats:
       return {
         ...state,
@@ -57,6 +64,7 @@ const reservationReducer = (state, { type, payload }) => {
           },
         },
       };
+
     case actionTypes.inputChange:
       return {
         ...state,
@@ -77,6 +85,7 @@ const reservationReducer = (state, { type, payload }) => {
           response: payload,
         },
       };
+
     case actionTypes.newTicket:
       return {
         ...state,
@@ -85,9 +94,22 @@ const reservationReducer = (state, { type, payload }) => {
           ticket: payload,
         },
       };
+    case actionTypes.search:
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          payload,
+        },
+      };
     default:
       return state;
   }
 };
 
-export { reservationReducer };
+const combineReducers =
+  (...reducers) =>
+  (state, action) =>
+    reducers.reduce((acc, nextReducer) => nextReducer(acc, action), state);
+
+export const modelReducer = combineReducers(reservationReducer, userReducer);

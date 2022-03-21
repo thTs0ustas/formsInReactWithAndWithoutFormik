@@ -15,8 +15,9 @@ const INITIAL_STATE = {
       screenings: [],
       seats: [],
     },
+    response: null,
   },
-  response: null,
+  userInfo: {},
 };
 
 export { INITIAL_STATE };

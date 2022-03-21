@@ -1,15 +1,14 @@
-import { reservationReducer } from "../reducer/modelReducer";
+import { modelReducer } from "../reducer/modelReducer";
 import { INITIAL_STATE } from "../constants/constants";
 import React from "react";
 import { createContext, useContextSelector } from "use-context-selector";
 import { isEmpty, get, reduce } from "lodash";
+
 const Model = createContext({});
 
 const Provider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(reservationReducer, INITIAL_STATE, (item) => item);
-
+  const [state, dispatch] = React.useReducer(modelReducer, INITIAL_STATE, (item) => item);
   const value = [state, dispatch];
-
   return <Model.Provider value={value}>{children}</Model.Provider>;
 };
 

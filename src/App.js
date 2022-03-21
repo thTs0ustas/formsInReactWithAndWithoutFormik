@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<HomePageLayout />} />
         <Route path="/login" element={<FormContainer />} />
-        <Route path="/seats" element={<SeatMatrix />} />
+        {/*<Route path="/seats" element={<SeatMatrix />} />*/}
         <Route path="/users/:username/reservation" element={<Reservation />} />
         <Route path="/users/:username/reservation/ticket" element={<Ticket />} />
       </Routes>

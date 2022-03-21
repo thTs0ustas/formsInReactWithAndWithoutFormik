@@ -9,9 +9,8 @@ export const Seat = ({ handleSeatRemove, handleSeatAdd, seatInfo }) => {
     "reservation.requests.reservedSeats",
   ]);
   const { seat, reservedSeats } = state;
-  const exists = !!seat[seatInfo.id];
 
-  console.log(exists);
+  const exists = !!seat[seatInfo.id];
   const isAlready = reservedSeats && reservedSeats.find((item) => item["seats_id"] === seatInfo.id);
 
   return (
