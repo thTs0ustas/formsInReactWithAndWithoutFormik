@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
-const HomeDiv = styled.div`
+const SignInDiv = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: blueviolet;
+  background-color: #94002e;
 `;
 const Header = styled.header`
-  height: 130px;
+  z-index: 1;
 `;
+
 const SignUpBar = styled.div`
   background-color: black;
 `;
@@ -25,7 +26,6 @@ const SignUpButton = styled.button`
     color: #9d9d9d;
   }
 `;
-
 const SignInButton = styled.button`
   height: 30px;
   width: 100px;
@@ -40,27 +40,45 @@ const SignInButton = styled.button`
 `;
 
 const NavDiv = styled.div`
-  top: 30px;
-  position: absolute;
   height: 100px;
   width: 100%;
   background-color: rgba(0, 111, 255, 0.16);
+  border-bottom: 4px solid #b09661;
 `;
-
 const Nav = styled.nav`
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 `;
-
 const NavItem = styled.div`
   text-align: center;
   background-color: coral;
   flex-grow: 1;
 `;
+
 const Footer = styled.div`
   background-color: black;
   height: 300px;
 `;
-export { Header, SignUpBar, SignInButton, SignUpButton, Nav, NavItem, NavDiv, HomeDiv, Footer };
+
+const Wrapper = styled.div`
+  background-color: black;
+  height: 50px;
+  width: 100%;
+  max-width: 100%;
+  vertical-align: top;
+`;
+
+export {
+  Header,
+  Wrapper,
+  SignUpBar,
+  SignInButton,
+  SignUpButton,
+  Nav,
+  NavItem,
+  NavDiv,
+  SignInDiv,
+  Footer,
+};

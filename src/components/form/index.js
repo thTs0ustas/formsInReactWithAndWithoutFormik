@@ -1,2 +1,1 @@
-export { FormLogin } from "./formComponent/form";
-export { ContactUsForm } from "./withFormik";
+export { LoginForm } from "./withFormik";

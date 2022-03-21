@@ -8,8 +8,9 @@ import {
   Nav,
   NavItem,
   NavDiv,
-  HomeDiv,
+  SignInDiv,
   Footer,
+  Wrapper,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -17,7 +18,7 @@ import { Container } from "react-bootstrap";
 const SignInLayout = () => {
   const navigate = useNavigate();
   return (
-    <HomeDiv>
+    <SignInDiv>
       <Header>
         <SignUpBar>
           <Container fluid className="d-flex p-0 justify-content-end">
@@ -37,6 +38,7 @@ const SignInLayout = () => {
             <NavItem>7</NavItem>
           </Nav>
         </NavDiv>
+        <Wrapper />
       </Header>
       <main className="flex-grow-1 d-flex">
         <FormContainer />
@@ -44,7 +46,7 @@ const SignInLayout = () => {
       <footer>
         <Footer />
       </footer>
-    </HomeDiv>
+    </SignInDiv>
   );
 };
 

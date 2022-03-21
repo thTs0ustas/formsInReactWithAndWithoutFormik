@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Field, Form, Formik } from "formik";
-import { Button } from "react-bootstrap";
+import { Form, Formik } from "formik";
+
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,9 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useProvider } from "../../model";
 import { actionTypes } from "../../model";
+import { Input, Button, FormOuterDiv } from "./styles";
 
-export const ContactUsForm = () => {
+export const LoginForm = () => {
   const [state, setState] = useState(null);
   const [, dispatch] = useProvider();
   let navigate = useNavigate();
@@ -38,7 +39,9 @@ export const ContactUsForm = () => {
 
   console.log(state);
   return (
-    <>
+    <FormOuterDiv>
+      <h1>MOVIE CLUB SIGN IN</h1>
+      <p>Please enter your username and password to continue.</p>
       <Formik
         initialValues={{ username: "", password: "" }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -63,13 +66,11 @@ export const ContactUsForm = () => {
         {(formik) => (
           <Form className="w-100">
             <div>
-              <label className="w-25 d-inline-block form-label" htmlFor="username">
-                Name:
-              </label>
-              <Field
+              <Input
                 id="username"
                 name="username"
-                className={` w-25 d-inline-block
+                placeholder="Username"
+                className={`  d-inline-block
                   ${
                     formik.touched.username && formik.errors.username
                       ? "form-control is-invalid"
@@ -83,18 +84,17 @@ export const ContactUsForm = () => {
             </div>
 
             <div>
-              <label className="form-label w-25 d-inline-block" htmlFor="password">
-                Password:
-              </label>
-              <Field
+              <Input
                 id="password"
                 name="password"
-                className={` w-25 d-inline-block
+                placeholder="Password"
+                className={`  d-inline-block 
                   ${
                     formik.touched.username && formik.errors.username
                       ? "form-control is-invalid"
                       : "form-control"
-                  }`}
+                  }
+                  `}
                 type="password"
               />
               {formik.touched.password && formik.errors.password ? (
@@ -102,25 +102,13 @@ export const ContactUsForm = () => {
               ) : null}
             </div>
 
-            <br />
-            <div>
-              <Button type="submit" disabled={formik.isSubmitting}>
-                {formik.isSubmitting ? "Please wait..." : "Submit"}
-              </Button>
-
-              <Button
-                variant={"danger"}
-                onReset={formik.handleReset}
-                type="reset"
-                disabled={formik.isSubmitting}
-              >
-                Reset
-              </Button>
-            </div>
+            <Button type="submit" disabled={formik.isSubmitting}>
+              {formik.isSubmitting ? "Please wait..." : "Continue"}
+            </Button>
           </Form>
         )}
       </Formik>
       <div>{state ? (state.message ? state.message : null) : ""}</div>
-    </>
+    </FormOuterDiv>
   );
 };
