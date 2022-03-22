@@ -44,6 +44,7 @@ const Col = styled.div`
 
 const SeatsContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 550px;
 `;

@@ -1,24 +1,25 @@
 import styled from "styled-components";
 
 const SignInDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-
   background-color: #94002e;
 `;
 
 const SignUpBar = styled.div`
+  display: flex;
+  justify-content: center;
   background-color: black;
   & div {
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     max-width: 1440px;
   }
 `;
 const SignUpButton = styled.button`
-  height: 30px;
+  height: 32px;
   width: 100px;
   background-color: black;
+
   color: aliceblue;
   border: 0;
   transition: 0.1s linear;
@@ -29,7 +30,7 @@ const SignUpButton = styled.button`
   }
 `;
 const SignInButton = styled.button`
-  height: 30px;
+  height: 32px;
   width: 100px;
   background-color: ${({ theme }) => theme.primary};
   border: 0;

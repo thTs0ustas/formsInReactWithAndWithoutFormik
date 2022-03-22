@@ -38,8 +38,8 @@ const SignInLayout = () => {
             <NavItem>7</NavItem>
           </Nav>
         </NavDiv>
-        <Wrapper />
       </Header>
+      <Wrapper />
       <SignInMain>
         <Login>
           <LoginForm />

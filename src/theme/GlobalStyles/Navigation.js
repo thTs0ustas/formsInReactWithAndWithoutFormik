@@ -5,8 +5,6 @@ const NavDiv = styled.div`
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  background-color: ${({ theme }) => theme.bgMain};
-  border-bottom: 4px solid ${({ theme }) => theme.primary};
 `;
 const Nav = styled.nav`
   height: 100%;

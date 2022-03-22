@@ -70,11 +70,13 @@ export const Reservation = ({
             disabled={!movie}
           >
             <option value="">Choose...</option>
-            {requests.auditoriums.map(({ id, hall_num }) => (
-              <option key={id} value={id}>
-                {`Hall ${hall_num}`}
-              </option>
-            ))}
+            {requests.auditoriums.map(({ id, hall_num, columns }) => {
+              return (
+                <option key={id} value={[id, columns]}>
+                  {`Hall ${hall_num}`}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div>
