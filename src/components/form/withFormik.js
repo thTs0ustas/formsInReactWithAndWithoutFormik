@@ -6,9 +6,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import { useProvider } from "../../model";
 import { actionTypes } from "../../model";
-import { Input, Button, FormOuterDiv } from "./styles";
+import { ContinueButton, FormOuterDiv } from "./styles";
+import { Input } from "../../theme";
 
 export const LoginForm = () => {
   const [state, setState] = useState(null);
@@ -102,9 +104,9 @@ export const LoginForm = () => {
               ) : null}
             </div>
 
-            <Button type="submit" disabled={formik.isSubmitting}>
+            <ContinueButton type="submit" disabled={formik.isSubmitting}>
               {formik.isSubmitting ? "Please wait..." : "Continue"}
-            </Button>
+            </ContinueButton>
           </Form>
         )}
       </Formik>

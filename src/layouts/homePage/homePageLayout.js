@@ -6,48 +6,55 @@ import {
   Card,
   ComingUp,
   Features,
-  Footer,
   HomeDiv,
-  Nav,
-  NavDiv,
-  NavItem,
   PromoCard,
   Promos,
   Typography,
-  SignUpBar,
-  SignUpButton,
-  SignInButton,
   VideoWallDiv,
   VideoWallInfo,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
+import {
+  Footer,
+  Header,
+  Nav,
+  NavDiv,
+  NavItem,
+  SignUpBar,
+  SignUpButton,
+  SignInButton,
+} from "../../theme";
 
 const HomePageLayout = () => {
   const navigate = useNavigate();
   return (
     <HomeDiv>
-      <SignUpBar>
-        <SignUpButton>Sign Up</SignUpButton>
-        <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
-      </SignUpBar>
-      <VideoWallDiv>
-        <NavDiv>
-          <Nav>
-            <NavItem>1</NavItem>
-            <NavItem>2</NavItem>
-            <NavItem>3</NavItem>
-            <NavItem>4</NavItem>
-            <NavItem>5</NavItem>
-            <NavItem>6</NavItem>
-            <NavItem>7</NavItem>
-          </Nav>
-        </NavDiv>
-        <VideoWallInfo>
-          <p>Small Description</p>
-          <h2>Movie Title</h2>
-          <button>BOOK TICKETS</button>
-        </VideoWallInfo>
-      </VideoWallDiv>
+      <Header>
+        <SignUpBar>
+          <div>
+            <SignUpButton>Sign Up</SignUpButton>
+            <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
+          </div>
+        </SignUpBar>
+        <VideoWallDiv>
+          <NavDiv>
+            <Nav>
+              <NavItem>1</NavItem>
+              <NavItem>2</NavItem>
+              <NavItem>3</NavItem>
+              <NavItem>4</NavItem>
+              <NavItem>5</NavItem>
+              <NavItem>6</NavItem>
+              <NavItem>7</NavItem>
+            </Nav>
+          </NavDiv>
+          <VideoWallInfo>
+            <p>Small Description</p>
+            <h2>Movie Title</h2>
+            <button>BOOK TICKETS</button>
+          </VideoWallInfo>
+        </VideoWallDiv>
+      </Header>
       <div>
         <Features>
           <Typography>

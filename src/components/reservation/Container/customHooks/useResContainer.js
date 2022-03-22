@@ -72,6 +72,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
       }),
     [response]
   );
+
   const handleSeatAdd = (seat) => {
     historyState.current = inputValues;
     dispatch({

@@ -1,5 +1,8 @@
 import React from "react";
-import { FormContainer } from "../../components/formContainer";
+import { LoginForm } from "../../components/form";
+import { Login, SignInMain, Wrapper } from "./styles";
+import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import {
   Header,
   SignUpBar,
@@ -10,10 +13,7 @@ import {
   NavDiv,
   SignInDiv,
   Footer,
-  Wrapper,
-} from "./styles";
-import { useNavigate } from "react-router-dom";
-import { Container } from "react-bootstrap";
+} from "../../theme";
 
 const SignInLayout = () => {
   const navigate = useNavigate();
@@ -40,9 +40,11 @@ const SignInLayout = () => {
         </NavDiv>
         <Wrapper />
       </Header>
-      <main className="flex-grow-1 d-flex">
-        <FormContainer />
-      </main>
+      <SignInMain>
+        <Login>
+          <LoginForm />
+        </Login>
+      </SignInMain>
       <footer>
         <Footer />
       </footer>

@@ -27,7 +27,7 @@ const useProvider = (partOfState = []) => {
         )
   );
   const dispatch = useContextSelector(Model, (v) => v[1]);
-  if (!state) {
+  if (!state || !dispatch) {
     throw new Error("Component is outside the context provider");
   }
   return [state, dispatch];
