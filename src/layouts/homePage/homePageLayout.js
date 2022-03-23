@@ -117,4 +117,4 @@ const HomePageLayout = () => {
   );
 };
 
-export default HomePageLayout;
+export { HomePageLayout };

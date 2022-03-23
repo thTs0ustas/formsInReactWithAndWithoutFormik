@@ -52,4 +52,4 @@ const SignInLayout = () => {
   );
 };
 
-export default SignInLayout;
+export { SignInLayout };

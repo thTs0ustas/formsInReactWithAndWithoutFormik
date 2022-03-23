@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import axios from "axios";
 import { actionTypes } from "../../../../model";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
   }, []);
 
   useEffect(() => {
+    console.log(inputValues);
     if (inputValues.cinema !== historyState.current.cinema) {
       axios.get(`${BASE_URL}/movies`).then((response) => {
         dispatch({

@@ -7,7 +7,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { ContinueButton, FormOuterDiv } from "./styles/styles";
-import { Input } from "../../theme";
+import { InputField } from "../../theme";
 import { useLoginForm } from "./hooks/useLoginForm";
 
 export const LoginForm = () => {
@@ -40,7 +40,7 @@ export const LoginForm = () => {
         {(formik) => (
           <Form className="w-100">
             <div>
-              <Input
+              <InputField
                 id="username"
                 name="username"
                 placeholder="Username"
@@ -58,7 +58,7 @@ export const LoginForm = () => {
             </div>
 
             <div>
-              <Input
+              <InputField
                 id="password"
                 name="password"
                 placeholder="Password"
