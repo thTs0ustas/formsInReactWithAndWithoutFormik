@@ -29,7 +29,7 @@ const HomePageLayout = () => {
   const navigate = useNavigate();
   return (
     <HomeDiv>
-      <Header>
+      <Header mainPage={false}>
         <SignUpBar>
           <div>
             <SignUpButton>Sign Up</SignUpButton>

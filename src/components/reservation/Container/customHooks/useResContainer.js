@@ -21,7 +21,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
     });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (inputValues.cinema !== historyState.current.cinema) {
       axios.get(`${BASE_URL}/movies`).then((response) => {
         dispatch({
