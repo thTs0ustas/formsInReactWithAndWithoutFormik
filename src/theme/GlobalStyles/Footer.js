@@ -10,4 +10,6 @@ const Footer = styled.div`
   }
 `;
 
-export { Footer };
+export const FooterInput = styled.input``;
+
+export { Footer, FooterInput };

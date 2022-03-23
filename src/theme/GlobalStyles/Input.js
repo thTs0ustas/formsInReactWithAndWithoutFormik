@@ -14,11 +14,10 @@ export const Input = styled(Field)`
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.bgMain} inset !important;
-    -webkit-text-fill-color: #fcfcfc; !important;
+    -webkit-text-fill-color: #fcfcfc !important;
     caret-color: aliceblue;
-    
   }
- 
+
   ::-webkit-input-placeholder {
     color: ${({ theme }) => theme.white};
   }
@@ -26,7 +25,7 @@ export const Input = styled(Field)`
   ::-moz-placeholder {
     color: ${({ theme }) => theme.white};
   }
-  
+
   &:first-child {
     margin-bottom: 10px;
   }
@@ -35,7 +34,7 @@ export const Input = styled(Field)`
     background-color: ${({ theme }) => theme.bgMain};
     color: ${({ theme }) => theme.white};
     border: 2px solid ${({ theme }) => theme.primary};
-  
+
     ::-moz-placeholder {
       color: rgba(0, 0, 0, 0);
     }
