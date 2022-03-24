@@ -22,6 +22,7 @@ export const ContinueButton = styled.button`
 `;
 export const FormOuterDiv = styled.div`
   width: 100%;
+
   & h1 {
     font-size: 40px;
     color: ${({ theme }) => theme.secondary};

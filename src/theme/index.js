@@ -1,4 +1,4 @@
-export { Input } from "./GlobalStyles/Input";
+export { Input,InputSignup } from "./GlobalStyles/Input";
 export { SignUpButton, SignUpBar, SignInButton, SignInDiv } from "./GlobalStyles/UpperBar";
 export { Nav, NavItem, NavDiv } from "./GlobalStyles/Navigation";
 export { Footer } from "./GlobalStyles/Footer";
