@@ -38,30 +38,30 @@ export const LoginForm = () => {
         })}
       >
         {(formik) => (
-          <Form className="w-100">
+          <Form className='w-100'>
             <div>
               <InputField
-                id="username"
-                name="username"
-                placeholder="Username"
+                id='username'
+                name='username'
+                placeholder='Username'
                 className={`  d-inline-block
                   ${
                     formik.touched.username && formik.errors.username
                       ? "form-control is-invalid"
                       : "form-control"
                   }`}
-                type="text"
+                type='text'
               />
               {formik.touched.username && formik.errors.username ? (
-                <div className="invalid-feedback text-black fw-bold ">{formik.errors.username}</div>
+                <div className='invalid-feedback text-black fw-bold '>{formik.errors.username}</div>
               ) : null}
             </div>
 
             <div>
               <InputField
-                id="password"
-                name="password"
-                placeholder="Password"
+                id='password'
+                name='password'
+                placeholder='Password'
                 className={`  d-inline-block 
                   ${
                     formik.touched.username && formik.errors.username
@@ -69,14 +69,14 @@ export const LoginForm = () => {
                       : "form-control"
                   }
                   `}
-                type="password"
+                type='password'
               />
               {formik.touched.password && formik.errors.password ? (
-                <div className="invalid-feedback text-black fw-bold">{formik.errors.password}</div>
+                <div className='invalid-feedback text-black fw-bold'>{formik.errors.password}</div>
               ) : null}
             </div>
 
-            <ContinueButton type="submit" disabled={formik.isSubmitting}>
+            <ContinueButton type='submit' disabled={formik.isSubmitting}>
               {formik.isSubmitting ? "Please wait..." : "Continue"}
             </ContinueButton>
           </Form>

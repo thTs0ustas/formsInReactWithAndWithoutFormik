@@ -1,7 +1,9 @@
 import React from "react";
 import { MdEventSeat } from "react-icons/md";
+
 import { useProvider } from "../../model";
 import { IconDiv } from "./styledComp";
+
 export const Seat = ({ handleSeatRemove, handleSeatAdd, seatInfo }) => {
   const [state] = useProvider([
     "reservation.inputValues.seat",

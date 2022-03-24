@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
-import { useProvider, actionTypes } from "../../../model";
+import { actionTypes, useProvider } from "../../../model";
 
 export const useTicket = (username, reservationId) => {
   const [state, dispatch] = useProvider();
