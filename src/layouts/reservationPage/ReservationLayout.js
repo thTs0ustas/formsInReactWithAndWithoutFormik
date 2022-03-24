@@ -1,7 +1,7 @@
-import { Header, Footer, Logo, NavDiv, Nav } from "../../theme";
-import { ReservationContainer, MoviePoster } from "./styles";
+import { Footer, Header, Logo, Nav, NavDiv } from "../../theme";
+import { MoviePoster, ReservationContainer } from "./styles";
 import React from "react";
-import { Reservation } from "../../components/reservation";
+import { Reservation } from "../../components";
 
 const ReservationLayout = () => {
   return (
@@ -13,11 +13,11 @@ const ReservationLayout = () => {
           </Nav>
         </NavDiv>
       </Header>
-      <MoviePoster></MoviePoster>
+      <MoviePoster />
       <ReservationContainer>
         <Reservation />
       </ReservationContainer>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 };

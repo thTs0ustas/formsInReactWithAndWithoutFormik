@@ -45,7 +45,6 @@ export const InputField = styled(Field)`
     }
   }
 `;
-
 export const SelectContainer = styled(FloatingLabel)`
   width: 20%;
   margin: 0 3px;

@@ -8,12 +8,14 @@ const ReservationForm = styled(Form)`
 `;
 
 const Container = styled.div`
+  margin: 0 auto;
   width: 100%;
   display: flex;
+  max-width: 1440px;
 `;
 
 const TicketOptions = styled.div`
-  box-shadow: 1px 1px 10px black;
+  box-shadow: 2px 0 10px 1px black;
   width: 30%;
   height: 600px;
   background-color: ${({ theme }) => theme.secondary};

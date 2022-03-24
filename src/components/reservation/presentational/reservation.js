@@ -2,17 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { isEmpty } from "lodash";
 
-import SeatMatrix from "../../seatsGrid/seatsGrid";
-import { price, setScreeningString } from "../helpers";
+import { SeatMatrix } from "../../seatsGrid";
+import { setScreeningString } from "../helpers";
 import {
+  Container,
+  ReservationForm,
   ReservationInfoBar,
   SeatsContainer,
-  ReservationForm,
-  TicketOptions,
-  Container,
   SeatsGrid,
+  TicketOptions,
 } from "./styles";
-import { Input, SelectContainer, ContinueButton } from "../../../theme";
+import { ContinueButton, Input, SelectContainer } from "../../../theme";
+
 export const Reservation = ({
   handleSubmit,
   handleChange,
@@ -25,9 +26,9 @@ export const Reservation = ({
   return (
     <ReservationForm onSubmit={handleSubmit}>
       <ReservationInfoBar>
-        <SelectContainer controlId="floatingInput" label="Theater">
-          <Input name="cinema" onChange={handleChange}>
-            <option value=""></option>
+        <SelectContainer controlId='floatingInput' label='Theater'>
+          <Input name='cinema' onChange={handleChange}>
+            <option value='' />
             {requests.cinemas.map(({ id, address }) => (
               <option key={id} value={address}>
                 {address}
@@ -36,9 +37,9 @@ export const Reservation = ({
           </Input>
         </SelectContainer>
 
-        <SelectContainer controlId="floatingInput" label="Movie">
-          <Input name="movie" onChange={(e) => handleChange(e)} disabled={!cinema}>
-            <option value=""></option>
+        <SelectContainer controlId='floatingInput' label='Movie'>
+          <Input name='movie' onChange={(e) => handleChange(e)} disabled={!cinema}>
+            <option value='' />
             {requests.movies.map(({ id, title }) => (
               <option key={id} value={title}>
                 {title}
@@ -47,9 +48,9 @@ export const Reservation = ({
           </Input>
         </SelectContainer>
 
-        <SelectContainer controlId="floatingInput" label="Auditorium">
-          <Input name="auditorium" onChange={(e) => handleChange(e)} disabled={!movie}>
-            <option value=""></option>
+        <SelectContainer controlId='floatingInput' label='Auditorium'>
+          <Input name='auditorium' onChange={(e) => handleChange(e)} disabled={!movie}>
+            <option value='' />
             {requests.auditoriums.map(({ id, hall_num, columns }) => {
               return (
                 <option key={id} value={[id, columns]}>
@@ -60,9 +61,9 @@ export const Reservation = ({
           </Input>
         </SelectContainer>
 
-        <SelectContainer controlId="floatingInput" label="Screenings">
-          <Input name="screening" onChange={(e) => handleChange(e)} disabled={!auditorium}>
-            <option value=""></option>
+        <SelectContainer controlId='floatingInput' label='Screenings'>
+          <Input name='screening' onChange={(e) => handleChange(e)} disabled={!auditorium}>
+            <option value='' />
             {requests.screenings.map(({ id, movie_starts, movie_ends, movie_date }) => (
               <option key={id} value={id}>
                 {setScreeningString(movie_starts, movie_ends, movie_date)}
@@ -84,7 +85,7 @@ export const Reservation = ({
               />
             )}
           </SeatsGrid>
-          <ContinueButton disabled={isEmpty(seat)} type="submit">
+          <ContinueButton disabled={isEmpty(seat)} type='submit'>
             Continue
           </ContinueButton>
         </SeatsContainer>
