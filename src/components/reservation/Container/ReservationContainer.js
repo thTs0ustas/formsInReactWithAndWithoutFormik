@@ -8,7 +8,7 @@ import { useProvider, actionTypes } from "../../../model";
 import { useResContainer } from "./customHooks/useResContainer";
 import { price } from "../helpers";
 
-const ReservationContainer = (WrapComponent) => () => {
+const ReservationContainer = () => {
   const [state, dispatch] = useProvider([
     "reservation.inputValues",
     "reservation.requests",
@@ -60,7 +60,7 @@ const ReservationContainer = (WrapComponent) => () => {
     state,
   };
 
-  return <WrapComponent {...props} />;
+  return <Reservation {...props} />;
 };
 
-export default ReservationContainer(Reservation);
+export default ReservationContainer;

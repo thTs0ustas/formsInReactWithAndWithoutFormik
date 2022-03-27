@@ -92,7 +92,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
     historyState.current = inputValues;
     dispatch({
       type: actionTypes.inputChange,
-      payload: event.target,
+      payload: { name: event.target.name, value: event.target.value },
     });
   };
 
