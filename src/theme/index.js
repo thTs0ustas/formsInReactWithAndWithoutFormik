@@ -8,7 +8,7 @@ export { SignUpButton, SignUpBar, SignInButton, SignInDiv } from "./GlobalStyles
 
 export const theme = {
   light: {
-    bgMain: "#94002E",
+    bgMain: "#6e0b24",
     logo: "#FF9D69",
     primary: "#b09661",
     secondary: "#ffebc6",

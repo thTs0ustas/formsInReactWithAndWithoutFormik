@@ -63,16 +63,14 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
     }
   }, [inputValues]);
 
-  useEffect(
-    () =>
-      response &&
+  useEffect(() => {
+    response &&
       navigate(`/users/${username}/reservation/ticket`, {
         state: {
           reservationId: response.Reservations.at(-1).id,
         },
-      }),
-    [response]
-  );
+      });
+  }, [response]);
 
   const handleSeatAdd = (seat) => {
     historyState.current = inputValues;
