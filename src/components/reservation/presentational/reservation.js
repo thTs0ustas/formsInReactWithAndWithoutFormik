@@ -132,7 +132,10 @@ export const Reservation = ({
               handleSeatAdd={handleSeatAdd}
             />
           </SeatsGrid>
-          <ContinueButton disabled={isEmpty(seat)} type='submit'>
+          <ContinueButton
+            disabled={isEmpty(seat) || numOfTickets.sum - keys(seat).length}
+            type='submit'
+          >
             Continue
           </ContinueButton>
         </SeatsContainer>
