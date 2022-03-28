@@ -13,7 +13,7 @@ function App() {
   const [theming, setTheming] = useState(true);
   return (
     <ThemeProvider theme={theming ? theme.light : theme.dark}>
-      TODO: switch for theme change
+      <input type='checkbox' onChange={() => setTheming(!theming)}></input>
       <div className='App'>
         <Routes>
           <Route exact path='/' element={<HomePageLayout />} />

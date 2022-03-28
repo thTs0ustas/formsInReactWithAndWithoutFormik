@@ -4,11 +4,11 @@ import { map } from "lodash";
 import axios from "axios";
 
 import { Reservation } from "../presentational/reservation";
-import { useProvider, actionTypes } from "../../../model";
+import { responseAction, useProvider } from "../../../model";
 import { useResContainer } from "./customHooks/useResContainer";
 import { price } from "../helpers";
 
-const ReservationContainer = (WrapComponent) => () => {
+const ReservationContainer = () => {
   const [state, dispatch] = useProvider([
     "reservation.inputValues",
     "reservation.requests",
@@ -42,12 +42,7 @@ const ReservationContainer = (WrapComponent) => () => {
           })),
         },
       })
-      .then(({ data }) =>
-        dispatch({
-          type: actionTypes.response,
-          payload: data,
-        })
-      );
+      .then(({ data }) => dispatch(responseAction(data)));
   };
 
   const props = {
@@ -60,7 +55,7 @@ const ReservationContainer = (WrapComponent) => () => {
     state,
   };
 
-  return <WrapComponent {...props} />;
+  return <Reservation {...props} />;
 };
 
-export default ReservationContainer(Reservation);
+export default ReservationContainer;

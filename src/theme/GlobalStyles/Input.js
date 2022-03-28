@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Field } from "formik";
 import { FloatingLabel, Form } from "react-bootstrap";
+
 export const InputField = styled(Field)`
   max-width: 418px;
   background-color: #340505;
@@ -50,13 +51,15 @@ export const SelectContainer = styled(FloatingLabel)`
   margin: 0 3px;
 `;
 export const Input = styled(Form.Select)`
-  background-color: ${({ theme, disabled }) => (disabled ? "#000" : theme.primary)};
+  background-color: ${({ theme }) => theme.primary};
   color: black;
   border: 0;
   width: 100%;
   height: 100%;
   border-radius: 1px;
-
+  &:disabled {
+    background-color: ${({ theme }) => theme.secondary};
+  }
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
@@ -86,8 +89,7 @@ export const Input = styled(Form.Select)`
       color: rgba(0, 0, 0, 0);
     }
   }
-  &,
-  option {
+  & option {
     color: black;
   }
 `;
