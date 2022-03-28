@@ -1,7 +1,7 @@
 import { actionTypes } from "../actions";
 import produce from "immer";
 
-const reservationReducer = (state, action) => {
+export const modelReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -21,6 +21,18 @@ const reservationReducer = (state, action) => {
     case actionTypes.addSeat:
       return produce(state, (draft) => {
         draft.reservation.inputValues.seat[payload.value.id] = payload.value;
+      });
+
+    case actionTypes.addTicket:
+      return produce(state, (draft) => {
+        draft.reservation.inputValues.numOfTickets[payload] += 1;
+        draft.reservation.inputValues.numOfTickets.sum += 1;
+      });
+
+    case actionTypes.removeTicket:
+      return produce(state, (draft) => {
+        draft.reservation.inputValues.numOfTickets[payload] -= 1;
+        draft.reservation.inputValues.numOfTickets.sum -= 1;
       });
 
     case actionTypes.removeSeat:
@@ -52,5 +64,3 @@ const reservationReducer = (state, action) => {
       return state;
   }
 };
-
-export const modelReducer = reservationReducer;

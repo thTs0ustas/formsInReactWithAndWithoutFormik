@@ -6,6 +6,12 @@ const INITIAL_STATE = {
       auditorium: "",
       movie: "",
       screening: "",
+      numOfTickets: {
+        adult: 0,
+        child: 0,
+        member: 0,
+        sum: 0,
+      },
       seat: {},
     },
     requests: {

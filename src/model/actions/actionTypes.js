@@ -8,6 +8,8 @@ const actionTypes = {
   userLogin: "USER_LOGIN",
   userLogout: "USER_LOGOUT",
   newTicket: "NEW_TICKET",
+  addTicket: "ADD_TICKET",
+  removeTicket: "REMOVE_TICKET",
   search: "SEARCH",
 };
 export { actionTypes };

@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { isEmpty } from "lodash";
+import { isEmpty, keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
-import { setScreeningString } from "../helpers";
+import { price, setScreeningString } from "../helpers";
 import {
   Container,
   ReservationForm,
@@ -13,12 +13,13 @@ import {
   TicketOptions,
 } from "./styles";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
+import { TicketButton } from "./reservationComponents/ticketButton";
 
 export const Reservation = ({
   handleSubmit,
   handleChange,
   requests,
-  inputValues: { cinema, movie, auditorium, seat, screening },
+  inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   state: { reservation },
   handleSeatRemove,
   handleSeatAdd,
@@ -73,17 +74,63 @@ export const Reservation = ({
         </SelectContainer>
       </ReservationInfoBar>
       <Container>
-        <TicketOptions />
-        <SeatsContainer>
+        <TicketOptions>
+          <div>
+            <div>
+              <TicketButton type='member' subtract={true}>
+                -
+              </TicketButton>
+              <span>Member</span>
+              <TicketButton type='member' add={true}>
+                +
+              </TicketButton>
+              <input type='text' disabled value={numOfTickets.member} />
+            </div>
+            <div>
+              <TicketButton type='adult' subtract={true}>
+                -
+              </TicketButton>
+              <span>Adult</span>
+              <TicketButton type='adult' add={true}>
+                +
+              </TicketButton>
+              <input type='text' disabled value={numOfTickets.adult} />
+            </div>
+            <div>
+              <TicketButton type='child' subtract={true}>
+                -
+              </TicketButton>
+              <span>Child</span>
+              <TicketButton type='child' add={true}>
+                +
+              </TicketButton>
+              <input type='text' disabled value={numOfTickets.child} />
+            </div>
+          </div>
+
+          <div>
+            <p>
+              You choose <strong>{numOfTickets.sum}</strong> tickets
+            </p>
+            <p>
+              Remaining seats{" "}
+              <strong>
+                {numOfTickets.sum - keys(seat).length > -1
+                  ? numOfTickets.sum - keys(seat).length
+                  : "Deselect some seats"}
+              </strong>
+            </p>
+            <p>Price: {price(numOfTickets)}€</p>
+          </div>
+        </TicketOptions>
+        <SeatsContainer disable={screening && numOfTickets.sum > 0}>
           <SeatsGrid>
-            {screening && (
-              <SeatMatrix
-                state={reservation}
-                seats={requests.seats}
-                handleSeatRemove={handleSeatRemove}
-                handleSeatAdd={handleSeatAdd}
-              />
-            )}
+            <SeatMatrix
+              state={reservation}
+              seats={requests.seats}
+              handleSeatRemove={handleSeatRemove}
+              handleSeatAdd={handleSeatAdd}
+            />
           </SeatsGrid>
           <ContinueButton disabled={isEmpty(seat)} type='submit'>
             Continue

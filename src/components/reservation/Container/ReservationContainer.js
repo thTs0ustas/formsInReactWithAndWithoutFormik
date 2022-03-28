@@ -13,10 +13,11 @@ const ReservationContainer = () => {
     "reservation.inputValues",
     "reservation.requests",
     "reservation.response",
+
     "BASE_URL",
   ]);
 
-  const { inputValues, requests, response, BASE_URL } = state;
+  const { inputValues, requests, response, numOfTickets, BASE_URL } = state;
   const { username } = useParams();
 
   const { handleSeatAdd, handleSeatRemove, handleChange } = useResContainer({
@@ -53,6 +54,7 @@ const ReservationContainer = () => {
     inputValues,
     requests,
     state,
+    numOfTickets,
   };
 
   return <Reservation {...props} />;

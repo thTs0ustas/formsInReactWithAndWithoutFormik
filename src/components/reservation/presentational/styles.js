@@ -28,6 +28,7 @@ const SeatsContainer = styled.div`
   justify-content: center;
   width: 70%;
   height: 600px;
+  pointer-events: ${({ disable }) => (!disable ? "none" : "all")};
 `;
 
 const SeatsGrid = styled.div`
