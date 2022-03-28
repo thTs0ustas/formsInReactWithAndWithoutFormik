@@ -21,6 +21,7 @@ export const Seat = ({ handleSeatRemove, handleSeatAdd, seatInfo }) => {
       id={`seat_${seat["seat_num"]}`}
       disabled={isAlready}
       onClick={(event) => {
+        event.stopPropagation();
         event.preventDefault();
         exists ? handleSeatRemove(seatInfo.id) : keys(seat).length < sum && handleSeatAdd(seatInfo);
       }}

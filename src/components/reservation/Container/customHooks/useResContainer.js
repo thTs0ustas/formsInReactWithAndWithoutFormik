@@ -56,23 +56,26 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
         )
       );
     }
-    if (inputValues.screening !== historyState.current.screening) {
-      axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) =>
+    if (
+      inputValues.screening !== historyState.current.screening &&
+      inputValues.numOfTickets === historyState.current.numOfTickets
+    ) {
+      axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) => {
         dispatch(
           requestAction({
             key: "seats",
             value: response.data,
           })
-        )
-      );
-      axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) =>
+        );
+      });
+      axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) => {
         dispatch(
           reservedSeatsAction({
             key: "reservedSeats",
             value: response.data,
           })
-        )
-      );
+        );
+      });
     }
   }, [inputValues]);
 
