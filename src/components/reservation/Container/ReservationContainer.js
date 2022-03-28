@@ -4,7 +4,7 @@ import { map } from "lodash";
 import axios from "axios";
 
 import { Reservation } from "../presentational/reservation";
-import { useProvider, actionTypes } from "../../../model";
+import { responseAction, useProvider } from "../../../model";
 import { useResContainer } from "./customHooks/useResContainer";
 import { price } from "../helpers";
 
@@ -42,12 +42,7 @@ const ReservationContainer = () => {
           })),
         },
       })
-      .then(({ data }) =>
-        dispatch({
-          type: actionTypes.response,
-          payload: data,
-        })
-      );
+      .then(({ data }) => dispatch(responseAction(data)));
   };
 
   const props = {

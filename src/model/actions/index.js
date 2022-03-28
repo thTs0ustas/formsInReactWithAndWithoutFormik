@@ -1,5 +1,5 @@
+export { actionTypes } from "./actionTypes";
 export {
-  actionTypes,
   addSeatAction,
   newTicketAction,
   removeSeatAction,
@@ -9,5 +9,4 @@ export {
   userLoginAction,
   userLogoutAction,
   inputChangeAction,
-} from "./actions";
-export { Provider, useProvider } from "./store/state";
+} from "./action";
