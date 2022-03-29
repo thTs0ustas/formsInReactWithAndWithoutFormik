@@ -26,33 +26,6 @@ export const StyledFooter = styled.footer`
       width: 100%;
     }
   }
-  /* ---MENU-------- */
-  .menu {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .col ul {
-    margin-right: 15px;
-  }
-  .menu .title {
-    margin-bottom: 20px;
-    color: #b09661;
-    text-transform: uppercase;
-  }
-  .menu ul li {
-    list-style: none;
-    /* padding-bottom: 10px; */
-  }
-  .menu ul li a {
-    display: block;
-    margin-bottom: 6px;
-    color: #fff;
-    text-decoration: none;
-  }
-  .menu ul li a:hover {
-    color: #b09661;
-  }
 
   @media (max-width: 768px) {
     .menu {
@@ -88,6 +61,7 @@ export const StyledFooter = styled.footer`
   }
 `;
 
+// ------------FORM----------------
 export const Boundary = styled.div`
   max-width: 80%;
   margin: 0 auto;
@@ -97,7 +71,7 @@ export const FormContainer = styled.form`
   width: 640px;
   margin: 50px auto;
   border-radius: 4px;
-  padding: 55px 90px;
+  padding: 30px 90px;
 `;
 
 export const Half = styled.div`
@@ -163,6 +137,39 @@ export const SubscribeButton = styled.input`
   transition: 0.3s linear;
   cursor: pointer;
   &:hover {
-    background-color: white;
+    background-color: #c1ad83;
   }
+`;
+
+// ------------MENU----------------
+export const MenuContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+`;
+
+export const Column = styled.div`
+  flex: 0 0 15%;
+  & ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  & ul li {
+    margin-bottom: 20px;
+  }
+  & ul li a {
+    display: block;
+    margin-bottom: 6px;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      color: #b09661;
+    }
+  }
+`;
+export const Title = styled.div`
+  margin-bottom: 20px;
+  color: #b09661;
+  text-transform: uppercase;
 `;

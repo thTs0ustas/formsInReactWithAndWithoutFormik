@@ -1,11 +1,12 @@
 import React from "react";
 import SocialIcons from "./SocialIcon";
+import { MenuContainer, Column, Title } from "./styles/Footer.styled";
 
 export default function Menu() {
   return (
-    <div class="menu">
-      <div class="col">
-        <div class="title">Films</div>
+    <MenuContainer>
+      <Column>
+        <Title>Films</Title>
         <ul>
           <li>
             <a href="#">Now Showing</a>
@@ -17,40 +18,9 @@ export default function Menu() {
             <a href="#">Cameo at home</a>
           </li>
         </ul>
-      </div>
-      <div class="col">
-        <div class="title">Events</div>
-        <ul>
-          <li>
-            <a href="#">All Events</a>
-          </li>
-          <li>
-            <a href="#">CHIFF</a>
-          </li>
-          <li>
-            <a href="#">JIFF 2019</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col">
-        <div class="title">Membership</div>
-        <ul>
-          <li>
-            <a href="#">Movie Club Log In</a>
-          </li>
-          <li>
-            <a href="#">Membership Options</a>
-          </li>
-          <li>
-            <a href="#">Terms & Conditions</a>
-          </li>
-          <li>
-            <a href="#">Member FAQs</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col">
-        <div class="title">Cinema info</div>
+      </Column>
+      <Column>
+        <Title>Cinema info</Title>
         <ul>
           <li>
             <a href="#">History</a>
@@ -74,26 +44,9 @@ export default function Menu() {
             <a href="#">Moving Story Entertainment</a>
           </li>
         </ul>
-      </div>
-      <div class="col">
-        <div class="title">Extras</div>
-        <ul>
-          <li>
-            <a href="#">Gifts</a>
-          </li>
-          <li>
-            <a href="#">Advertising</a>
-          </li>
-          <li>
-            <a href="#">Work at Cameo</a>
-          </li>
-          <li>
-            <a href="#">Download the App</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col">
-        <div class="title">Contact us</div>
+      </Column>
+      <Column>
+        <Title>Contact us</Title>
         <ul>
           <li>
             <a href="#">(03) 9754 7844</a>
@@ -103,7 +56,7 @@ export default function Menu() {
           </li>
         </ul>
         <SocialIcons />
-      </div>
-    </div>
+      </Column>
+    </MenuContainer>
   );
 }
