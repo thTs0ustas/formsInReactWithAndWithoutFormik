@@ -16,6 +16,10 @@ const Container = styled.div`
 
 const TicketOptions = styled.div`
   box-shadow: 2px 0 10px 1px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 30%;
   height: 600px;
   background-color: ${({ theme }) => theme.secondary};
@@ -51,4 +55,26 @@ const ReservationInfoBar = styled.div`
   width: 100%;
 `;
 
-export { ReservationInfoBar, SeatsContainer, Container, ReservationForm, SeatsGrid, TicketOptions };
+const TypeOfTicket = styled.span`
+  display: inline-block;
+  width: 70px;
+  text-align: center;
+`;
+const NumberOfTickets = styled.p`
+  background-color: blueviolet;
+  padding: 0 10px;
+  display: inline-block;
+  margin-left: 10px;
+  text-align: center;
+  border-radius: 5px;
+`;
+export {
+  NumberOfTickets,
+  TypeOfTicket,
+  ReservationInfoBar,
+  SeatsContainer,
+  Container,
+  ReservationForm,
+  SeatsGrid,
+  TicketOptions,
+};

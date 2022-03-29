@@ -1,4 +1,4 @@
-import { keys, reduce } from "lodash";
+import { keys, isEmpty, reduce } from "lodash";
 
 const PRICING = {
   adult: 15,
@@ -18,4 +18,12 @@ const setScreeningString = (start, end, date) => `
       ${new Date(start).toISOString().split("T")[1].slice(0, 5)} - 
       ${new Date(end).toISOString().split("T")[1].slice(0, 5)}`;
 
-export { price, setScreeningString };
+const disabledIncrement = (nValues, requests) =>
+  isEmpty(requests.seats) ||
+  requests.seats.length === requests.reservedSeats?.length ||
+  requests.seats.length - requests.reservedSeats?.length === nValues.sum;
+
+const disabledDecrement = (requests) =>
+  isEmpty(requests.seats) || requests.seats.length === requests.reservedSeats?.length;
+
+export { price, setScreeningString, disabledIncrement, disabledDecrement };

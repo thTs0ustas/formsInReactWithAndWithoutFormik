@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { isEmpty, keys } from "lodash";
+import { keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
-import { price, setScreeningString } from "../helpers";
+import { price, setScreeningString, disabledIncrement, disabledDecrement } from "../helpers";
 import {
   Container,
   ReservationForm,
@@ -11,6 +11,8 @@ import {
   SeatsContainer,
   SeatsGrid,
   TicketOptions,
+  TypeOfTicket,
+  NumberOfTickets,
 } from "./styles";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
 import { TicketButton } from "./reservationComponents/ticketButton";
@@ -76,35 +78,48 @@ export const Reservation = ({
       <Container>
         <TicketOptions>
           <div>
+            <h3>Type of Ticket</h3>
             <div>
-              <TicketButton type='member' subtract={true}>
+              <TicketButton disabled={disabledDecrement(requests)} type='member' subtract={true}>
                 -
               </TicketButton>
-              <span>Member</span>
-              <TicketButton type='member' add={true}>
+              <TypeOfTicket>Member</TypeOfTicket>
+              <TicketButton
+                disabled={disabledIncrement(numOfTickets, requests)}
+                type='member'
+                add={true}
+              >
                 +
               </TicketButton>
-              <input type='text' disabled value={numOfTickets.member} />
+              <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
             </div>
             <div>
-              <TicketButton type='adult' subtract={true}>
+              <TicketButton disabled={disabledDecrement(requests)} type='adult' subtract={true}>
                 -
               </TicketButton>
-              <span>Adult</span>
-              <TicketButton type='adult' add={true}>
+              <TypeOfTicket>Adult</TypeOfTicket>
+              <TicketButton
+                disabled={disabledIncrement(numOfTickets, requests)}
+                type='adult'
+                add={true}
+              >
                 +
               </TicketButton>
-              <input type='text' disabled value={numOfTickets.adult} />
+              <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
             </div>
             <div>
-              <TicketButton type='child' subtract={true}>
+              <TicketButton disabled={disabledDecrement(requests)} type='child' subtract={true}>
                 -
               </TicketButton>
-              <span>Child</span>
-              <TicketButton type='child' add={true}>
+              <TypeOfTicket>Child</TypeOfTicket>
+              <TicketButton
+                disabled={disabledIncrement(numOfTickets, requests)}
+                type='child'
+                add={true}
+              >
                 +
               </TicketButton>
-              <input type='text' disabled value={numOfTickets.child} />
+              <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
             </div>
           </div>
 
@@ -132,10 +147,7 @@ export const Reservation = ({
               handleSeatAdd={handleSeatAdd}
             />
           </SeatsGrid>
-          <ContinueButton
-            disabled={isEmpty(seat) || numOfTickets.sum - keys(seat).length < 0}
-            type='submit'
-          >
+          <ContinueButton disabled={numOfTickets.sum - keys(seat).length !== 0} type='submit'>
             Continue
           </ContinueButton>
         </SeatsContainer>
