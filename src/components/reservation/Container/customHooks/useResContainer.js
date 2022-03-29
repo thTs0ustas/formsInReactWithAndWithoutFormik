@@ -27,6 +27,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
         })
       );
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -77,6 +78,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
         );
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValues]);
 
   useEffect(() => {
@@ -86,6 +88,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
           reservationId: response["Reservations"].at(-1).id,
         },
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
 
   const handleSeatAdd = (seat) => {
