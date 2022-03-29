@@ -11,4 +11,5 @@ export {
   inputChangeAction,
   addTicketAction,
   removeTicketAction,
+  resetReservation,
 } from "./action";

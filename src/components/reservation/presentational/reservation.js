@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
+import { TicketButton } from "./reservationComponents/ticketButton";
 import { price, setScreeningString, disabledIncrement, disabledDecrement } from "../helpers";
 import {
   Container,
@@ -15,7 +16,6 @@ import {
   NumberOfTickets,
 } from "./styles";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
-import { TicketButton } from "./reservationComponents/ticketButton";
 
 export const Reservation = ({
   handleSubmit,
@@ -27,7 +27,7 @@ export const Reservation = ({
   handleSeatAdd,
 }) => {
   return (
-    <ReservationForm onSubmit={handleSubmit}>
+    <ReservationForm>
       <ReservationInfoBar>
         <SelectContainer controlId='floatingInput' label='Theater'>
           <Input name='cinema' onChange={handleChange}>
@@ -147,7 +147,11 @@ export const Reservation = ({
               handleSeatAdd={handleSeatAdd}
             />
           </SeatsGrid>
-          <ContinueButton disabled={numOfTickets.sum - keys(seat).length !== 0} type='submit'>
+          <ContinueButton
+            onClick={handleSubmit}
+            disabled={numOfTickets.sum - keys(seat).length !== 0}
+            type='submit'
+          >
             Continue
           </ContinueButton>
         </SeatsContainer>

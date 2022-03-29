@@ -6,6 +6,7 @@ import {
   removeSeatAction,
   requestAction,
   reservedSeatsAction,
+  resetReservation,
 } from "../../../../model";
 import { useNavigate } from "react-router-dom";
 
@@ -88,6 +89,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
           reservationId: response["Reservations"].at(-1).id,
         },
       });
+    dispatch(resetReservation());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
 

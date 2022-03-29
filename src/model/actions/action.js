@@ -46,7 +46,12 @@ const newTicketAction = (payload) => ({
   payload,
 });
 
+const resetReservation = () => ({
+  type: actionTypes.resetReservation,
+});
+
 export {
+  resetReservation,
   addSeatAction,
   newTicketAction,
   removeSeatAction,

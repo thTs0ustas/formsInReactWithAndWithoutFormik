@@ -23,7 +23,10 @@ const INITIAL_STATE = {
     },
     response: null,
   },
-  userInfo: {},
+  userInfo: {
+    tickets: [],
+    reviews: {},
+  },
 };
 
 export { INITIAL_STATE };

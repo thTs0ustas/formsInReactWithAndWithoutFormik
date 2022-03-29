@@ -11,5 +11,6 @@ const actionTypes = {
   addTicket: "ADD_TICKET",
   removeTicket: "REMOVE_TICKET",
   search: "SEARCH",
+  resetReservation: "RESET_RESERVATION",
 };
 export { actionTypes };

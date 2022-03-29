@@ -7,13 +7,13 @@ import { useProvider } from "../../model";
 const Ticket = () => {
   const { username } = useParams();
   const { state } = useLocation();
+  const [{ tickets }] = useProvider(["userInfo.tickets"]);
 
-  useTicket(username, state.reservationId);
-  const [model] = useProvider(["reservation.ticket", "reservation.response"]);
+  useTicket(username, state?.reservationId);
 
   return (
     <div>
-      <pre>{JSON.stringify(model.ticket, null, 2)}</pre>
+      <pre>{JSON.stringify(tickets.at(-1), null, 2)}</pre>
     </div>
   );
 };

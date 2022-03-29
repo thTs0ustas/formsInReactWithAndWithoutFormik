@@ -20,10 +20,10 @@ const setScreeningString = (start, end, date) => `
 
 const disabledIncrement = (nValues, requests) =>
   isEmpty(requests.seats) ||
-  requests.seats.length === requests.reservedSeats?.length ||
-  requests.seats.length - requests.reservedSeats?.length === nValues.sum;
+  requests.seats?.length === requests.reservedSeats?.length ||
+  requests.seats?.length - requests.reservedSeats?.length === nValues.sum;
 
 const disabledDecrement = (requests) =>
-  isEmpty(requests.seats) || requests.seats.length === requests.reservedSeats?.length;
+  isEmpty(requests?.seats) || requests.seats?.length === requests.reservedSeats?.length;
 
 export { price, setScreeningString, disabledIncrement, disabledDecrement };
