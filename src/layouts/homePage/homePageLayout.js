@@ -14,16 +14,8 @@ import {
   VideoWallInfo,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
-import {
-  Footer,
-  Header,
-  Nav,
-  NavDiv,
-  NavItem,
-  SignUpBar,
-  SignUpButton,
-  SignInButton,
-} from "../../theme";
+import { Header, Nav, NavDiv, NavItem, SignUpBar, SignUpButton, SignInButton } from "../../theme";
+import Footer from "../../components/footer/Footer";
 
 const HomePageLayout = () => {
   const navigate = useNavigate();
