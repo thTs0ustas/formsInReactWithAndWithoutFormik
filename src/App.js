@@ -11,7 +11,7 @@ import SignInLayout from "./layouts/signInPage/SignInLayout";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 
-import { RegistrationForm } from './components/form/RegistrationForm';
+import { RegistrationForm } from "./components/registrationForm/RegistrationForm";
 
 function App() {
   const [theming, setTheming] = useState(true);
@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/" element={<HomePageLayout />} />
           <Route path="/login" element={<SignInLayout />} />
           <Route path="/signup" element={<RegistrationForm />} />
-  
+
           <Route path="/users/:username/reservation" element={<Reservation />} />
           <Route path="/users/:username/reservation/ticket" element={<Ticket />} />
         </Routes>
