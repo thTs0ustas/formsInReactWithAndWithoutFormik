@@ -4,6 +4,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Container, UserDetails, InputBox, Button } from "./styledComponents";
+import { ContinueButton } from "../form/styles/styles";
 
 const INITIAL_STATE = {
   username: "",
@@ -140,7 +141,7 @@ export const RegistrationForm = () => {
               />
             </InputBox>
           </UserDetails>
-          <Button type="submit">Register</Button>
+          <ContinueButton type="submit">Register</ContinueButton>
         </form>
       </Container>
     </>
