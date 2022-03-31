@@ -24,7 +24,7 @@ const SignUp = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 450px;
+  max-width: 750px;
 `;
 
 export { Wrapper, SignUpMain, SignUp };

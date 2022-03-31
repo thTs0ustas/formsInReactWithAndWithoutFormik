@@ -8,9 +8,8 @@ const Container = styled.div`
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 
-  & > h2 {
+  & > h1 {
     color: #f7dabb;
-    font-size: 2.5rem;
     font-weight: 500;
     padding-bottom: 30px;
     text-transform: uppercase;
@@ -19,7 +18,6 @@ const Container = styled.div`
 
   & > h3 {
     color: #f7dabb;
-    font-size: 2rem;
     font-weight: 400;
     text-transform: uppercase;
     position: relative;
@@ -44,8 +42,8 @@ const InputBox = styled.div`
   & span {
     color: #f7dabb;
     display: block;
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: .9rem;
+    font-weight: 400;
     margin-bottom: 5px;
     text-transform: uppercase;
   }
@@ -54,8 +52,7 @@ const InputBox = styled.div`
     height: 45px;
     width: 100%;
     outline: none;
-    font-size: 1.6rem;
-    border-radius: 5px;
+    font-size: 1rem;
     border: none;
     padding-left: 15px;
     background: #480016;

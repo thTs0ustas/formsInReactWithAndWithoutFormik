@@ -38,7 +38,7 @@ export const RegistrationForm = () => {
   return (
     <>
       <Container>
-        <h2>Registration</h2>
+        <h1>Registration</h1>
         <h3>Your Account Details</h3>
 
         <form action="#" onSubmit={handleSubmit}>
