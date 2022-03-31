@@ -18,6 +18,7 @@ export const StyledSocialIcons = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 630px) {
+    justify-content: center;
   }
 `;
