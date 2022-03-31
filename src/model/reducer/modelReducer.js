@@ -1,13 +1,15 @@
 import { actionTypes } from "../actions";
 import produce from "immer";
+import { INITIAL_STATE } from "../constants/constants";
 
-const reservationReducer = (state, action) => {
+export const modelReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case actionTypes.userLogin:
       return produce(state, (draft) => {
-        draft.userInfo = payload;
+        draft.userInfo.username = payload.username;
+        draft.userInfo.token = payload.token;
       });
     case actionTypes.userLogout:
       return produce(state, (draft) => {
@@ -21,6 +23,18 @@ const reservationReducer = (state, action) => {
     case actionTypes.addSeat:
       return produce(state, (draft) => {
         draft.reservation.inputValues.seat[payload.value.id] = payload.value;
+      });
+
+    case actionTypes.addTicket:
+      return produce(state, (draft) => {
+        draft.reservation.inputValues.numOfTickets[payload] += 1;
+        draft.reservation.inputValues.numOfTickets.sum += 1;
+      });
+
+    case actionTypes.removeTicket:
+      return produce(state, (draft) => {
+        draft.reservation.inputValues.numOfTickets[payload] -= 1;
+        draft.reservation.inputValues.numOfTickets.sum -= 1;
       });
 
     case actionTypes.removeSeat:
@@ -42,15 +56,17 @@ const reservationReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.reservation.response = payload;
       });
+    case actionTypes.resetReservation:
+      return produce(state, (draft) => {
+        draft.reservation = INITIAL_STATE.reservation;
+      });
 
     case actionTypes.newTicket:
       return produce(state, (draft) => {
-        draft.reservation.ticket = payload;
+        draft.userInfo.tickets.push(payload);
       });
 
     default:
       return state;
   }
 };
-
-export const modelReducer = reservationReducer;

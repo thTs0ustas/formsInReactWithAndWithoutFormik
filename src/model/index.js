@@ -9,5 +9,8 @@ export {
   userLoginAction,
   userLogoutAction,
   inputChangeAction,
+  addTicketAction,
+  removeTicketAction,
+  resetReservation,
 } from "./actions";
 export { Provider, useProvider } from "./store/state";

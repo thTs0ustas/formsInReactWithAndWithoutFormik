@@ -1,1 +1,1 @@
-export { default as SeatMatrix } from "./seatsGrid";
+export { SeatMatrix } from "./seatsGrid/seatsGrid";

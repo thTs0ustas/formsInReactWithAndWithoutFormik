@@ -9,4 +9,7 @@ export {
   userLoginAction,
   userLogoutAction,
   inputChangeAction,
+  addTicketAction,
+  removeTicketAction,
+  resetReservation,
 } from "./action";

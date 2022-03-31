@@ -6,12 +6,12 @@ import { useProvider, userLoginAction } from "../../../model";
 export const useLoginForm = () => {
   const [state, setState] = useState(null);
   const [, dispatch] = useProvider();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (window.sessionStorage.getItem("token")) {
       const username = window.sessionStorage.getItem("username");
-      // overkill
+
       dispatch(
         userLoginAction({
           username,
@@ -32,6 +32,7 @@ export const useLoginForm = () => {
       );
       navigate(`/users/${state.username}/reservation`);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   return { state, setState };

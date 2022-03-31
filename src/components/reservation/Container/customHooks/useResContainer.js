@@ -6,6 +6,7 @@ import {
   removeSeatAction,
   requestAction,
   reservedSeatsAction,
+  resetReservation,
 } from "../../../../model";
 import { useNavigate } from "react-router-dom";
 
@@ -27,6 +28,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
         })
       );
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -56,24 +58,28 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
         )
       );
     }
-    if (inputValues.screening !== historyState.current.screening) {
-      axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) =>
+    if (
+      inputValues.screening !== historyState.current.screening &&
+      inputValues.numOfTickets === historyState.current.numOfTickets
+    ) {
+      axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) => {
         dispatch(
           requestAction({
             key: "seats",
             value: response.data,
           })
-        )
-      );
-      axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) =>
+        );
+      });
+      axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) => {
         dispatch(
           reservedSeatsAction({
             key: "reservedSeats",
             value: response.data,
           })
-        )
-      );
+        );
+      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValues]);
 
   useEffect(() => {
@@ -83,6 +89,8 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
           reservationId: response["Reservations"].at(-1).id,
         },
       });
+    dispatch(resetReservation());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
 
   const handleSeatAdd = (seat) => {

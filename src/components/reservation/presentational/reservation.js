@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { isEmpty } from "lodash";
+import { keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
-import { setScreeningString } from "../helpers";
+import { TicketButton } from "./reservationComponents/ticketButton";
+import { price, setScreeningString, disabledIncrement, disabledDecrement } from "../helpers";
 import {
   Container,
   ReservationForm,
@@ -11,6 +12,8 @@ import {
   SeatsContainer,
   SeatsGrid,
   TicketOptions,
+  TypeOfTicket,
+  NumberOfTickets,
 } from "./styles";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
 
@@ -18,13 +21,13 @@ export const Reservation = ({
   handleSubmit,
   handleChange,
   requests,
-  inputValues: { cinema, movie, auditorium, seat, screening },
+  inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   state: { reservation },
   handleSeatRemove,
   handleSeatAdd,
 }) => {
   return (
-    <ReservationForm onSubmit={handleSubmit}>
+    <ReservationForm>
       <ReservationInfoBar>
         <SelectContainer controlId='floatingInput' label='Theater'>
           <Input name='cinema' onChange={handleChange}>
@@ -73,19 +76,82 @@ export const Reservation = ({
         </SelectContainer>
       </ReservationInfoBar>
       <Container>
-        <TicketOptions />
-        <SeatsContainer>
+        <TicketOptions>
+          <div>
+            <h3>Type of Ticket</h3>
+            <div>
+              <TicketButton disabled={disabledDecrement(requests)} type='member' subtract={true}>
+                -
+              </TicketButton>
+              <TypeOfTicket>Member</TypeOfTicket>
+              <TicketButton
+                disabled={disabledIncrement(numOfTickets, requests)}
+                type='member'
+                add={true}
+              >
+                +
+              </TicketButton>
+              <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
+            </div>
+            <div>
+              <TicketButton disabled={disabledDecrement(requests)} type='adult' subtract={true}>
+                -
+              </TicketButton>
+              <TypeOfTicket>Adult</TypeOfTicket>
+              <TicketButton
+                disabled={disabledIncrement(numOfTickets, requests)}
+                type='adult'
+                add={true}
+              >
+                +
+              </TicketButton>
+              <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
+            </div>
+            <div>
+              <TicketButton disabled={disabledDecrement(requests)} type='child' subtract={true}>
+                -
+              </TicketButton>
+              <TypeOfTicket>Child</TypeOfTicket>
+              <TicketButton
+                disabled={disabledIncrement(numOfTickets, requests)}
+                type='child'
+                add={true}
+              >
+                +
+              </TicketButton>
+              <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
+            </div>
+          </div>
+
+          <div>
+            <p>
+              You choose <strong>{numOfTickets.sum}</strong> tickets
+            </p>
+            <p>
+              Remaining seats{" "}
+              <strong>
+                {numOfTickets.sum - keys(seat).length > -1
+                  ? numOfTickets.sum - keys(seat).length
+                  : "Deselect some seats"}
+              </strong>
+            </p>
+            <p>Price: {price(numOfTickets)}€</p>
+          </div>
+        </TicketOptions>
+        <SeatsContainer disable={screening && numOfTickets.sum > 0}>
           <SeatsGrid>
-            {screening && (
-              <SeatMatrix
-                state={reservation}
-                seats={requests.seats}
-                handleSeatRemove={handleSeatRemove}
-                handleSeatAdd={handleSeatAdd}
-              />
-            )}
+            <SeatMatrix
+              state={reservation}
+              seats={requests.seats}
+              handleSeatRemove={handleSeatRemove}
+              handleSeatAdd={handleSeatAdd}
+            />
           </SeatsGrid>
-          <ContinueButton disabled={isEmpty(seat)} type='submit'>
+          <ContinueButton
+            onClick={handleSubmit}
+            disabled={numOfTickets.sum - keys(seat).length !== 0}
+            type='submit'
+          >
             Continue
           </ContinueButton>
         </SeatsContainer>

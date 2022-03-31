@@ -16,6 +16,14 @@ const removeSeatAction = (payload) => ({
   type: actionTypes.removeSeat,
   payload,
 });
+const addTicketAction = (payload) => ({
+  type: actionTypes.addTicket,
+  payload,
+});
+const removeTicketAction = (payload) => ({
+  type: actionTypes.removeTicket,
+  payload,
+});
 const reservedSeatsAction = (payload) => ({
   type: actionTypes.reservedSeats,
   payload,
@@ -38,7 +46,12 @@ const newTicketAction = (payload) => ({
   payload,
 });
 
+const resetReservation = () => ({
+  type: actionTypes.resetReservation,
+});
+
 export {
+  resetReservation,
   addSeatAction,
   newTicketAction,
   removeSeatAction,
@@ -48,4 +61,6 @@ export {
   userLoginAction,
   userLogoutAction,
   inputChangeAction,
+  addTicketAction,
+  removeTicketAction,
 };
