@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const SignInMain = styled.main`
+const SignUpMain = styled.main`
   margin: 75px 0;
   flex-grow: 1;
 `;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     max-width: 1400px;
   }
 `;
-const Login = styled.div`
+const SignUp = styled.div`
   margin: 0 auto;
   text-align: left;
   padding: 0 1vw;
@@ -27,4 +27,4 @@ const Login = styled.div`
   max-width: 450px;
 `;
 
-export { Wrapper, SignInMain, Login };
+export { Wrapper, SignUpMain, SignUp };

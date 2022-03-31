@@ -1,6 +1,6 @@
 import React from "react";
-import { LoginForm } from "../../components/form";
-import { Login, SignInMain, Wrapper } from "./styles";
+// import { LoginForm } from "../../components/form";
+import { SignUp, SignUpMain, Wrapper } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import {
@@ -14,6 +14,7 @@ import {
   SignInDiv,
   Footer,
 } from "../../theme";
+import { RegistrationForm } from "../../components/registrationForm/RegistrationForm";
 
 const SignInLayout = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const SignInLayout = () => {
       <Header>
         <SignUpBar>
           <Container fluid className="d-flex p-0 justify-content-end">
-            <SignUpButton>Sign Up</SignUpButton>
+            <SignUpButton onClick={() => navigate("/signup")}>Sign Up</SignUpButton>
             <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
           </Container>
         </SignUpBar>
@@ -40,11 +41,11 @@ const SignInLayout = () => {
         </NavDiv>
       </Header>
       <Wrapper />
-      <SignInMain>
-        <Login>
-          <LoginForm />
-        </Login>
-      </SignInMain>
+      <SignUpMain>
+        <SignUp>
+          <RegistrationForm />
+        </SignUp>
+      </SignUpMain>
       <footer>
         <Footer />
       </footer>
