@@ -1,3 +1,4 @@
+import React from "react";
 import { Seat } from "../seat/Seat";
 import { SeatDiv } from "../styledComp";
 

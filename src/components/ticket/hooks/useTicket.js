@@ -17,5 +17,6 @@ export const useTicket = (username, reservationId) => {
         .get(`${state.BASE_URL}/reservations/users/${username}/ticket/${reservationId}`)
         .then(({ data }) => dispatch(newTicketAction({ data })));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

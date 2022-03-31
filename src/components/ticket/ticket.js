@@ -1,15 +1,16 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
 
 import { useTicket } from "./hooks/useTicket";
 import { useProvider } from "../../model";
 
 const Ticket = () => {
-  const { username } = useParams();
-  const { state } = useLocation();
-  const [{ tickets }] = useProvider(["userInfo.tickets"]);
+  const username = window.sessionStorage.getItem("username");
+  const [{ tickets, Reservations }] = useProvider([
+    "userInfo.tickets",
+    "reservation.response.Reservations",
+  ]);
 
-  useTicket(username, state?.reservationId);
+  useTicket(username, Reservations.at(-1).id);
 
   return (
     <div>

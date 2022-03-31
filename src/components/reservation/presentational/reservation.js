@@ -4,21 +4,22 @@ import { keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
 import { TicketButton } from "./reservationComponents/ticketButton";
-import { price, setScreeningString, disabledIncrement, disabledDecrement } from "../helpers";
+import { disabledDecrement, disabledIncrement, price, setScreeningString } from "../helpers";
 import {
   Container,
+  NumberOfTickets,
   ReservationForm,
   ReservationInfoBar,
   SeatsContainer,
   SeatsGrid,
   TicketOptions,
   TypeOfTicket,
-  NumberOfTickets,
 } from "./styles";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
+import { paymentWithStripe } from "../../../stripe/stripe";
 
 export const Reservation = ({
-  handleSubmit,
+  BASE_URL,
   handleChange,
   requests,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
@@ -26,6 +27,7 @@ export const Reservation = ({
   handleSeatRemove,
   handleSeatAdd,
 }) => {
+  console.log(paymentWithStripe);
   return (
     <ReservationForm>
       <ReservationInfoBar>
@@ -135,7 +137,7 @@ export const Reservation = ({
                   : "Deselect some seats"}
               </strong>
             </p>
-            <p>Price: {price(numOfTickets)}€</p>
+            <p>Price: {price(numOfTickets).toFixed(2)}€</p>
           </div>
         </TicketOptions>
         <SeatsContainer disable={screening && numOfTickets.sum > 0}>
@@ -148,7 +150,14 @@ export const Reservation = ({
             />
           </SeatsGrid>
           <ContinueButton
-            onClick={handleSubmit}
+            onClick={(ev) => {
+              ev.preventDefault();
+              paymentWithStripe(
+                BASE_URL,
+                { name: "Tickets", price: price(numOfTickets) * 100, quantity: numOfTickets.sum },
+                { BASE_URL, seat, screening }
+              );
+            }}
             disabled={numOfTickets.sum - keys(seat).length !== 0}
             type='submit'
           >
