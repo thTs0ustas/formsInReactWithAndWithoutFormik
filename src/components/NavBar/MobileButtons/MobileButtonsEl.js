@@ -9,7 +9,7 @@ export const MobileDiv = styled.div`
 		 ${({ isOpen }) =>
 		isOpen && `
 		display: block;	
-        width:	
+        
 		` 
 		}
 	  }
@@ -24,13 +24,15 @@ export const Description = styled.span`
 
 `;
 
-export const SignIn = styled.a`
-	color: white;
-	margin-top: 20px;
-    display: block;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: calc(15px + 0.5rem);
+export const SignIn = styled.button`
+	font-size: calc(15px + 0.5rem);
+    width: 100%;
+	background-color: transparent;
+	border: 2px solid #B17615;
+	outline: none;
+	padding: 6px 6px;
+	margin: 20px 0;
+    color: #B17615;
     
     
 `;
@@ -45,9 +47,16 @@ export const SignUp = styled.button`
 	border: none;
 	outline: none;
 	padding: 6px 6px;
-
     color: white;
+	margin-bottom: 20px;
     
-    
-    
+`;
+
+
+export const SocialDiv = styled.div`
+   	display: flex;
+    justify-content: space-evenly;
+	margin-bottom: 20px;
+	font-size: 22px;
+
 `;
