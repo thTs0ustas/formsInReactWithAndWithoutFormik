@@ -32,7 +32,7 @@ const HomePageLayout = () => {
       <Header mainPage={false}>
         <SignUpBar>
           <div>
-            <SignUpButton>Sign Up</SignUpButton>
+            <SignUpButton onClick={() => navigate("/signup")}>Sign Up</SignUpButton>
             <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
           </div>
         </SignUpBar>
