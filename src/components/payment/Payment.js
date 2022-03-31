@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
-import { price } from "./reservation/helpers";
+import { price } from "../reservation/helpers";
 import { map } from "lodash";
-import { responseAction, useProvider } from "../model";
+import { responseAction, useProvider } from "../../model";
 import { useNavigate } from "react-router-dom";
 
 export const Payment = () => {
@@ -12,7 +12,6 @@ export const Payment = () => {
   const { BASE_URL, seat, screening } = JSON.parse(window.sessionStorage.getItem("request"));
   const username = window.sessionStorage.getItem("username");
 
-  console.log(BASE_URL, seat, screening, username);
   React.useEffect(() => {
     axios
       .post(`${String(BASE_URL)}/reservations/users/${username}/new`, {
@@ -28,7 +27,7 @@ export const Payment = () => {
         },
       })
       .then(({ data }) => dispatch(responseAction(data)))
-      // .then(() => window.sessionStorage.removeItem("request"))
+      .then(() => window.sessionStorage.removeItem("request"))
       .then(() => navigate("/payments/payment_success"));
   }, []);
 

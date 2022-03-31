@@ -6,7 +6,7 @@ import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { ContinueButton, FormOuterDiv } from "./styles/styles";
+import { ContinueButton, FormOuterDiv } from "./styledComponents/styles";
 import { InputField } from "../../theme";
 import { useLoginForm } from "./hooks/useLoginForm";
 

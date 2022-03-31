@@ -1,6 +1,6 @@
 import React from "react";
 import { LoginForm } from "../../components";
-import { Login, SignInMain, Wrapper } from "./styles";
+import { Login, SignInMain, Wrapper } from "./styledComponents/styles";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import {

@@ -12,7 +12,7 @@ import {
   Typography,
   VideoWallDiv,
   VideoWallInfo,
-} from "./styles";
+} from "./styledComponents/styles";
 import { useNavigate } from "react-router-dom";
 import {
   Footer,
@@ -20,9 +20,9 @@ import {
   Nav,
   NavDiv,
   NavItem,
+  SignInButton,
   SignUpBar,
   SignUpButton,
-  SignInButton,
 } from "../../theme";
 
 const HomePageLayout = () => {
@@ -62,7 +62,7 @@ const HomePageLayout = () => {
             <p>Under Title</p>
           </Typography>
           <ComingUp>
-            <Row className="flex-nowrap">
+            <Row className='flex-nowrap'>
               <Col md={4} sm={6} xs={12}>
                 <Card />
               </Col>

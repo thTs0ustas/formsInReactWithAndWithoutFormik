@@ -10,7 +10,7 @@ const Ticket = () => {
     "reservation.response.Reservations",
   ]);
 
-  useTicket(username, Reservations.at(-1).id);
+  useTicket({ username, reservationId: Reservations.at(-1).id });
 
   return (
     <div>

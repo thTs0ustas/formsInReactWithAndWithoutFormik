@@ -2,7 +2,7 @@ import React from "react";
 import { keys } from "lodash";
 import { MdEventSeat } from "react-icons/md";
 
-import { IconDiv } from "../styledComp";
+import { IconDiv } from "../styledComponents";
 import { useProvider } from "../../../model";
 
 export const Seat = ({ handleSeatRemove, handleSeatAdd, seatInfo }) => {

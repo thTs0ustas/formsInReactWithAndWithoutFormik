@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
-import { TicketButton } from "./reservationComponents/ticketButton";
+import { TicketButton } from "./ticketButton/ticketButton";
 import { disabledDecrement, disabledIncrement, price, setScreeningString } from "../helpers";
 import {
   Container,
@@ -14,7 +14,7 @@ import {
   SeatsGrid,
   TicketOptions,
   TypeOfTicket,
-} from "./styles";
+} from "./styledComponents/styles";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
 import { paymentWithStripe } from "../../../stripe/stripe";
 
@@ -31,19 +31,8 @@ export const Reservation = ({
   return (
     <ReservationForm>
       <ReservationInfoBar>
-        <SelectContainer controlId='floatingInput' label='Theater'>
-          <Input name='cinema' onChange={handleChange}>
-            <option value='' />
-            {requests.cinemas.map(({ id, address }) => (
-              <option key={id} value={address}>
-                {address}
-              </option>
-            ))}
-          </Input>
-        </SelectContainer>
-
         <SelectContainer controlId='floatingInput' label='Movie'>
-          <Input name='movie' onChange={(e) => handleChange(e)} disabled={!cinema}>
+          <Input name='movie' onChange={(e) => handleChange(e)}>
             <option value='' />
             {requests.movies.map(({ id, title }) => (
               <option key={id} value={title}>
@@ -53,8 +42,19 @@ export const Reservation = ({
           </Input>
         </SelectContainer>
 
+        <SelectContainer controlId='floatingInput' label='Theater'>
+          <Input name='cinema' onChange={handleChange} disabled={!movie}>
+            <option value='' />
+            {requests.cinemas.map(({ id, address }) => (
+              <option key={id} value={address}>
+                {address}
+              </option>
+            ))}
+          </Input>
+        </SelectContainer>
+
         <SelectContainer controlId='floatingInput' label='Auditorium'>
-          <Input name='auditorium' onChange={(e) => handleChange(e)} disabled={!movie}>
+          <Input name='auditorium' onChange={(e) => handleChange(e)} disabled={!cinema}>
             <option value='' />
             {requests.auditoriums.map(({ id, hall_num, columns }) => {
               return (

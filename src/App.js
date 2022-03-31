@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { Ticket } from "./components";
-import { Payment } from "./components/payment";
+import { Payment } from "./components/payment/Payment";
 import { HomePageLayout, ReservationLayout, SignInLayout } from "./layouts";
-
-import "./App.css";
 
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";

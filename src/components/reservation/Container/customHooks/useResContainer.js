@@ -20,10 +20,10 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
     }
 
     historyState.current = inputValues;
-    axios.get(`${BASE_URL}/cinema`).then((response) => {
+    axios.get(`${BASE_URL}/movies`).then((response) => {
       dispatch(
         requestAction({
-          key: "cinemas",
+          key: "movies",
           value: response.data,
         })
       );
@@ -33,12 +33,12 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
 
   useEffect(() => {
     console.log(inputValues);
-    if (inputValues.cinema !== historyState.current.cinema) {
-      axios.get(`${BASE_URL}/movies`).then((response) => {
-        dispatch(requestAction({ key: "movies", value: response.data }));
+    if (inputValues.movie !== historyState.current.movie) {
+      axios.get(`${BASE_URL}/cinema`).then((response) => {
+        dispatch(requestAction({ key: "cinemas", value: response.data }));
       });
     }
-    if (inputValues.movie !== historyState.current.movie) {
+    if (inputValues.cinema !== historyState.current.cinema) {
       axios.get(`${BASE_URL}/auditorium`).then((response) =>
         dispatch(
           requestAction({
