@@ -29,7 +29,7 @@ const useProvider = (selectors = []) => {
   );
   const dispatch = useContextSelector(Model, (v) => v[1]);
   if (!state || !dispatch) {
-    throw new Error("Component is outside the context provider");
+    throw new Error("useProvider must be used within a Provider");
   }
   return [state, dispatch];
 };

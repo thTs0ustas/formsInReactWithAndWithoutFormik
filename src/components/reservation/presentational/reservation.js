@@ -29,6 +29,7 @@ export const Reservation = ({
   handleSeatAdd,
 }) => {
   const [spinner, setSpinner] = useState(true);
+  const username = sessionStorage.getItem("username");
   return (
     <ReservationForm>
       <ReservationInfoBar>
@@ -156,7 +157,12 @@ export const Reservation = ({
               setSpinner(!spinner);
               paymentWithStripe(
                 BASE_URL,
-                { name: "Tickets", price: price(numOfTickets) * 100, quantity: numOfTickets.sum },
+                {
+                  name: "Tickets",
+                  price: price(numOfTickets) * 100,
+                  quantity: numOfTickets.sum,
+                  username,
+                },
                 { BASE_URL, seat, screening }
               );
             }}
