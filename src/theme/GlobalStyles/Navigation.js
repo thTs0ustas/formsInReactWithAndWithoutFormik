@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const NavDiv = styled.div`
+  background-color: ${({ theme }) => theme.bgMain};
   height: 100px;
   width: 100%;
   max-width: 1400px;

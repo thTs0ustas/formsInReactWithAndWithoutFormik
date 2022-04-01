@@ -1,45 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Form, Formik } from "formik";
 
 import * as Yup from "yup";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { useProvider } from "../../model";
-import { actionTypes } from "../../model";
-import { ContinueButton, FormOuterDiv } from "./styles";
-import { Input } from "../../theme";
+import { ContinueButton, FormOuterDiv } from "./styledComponents/styles";
+import { InputField } from "../../theme";
+import { useLoginForm } from "./hooks/useLoginForm";
 
 export const LoginForm = () => {
-  const [state, setState] = useState(null);
-  const [, dispatch] = useProvider();
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    if (window.sessionStorage.getItem("token")) {
-      const username = window.sessionStorage.getItem("username");
-      // overkill
-      dispatch({
-        type: actionTypes.userLogin,
-        payload: { username: username, token: window.sessionStorage.getItem("token") },
-      });
-      username && navigate(`/users/${username}/reservation`);
-    }
-
-    if (state && state.accessToken && state.username) {
-      window.sessionStorage.setItem("token", state.accessToken);
-      window.sessionStorage.setItem("username", state.username);
-      dispatch({
-        type: actionTypes.userLogin,
-        payload: { username: state.username, token: state.accessToken },
-      });
-      navigate(`/users/${state.username}/reservation`);
-    }
-  }, [state]);
-
-  console.log(state);
+  const { state, setState } = useLoginForm();
   return (
     <FormOuterDiv>
       <h1>MOVIE CLUB SIGN IN</h1>
@@ -66,30 +38,30 @@ export const LoginForm = () => {
         })}
       >
         {(formik) => (
-          <Form className="w-100">
+          <Form className='w-100'>
             <div>
-              <Input
-                id="username"
-                name="username"
-                placeholder="Username"
+              <InputField
+                id='username'
+                name='username'
+                placeholder='Username'
                 className={`  d-inline-block
                   ${
                     formik.touched.username && formik.errors.username
                       ? "form-control is-invalid"
                       : "form-control"
                   }`}
-                type="text"
+                type='text'
               />
               {formik.touched.username && formik.errors.username ? (
-                <div className="invalid-feedback text-black fw-bold ">{formik.errors.username}</div>
+                <div className='invalid-feedback text-black fw-bold '>{formik.errors.username}</div>
               ) : null}
             </div>
 
             <div>
-              <Input
-                id="password"
-                name="password"
-                placeholder="Password"
+              <InputField
+                id='password'
+                name='password'
+                placeholder='Password'
                 className={`  d-inline-block 
                   ${
                     formik.touched.username && formik.errors.username
@@ -97,14 +69,14 @@ export const LoginForm = () => {
                       : "form-control"
                   }
                   `}
-                type="password"
+                type='password'
               />
               {formik.touched.password && formik.errors.password ? (
-                <div className="invalid-feedback text-black fw-bold">{formik.errors.password}</div>
+                <div className='invalid-feedback text-black fw-bold'>{formik.errors.password}</div>
               ) : null}
             </div>
 
-            <ContinueButton type="submit" disabled={formik.isSubmitting}>
+            <ContinueButton type='submit' disabled={formik.isSubmitting}>
               {formik.isSubmitting ? "Please wait..." : "Continue"}
             </ContinueButton>
           </Form>

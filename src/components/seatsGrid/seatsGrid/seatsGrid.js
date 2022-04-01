@@ -1,25 +1,11 @@
 import React from "react";
-import { groupBy, map, chunk } from "lodash";
-
-import { Container, Screen, SeatDiv, SeatsContainer } from "./styledComp";
-import { Seat } from "./Seat";
+import { chunk, groupBy, map } from "lodash";
 import { Col, Row } from "react-bootstrap";
-import { useProvider } from "../../model";
 
-const GenerateSeats = (seatNumbers, handleSeatRemove, handleSeatAdd) => {
-  return (
-    <SeatDiv>
-      {seatNumbers.map((seatNumber) => (
-        <Seat
-          key={seatNumber.id}
-          seatInfo={seatNumber}
-          handleSeatRemove={handleSeatRemove}
-          handleSeatAdd={handleSeatAdd}
-        />
-      ))}
-    </SeatDiv>
-  );
-};
+import { GenerateSeats } from "../generateSeatsRows/GenerateSeats";
+import { Container, Screen, SeatsContainer } from "../styledComponents";
+
+import { useProvider } from "../../../model";
 
 const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd }) => {
   const seatsCol = (seats) => map(groupBy(seats, "row_letter"));
@@ -45,4 +31,4 @@ const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd }) => {
   );
 };
 
-export default SeatMatrix;
+export { SeatMatrix };

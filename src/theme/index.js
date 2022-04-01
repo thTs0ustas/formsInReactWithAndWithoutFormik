@@ -1,12 +1,14 @@
-export { Input } from "./GlobalStyles/Input";
-export { SignUpButton, SignUpBar, SignInButton, SignInDiv } from "./GlobalStyles/UpperBar";
-export { Nav, NavItem, NavDiv } from "./GlobalStyles/Navigation";
+export { ContinueButton } from "./GlobalStyles/ContinueButton";
+export { Logo } from "./GlobalStyles/Logo";
+export { Input, InputField, SelectContainer } from "./GlobalStyles/Input";
 export { Footer } from "./GlobalStyles/Footer";
 export { Header } from "./GlobalStyles/Header";
+export { Nav, NavItem, NavDiv } from "./GlobalStyles/Navigation";
+export { SignUpButton, SignUpBar, SignInButton, SignInDiv } from "./GlobalStyles/UpperBar";
 
 export const theme = {
   light: {
-    bgMain: `rgb(72, 0, 22)`,
+    bgMain: "#6e0b24",
     logo: "#FF9D69",
     primary: "#b09661",
     secondary: "#ffebc6",

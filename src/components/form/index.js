@@ -1,1 +1,1 @@
-export { LoginForm } from "./withFormik";
+export { LoginForm } from "./LoginForm";

@@ -1,23 +1,25 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { map } from "lodash";
 import axios from "axios";
 
 import { Reservation } from "../presentational/reservation";
-import { useProvider, actionTypes } from "../../../model";
+import { responseAction, useProvider } from "../../../model";
 import { useResContainer } from "./customHooks/useResContainer";
 import { price } from "../helpers";
 
-const ReservationContainer = (WrapComponent) => () => {
+const ReservationContainer = () => {
   const [state, dispatch] = useProvider([
     "reservation.inputValues",
     "reservation.requests",
     "reservation.response",
+
     "BASE_URL",
   ]);
 
-  const { inputValues, requests, response, BASE_URL } = state;
+  const { inputValues, requests, response, numOfTickets, BASE_URL } = state;
   const { username } = useParams();
+  const navigate = useNavigate();
 
   const { handleSeatAdd, handleSeatRemove, handleChange } = useResContainer({
     BASE_URL,
@@ -42,15 +44,12 @@ const ReservationContainer = (WrapComponent) => () => {
           })),
         },
       })
-      .then(({ data }) =>
-        dispatch({
-          type: actionTypes.response,
-          payload: data,
-        })
-      );
+      .then(({ data }) => dispatch(responseAction(data)));
   };
 
   const props = {
+    navigate,
+    BASE_URL,
     handleSubmit,
     handleChange,
     handleSeatRemove,
@@ -58,9 +57,10 @@ const ReservationContainer = (WrapComponent) => () => {
     inputValues,
     requests,
     state,
+    numOfTickets,
   };
 
-  return <WrapComponent {...props} />;
+  return <Reservation {...props} />;
 };
 
-export default ReservationContainer(Reservation);
+export default ReservationContainer;

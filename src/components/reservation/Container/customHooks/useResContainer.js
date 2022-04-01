@@ -1,6 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import axios from "axios";
-import { actionTypes } from "../../../../model";
+import {
+  addSeatAction,
+  inputChangeAction,
+  removeSeatAction,
+  requestAction,
+  reservedSeatsAction,
+  resetReservation,
+} from "../../../../model";
 import { useNavigate } from "react-router-dom";
 
 export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, username }) => {
@@ -13,88 +20,102 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
     }
 
     historyState.current = inputValues;
-    axios.get(`${BASE_URL}/cinema`).then((response) => {
-      dispatch({
-        type: actionTypes.request,
-        payload: { key: "cinemas", value: response.data },
-      });
+    axios.get(`${BASE_URL}/movies`).then((response) => {
+      dispatch(
+        requestAction({
+          key: "movies",
+          value: response.data,
+        })
+      );
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  React.useEffect(() => {
-    if (inputValues.cinema !== historyState.current.cinema) {
-      axios.get(`${BASE_URL}/movies`).then((response) => {
-        dispatch({
-          type: actionTypes.request,
-          payload: { key: "movies", value: response.data },
-        });
+  useEffect(() => {
+    console.log(inputValues);
+    if (inputValues.movie !== historyState.current.movie) {
+      axios.get(`${BASE_URL}/cinema`).then((response) => {
+        dispatch(requestAction({ key: "cinemas", value: response.data }));
       });
     }
-    if (inputValues.movie !== historyState.current.movie) {
+    if (inputValues.cinema !== historyState.current.cinema) {
       axios.get(`${BASE_URL}/auditorium`).then((response) =>
-        dispatch({
-          type: actionTypes.request,
-          payload: { key: "auditoriums", value: response.data },
-        })
+        dispatch(
+          requestAction({
+            key: "auditoriums",
+            value: response.data,
+          })
+        )
       );
     }
     if (inputValues.auditorium !== historyState.current.auditorium) {
       axios.get(`${BASE_URL}/screenings`).then((response) =>
-        dispatch({
-          type: actionTypes.request,
-          payload: { key: "screenings", value: response.data },
-        })
+        dispatch(
+          requestAction({
+            key: "screenings",
+            value: response.data,
+          })
+        )
       );
     }
-    if (inputValues.screening !== historyState.current.screening) {
-      axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) =>
-        dispatch({
-          type: actionTypes.request,
-          payload: { key: "seats", value: response.data },
-        })
-      );
-      axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) =>
-        dispatch({
-          type: actionTypes.reservedSeats,
-          payload: { key: "reservedSeats", value: response.data },
-        })
-      );
+    if (
+      inputValues.screening !== historyState.current.screening &&
+      inputValues.numOfTickets === historyState.current.numOfTickets
+    ) {
+      axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) => {
+        dispatch(
+          requestAction({
+            key: "seats",
+            value: response.data,
+          })
+        );
+      });
+      axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) => {
+        dispatch(
+          reservedSeatsAction({
+            key: "reservedSeats",
+            value: response.data,
+          })
+        );
+      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValues]);
 
-  useEffect(
-    () =>
-      response &&
+  useEffect(() => {
+    response &&
       navigate(`/users/${username}/reservation/ticket`, {
         state: {
-          reservationId: response.Reservations.at(-1).id,
+          reservationId: response["Reservations"].at(-1).id,
         },
-      }),
-    [response]
-  );
+      });
+    dispatch(resetReservation());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [response]);
 
   const handleSeatAdd = (seat) => {
     historyState.current = inputValues;
-    dispatch({
-      type: actionTypes.addSeat,
-      payload: { name: "seat", value: seat },
-    });
+    dispatch(
+      addSeatAction({
+        name: "seat",
+        value: seat,
+      })
+    );
   };
 
   const handleSeatRemove = (id) => {
     historyState.current = inputValues;
-    dispatch({
-      type: actionTypes.removeSeat,
-      payload: id,
-    });
+    dispatch(removeSeatAction(id));
   };
 
   const handleChange = (event) => {
     historyState.current = inputValues;
-    dispatch({
-      type: actionTypes.inputChange,
-      payload: event.target,
-    });
+    dispatch(
+      inputChangeAction({
+        name: event.target.name,
+        value: event.target.value,
+      })
+    );
   };
 
   return { handleSeatAdd, handleSeatRemove, handleChange };
