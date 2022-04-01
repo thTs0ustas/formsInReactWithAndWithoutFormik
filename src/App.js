@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { Ticket } from "./components";
+import { Payment } from "./components/payment/Payment";
 import { HomePageLayout, ReservationLayout, SignInLayout } from "./layouts";
-
-import "./App.css";
 
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
@@ -18,6 +17,9 @@ function App() {
         <Routes>
           <Route exact path='/' element={<HomePageLayout />} />
           <Route path='/login' element={<SignInLayout />} />
+          <Route path='/payments' element={<Payment />} />
+          <Route path='/payments/payment_success' element={<Ticket />} />
+          <Route path='/payments/payment_cancel' element={<div>Cancel</div>} />
           <Route path='/users/:username/reservation' element={<ReservationLayout />} />
           <Route path='/users/:username/reservation/ticket' element={<Ticket />} />
         </Routes>

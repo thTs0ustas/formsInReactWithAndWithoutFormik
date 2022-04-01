@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { newTicketAction, useProvider } from "../../../model";
 
-export const useTicket = (username, reservationId) => {
+export const useTicket = ({ username, reservationId }) => {
   const [state, dispatch] = useProvider(["BASE_URL"]);
 
   const navigate = useNavigate();
@@ -17,5 +17,6 @@ export const useTicket = (username, reservationId) => {
         .get(`${state.BASE_URL}/reservations/users/${username}/ticket/${reservationId}`)
         .then(({ data }) => dispatch(newTicketAction({ data })));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

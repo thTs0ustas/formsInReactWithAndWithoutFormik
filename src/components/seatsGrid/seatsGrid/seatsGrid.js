@@ -1,9 +1,9 @@
 import React from "react";
-import { groupBy, map, chunk } from "lodash";
+import { chunk, groupBy, map } from "lodash";
 import { Col, Row } from "react-bootstrap";
 
 import { GenerateSeats } from "../generateSeatsRows/GenerateSeats";
-import { Container, Screen, SeatsContainer } from "../styledComp";
+import { Container, Screen, SeatsContainer } from "../styledComponents";
 
 import { useProvider } from "../../../model";
 

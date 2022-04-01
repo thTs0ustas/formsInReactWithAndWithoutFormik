@@ -1,6 +1,7 @@
-import { useProvider } from "../../../../model";
-import { addTicketAction, removeTicketAction } from "../../../../model";
-import { ButtonForTickets } from "./styles";
+import React from "react";
+import { addTicketAction, removeTicketAction, useProvider } from "../../../../model";
+import { ButtonForTickets } from "../styledComponents/styles";
+
 export const TicketButton = ({ children, add = false, subtract = false, type, disabled }) => {
   const [model, dispatch] = useProvider(["reservation.inputValues.numOfTickets"]);
   const handleClick = (event) => {

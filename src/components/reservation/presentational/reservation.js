@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
-import { TicketButton } from "./reservationComponents/ticketButton";
-import { price, setScreeningString, disabledIncrement, disabledDecrement } from "../helpers";
+import { TicketButton } from "./ticketButton/ticketButton";
+import { disabledDecrement, disabledIncrement, price, setScreeningString } from "../helpers";
 import {
   Container,
+  NumberOfTickets,
   ReservationForm,
   ReservationInfoBar,
   SeatsContainer,
   SeatsGrid,
   TicketOptions,
   TypeOfTicket,
-  NumberOfTickets,
-} from "./styles";
+} from "./styledComponents/styles";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
+import { paymentWithStripe } from "../../../stripe/stripe";
+import { Spinner } from "react-bootstrap";
 
 export const Reservation = ({
-  handleSubmit,
+  BASE_URL,
   handleChange,
   requests,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
@@ -26,22 +28,12 @@ export const Reservation = ({
   handleSeatRemove,
   handleSeatAdd,
 }) => {
+  const [spinner, setSpinner] = useState(true);
   return (
     <ReservationForm>
       <ReservationInfoBar>
-        <SelectContainer controlId='floatingInput' label='Theater'>
-          <Input name='cinema' onChange={handleChange}>
-            <option value='' />
-            {requests.cinemas.map(({ id, address }) => (
-              <option key={id} value={address}>
-                {address}
-              </option>
-            ))}
-          </Input>
-        </SelectContainer>
-
         <SelectContainer controlId='floatingInput' label='Movie'>
-          <Input name='movie' onChange={(e) => handleChange(e)} disabled={!cinema}>
+          <Input name='movie' onChange={(e) => handleChange(e)}>
             <option value='' />
             {requests.movies.map(({ id, title }) => (
               <option key={id} value={title}>
@@ -51,8 +43,19 @@ export const Reservation = ({
           </Input>
         </SelectContainer>
 
+        <SelectContainer controlId='floatingInput' label='Theater'>
+          <Input name='cinema' onChange={handleChange} disabled={!movie}>
+            <option value='' />
+            {requests.cinemas.map(({ id, address }) => (
+              <option key={id} value={address}>
+                {address}
+              </option>
+            ))}
+          </Input>
+        </SelectContainer>
+
         <SelectContainer controlId='floatingInput' label='Auditorium'>
-          <Input name='auditorium' onChange={(e) => handleChange(e)} disabled={!movie}>
+          <Input name='auditorium' onChange={(e) => handleChange(e)} disabled={!cinema}>
             <option value='' />
             {requests.auditoriums.map(({ id, hall_num, columns }) => {
               return (
@@ -135,7 +138,7 @@ export const Reservation = ({
                   : "Deselect some seats"}
               </strong>
             </p>
-            <p>Price: {price(numOfTickets)}€</p>
+            <p>Price: {price(numOfTickets).toFixed(2)}€</p>
           </div>
         </TicketOptions>
         <SeatsContainer disable={screening && numOfTickets.sum > 0}>
@@ -148,11 +151,25 @@ export const Reservation = ({
             />
           </SeatsGrid>
           <ContinueButton
-            onClick={handleSubmit}
+            onClick={(ev) => {
+              ev.preventDefault();
+              setSpinner(!spinner);
+              paymentWithStripe(
+                BASE_URL,
+                { name: "Tickets", price: price(numOfTickets) * 100, quantity: numOfTickets.sum },
+                { BASE_URL, seat, screening }
+              );
+            }}
             disabled={numOfTickets.sum - keys(seat).length !== 0}
             type='submit'
           >
-            Continue
+            {spinner ? (
+              "Continue"
+            ) : (
+              <Spinner animation='border' role='status'>
+                <span className='visually-hidden'>Loading...</span>
+              </Spinner>
+            )}
           </ContinueButton>
         </SeatsContainer>
       </Container>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { map } from "lodash";
 import axios from "axios";
 
@@ -19,6 +19,7 @@ const ReservationContainer = () => {
 
   const { inputValues, requests, response, numOfTickets, BASE_URL } = state;
   const { username } = useParams();
+  const navigate = useNavigate();
 
   const { handleSeatAdd, handleSeatRemove, handleChange } = useResContainer({
     BASE_URL,
@@ -47,6 +48,8 @@ const ReservationContainer = () => {
   };
 
   const props = {
+    navigate,
+    BASE_URL,
     handleSubmit,
     handleChange,
     handleSeatRemove,
