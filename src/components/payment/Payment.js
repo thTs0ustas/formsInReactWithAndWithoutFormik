@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { price } from "../reservation/helpers";
 import { map } from "lodash";
-import { responseAction, useProvider } from "../../model";
 import { useNavigate } from "react-router-dom";
+
+import { price } from "../reservation/helpers";
+import { responseAction, useProvider } from "../../model";
+import { Spinner } from "react-bootstrap";
 
 export const Payment = () => {
   const [_, dispatch] = useProvider();
@@ -31,5 +33,9 @@ export const Payment = () => {
       .then(() => navigate("/payments/payment_success"));
   }, []);
 
-  return <div>Hello</div>;
+  return (
+    <Spinner animation='border' role='status'>
+      <span className='visually-hidden'>Loading...</span>
+    </Spinner>
+  );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { keys } from "lodash";
 
@@ -17,6 +17,7 @@ import {
 } from "./styledComponents/styles";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
 import { paymentWithStripe } from "../../../stripe/stripe";
+import { Spinner } from "react-bootstrap";
 
 export const Reservation = ({
   BASE_URL,
@@ -27,7 +28,7 @@ export const Reservation = ({
   handleSeatRemove,
   handleSeatAdd,
 }) => {
-  console.log(paymentWithStripe);
+  const [spinner, setSpinner] = useState(true);
   return (
     <ReservationForm>
       <ReservationInfoBar>
@@ -152,6 +153,7 @@ export const Reservation = ({
           <ContinueButton
             onClick={(ev) => {
               ev.preventDefault();
+              setSpinner(!spinner);
               paymentWithStripe(
                 BASE_URL,
                 { name: "Tickets", price: price(numOfTickets) * 100, quantity: numOfTickets.sum },
@@ -161,7 +163,13 @@ export const Reservation = ({
             disabled={numOfTickets.sum - keys(seat).length !== 0}
             type='submit'
           >
-            Continue
+            {spinner ? (
+              "Continue"
+            ) : (
+              <Spinner animation='border' role='status'>
+                <span className='visually-hidden'>Loading...</span>
+              </Spinner>
+            )}
           </ContinueButton>
         </SeatsContainer>
       </Container>

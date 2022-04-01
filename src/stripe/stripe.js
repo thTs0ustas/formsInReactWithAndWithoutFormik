@@ -5,7 +5,6 @@ export const paymentWithStripe = (url, data, request) => {
   axios
     .post(`${url}/payments/create-checkout`, data)
     .then(({ data }) => {
-      console.log(data);
       if (data.url) return data;
       return Promise.reject(data);
     })
