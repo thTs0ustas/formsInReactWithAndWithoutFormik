@@ -15,7 +15,7 @@ function App() {
       <input type='checkbox' onChange={() => setTheming(!theming)}></input>
       <div className='App'>
         <Routes>
-          <Route exact path='/' element={<HomePageLayout />} />
+          <Route path='/' element={<HomePageLayout />} />
           <Route path='/login' element={<SignInLayout />} />
           <Route path='/payments' element={<Payment />} />
           <Route path='/payments/payment_success' element={<Ticket />} />

@@ -10,10 +10,11 @@ import { useProvider } from "../../../model";
 const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd }) => {
   const seatsCol = (seats) => map(groupBy(seats, "row_letter"));
   const [{ auditorium }] = useProvider(["reservation.inputValues.auditorium"]);
-
+  console.log(auditorium);
   return (
     <Container>
       <Screen>Screen</Screen>
+
       <SeatsContainer>
         {seatsCol(seats).map((seatArr, index) => {
           let counter = seatArr.length / auditorium[2];

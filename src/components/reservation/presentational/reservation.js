@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { keys } from "lodash";
 
@@ -23,13 +23,14 @@ export const Reservation = ({
   BASE_URL,
   handleChange,
   requests,
+  spinner,
+  username,
+  setSpinner,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   state: { reservation },
   handleSeatRemove,
   handleSeatAdd,
 }) => {
-  const [spinner, setSpinner] = useState(true);
-  const username = sessionStorage.getItem("username");
   return (
     <ReservationForm>
       <ReservationInfoBar>
@@ -184,8 +185,15 @@ export const Reservation = ({
 };
 
 Reservation.propTypes = {
+  requests: PropTypes.object,
+  handleSeatAdd: PropTypes.func,
+  handleSeatRemove: PropTypes.func,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   inputValues: PropTypes.object,
   price: PropTypes.string,
+  screening: PropTypes.object,
+  setSeat: PropTypes.func,
+  setSpinner: PropTypes.func,
+  setTicket: PropTypes.func,
 };
