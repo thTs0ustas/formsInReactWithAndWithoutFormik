@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   addSeatAction,
@@ -8,7 +9,6 @@ import {
   reservedSeatsAction,
   resetReservation,
 } from "../../../../model";
-import { useNavigate } from "react-router-dom";
 
 export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, username }) => {
   const historyState = useRef({});
@@ -32,31 +32,20 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
   }, []);
 
   useEffect(() => {
-    console.log(inputValues);
     if (inputValues.movie !== historyState.current.movie) {
       axios.get(`${BASE_URL}/cinema`).then((response) => {
         dispatch(requestAction({ key: "cinemas", value: response.data }));
       });
     }
     if (inputValues.cinema !== historyState.current.cinema) {
-      axios.get(`${BASE_URL}/auditorium`).then((response) =>
-        dispatch(
-          requestAction({
-            key: "auditoriums",
-            value: response.data,
-          })
-        )
-      );
+      axios
+        .get(`${BASE_URL}/auditorium`)
+        .then((response) => dispatch(requestAction({ key: "auditoriums", value: response.data })));
     }
     if (inputValues.auditorium !== historyState.current.auditorium) {
-      axios.get(`${BASE_URL}/screenings`).then((response) =>
-        dispatch(
-          requestAction({
-            key: "screenings",
-            value: response.data,
-          })
-        )
-      );
+      axios
+        .get(`${BASE_URL}/screenings`)
+        .then((response) => dispatch(requestAction({ key: "screenings", value: response.data })));
     }
     if (
       inputValues.screening !== historyState.current.screening &&

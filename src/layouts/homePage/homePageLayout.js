@@ -1,12 +1,13 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
-
+import { Col, NavDropdown, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Archive,
   Card,
   ComingUp,
   Features,
   HomeDiv,
+  NavDropdownDiv,
   PromoCard,
   Promos,
   Typography,
@@ -27,13 +28,35 @@ import {
 
 const HomePageLayout = () => {
   const navigate = useNavigate();
+  const username = sessionStorage.getItem("username");
   return (
     <HomeDiv>
       <Header mainPage={false}>
         <SignUpBar>
           <div>
-            <SignUpButton>Sign Up</SignUpButton>
-            <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
+            {!username ? (
+              <>
+                <SignUpButton>Sign Up</SignUpButton>
+                <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
+              </>
+            ) : (
+              <NavDropdownDiv title={username} id='nav-dropdown'>
+                <NavDropdown.Item eventKey='4.1'>Info</NavDropdown.Item>
+                <NavDropdown.Item eventKey='4.1'>Reservations</NavDropdown.Item>
+                <NavDropdown.Item eventKey='4.1'>Reviews</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  eventKey='4.2'
+                  onClick={() => {
+                    sessionStorage.removeItem("username");
+                    sessionStorage.removeItem("token");
+                    navigate("/");
+                  }}
+                >
+                  Sign Out
+                </NavDropdown.Item>
+              </NavDropdownDiv>
+            )}
           </div>
         </SignUpBar>
         <VideoWallDiv>

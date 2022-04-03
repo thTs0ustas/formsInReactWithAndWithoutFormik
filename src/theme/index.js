@@ -11,6 +11,7 @@ export const theme = {
     bgMain: "#6e0b24",
     logo: "#FF9D69",
     primary: "#b09661",
+    secondary2: "#ffda8a",
     secondary: "#ffebc6",
     white: "#ffffff",
   },

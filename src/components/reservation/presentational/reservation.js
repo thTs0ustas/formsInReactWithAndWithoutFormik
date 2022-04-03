@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
@@ -84,20 +85,22 @@ export const Reservation = ({
         <TicketOptions>
           <div>
             <h3>Type of Ticket</h3>
-            <div>
-              <TicketButton disabled={disabledDecrement(requests)} type='member' subtract={true}>
-                -
-              </TicketButton>
-              <TypeOfTicket>Member</TypeOfTicket>
-              <TicketButton
-                disabled={disabledIncrement(numOfTickets, requests)}
-                type='member'
-                add={true}
-              >
-                +
-              </TicketButton>
-              <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
-            </div>
+            {username || (
+              <div>
+                <TicketButton disabled={disabledDecrement(requests)} type='member' subtract={true}>
+                  -
+                </TicketButton>
+                <TypeOfTicket>Member</TypeOfTicket>
+                <TicketButton
+                  disabled={disabledIncrement(numOfTickets, requests)}
+                  type='member'
+                  add={true}
+                >
+                  +
+                </TicketButton>
+                <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
+              </div>
+            )}
             <div>
               <TicketButton disabled={disabledDecrement(requests)} type='adult' subtract={true}>
                 -
@@ -127,7 +130,11 @@ export const Reservation = ({
               <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
             </div>
           </div>
-
+          <div>
+            <p>
+              Not a member... Sign up <Link to='/'>here</Link>
+            </p>
+          </div>
           <div>
             <p>
               You choose <strong>{numOfTickets.sum}</strong> tickets

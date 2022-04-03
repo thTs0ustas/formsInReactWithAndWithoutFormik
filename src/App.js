@@ -20,8 +20,7 @@ function App() {
           <Route path='/payments' element={<Payment />} />
           <Route path='/payments/payment_success' element={<Ticket />} />
           <Route path='/payments/payment_cancel' element={<div>Cancel</div>} />
-          <Route path='/users/:username/reservation' element={<ReservationLayout />} />
-          <Route path='/users/:username/reservation/ticket' element={<Ticket />} />
+          <Route path='/reservation' element={<ReservationLayout />} />
         </Routes>
       </div>
     </ThemeProvider>

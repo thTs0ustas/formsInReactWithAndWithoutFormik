@@ -18,7 +18,7 @@ export const useLoginForm = () => {
           token: window.sessionStorage.getItem("token"),
         })
       );
-      username && navigate(`/users/${username}/reservation`);
+      username && navigate("/");
     }
 
     if (state && state.accessToken && state.username) {
@@ -30,7 +30,7 @@ export const useLoginForm = () => {
           token: state.accessToken,
         })
       );
-      navigate(`/users/${state.username}/reservation`);
+      navigate("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
