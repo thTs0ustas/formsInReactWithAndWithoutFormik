@@ -14,9 +14,17 @@ import { theme } from "./theme";
  
 import NavBar from "./components/NavBar";
 import CarouselHero from "./components/HeroSlider";
+//delete
+import { SignUpBar, SignUpButton , SignInButton } from "./theme";
+//delete
+import { useNavigate } from "react-router-dom";
+
+
 
 function App() {
   const [theming, setTheming] = useState(true);
+  //delete
+  const navigate = useNavigate();
   return (
     <ThemeProvider theme={theming ? theme.light : theme.dark}>
       {/* TODO: switch for theme change */}
@@ -28,6 +36,13 @@ function App() {
           <Route path="/users/:username/reservation" element={<Reservation />} />
           <Route path="/users/:username/reservation/ticket" element={<Ticket />} />
         </Routes> */}
+        
+        <SignUpBar>
+          <div>
+            <SignUpButton>Sign Up</SignUpButton>
+            <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
+          </div>
+        </SignUpBar>
         <NavBar /> 
         <CarouselHero />
         

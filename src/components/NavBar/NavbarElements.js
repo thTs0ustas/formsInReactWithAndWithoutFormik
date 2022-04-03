@@ -10,7 +10,7 @@ import "./index";
  100% { opacity: 1;}
  `;
 
-
+//Nav main Container
 export const Nav = styled.nav`
 	background: linear-gradient(black, transparent);;
 	width: 100%;
@@ -21,23 +21,29 @@ export const Nav = styled.nav`
 	align-items: center;
 	position: absolute;
 	z-index: 9999;
-	/* Where the user has clicked the burger (is on mobile) change it to FullPageView */
+
 	@media screen and (max-width: 768px) {
+		//In smaller screens add different styling to the nav container
+		position: static;
+		background: linear-gradient(#94002E, #94002E);
+		border-bottom: 2px solid #B09661;
+		//when Burger is clicked turn it to full pageview
 		${({ isOpen }) =>
 		isOpen && `
 		flex-direction: column;
 		justify-content: space-around;
 		height: 100vh;
-		background-color: black;
+		background: linear-gradient(black, black);
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
-		transition: all 0.6s ease-in-out;
+		transition: height 0.4s ease-in-out;
+		border-bottom: none;
 		` 
 		}
 	}
-	//Change the content when the scree height is too small
+	//Change the content when the screen height is too small
 	@media screen and (max-height: 726px) {
 		${({ isOpen }) =>
 		isOpen && `
@@ -55,7 +61,9 @@ export const MobileContainer = styled.div`
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		padding: 20px;
+		padding: 12px;
+		
+		
 		${({ isOpen }) =>
 		isOpen && `
 		position: absolute;
