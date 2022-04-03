@@ -1,18 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
 import { TicketButton } from "./ticketButton/ticketButton";
-import { disabledDecrement, disabledIncrement, price, setScreeningString } from "../helpers";
 import {
+  disabledDecrement,
+  disabledIncrement,
+  price,
+  PRICING,
+  setScreeningString,
+} from "../helpers";
+import {
+  ButtonForMembers,
   Container,
   NumberOfTickets,
+  PleaseBeAMember,
+  PleaseBeAMemberHeader,
+  PleaseBeAMemberParagraph,
+  Price,
   ReservationForm,
   ReservationInfoBar,
   SeatsContainer,
   SeatsGrid,
+  TicketBar,
+  TicketBarRight,
   TicketOptions,
   TypeOfTicket,
 } from "./styledComponents/styles";
@@ -58,7 +70,11 @@ export const Reservation = ({
         </SelectContainer>
 
         <SelectContainer controlId='floatingInput' label='Auditorium'>
-          <Input name='auditorium' onChange={(e) => handleChange(e)} disabled={!cinema}>
+          <Input
+            name='auditorium'
+            onChange={(e) => handleChange(e)}
+            disabled={!cinema}
+          >
             <option value='' />
             {requests.auditoriums.map(({ id, hall_num, columns }) => {
               return (
@@ -71,26 +87,40 @@ export const Reservation = ({
         </SelectContainer>
 
         <SelectContainer controlId='floatingInput' label='Screenings'>
-          <Input name='screening' onChange={(e) => handleChange(e)} disabled={!auditorium}>
+          <Input
+            name='screening'
+            onChange={(e) => handleChange(e)}
+            disabled={!auditorium}
+          >
             <option value='' />
-            {requests.screenings.map(({ id, movie_starts, movie_ends, movie_date }) => (
-              <option key={id} value={id}>
-                {setScreeningString(movie_starts, movie_ends, movie_date)}
-              </option>
-            ))}
+            {requests.screenings.map(
+              ({ id, movie_starts, movie_ends, movie_date }) => (
+                <option key={id} value={id}>
+                  {setScreeningString(movie_starts, movie_ends, movie_date)}
+                </option>
+              )
+            )}
           </Input>
         </SelectContainer>
       </ReservationInfoBar>
       <Container>
         <TicketOptions>
-          <div>
-            <h3>Type of Ticket</h3>
-            {username || (
+          {username || (
+            <TicketBar>
               <div>
-                <TicketButton disabled={disabledDecrement(requests)} type='member' subtract={true}>
+                <TypeOfTicket>Member</TypeOfTicket>
+                <Price>{PRICING.member.toFixed(2)} €</Price>
+              </div>
+              <TicketBarRight>
+                <TicketButton
+                  left={true}
+                  disabled={disabledDecrement(requests)}
+                  type='member'
+                  subtract={true}
+                >
                   -
                 </TicketButton>
-                <TypeOfTicket>Member</TypeOfTicket>
+                <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
                 <TicketButton
                   disabled={disabledIncrement(numOfTickets, requests)}
                   type='member'
@@ -98,14 +128,24 @@ export const Reservation = ({
                 >
                   +
                 </TicketButton>
-                <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
-              </div>
-            )}
+              </TicketBarRight>
+            </TicketBar>
+          )}
+          <TicketBar>
             <div>
-              <TicketButton disabled={disabledDecrement(requests)} type='adult' subtract={true}>
+              <TypeOfTicket>Adult</TypeOfTicket>
+              <Price>{PRICING.adult.toFixed(2)} €</Price>
+            </div>
+            <TicketBarRight>
+              <TicketButton
+                left={true}
+                disabled={disabledDecrement(requests)}
+                type='adult'
+                subtract={true}
+              >
                 -
               </TicketButton>
-              <TypeOfTicket>Adult</TypeOfTicket>
+              <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
               <TicketButton
                 disabled={disabledIncrement(numOfTickets, requests)}
                 type='adult'
@@ -113,13 +153,23 @@ export const Reservation = ({
               >
                 +
               </TicketButton>
-              <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
-            </div>
+            </TicketBarRight>
+          </TicketBar>
+          <TicketBar>
             <div>
-              <TicketButton disabled={disabledDecrement(requests)} type='child' subtract={true}>
+              <TypeOfTicket>Child</TypeOfTicket>
+              <Price>{PRICING.child.toFixed(2)} €</Price>
+            </div>
+            <TicketBarRight>
+              <TicketButton
+                left={true}
+                disabled={disabledDecrement(requests)}
+                type='child'
+                subtract={true}
+              >
                 -
               </TicketButton>
-              <TypeOfTicket>Child</TypeOfTicket>
+              <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
               <TicketButton
                 disabled={disabledIncrement(numOfTickets, requests)}
                 type='child'
@@ -127,14 +177,21 @@ export const Reservation = ({
               >
                 +
               </TicketButton>
-              <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
+            </TicketBarRight>
+          </TicketBar>
+
+          <PleaseBeAMember>
+            <div>
+              <PleaseBeAMemberHeader>
+                Please be a member to buy tickets
+              </PleaseBeAMemberHeader>
+              <PleaseBeAMemberParagraph>
+                TERMS AND CONDITIONS APPLY{" "}
+              </PleaseBeAMemberParagraph>
             </div>
-          </div>
-          <div>
-            <p>
-              Not a member... Sign up <Link to='/'>here</Link>
-            </p>
-          </div>
+            <ButtonForMembers>BE A MEMBER</ButtonForMembers>
+          </PleaseBeAMember>
+
           <div>
             <p>
               You choose <strong>{numOfTickets.sum}</strong> tickets

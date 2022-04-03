@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, NavDropdown, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Archive,
@@ -7,56 +7,23 @@ import {
   ComingUp,
   Features,
   HomeDiv,
-  NavDropdownDiv,
   PromoCard,
   Promos,
   Typography,
   VideoWallDiv,
   VideoWallInfo,
 } from "./styledComponents/styles";
-import { useNavigate } from "react-router-dom";
-import {
-  Footer,
-  Header,
-  Nav,
-  NavDiv,
-  NavItem,
-  SignInButton,
-  SignUpBar,
-  SignUpButton,
-} from "../../theme";
+import { Footer, Header, Nav, NavDiv, NavItem, SignUpBar } from "../../theme";
+import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 
 const HomePageLayout = () => {
-  const navigate = useNavigate();
   const username = sessionStorage.getItem("username");
   return (
     <HomeDiv>
       <Header mainPage={false}>
         <SignUpBar>
           <div>
-            {!username ? (
-              <>
-                <SignUpButton>Sign Up</SignUpButton>
-                <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
-              </>
-            ) : (
-              <NavDropdownDiv title={username} id='nav-dropdown'>
-                <NavDropdown.Item eventKey='4.1'>Info</NavDropdown.Item>
-                <NavDropdown.Item eventKey='4.1'>Reservations</NavDropdown.Item>
-                <NavDropdown.Item eventKey='4.1'>Reviews</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item
-                  eventKey='4.2'
-                  onClick={() => {
-                    sessionStorage.removeItem("username");
-                    sessionStorage.removeItem("token");
-                    navigate("/");
-                  }}
-                >
-                  Sign Out
-                </NavDropdown.Item>
-              </NavDropdownDiv>
-            )}
+            <SignupBarPart username={username} />
           </div>
         </SignUpBar>
         <VideoWallDiv>

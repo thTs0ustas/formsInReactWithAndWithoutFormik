@@ -3,7 +3,7 @@ const actionTypes = {
   request: "REQUEST",
   addSeat: "SEAT_ADD",
   removeSeat: "SEAT_REMOVE",
-  reservedSeats: "RESERV_SEATS",
+  reservedSeats: "RESERVED_SEATS",
   response: "RESPONSE",
   userLogin: "USER_LOGIN",
   userLogout: "USER_LOGOUT",

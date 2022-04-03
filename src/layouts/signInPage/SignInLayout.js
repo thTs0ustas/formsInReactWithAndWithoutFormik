@@ -1,30 +1,26 @@
 import React from "react";
 import { LoginForm } from "../../components";
 import { Login, SignInMain, Wrapper } from "./styledComponents/styles";
-import { useNavigate } from "react-router-dom";
-import { Container } from "react-bootstrap";
 import {
   Footer,
   Header,
   Nav,
   NavDiv,
   NavItem,
-  SignInButton,
   SignInDiv,
   SignUpBar,
-  SignUpButton,
 } from "../../theme";
+import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 
 const SignInLayout = () => {
-  const navigate = useNavigate();
+  const username = sessionStorage.getItem("username");
   return (
     <SignInDiv>
       <Header>
         <SignUpBar>
-          <Container fluid className='d-flex p-0 justify-content-end'>
-            <SignUpButton>Sign Up</SignUpButton>
-            <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
-          </Container>
+          <div>
+            <SignupBarPart username={username} />
+          </div>
         </SignUpBar>
 
         <NavDiv>

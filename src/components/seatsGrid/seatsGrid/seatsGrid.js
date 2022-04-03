@@ -10,7 +10,7 @@ import { useProvider } from "../../../model";
 const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd }) => {
   const seatsCol = (seats) => map(groupBy(seats, "row_letter"));
   const [{ auditorium }] = useProvider(["reservation.inputValues.auditorium"]);
-  console.log(auditorium);
+
   return (
     <Container>
       <Screen>Screen</Screen>
@@ -22,7 +22,9 @@ const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd }) => {
           return (
             <Row key={index}>
               {map(cols, (column, i) => (
-                <Col key={i}>{GenerateSeats(cols[i], handleSeatRemove, handleSeatAdd)}</Col>
+                <Col key={i}>
+                  {GenerateSeats(cols[i], handleSeatRemove, handleSeatAdd)}
+                </Col>
               ))}
             </Row>
           );

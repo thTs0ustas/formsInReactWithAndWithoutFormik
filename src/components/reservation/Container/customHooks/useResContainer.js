@@ -6,11 +6,11 @@ import {
   inputChangeAction,
   removeSeatAction,
   requestAction,
-  reservedSeatsAction,
-  resetReservation,
 } from "../../../../model";
+import { differenceWith, isEqual, toPairs } from "lodash";
+import { fetchRequest, nextRequest } from "../../helpers";
 
-export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, username }) => {
+export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
   const historyState = useRef({});
   const navigate = useNavigate();
 
@@ -32,55 +32,17 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, use
   }, []);
 
   useEffect(() => {
-    if (inputValues.movie !== historyState.current.movie) {
-      axios.get(`${BASE_URL}/cinema`).then((response) => {
-        dispatch(requestAction({ key: "cinemas", value: response.data }));
-      });
-    }
-    if (inputValues.cinema !== historyState.current.cinema) {
-      axios
-        .get(`${BASE_URL}/auditorium`)
-        .then((response) => dispatch(requestAction({ key: "auditoriums", value: response.data })));
-    }
-    if (inputValues.auditorium !== historyState.current.auditorium) {
-      axios
-        .get(`${BASE_URL}/screenings`)
-        .then((response) => dispatch(requestAction({ key: "screenings", value: response.data })));
-    }
-    if (
-      inputValues.screening !== historyState.current.screening &&
-      inputValues.numOfTickets === historyState.current.numOfTickets
-    ) {
-      axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) => {
-        dispatch(
-          requestAction({
-            key: "seats",
-            value: response.data,
-          })
-        );
-      });
-      axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) => {
-        dispatch(
-          reservedSeatsAction({
-            key: "reservedSeats",
-            value: response.data,
-          })
-        );
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const diff = differenceWith(
+      toPairs(inputValues),
+      toPairs(historyState.current),
+      isEqual
+    )[0]?.[0];
+    console.log(diff);
+    fetchRequest({
+      types: nextRequest(inputValues.auditorium, inputValues.screening)[diff],
+      action: requestAction,
+    })({ dispatch, baseUrl: BASE_URL });
   }, [inputValues]);
-
-  useEffect(() => {
-    response &&
-      navigate(`/users/${username}/reservation/ticket`, {
-        state: {
-          reservationId: response["Reservations"].at(-1).id,
-        },
-      });
-    dispatch(resetReservation());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [response]);
 
   const handleSeatAdd = (seat) => {
     historyState.current = inputValues;

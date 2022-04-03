@@ -4,7 +4,12 @@ export { Input, InputField, SelectContainer } from "./GlobalStyles/Input";
 export { Footer } from "./GlobalStyles/Footer";
 export { Header } from "./GlobalStyles/Header";
 export { Nav, NavItem, NavDiv } from "./GlobalStyles/Navigation";
-export { SignUpButton, SignUpBar, SignInButton, SignInDiv } from "./GlobalStyles/UpperBar";
+export {
+  SignUpButton,
+  SignUpBar,
+  SignInButton,
+  SignInDiv,
+} from "./GlobalStyles/UpperBar";
 
 export const theme = {
   light: {
@@ -14,6 +19,7 @@ export const theme = {
     secondary2: "#ffda8a",
     secondary: "#ffebc6",
     white: "#ffffff",
+    border: "#000",
   },
   dark: {
     bgMain: `rgb(45, 3, 23)`,

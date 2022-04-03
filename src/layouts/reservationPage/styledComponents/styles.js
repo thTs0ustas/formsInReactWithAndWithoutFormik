@@ -7,7 +7,9 @@ const ReservationContainer = styled.main`
 `;
 
 const MoviePoster = styled.div`
-  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
   min-height: 250px;
   max-height: 360px;
   height: 40vw;

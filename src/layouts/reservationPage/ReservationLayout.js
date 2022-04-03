@@ -13,8 +13,8 @@ const ReservationLayout = () => {
           </Nav>
         </NavDiv>
       </Header>
-      <MoviePoster />
       <ReservationContainer>
+        <MoviePoster />
         <Reservation />
       </ReservationContainer>
       <Footer />
