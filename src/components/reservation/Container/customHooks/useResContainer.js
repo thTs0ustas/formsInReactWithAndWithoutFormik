@@ -37,7 +37,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
       toPairs(historyState.current),
       isEqual
     )[0]?.[0];
-    console.log(diff);
+
     fetchRequest({
       types: nextRequest(inputValues.auditorium, inputValues.screening)[diff],
       action: requestAction,
