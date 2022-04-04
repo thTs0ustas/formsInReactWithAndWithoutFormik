@@ -31,6 +31,7 @@ import {
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
 import { paymentWithStripe } from "../../../stripe/stripe";
 import { Spinner } from "react-bootstrap";
+import { SeatsModal } from "./modal/Modal";
 
 export const Reservation = ({
   BASE_URL,
@@ -44,6 +45,11 @@ export const Reservation = ({
   handleSeatRemove,
   handleSeatAdd,
 }) => {
+  // const [show, setShow] = useState(false);
+  //
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
   return (
     <ReservationForm>
       <ReservationInfoBar>
@@ -207,42 +213,44 @@ export const Reservation = ({
             <p>Price: {price(numOfTickets).toFixed(2)}€</p>
           </div>
         </TicketOptions>
-        <SeatsContainer disable={screening && numOfTickets.sum > 0}>
-          <SeatsGrid>
-            <SeatMatrix
-              state={reservation}
-              seats={requests.seats}
-              handleSeatRemove={handleSeatRemove}
-              handleSeatAdd={handleSeatAdd}
-            />
-          </SeatsGrid>
-          <ContinueButton
-            onClick={(ev) => {
-              ev.preventDefault();
-              setSpinner(!spinner);
-              paymentWithStripe(
-                BASE_URL,
-                {
-                  name: "Tickets",
-                  price: price(numOfTickets) * 100,
-                  quantity: numOfTickets.sum,
-                  username,
-                },
-                { BASE_URL, seat, screening }
-              );
-            }}
-            disabled={numOfTickets.sum - keys(seat).length !== 0}
-            type='submit'
-          >
-            {spinner ? (
-              "Continue"
-            ) : (
-              <Spinner animation='border' role='status'>
-                <span className='visually-hidden'>Loading...</span>
-              </Spinner>
-            )}
-          </ContinueButton>
-        </SeatsContainer>
+        <SeatsModal>
+          <SeatsContainer disable={screening && numOfTickets.sum > 0}>
+            <SeatsGrid>
+              <SeatMatrix
+                state={reservation}
+                seats={requests.seats}
+                handleSeatRemove={handleSeatRemove}
+                handleSeatAdd={handleSeatAdd}
+              />
+            </SeatsGrid>
+            <ContinueButton
+              onClick={(ev) => {
+                ev.preventDefault();
+                setSpinner(!spinner);
+                paymentWithStripe(
+                  BASE_URL,
+                  {
+                    name: "Tickets",
+                    price: price(numOfTickets) * 100,
+                    quantity: numOfTickets.sum,
+                    username,
+                  },
+                  { BASE_URL, seat, screening }
+                );
+              }}
+              disabled={numOfTickets.sum - keys(seat).length !== 0}
+              type='submit'
+            >
+              {spinner ? (
+                "Continue"
+              ) : (
+                <Spinner animation='border' role='status'>
+                  <span className='visually-hidden'>Loading...</span>
+                </Spinner>
+              )}
+            </ContinueButton>
+          </SeatsContainer>
+        </SeatsModal>
       </Container>
     </ReservationForm>
   );

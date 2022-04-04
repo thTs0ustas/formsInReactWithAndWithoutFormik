@@ -4,6 +4,7 @@ import React from "react";
 import { Reservation } from "../../components";
 
 const ReservationLayout = () => {
+  // const [movie, setMovie] = useProvider(["reservation.inputValues.movie"]);
   return (
     <>
       <Header>
