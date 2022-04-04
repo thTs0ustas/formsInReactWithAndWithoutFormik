@@ -29,22 +29,27 @@ function App() {
     <ThemeProvider theme={theming ? theme.light : theme.dark}>
       {/* TODO: switch for theme change */}
       <div className="App">
-        {/* <Routes>
+        <Routes>
           <Route exact path="/" element={<HomePageLayout />} />
           <Route path="/login" element={<SignInLayout />} />
-          <Route path="/nav" element={<NavBar />} />
+          
           <Route path="/users/:username/reservation" element={<Reservation />} />
           <Route path="/users/:username/reservation/ticket" element={<Ticket />} />
-        </Routes> */}
-        
-        <SignUpBar>
-          <div>
-            <SignUpButton>Sign Up</SignUpButton>
-            <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
-          </div>
-        </SignUpBar>
-        <NavBar /> 
-        <CarouselHero />
+          <Route path="/nav" element=
+              {
+                <>
+                  <SignUpBar>
+                  <div>
+                    <SignUpButton>Sign Up</SignUpButton>
+                    <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
+                  </div>
+                  </SignUpBar>
+                  <NavBar /> 
+                  <CarouselHero />
+                </>
+              } 
+              />
+        </Routes>
         
       </div>
     </ThemeProvider>

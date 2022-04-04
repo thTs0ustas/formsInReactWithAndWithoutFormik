@@ -21,6 +21,7 @@ export const Nav = styled.nav`
 	align-items: center;
 	position: absolute;
 	z-index: 9999;
+	padding: 2%;
 
 	@media screen and (max-width: 768px) {
 		//In smaller screens add different styling to the nav container
