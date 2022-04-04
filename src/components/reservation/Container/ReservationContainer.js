@@ -1,14 +1,11 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { map } from "lodash";
-import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Reservation } from "../presentational/reservation";
-import { useProvider, actionTypes } from "../../../model";
+import { useProvider } from "../../../model";
 import { useResContainer } from "./customHooks/useResContainer";
-import { price } from "../helpers";
 
-const ReservationContainer = (WrapComponent) => () => {
+const ReservationContainer = () => {
   const [state, dispatch] = useProvider([
     "reservation.inputValues",
     "reservation.requests",
@@ -16,8 +13,10 @@ const ReservationContainer = (WrapComponent) => () => {
     "BASE_URL",
   ]);
 
-  const { inputValues, requests, response, BASE_URL } = state;
+  const { inputValues, requests, response, numOfTickets, BASE_URL } = state;
   const { username } = useParams();
+  const navigate = useNavigate();
+  const [spinner, setSpinner] = useState(true);
 
   const { handleSeatAdd, handleSeatRemove, handleChange } = useResContainer({
     BASE_URL,
@@ -27,40 +26,22 @@ const ReservationContainer = (WrapComponent) => () => {
     username,
   });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .post(`${BASE_URL}/reservations/users/${username}/new`, {
-        data: {
-          screening_id: +inputValues.screening,
-          price: +price(inputValues.seat),
-          seats: map(inputValues.seat, (seat) => ({
-            id: seat.id,
-            discount_type: "adult",
-            cost: seat.cost,
-            screening_id: inputValues.screening,
-          })),
-        },
-      })
-      .then(({ data }) =>
-        dispatch({
-          type: actionTypes.response,
-          payload: data,
-        })
-      );
-  };
-
   const props = {
-    handleSubmit,
     handleChange,
     handleSeatRemove,
     handleSeatAdd,
+    spinner,
+    setSpinner,
+    navigate,
+    BASE_URL,
     inputValues,
     requests,
+    username,
     state,
+    numOfTickets,
   };
 
-  return <WrapComponent {...props} />;
+  return <Reservation {...props} />;
 };
 
-export default ReservationContainer(Reservation);
+export default ReservationContainer;

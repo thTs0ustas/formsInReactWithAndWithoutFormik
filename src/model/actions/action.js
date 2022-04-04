@@ -1,14 +1,66 @@
-const actionTypes = {
-  inputChange: "INPUT_CHANGE",
-  request: "REQUEST",
-  addSeat: "SEAT_ADD",
-  removeSeat: "SEAT_REMOVE",
-  reservedSeats: "RESERV_SEATS",
-  response: "RESPONSE",
-  userLogin: "USER_LOGIN",
-  userLogout: "USER_LOGOUT",
-  newTicket: "NEW_TICKET",
-  search: "SEARCH",
-};
+import { actionTypes } from "./actionTypes";
 
-export { actionTypes };
+const requestAction = (payload) => ({
+  type: actionTypes.request,
+  payload,
+});
+const inputChangeAction = (payload) => ({
+  type: actionTypes.inputChange,
+  payload,
+});
+const addSeatAction = (payload) => ({
+  type: actionTypes.addSeat,
+  payload,
+});
+const removeSeatAction = (payload) => ({
+  type: actionTypes.removeSeat,
+  payload,
+});
+const addTicketAction = (payload) => ({
+  type: actionTypes.addTicket,
+  payload,
+});
+const removeTicketAction = (payload) => ({
+  type: actionTypes.removeTicket,
+  payload,
+});
+const reservedSeatsAction = (payload) => ({
+  type: actionTypes.reservedSeats,
+  payload,
+});
+const responseAction = (payload) => ({
+  type: actionTypes.response,
+  payload,
+});
+const userLoginAction = (payload) => ({
+  type: actionTypes.userLogin,
+  payload,
+});
+const userLogoutAction = (payload) => ({
+  type: actionTypes.userLogout,
+  payload,
+});
+
+const newTicketAction = (payload) => ({
+  type: actionTypes.newTicket,
+  payload,
+});
+
+const resetReservation = () => ({
+  type: actionTypes.resetReservation,
+});
+
+export {
+  resetReservation,
+  addSeatAction,
+  newTicketAction,
+  removeSeatAction,
+  requestAction,
+  reservedSeatsAction,
+  responseAction,
+  userLoginAction,
+  userLogoutAction,
+  inputChangeAction,
+  addTicketAction,
+  removeTicketAction,
+};

@@ -10,10 +10,8 @@ const Screen = styled.div`
 `;
 
 const Container = styled.div`
-  //height: 50vh;
   padding: 10px 0;
   width: 100%;
-  //background-color: #dc9678;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +37,7 @@ const SeatDiv = styled.div`
 const Col = styled.div`
   display: flex;
   flex-direction: column;
-  width: 33.33333333333333333%;
+  width: 33.3%;
 `;
 
 const SeatsContainer = styled.div`
