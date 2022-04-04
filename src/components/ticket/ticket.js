@@ -1,19 +1,20 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
 
 import { useTicket } from "./hooks/useTicket";
 import { useProvider } from "../../model";
 
 const Ticket = () => {
-  const { username } = useParams();
-  const { state } = useLocation();
+  const username = window.sessionStorage.getItem("username");
+  const [{ tickets, Reservations }] = useProvider([
+    "userInfo.tickets",
+    "reservation.response.Reservations",
+  ]);
 
-  useTicket(username, state.reservationId);
-  const [model] = useProvider(["reservation.ticket", "reservation.response"]);
+  useTicket({ username, reservationId: Reservations.at(-1).id });
 
   return (
     <div>
-      <pre>{JSON.stringify(model.ticket, null, 2)}</pre>
+      <pre>{JSON.stringify(tickets.at(-1), null, 2)}</pre>
     </div>
   );
 };

@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { Reservation } from "./components/reservation";
+import { Ticket } from "./components";
+import { Payment } from "./components/payment/Payment";
+import { HomePageLayout, ReservationLayout, SignInLayout } from "./layouts";
 
-import { Ticket } from "./components/ticket/ticket";
-import HomePageLayout from "./layouts/homePage/homePageLayout";
-
-import "./App.css";
-import SignInLayout from "./layouts/signInPage/SignInLayout";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 
@@ -15,13 +12,15 @@ function App() {
   const [theming, setTheming] = useState(true);
   return (
     <ThemeProvider theme={theming ? theme.light : theme.dark}>
-      TODO: switch for theme change
-      <div className="App">
+      <input type='checkbox' onChange={() => setTheming(!theming)}></input>
+      <div className='App'>
         <Routes>
-          <Route exact path="/" element={<HomePageLayout />} />
-          <Route path="/login" element={<SignInLayout />} />
-          <Route path="/users/:username/reservation" element={<Reservation />} />
-          <Route path="/users/:username/reservation/ticket" element={<Ticket />} />
+          <Route path='/' element={<HomePageLayout />} />
+          <Route path='/login' element={<SignInLayout />} />
+          <Route path='/payments' element={<Payment />} />
+          <Route path='/payments/payment_success' element={<Ticket />} />
+          <Route path='/payments/payment_cancel' element={<div>Cancel</div>} />
+          <Route path='/reservation' element={<ReservationLayout />} />
         </Routes>
       </div>
     </ThemeProvider>

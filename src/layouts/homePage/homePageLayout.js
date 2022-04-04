@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Archive,
   Card,
@@ -12,20 +12,20 @@ import {
   Typography,
   VideoWallDiv,
   VideoWallInfo,
-} from "./styles";
-import { useNavigate } from "react-router-dom";
-import { Header, Nav, NavDiv, NavItem, SignUpBar, SignUpButton, SignInButton } from "../../theme";
+} from "./styledComponents/styles";
+import { Footer, Header, Nav, NavDiv, NavItem, SignUpBar } from "../../theme";
+import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 
+
 const HomePageLayout = () => {
-  const navigate = useNavigate();
+  const username = sessionStorage.getItem("username");
   return (
     <HomeDiv>
       <Header mainPage={false}>
         <SignUpBar>
           <div>
-            <SignUpButton>Sign Up</SignUpButton>
-            <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
+            <SignupBarPart username={username} />
           </div>
         </SignUpBar>
         <VideoWallDiv>
@@ -54,7 +54,7 @@ const HomePageLayout = () => {
             <p>Under Title</p>
           </Typography>
           <ComingUp>
-            <Row className="flex-nowrap">
+            <Row className='flex-nowrap'>
               <Col md={4} sm={6} xs={12}>
                 <Card />
               </Col>
@@ -109,4 +109,4 @@ const HomePageLayout = () => {
   );
 };
 
-export default HomePageLayout;
+export { HomePageLayout };

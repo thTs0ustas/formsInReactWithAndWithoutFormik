@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavDropdown } from "react-bootstrap";
 
 const HomeDiv = styled.div`
   background-color: blueviolet;
@@ -14,6 +15,42 @@ const VideoWallDiv = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+`;
+
+const NavDropdownDiv = styled(NavDropdown)`
+  padding: 0 5px;
+  height: 32px;
+  & > a {
+    padding: 5px 5px;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+    background-color: ${({ theme }) => theme.primary};
+    transition: background-color 0.3s ease-in-out;
+    color: black;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: ${({ theme }) => theme.secondary2};
+      color: #000;
+    }
+  }
+  & div {
+    z-index: -1;
+    &[class*="show"] {
+      width: fit-content;
+      z-index: 1;
+
+      background-color: ${({ theme }) => theme.secondary};
+      border-radius: 0;
+
+      & a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
 `;
 
 const VideoWallInfo = styled.div`
@@ -110,6 +147,7 @@ const PromoCard = styled.div`
 
 export {
   HomeDiv,
+  NavDropdownDiv,
   VideoWallDiv,
   VideoWallInfo,
   Features,
