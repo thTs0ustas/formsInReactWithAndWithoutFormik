@@ -1,4 +1,4 @@
-import { Form } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import styled from "styled-components";
 
 const ReservationForm = styled(Form)`
@@ -13,7 +13,6 @@ const Container = styled.div`
   margin: 0 auto;
   width: 100%;
   display: flex;
-
   flex-direction: column;
   max-width: 1440px;
 `;
@@ -28,6 +27,14 @@ const TicketOptions = styled.div`
   height: 600px;
   margin: 45px auto;
   background-color: ${({ theme }) => theme.bgMain};
+
+  &:last-child {
+    align-items: flex-end;
+
+    @media (max-width: 768px) {
+      align-items: center;
+    }
+  }
 `;
 
 const SeatsContainer = styled.div`
@@ -169,7 +176,36 @@ const Price = styled.p`
   color: ${({ theme }) => theme.secondary};
 `;
 
+const ModalContainer = styled(Modal)`
+  &:has(.modal) {
+    border-radius: 0 !important;
+    color: ${({ theme }) => theme.bgMain} !important;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+`;
+
+const ModalHeader = styled(Modal.Header)`
+  border-radius: 0;
+  border-bottom: 1px solid ${({ theme }) => theme.border};
+  padding: 0;
+  margin: 0;
+`;
+const ModalBody = styled(Modal.Body)`
+  width: 600px;
+  padding: 0;
+  margin: 0;
+  background-color: ${({ theme }) => theme.bgMain};
+`;
+
 export {
+  ModalContainer,
+  ModalHeader,
+  ModalBody,
   Price,
   TicketBarRight,
   TicketBar,

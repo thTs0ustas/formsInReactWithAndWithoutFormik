@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Archive,
@@ -42,7 +43,9 @@ const HomePageLayout = () => {
           <VideoWallInfo>
             <p>Small Description</p>
             <h2>Movie Title</h2>
-            <button>BOOK TICKETS</button>
+            <Link to='/reservation'>
+              <button>BOOK TICKETS</button>
+            </Link>
           </VideoWallInfo>
         </VideoWallDiv>
       </Header>
