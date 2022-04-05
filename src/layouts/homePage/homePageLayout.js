@@ -14,7 +14,9 @@ import {
   VideoWallDiv,
   VideoWallInfo,
 } from "./styledComponents/styles";
+
 import { Header, Nav, NavDiv, NavItem, SignUpBar } from "../../theme";
+
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 
