@@ -42,8 +42,8 @@ const SeatsContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  width: 70%;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   pointer-events: ${({ disable }) => (!disable ? "none" : "all")};
 `;
 
@@ -53,7 +53,7 @@ const SeatsGrid = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 600px;
+  height: 100%;
 `;
 
 const ReservationInfoBar = styled.div`
@@ -177,16 +177,29 @@ const Price = styled.p`
 `;
 
 const ModalContainer = styled(Modal)`
-  &:has(.modal) {
-    border-radius: 0 !important;
-    color: ${({ theme }) => theme.bgMain} !important;
-  }
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  border-radius: 0;
+  & .modal-dialog {
+    @media (min-width: 576px) {
+      max-width: 900px;
+      margin: 1.75rem auto;
+    }
+    & .modal-content {
+      background-color: ${({ theme }) => theme.bgMain};
+      width: 100%;
+
+      & .modal-body {
+        padding: 0;
+      }
+      @media (min-width: 576px) {
+        border-radius: 0;
+        max-width: 900px;
+      }
+    }
+  }
 `;
 
 const ModalHeader = styled(Modal.Header)`
@@ -195,12 +208,7 @@ const ModalHeader = styled(Modal.Header)`
   padding: 0;
   margin: 0;
 `;
-const ModalBody = styled(Modal.Body)`
-  width: 600px;
-  padding: 0;
-  margin: 0;
-  background-color: ${({ theme }) => theme.bgMain};
-`;
+const ModalBody = styled(Modal.Body)``;
 
 export {
   ModalContainer,

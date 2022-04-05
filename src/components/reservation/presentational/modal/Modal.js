@@ -13,6 +13,7 @@ const SeatsModal = ({ children, disabled }) => {
   };
 
   return (
+    //must be !disabled to show modal
     <>
       <ContinueButton disabled={!disabled} onClick={handleShow}>
         Next
