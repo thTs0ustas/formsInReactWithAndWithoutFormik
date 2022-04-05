@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   addSeatAction,
@@ -12,13 +11,8 @@ import { fetchRequest, nextRequest } from "../../helpers";
 
 export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
   const historyState = useRef({});
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!window.sessionStorage.getItem("token")) {
-      navigate("/login");
-    }
-
     historyState.current = inputValues;
     axios.get(`${BASE_URL}/movies`).then((response) => {
       dispatch(

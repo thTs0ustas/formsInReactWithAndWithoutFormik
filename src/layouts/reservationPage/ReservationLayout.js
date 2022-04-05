@@ -1,7 +1,8 @@
-import { Footer, Header, Logo, Nav, NavDiv } from "../../theme";
+import { Header, Logo, Nav, NavDiv } from "../../theme";
 import { MoviePoster, ReservationContainer } from "./styledComponents/styles";
 import React from "react";
 import { Reservation } from "../../components";
+import Footer from "../../components/footer/Footer";
 
 const ReservationLayout = () => {
   return (

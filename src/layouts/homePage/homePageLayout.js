@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Archive,
@@ -13,10 +14,11 @@ import {
   VideoWallDiv,
   VideoWallInfo,
 } from "./styledComponents/styles";
-import {Header, Nav, NavDiv, NavItem, SignUpBar } from "../../theme";
+
+import { Header, Nav, NavDiv, NavItem, SignUpBar } from "../../theme";
+
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
-
 
 const HomePageLayout = () => {
   const username = sessionStorage.getItem("username");
@@ -43,7 +45,9 @@ const HomePageLayout = () => {
           <VideoWallInfo>
             <p>Small Description</p>
             <h2>Movie Title</h2>
-            <button>BOOK TICKETS</button>
+            <Link to='/reservation'>
+              <button>BOOK TICKETS</button>
+            </Link>
           </VideoWallInfo>
         </VideoWallDiv>
       </Header>

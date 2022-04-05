@@ -24,6 +24,7 @@ export const SignupBarPart = ({ username = null }) => {
           sessionStorage.removeItem("username");
           sessionStorage.removeItem("token");
           navigate("/");
+          window.location.reload();
         }}
       >
         Sign Out

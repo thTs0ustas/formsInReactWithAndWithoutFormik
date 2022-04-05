@@ -1,4 +1,4 @@
-import { Form } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import styled from "styled-components";
 
 const ReservationForm = styled(Form)`
@@ -13,7 +13,6 @@ const Container = styled.div`
   margin: 0 auto;
   width: 100%;
   display: flex;
-
   flex-direction: column;
   max-width: 1440px;
 `;
@@ -28,6 +27,14 @@ const TicketOptions = styled.div`
   height: 600px;
   margin: 45px auto;
   background-color: ${({ theme }) => theme.bgMain};
+
+  &:last-child {
+    align-items: flex-end;
+
+    @media (max-width: 768px) {
+      align-items: center;
+    }
+  }
 `;
 
 const SeatsContainer = styled.div`
@@ -35,8 +42,8 @@ const SeatsContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  width: 70%;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   pointer-events: ${({ disable }) => (!disable ? "none" : "all")};
 `;
 
@@ -46,7 +53,7 @@ const SeatsGrid = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 600px;
+  height: 100%;
 `;
 
 const ReservationInfoBar = styled.div`
@@ -169,7 +176,44 @@ const Price = styled.p`
   color: ${({ theme }) => theme.secondary};
 `;
 
+const ModalContainer = styled(Modal)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  & .modal-dialog {
+    @media (min-width: 576px) {
+      max-width: 900px;
+      margin: 1.75rem auto;
+    }
+    & .modal-content {
+      background-color: ${({ theme }) => theme.bgMain};
+      width: 100%;
+
+      & .modal-body {
+        padding: 0;
+      }
+      @media (min-width: 576px) {
+        border-radius: 0;
+        max-width: 900px;
+      }
+    }
+  }
+`;
+
+const ModalHeader = styled(Modal.Header)`
+  border-radius: 0;
+  border-bottom: 1px solid ${({ theme }) => theme.border};
+  padding: 0;
+  margin: 0;
+`;
+const ModalBody = styled(Modal.Body)``;
+
 export {
+  ModalContainer,
+  ModalHeader,
+  ModalBody,
   Price,
   TicketBarRight,
   TicketBar,
