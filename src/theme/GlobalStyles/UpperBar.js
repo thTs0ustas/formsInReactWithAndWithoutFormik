@@ -12,7 +12,8 @@ const SignUpBar = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    max-width: 1440px;
+    //max-width: 1440px;
+    padding: 0 1vw;
   }
 `;
 const SignUpButton = styled.button`

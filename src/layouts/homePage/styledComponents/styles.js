@@ -6,15 +6,8 @@ const HomeDiv = styled.div`
 `;
 
 const VideoWallDiv = styled.div`
-  position: relative;
   min-height: 400px;
-  max-height: 1000px;
-  height: 40vw;
   background-color: #a5f1d2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
 `;
 
 const NavDropdownDiv = styled(NavDropdown)`

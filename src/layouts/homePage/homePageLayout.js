@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Archive,
@@ -12,13 +12,14 @@ import {
   Promos,
   Typography,
   VideoWallDiv,
-  VideoWallInfo,
 } from "./styledComponents/styles";
 
-import { Header, Nav, NavDiv, NavItem, SignUpBar } from "../../theme";
+import { Header, SignUpBar } from "../../theme";
 
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
+import NavBar from "../../components/NavBar";
+import CarouselHero from "../../components/HeroSlider";
 
 const HomePageLayout = () => {
   const username = sessionStorage.getItem("username");
@@ -31,24 +32,17 @@ const HomePageLayout = () => {
           </div>
         </SignUpBar>
         <VideoWallDiv>
-          <NavDiv>
-            <Nav>
-              <NavItem>1</NavItem>
-              <NavItem>2</NavItem>
-              <NavItem>3</NavItem>
-              <NavItem>4</NavItem>
-              <NavItem>5</NavItem>
-              <NavItem>6</NavItem>
-              <NavItem>7</NavItem>
-            </Nav>
-          </NavDiv>
-          <VideoWallInfo>
-            <p>Small Description</p>
-            <h2>Movie Title</h2>
-            <Link to='/reservation'>
-              <button>BOOK TICKETS</button>
-            </Link>
-          </VideoWallInfo>
+          {/*<NavDiv>*/}
+          {/*</NavDiv>*/}
+          <NavBar />
+          <CarouselHero />
+          {/*<VideoWallInfo>*/}
+          {/*  <p>Small Description</p>*/}
+          {/*  <h2>Movie Title</h2>*/}
+          {/*  <Link to='/reservation'>*/}
+          {/*    <button>BOOK TICKETS</button>*/}
+          {/*  </Link>*/}
+          {/*</VideoWallInfo>*/}
         </VideoWallDiv>
       </Header>
       <div>
