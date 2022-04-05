@@ -14,6 +14,7 @@ import {
 import {
   ButtonForMembers,
   Container,
+  GuestContainer,
   NumberOfTickets,
   PleaseBeAMember,
   PleaseBeAMemberHeader,
@@ -33,6 +34,8 @@ import { ContinueButton, Input, SelectContainer } from "../../../theme";
 import { paymentWithStripe } from "../../../stripe/stripe";
 import { Spinner } from "react-bootstrap";
 import { SeatsModal } from "./modal/Modal";
+import { GuestModal } from "./guestModal/GuestModal";
+import { LoginForm } from "../../signUpForm";
 
 export const Reservation = ({
   BASE_URL,
@@ -46,19 +49,21 @@ export const Reservation = ({
   handleSeatAdd,
 }) => {
   const username = window.sessionStorage.getItem("username");
+  // const navigate = useNavigate();
   const handleContinueButton = (ev) => {
     ev.preventDefault();
     setSpinner(!spinner);
-    paymentWithStripe(
-      BASE_URL,
-      {
-        name: "Tickets",
-        price: price(numOfTickets) * 100,
-        quantity: numOfTickets.sum,
-        username,
-      },
-      { BASE_URL, seat, screening }
-    );
+    if (!username)
+      paymentWithStripe(
+        BASE_URL,
+        {
+          name: "Tickets",
+          price: price(numOfTickets) * 100,
+          quantity: numOfTickets.sum,
+          username,
+        },
+        { BASE_URL, seat, screening }
+      );
   };
 
   return (
@@ -233,19 +238,29 @@ export const Reservation = ({
                   handleSeatAdd={handleSeatAdd}
                 />
               </SeatsGrid>
-              <ContinueButton
-                disabled={numOfTickets.sum - keys(seat).length !== 0}
-                onClick={handleContinueButton}
-                type='submit'
-              >
-                {spinner ? (
-                  "Continue"
-                ) : (
-                  <Spinner animation='border' role='status'>
-                    <span className='visually-hidden'>Loading...</span>
-                  </Spinner>
-                )}
-              </ContinueButton>
+              {!!!username ? (
+                <GuestModal
+                  disabled={numOfTickets.sum - keys(seat).length !== 0}
+                >
+                  <GuestContainer>
+                    <LoginForm />
+                  </GuestContainer>
+                </GuestModal>
+              ) : (
+                <ContinueButton
+                  disabled={numOfTickets.sum - keys(seat).length !== 0}
+                  onClick={handleContinueButton}
+                  type='submit'
+                >
+                  {spinner ? (
+                    "Continue"
+                  ) : (
+                    <Spinner animation='border' role='status'>
+                      <span className='visually-hidden'>Loading...</span>
+                    </Spinner>
+                  )}
+                </ContinueButton>
+              )}
             </SeatsContainer>
           </SeatsModal>
         </TicketOptions>

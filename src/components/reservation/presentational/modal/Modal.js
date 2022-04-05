@@ -5,6 +5,8 @@ import { ModalContainer } from "../styledComponents/styles";
 import { keys } from "lodash";
 
 const SeatsModal = ({ children, disabled, sum, seat }) => {
+  const username = sessionStorage.getItem("username");
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
