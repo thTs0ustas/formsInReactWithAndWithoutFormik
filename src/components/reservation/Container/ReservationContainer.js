@@ -35,7 +35,6 @@ const ReservationContainer = () => {
     BASE_URL,
     inputValues,
     requests,
-
     state,
     numOfTickets,
   };

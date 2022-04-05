@@ -3,6 +3,7 @@ import "./Carousel.css";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ButtonIcon, CarouselButton } from "./CarouselButton";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const CarouselHero = () => {
@@ -29,7 +30,7 @@ const CarouselHero = () => {
       {movie.map((item) => {
         const { id, title, description, image } = item.Movie;
         return (
-          <Carousel.Item interval={3000}>
+          <Carousel.Item key={id} interval={3000}>
             <img
               src={require(`../../assets/imgs/batman.jpg`)}
               alt='First slide'
@@ -39,7 +40,7 @@ const CarouselHero = () => {
               <p>{description}</p>
               <CarouselButton>
                 <ButtonIcon />
-                Book Now
+                <Link to='/reservation'>Book Now</Link>
               </CarouselButton>
             </Carousel.Caption>
           </Carousel.Item>

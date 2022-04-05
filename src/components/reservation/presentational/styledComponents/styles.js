@@ -65,7 +65,7 @@ const ReservationInfoBar = styled.div`
   height: 60px;
   background-color: black;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1520px;
 `;
 
 const TicketBar = styled.div`
@@ -167,12 +167,39 @@ const PleaseBeAMemberParagraph = styled.p`
     font-size: 0.5rem;
   }
 `;
+const TicketInfo = styled.div`
+  width: 100%;
+  text-align: left;
+
+  & p:first-child {
+    text-transform: uppercase;
+    font-size: 18px;
+    color: ${({ theme }) => theme.secondary};
+    border-bottom: 1px solid #b09661;
+
+    & strong {
+      color: ${({ theme }) => theme.primary};
+      font-size: 20px;
+    }
+  }
+  & p:last-child {
+    text-transform: uppercase;
+    font-size: 18px;
+    color: ${({ theme }) => theme.secondary};
+    border-bottom: 1px solid #b09661;
+
+    & strong {
+      color: ${({ theme }) => theme.primary};
+      font-size: 20px;
+    }
+  }
+`;
 
 const Price = styled.p`
   width: 70px;
   text-align: left;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 16px;
   color: ${({ theme }) => theme.secondary};
 `;
 
@@ -211,6 +238,7 @@ const ModalHeader = styled(Modal.Header)`
 const ModalBody = styled(Modal.Body)``;
 
 export {
+  TicketInfo,
   ModalContainer,
   ModalHeader,
   ModalBody,

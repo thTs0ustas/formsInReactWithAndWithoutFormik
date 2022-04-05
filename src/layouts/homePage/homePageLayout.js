@@ -32,17 +32,8 @@ const HomePageLayout = () => {
           </div>
         </SignUpBar>
         <VideoWallDiv>
-          {/*<NavDiv>*/}
-          {/*</NavDiv>*/}
           <NavBar />
           <CarouselHero />
-          {/*<VideoWallInfo>*/}
-          {/*  <p>Small Description</p>*/}
-          {/*  <h2>Movie Title</h2>*/}
-          {/*  <Link to='/reservation'>*/}
-          {/*    <button>BOOK TICKETS</button>*/}
-          {/*  </Link>*/}
-          {/*</VideoWallInfo>*/}
         </VideoWallDiv>
       </Header>
       <div>

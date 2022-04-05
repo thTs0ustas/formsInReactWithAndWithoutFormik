@@ -33,7 +33,7 @@ const NavDropdownDiv = styled(NavDropdown)`
     z-index: -1;
     &[class*="show"] {
       width: fit-content;
-      z-index: 1;
+      z-index: 10000;
 
       background-color: ${({ theme }) => theme.secondary};
       border-radius: 0;

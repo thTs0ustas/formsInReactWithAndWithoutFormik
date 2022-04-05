@@ -25,6 +25,7 @@ import {
   SeatsGrid,
   TicketBar,
   TicketBarRight,
+  TicketInfo,
   TicketOptions,
   TypeOfTicket,
 } from "./styledComponents/styles";
@@ -38,7 +39,6 @@ export const Reservation = ({
   handleChange,
   requests,
   spinner,
-
   setSpinner,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   state: { reservation },
@@ -122,7 +122,7 @@ export const Reservation = ({
       </ReservationInfoBar>
       <Container>
         <TicketOptions>
-          {username || (
+          {!username || (
             <TicketBar>
               <div>
                 <TypeOfTicket>Member</TypeOfTicket>
@@ -209,22 +209,21 @@ export const Reservation = ({
             <ButtonForMembers>BE A MEMBER</ButtonForMembers>
           </PleaseBeAMember>
 
-          <div style={{ width: "100%", textAlign: "center" }}>
+          <TicketInfo>
             <p>
-              You choose <strong>{numOfTickets.sum}</strong> tickets
+              You choose <strong>{numOfTickets.sum}</strong> ticket(s)
             </p>
-            <p>
-              Remaining seats{" "}
-              <strong>
-                {numOfTickets.sum - keys(seat).length > -1
-                  ? numOfTickets.sum - keys(seat).length
-                  : "Deselect some seats"}
-              </strong>
-            </p>
-            <p>Price: {price(numOfTickets).toFixed(2)}€</p>
-          </div>
 
-          <SeatsModal disabled={numOfTickets.sum - keys(seat).length !== 0}>
+            <p>
+              Price: <strong>{price(numOfTickets).toFixed(2)}</strong>€
+            </p>
+          </TicketInfo>
+
+          <SeatsModal
+            disabled={numOfTickets.sum - keys(seat).length !== 0}
+            sum={numOfTickets?.sum}
+            seat={seat}
+          >
             <SeatsContainer disable={screening && numOfTickets.sum > 0}>
               <SeatsGrid>
                 <SeatMatrix
