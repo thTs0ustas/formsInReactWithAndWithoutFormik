@@ -24,8 +24,8 @@ export const theme = {
   dark: {
     bgMain: `rgb(45, 3, 23)`,
     logo: "#ff8e56",
-    primary: "#063d5e",
-    secondary: "#3a6ba2",
+    primary: "#139df1",
+    secondary: "#1980fa",
     white: "#858282",
     light: "#5b5b5b",
   },

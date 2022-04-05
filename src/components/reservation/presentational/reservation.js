@@ -38,13 +38,14 @@ export const Reservation = ({
   handleChange,
   requests,
   spinner,
-  username,
+
   setSpinner,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   state: { reservation },
   handleSeatRemove,
   handleSeatAdd,
 }) => {
+  const username = window.sessionStorage.getItem("username");
   const handleContinueButton = (ev) => {
     ev.preventDefault();
     setSpinner(!spinner);

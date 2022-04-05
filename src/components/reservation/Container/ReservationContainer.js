@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Reservation } from "../presentational/reservation";
 import { useProvider } from "../../../model";
@@ -14,7 +14,7 @@ const ReservationContainer = () => {
   ]);
 
   const { inputValues, requests, response, numOfTickets, BASE_URL } = state;
-  const { username } = useParams();
+
   const navigate = useNavigate();
   const [spinner, setSpinner] = useState(true);
 
@@ -23,7 +23,6 @@ const ReservationContainer = () => {
     inputValues,
     dispatch,
     response,
-    username,
   });
 
   const props = {
@@ -36,7 +35,7 @@ const ReservationContainer = () => {
     BASE_URL,
     inputValues,
     requests,
-    username,
+
     state,
     numOfTickets,
   };
