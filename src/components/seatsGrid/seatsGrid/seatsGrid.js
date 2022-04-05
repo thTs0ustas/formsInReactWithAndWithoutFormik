@@ -14,6 +14,7 @@ const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd }) => {
   return (
     <Container>
       <Screen>Screen</Screen>
+
       <SeatsContainer>
         {seatsCol(seats).map((seatArr, index) => {
           let counter = seatArr.length / auditorium[2];
@@ -21,7 +22,9 @@ const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd }) => {
           return (
             <Row key={index}>
               {map(cols, (column, i) => (
-                <Col key={i}>{GenerateSeats(cols[i], handleSeatRemove, handleSeatAdd)}</Col>
+                <Col key={i}>
+                  {GenerateSeats(cols[i], handleSeatRemove, handleSeatAdd)}
+                </Col>
               ))}
             </Row>
           );

@@ -1,34 +1,65 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { keys } from "lodash";
 
 import { SeatMatrix } from "../../seatsGrid";
 import { TicketButton } from "./ticketButton/ticketButton";
-import { disabledDecrement, disabledIncrement, price, setScreeningString } from "../helpers";
 import {
+  disabledDecrement,
+  disabledIncrement,
+  price,
+  PRICING,
+  setScreeningString,
+} from "../helpers";
+import {
+  ButtonForMembers,
   Container,
   NumberOfTickets,
+  PleaseBeAMember,
+  PleaseBeAMemberHeader,
+  PleaseBeAMemberParagraph,
+  Price,
   ReservationForm,
   ReservationInfoBar,
   SeatsContainer,
   SeatsGrid,
+  TicketBar,
+  TicketBarRight,
   TicketOptions,
   TypeOfTicket,
 } from "./styledComponents/styles";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
 import { paymentWithStripe } from "../../../stripe/stripe";
 import { Spinner } from "react-bootstrap";
+import { SeatsModal } from "./modal/Modal";
 
 export const Reservation = ({
   BASE_URL,
   handleChange,
   requests,
+  spinner,
+  username,
+  setSpinner,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   state: { reservation },
   handleSeatRemove,
   handleSeatAdd,
 }) => {
-  const [spinner, setSpinner] = useState(true);
+  const handleContinueButton = (ev) => {
+    ev.preventDefault();
+    setSpinner(!spinner);
+    paymentWithStripe(
+      BASE_URL,
+      {
+        name: "Tickets",
+        price: price(numOfTickets) * 100,
+        quantity: numOfTickets.sum,
+        username,
+      },
+      { BASE_URL, seat, screening }
+    );
+  };
+
   return (
     <ReservationForm>
       <ReservationInfoBar>
@@ -55,7 +86,11 @@ export const Reservation = ({
         </SelectContainer>
 
         <SelectContainer controlId='floatingInput' label='Auditorium'>
-          <Input name='auditorium' onChange={(e) => handleChange(e)} disabled={!cinema}>
+          <Input
+            name='auditorium'
+            onChange={(e) => handleChange(e)}
+            disabled={!cinema}
+          >
             <option value='' />
             {requests.auditoriums.map(({ id, hall_num, columns }) => {
               return (
@@ -68,39 +103,65 @@ export const Reservation = ({
         </SelectContainer>
 
         <SelectContainer controlId='floatingInput' label='Screenings'>
-          <Input name='screening' onChange={(e) => handleChange(e)} disabled={!auditorium}>
+          <Input
+            name='screening'
+            onChange={(e) => handleChange(e)}
+            disabled={!auditorium}
+          >
             <option value='' />
-            {requests.screenings.map(({ id, movie_starts, movie_ends, movie_date }) => (
-              <option key={id} value={id}>
-                {setScreeningString(movie_starts, movie_ends, movie_date)}
-              </option>
-            ))}
+            {requests.screenings.map(
+              ({ id, movie_starts, movie_ends, movie_date }) => (
+                <option key={id} value={id}>
+                  {setScreeningString(movie_starts, movie_ends, movie_date)}
+                </option>
+              )
+            )}
           </Input>
         </SelectContainer>
       </ReservationInfoBar>
       <Container>
         <TicketOptions>
-          <div>
-            <h3>Type of Ticket</h3>
+          {username || (
+            <TicketBar>
+              <div>
+                <TypeOfTicket>Member</TypeOfTicket>
+                <Price>{PRICING.member.toFixed(2)} €</Price>
+              </div>
+              <TicketBarRight>
+                <TicketButton
+                  left={true}
+                  disabled={disabledDecrement(requests)}
+                  type='member'
+                  subtract={true}
+                >
+                  -
+                </TicketButton>
+                <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
+                <TicketButton
+                  disabled={disabledIncrement(numOfTickets, requests)}
+                  type='member'
+                  add={true}
+                >
+                  +
+                </TicketButton>
+              </TicketBarRight>
+            </TicketBar>
+          )}
+          <TicketBar>
             <div>
-              <TicketButton disabled={disabledDecrement(requests)} type='member' subtract={true}>
-                -
-              </TicketButton>
-              <TypeOfTicket>Member</TypeOfTicket>
-              <TicketButton
-                disabled={disabledIncrement(numOfTickets, requests)}
-                type='member'
-                add={true}
-              >
-                +
-              </TicketButton>
-              <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
-            </div>
-            <div>
-              <TicketButton disabled={disabledDecrement(requests)} type='adult' subtract={true}>
-                -
-              </TicketButton>
               <TypeOfTicket>Adult</TypeOfTicket>
+              <Price>{PRICING.adult.toFixed(2)} €</Price>
+            </div>
+            <TicketBarRight>
+              <TicketButton
+                left={true}
+                disabled={disabledDecrement(requests)}
+                type='adult'
+                subtract={true}
+              >
+                -
+              </TicketButton>
+              <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
               <TicketButton
                 disabled={disabledIncrement(numOfTickets, requests)}
                 type='adult'
@@ -108,13 +169,23 @@ export const Reservation = ({
               >
                 +
               </TicketButton>
-              <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
-            </div>
+            </TicketBarRight>
+          </TicketBar>
+          <TicketBar>
             <div>
-              <TicketButton disabled={disabledDecrement(requests)} type='child' subtract={true}>
+              <TypeOfTicket>Child</TypeOfTicket>
+              <Price>{PRICING.child.toFixed(2)} €</Price>
+            </div>
+            <TicketBarRight>
+              <TicketButton
+                left={true}
+                disabled={disabledDecrement(requests)}
+                type='child'
+                subtract={true}
+              >
                 -
               </TicketButton>
-              <TypeOfTicket>Child</TypeOfTicket>
+              <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
               <TicketButton
                 disabled={disabledIncrement(numOfTickets, requests)}
                 type='child'
@@ -122,11 +193,22 @@ export const Reservation = ({
               >
                 +
               </TicketButton>
-              <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
-            </div>
-          </div>
+            </TicketBarRight>
+          </TicketBar>
 
-          <div>
+          <PleaseBeAMember>
+            <div>
+              <PleaseBeAMemberHeader>
+                Please be a member to buy tickets
+              </PleaseBeAMemberHeader>
+              <PleaseBeAMemberParagraph>
+                TERMS AND CONDITIONS APPLY{" "}
+              </PleaseBeAMemberParagraph>
+            </div>
+            <ButtonForMembers>BE A MEMBER</ButtonForMembers>
+          </PleaseBeAMember>
+
+          <div style={{ width: "100%", textAlign: "center" }}>
             <p>
               You choose <strong>{numOfTickets.sum}</strong> tickets
             </p>
@@ -140,46 +222,48 @@ export const Reservation = ({
             </p>
             <p>Price: {price(numOfTickets).toFixed(2)}€</p>
           </div>
+
+          <SeatsModal disabled={numOfTickets.sum - keys(seat).length !== 0}>
+            <SeatsContainer disable={screening && numOfTickets.sum > 0}>
+              <SeatsGrid>
+                <SeatMatrix
+                  state={reservation}
+                  seats={requests.seats}
+                  handleSeatRemove={handleSeatRemove}
+                  handleSeatAdd={handleSeatAdd}
+                />
+              </SeatsGrid>
+              <ContinueButton
+                disabled={numOfTickets.sum - keys(seat).length !== 0}
+                onClick={handleContinueButton}
+                type='submit'
+              >
+                {spinner ? (
+                  "Continue"
+                ) : (
+                  <Spinner animation='border' role='status'>
+                    <span className='visually-hidden'>Loading...</span>
+                  </Spinner>
+                )}
+              </ContinueButton>
+            </SeatsContainer>
+          </SeatsModal>
         </TicketOptions>
-        <SeatsContainer disable={screening && numOfTickets.sum > 0}>
-          <SeatsGrid>
-            <SeatMatrix
-              state={reservation}
-              seats={requests.seats}
-              handleSeatRemove={handleSeatRemove}
-              handleSeatAdd={handleSeatAdd}
-            />
-          </SeatsGrid>
-          <ContinueButton
-            onClick={(ev) => {
-              ev.preventDefault();
-              setSpinner(!spinner);
-              paymentWithStripe(
-                BASE_URL,
-                { name: "Tickets", price: price(numOfTickets) * 100, quantity: numOfTickets.sum },
-                { BASE_URL, seat, screening }
-              );
-            }}
-            disabled={numOfTickets.sum - keys(seat).length !== 0}
-            type='submit'
-          >
-            {spinner ? (
-              "Continue"
-            ) : (
-              <Spinner animation='border' role='status'>
-                <span className='visually-hidden'>Loading...</span>
-              </Spinner>
-            )}
-          </ContinueButton>
-        </SeatsContainer>
       </Container>
     </ReservationForm>
   );
 };
 
 Reservation.propTypes = {
+  requests: PropTypes.object,
+  handleSeatAdd: PropTypes.func,
+  handleSeatRemove: PropTypes.func,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   inputValues: PropTypes.object,
   price: PropTypes.string,
+  screening: PropTypes.object,
+  setSeat: PropTypes.func,
+  setSpinner: PropTypes.func,
+  setTicket: PropTypes.func,
 };

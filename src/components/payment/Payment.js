@@ -30,12 +30,13 @@ export const Payment = () => {
       })
       .then(({ data }) => dispatch(responseAction(data)))
       .then(() => window.sessionStorage.removeItem("request"))
-      .then(() => navigate("/payments/payment_success"));
+      .then(() => navigate(`/reservations/${username && "guest"}/new`))
+      .catch((err) => console.log(err)); // TODO: handle error with new action
   }, []);
 
   return (
     <Spinner animation='border' role='status'>
-      <span className='visually-hidden'>Loading...</span>
+      <span className='visually-hidden' />
     </Spinner>
   );
 };
