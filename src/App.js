@@ -12,7 +12,7 @@ import SignUpLayout from "./layouts/signUpPage/SignUpLayout";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 
-import { RegistrationForm } from "./components/registrationForm/RegistrationForm";
+// import { RegistrationForm } from "./components/registrationForm/RegistrationForm";
 
 
 function App() {

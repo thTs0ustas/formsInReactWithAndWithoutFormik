@@ -14,7 +14,7 @@ import {
   SignInDiv,
   Footer,
 } from "../../theme";
-import { RegistrationForm } from "../../components/registrationForm/RegistrationForm";
+import { RegistrationForm } from "../../components/registrationForm/registrationForm";
 
 const SignInLayout = () => {
   const navigate = useNavigate();
