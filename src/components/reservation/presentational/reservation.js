@@ -22,6 +22,7 @@ import {
   Price,
   ReservationForm,
   ReservationInfoBar,
+  SeatLegend,
   SeatsContainer,
   SeatsGrid,
   TicketBar,
@@ -37,6 +38,8 @@ import { SeatsModal } from "./modal/Modal";
 import { GuestModal } from "./guestModal/GuestModal";
 
 import { GuestSignup } from "../../guestSignUp";
+import { MdEventSeat } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export const Reservation = ({
   BASE_URL,
@@ -50,7 +53,7 @@ export const Reservation = ({
   handleSeatAdd,
 }) => {
   const username = window.sessionStorage.getItem("username");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleContinueButton = (ev) => {
     ev.preventDefault();
     setSpinner(!spinner);
@@ -212,7 +215,9 @@ export const Reservation = ({
                 TERMS AND CONDITIONS APPLY{" "}
               </PleaseBeAMemberParagraph>
             </div>
-            <ButtonForMembers>BE A MEMBER</ButtonForMembers>
+            <ButtonForMembers onClick={() => navigate("/login")}>
+              BE A MEMBER
+            </ButtonForMembers>
           </PleaseBeAMember>
 
           <TicketInfo>
@@ -239,7 +244,21 @@ export const Reservation = ({
                   handleSeatAdd={handleSeatAdd}
                 />
               </SeatsGrid>
-              {!!!username ? (
+              <SeatLegend>
+                <div>
+                  <MdEventSeat size={25} color='black' />
+                  <span>Seat is already taken.</span>
+                </div>
+                <div>
+                  <MdEventSeat size={25} color='#FF9D69' />
+                  <span>Seat is open.</span>
+                </div>
+                <div>
+                  <MdEventSeat size={25} color='crimson' />
+                  <span>Seat is checked.</span>
+                </div>
+              </SeatLegend>
+              {!username ? (
                 <GuestModal
                   disabled={numOfTickets.sum - keys(seat).length !== 0}
                 >

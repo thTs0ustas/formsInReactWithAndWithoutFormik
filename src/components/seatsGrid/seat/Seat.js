@@ -14,7 +14,9 @@ export const Seat = ({ handleSeatRemove, handleSeatAdd, seatInfo }) => {
   const { seat, sum, reservedSeats } = state;
 
   const exists = !!seat[seatInfo.id];
-  const isAlreadyTaken = reservedSeats?.find((item) => item["seats_id"] === seatInfo.id);
+  const isAlreadyTaken = reservedSeats?.find(
+    (item) => item["seats_id"] === seatInfo.id
+  );
 
   return (
     <IconDiv
@@ -23,10 +25,15 @@ export const Seat = ({ handleSeatRemove, handleSeatAdd, seatInfo }) => {
       onClick={(event) => {
         event.stopPropagation();
         event.preventDefault();
-        exists ? handleSeatRemove(seatInfo.id) : keys(seat).length < sum && handleSeatAdd(seatInfo);
+        exists
+          ? handleSeatRemove(seatInfo.id)
+          : keys(seat).length < sum && handleSeatAdd(seatInfo);
       }}
     >
-      <MdEventSeat size={25} color={exists || isAlreadyTaken ? "crimson" : "black"} />
+      <MdEventSeat
+        size={25}
+        color={exists ? "crimson" : isAlreadyTaken ? "black" : "#FF9D69"}
+      />
     </IconDiv>
   );
 };

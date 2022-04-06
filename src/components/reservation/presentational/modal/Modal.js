@@ -33,12 +33,13 @@ const SeatsModal = ({ children, disabled, sum, seat }) => {
         <ModalBody>{children}</ModalBody>
         <Modal.Footer>
           <p>
-            Remaining seats{" "}
+            can choose{" "}
             <strong>
               {sum - keys(seat).length > -1
                 ? sum - keys(seat).length
                 : "Deselect some seats"}
-            </strong>
+            </strong>{" "}
+            more seat(s)
           </p>
         </Modal.Footer>
       </ModalContainer>

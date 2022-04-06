@@ -300,8 +300,21 @@ const GuestModalContainer = styled(Modal)`
     }
   }
 `;
-
+const SeatLegend = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left: 20px;
+  width: 100%;
+  align-items: flex-start;
+  & div span {
+    margin-left: 10px;
+    text-decoration: underline;
+    color: ${({ theme }) => theme.secondary2};
+  }
+`;
 export {
+  SeatLegend,
   GuestModalContainer,
   GuestContainer,
   TicketInfo,

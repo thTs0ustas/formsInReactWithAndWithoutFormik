@@ -29,9 +29,9 @@ export const SignInForm = ({ isInModal }) => {
       }}
       validationSchema={Yup.object({
         username: Yup.string()
-          .max(20, "Must be 20 characters or less")
-          .required("Name is required"),
-        password: Yup.string().required("Password is required"),
+          .max(20, "Must be 20 characters or less.")
+          .required("Name is required."),
+        password: Yup.string().required("Password is required."),
       })}
     >
       {(formik) => (

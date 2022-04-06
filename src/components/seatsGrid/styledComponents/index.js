@@ -21,9 +21,10 @@ const Container = styled.div`
 
 const IconDiv = styled.button`
   border: 0;
-  border-radius: 10px;
+  //border-radius: 10px;
   padding: 2px 5px;
-  background-color: ${({ disabled }) => (!disabled ? "#dc9678" : "#464444")};
+  margin: 1px 1px;
+  background-color: ${({ theme }) => theme.bgMain};
   transition: 0.05s linear;
   &:active {
     transform: ${({ disabled }) => !disabled && "scale(1.2)"};
