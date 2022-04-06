@@ -7,12 +7,14 @@ import { Payment } from "./components/payment/Payment";
 import { HomePageLayout, ReservationLayout, SignInLayout } from "./layouts";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
+
 // import { Navbar } from "react-bootstrap";
 
-//Imports components for Homepage to see the rendered
- 
+//Imports components for Homepage to see them rendered
+
 import NavBar from "./components/NavBar";
 import CarouselHero from "./components/HeroSlider";
+import { PromoCards } from "./components/Promos";
 //delete
 import { SignUpBar, SignUpButton , SignInButton } from "./theme";
 //delete
@@ -50,8 +52,9 @@ function App() {
                 </>
               } 
               />
-
         </Routes>
+       
+
         
       </div>
     </ThemeProvider>
