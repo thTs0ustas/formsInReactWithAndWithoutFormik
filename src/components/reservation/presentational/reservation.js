@@ -35,7 +35,8 @@ import { paymentWithStripe } from "../../../stripe/stripe";
 import { Spinner } from "react-bootstrap";
 import { SeatsModal } from "./modal/Modal";
 import { GuestModal } from "./guestModal/GuestModal";
-import { LoginForm } from "../../signUpForm";
+
+import { GuestSignup } from "../../guestSignUp";
 
 export const Reservation = ({
   BASE_URL,
@@ -53,7 +54,7 @@ export const Reservation = ({
   const handleContinueButton = (ev) => {
     ev.preventDefault();
     setSpinner(!spinner);
-    if (!username)
+    if (username)
       paymentWithStripe(
         BASE_URL,
         {
@@ -225,7 +226,7 @@ export const Reservation = ({
           </TicketInfo>
 
           <SeatsModal
-            disabled={numOfTickets.sum - keys(seat).length !== 0}
+            disabled={numOfTickets.sum > 0}
             sum={numOfTickets?.sum}
             seat={seat}
           >
@@ -243,7 +244,7 @@ export const Reservation = ({
                   disabled={numOfTickets.sum - keys(seat).length !== 0}
                 >
                   <GuestContainer>
-                    <LoginForm />
+                    <GuestSignup />
                   </GuestContainer>
                 </GuestModal>
               ) : (
