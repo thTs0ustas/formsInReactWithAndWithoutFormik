@@ -125,13 +125,13 @@ const PromoCard = styled.div`
   margin: 10px auto 10px auto;
 
   height: 35vw;
-  min-height: 120px;
+  min-height: 300px;
   max-height: 500px;
   border: 1px solid #000;
   width: 42vw;
   min-width: 250px;
   max-width: 650px;
-
+  
   @media (max-width: 576px) {
     width: 90vw;
     height: 85vw;

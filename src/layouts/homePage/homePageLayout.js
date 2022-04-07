@@ -8,8 +8,8 @@ import {
   ComingUp,
   Features,
   HomeDiv,
-  PromoCard,
   Promos,
+  PromoCard,
   Typography,
   VideoWallDiv,
 } from "./styledComponents/styles";
@@ -20,6 +20,7 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
+import { PromoStudents, PromoMember } from "../../components/Promos/index";
 
 const HomePageLayout = () => {
   const username = sessionStorage.getItem("username");
@@ -57,11 +58,11 @@ const HomePageLayout = () => {
           </ComingUp>
           <Promos>
             <Row>
-              <Col sm={6}>
-                <PromoCard />
+              <Col md={6} >
+                  <PromoMember />
               </Col>
-              <Col sm={6}>
-                <PromoCard />
+              <Col md={6}>
+                   <PromoStudents />
               </Col>
             </Row>
           </Promos>
