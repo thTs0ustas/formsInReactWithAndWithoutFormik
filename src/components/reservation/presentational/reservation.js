@@ -30,7 +30,7 @@ import {
   TicketInfo,
   TicketOptions,
   TypeOfTicket,
-} from "./styledComponents/styles";
+} from "./styledComponents";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
 import { paymentWithStripe } from "../../../stripe/stripe";
 import { Spinner } from "react-bootstrap";

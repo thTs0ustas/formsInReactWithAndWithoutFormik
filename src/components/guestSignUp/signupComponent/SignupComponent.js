@@ -1,13 +1,13 @@
 import React from "react";
-import { Form, Formik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { InputField } from "../../../theme";
-import { ContinueButton } from "../../signUpForm/styledComponents/styles";
+import { ContinueButton } from "../../signInForm";
 import { useGuestSignup } from "../hooks/useGuestSignup";
 
 const SignupComponent = () => {
-  const { state, setState } = useGuestSignup();
+  const { setState } = useGuestSignup();
   return (
     <Formik
       initialValues={{ first_name: "", last_name: "", email: "" }}

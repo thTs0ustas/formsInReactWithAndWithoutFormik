@@ -8,20 +8,16 @@ export const useLoginForm = (isInModal = false) => {
   const [, dispatch] = useProvider();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (window.sessionStorage.getItem("token")) {
-      const username = window.sessionStorage.getItem("username");
+  const token = window.sessionStorage.getItem("token");
+  const username = window.sessionStorage.getItem("username");
 
-      dispatch(
-        userLoginAction({
-          username,
-          token: window.sessionStorage.getItem("token"),
-        })
-      );
+  useEffect(() => {
+    if (token) {
+      dispatch(userLoginAction({ username, token }));
       username && navigate("/");
     }
 
-    if (state && state.accessToken && state.username) {
+    if (state?.accessToken && state?.username) {
       window.sessionStorage.setItem("token", state.accessToken);
       window.sessionStorage.setItem("username", state.username);
       dispatch(

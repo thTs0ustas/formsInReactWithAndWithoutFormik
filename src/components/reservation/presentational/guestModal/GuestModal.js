@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader } from "react-bootstrap";
 import { ContinueButton } from "../../../../theme";
-import { GuestModalContainer } from "../styledComponents/styles";
+import { GuestModalContainer } from "../styledComponents";
 
 const GuestModal = ({ children, disabled }) => {
   const [showGuest, setShowGuest] = useState(false);

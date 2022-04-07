@@ -4,7 +4,7 @@ import {
   removeTicketAction,
   useProvider,
 } from "../../../../model";
-import { ButtonForTickets } from "../styledComponents/styles";
+import { ButtonForTickets } from "../styledComponents";
 
 export const TicketButton = ({
   children,

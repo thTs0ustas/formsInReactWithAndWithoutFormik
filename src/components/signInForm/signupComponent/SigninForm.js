@@ -6,12 +6,12 @@ import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { ContinueButton } from "../styledComponents/styles";
+import { ContinueButton } from "../styledComponents";
 import { InputField } from "../../../theme";
-import { useLoginForm } from "../hooks/useLoginForm";
+import { useLoginForm } from "../hooks";
 
 export const SignInForm = ({ isInModal }) => {
-  const { state, setState } = useLoginForm(isInModal);
+  const { setState } = useLoginForm(isInModal);
   return (
     <Formik
       initialValues={{ username: "", password: "" }}
@@ -22,8 +22,8 @@ export const SignInForm = ({ isInModal }) => {
             password: values.password,
           })
           .then((res) => {
-            resetForm();
             setState(res.data);
+            resetForm();
           })
           .then(() => setSubmitting(false));
       }}

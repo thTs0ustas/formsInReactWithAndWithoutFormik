@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react";
 import axios from "axios";
+import { differenceWith, isEqual, toPairs } from "lodash";
+
 import {
   addSeatAction,
   inputChangeAction,
   removeSeatAction,
   requestAction,
 } from "../../../../model";
-import { differenceWith, isEqual, toPairs } from "lodash";
+
 import { fetchRequest, nextRequest } from "../../helpers";
 
 export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
@@ -36,6 +38,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
       types: nextRequest(inputValues.auditorium, inputValues.screening)[diff],
       action: requestAction,
     })({ dispatch, baseUrl: BASE_URL });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValues]);
 
   const handleSeatAdd = (seat) => {

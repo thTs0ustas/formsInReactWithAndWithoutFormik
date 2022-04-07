@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FormOuterDiv } from "../signUpForm/styledComponents/styles";
+import { FormOuterDiv } from "../signInForm";
 import { SignupComponent } from "./signupComponent/SignupComponent";
-import { SignInForm } from "../signUpForm/signupComponent/SigninForm";
+import { SignInForm } from "../signInForm/signupComponent";
 
 const GuestSignup = () => {
   const [typeOfLogin, setTypeOfLogin] = useState(false);
