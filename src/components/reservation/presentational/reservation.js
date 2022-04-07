@@ -14,6 +14,7 @@ import {
 import {
   ButtonForMembers,
   Container,
+  GuestContainer,
   NumberOfTickets,
   PleaseBeAMember,
   PleaseBeAMemberHeader,
@@ -21,6 +22,7 @@ import {
   Price,
   ReservationForm,
   ReservationInfoBar,
+  SeatLegend,
   SeatsContainer,
   SeatsGrid,
   TicketBar,
@@ -28,11 +30,16 @@ import {
   TicketInfo,
   TicketOptions,
   TypeOfTicket,
-} from "./styledComponents/styles";
+} from "./styledComponents";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
 import { paymentWithStripe } from "../../../stripe/stripe";
 import { Spinner } from "react-bootstrap";
 import { SeatsModal } from "./modal/Modal";
+import { GuestModal } from "./guestModal/GuestModal";
+
+import { GuestSignup } from "../../guestSignUp";
+import { MdEventSeat } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export const Reservation = ({
   BASE_URL,
@@ -46,19 +53,21 @@ export const Reservation = ({
   handleSeatAdd,
 }) => {
   const username = window.sessionStorage.getItem("username");
+  const navigate = useNavigate();
   const handleContinueButton = (ev) => {
     ev.preventDefault();
     setSpinner(!spinner);
-    paymentWithStripe(
-      BASE_URL,
-      {
-        name: "Tickets",
-        price: price(numOfTickets) * 100,
-        quantity: numOfTickets.sum,
-        username,
-      },
-      { BASE_URL, seat, screening }
-    );
+    if (username)
+      paymentWithStripe(
+        BASE_URL,
+        {
+          name: "Tickets",
+          price: price(numOfTickets) * 100,
+          quantity: numOfTickets.sum,
+          username,
+        },
+        { BASE_URL, seat, screening }
+      );
   };
 
   return (
@@ -206,7 +215,9 @@ export const Reservation = ({
                 TERMS AND CONDITIONS APPLY{" "}
               </PleaseBeAMemberParagraph>
             </div>
-            <ButtonForMembers>BE A MEMBER</ButtonForMembers>
+            <ButtonForMembers onClick={() => navigate("/login")}>
+              BE A MEMBER
+            </ButtonForMembers>
           </PleaseBeAMember>
 
           <TicketInfo>
@@ -220,7 +231,7 @@ export const Reservation = ({
           </TicketInfo>
 
           <SeatsModal
-            disabled={numOfTickets.sum - keys(seat).length !== 0}
+            disabled={numOfTickets.sum > 0}
             sum={numOfTickets?.sum}
             seat={seat}
           >
@@ -233,19 +244,43 @@ export const Reservation = ({
                   handleSeatAdd={handleSeatAdd}
                 />
               </SeatsGrid>
-              <ContinueButton
-                disabled={numOfTickets.sum - keys(seat).length !== 0}
-                onClick={handleContinueButton}
-                type='submit'
-              >
-                {spinner ? (
-                  "Continue"
-                ) : (
-                  <Spinner animation='border' role='status'>
-                    <span className='visually-hidden'>Loading...</span>
-                  </Spinner>
-                )}
-              </ContinueButton>
+              <SeatLegend>
+                <div>
+                  <MdEventSeat size={25} color='black' />
+                  <span>Seat is already taken.</span>
+                </div>
+                <div>
+                  <MdEventSeat size={25} color='#FF9D69' />
+                  <span>Seat is open.</span>
+                </div>
+                <div>
+                  <MdEventSeat size={25} color='crimson' />
+                  <span>Seat is checked.</span>
+                </div>
+              </SeatLegend>
+              {!username ? (
+                <GuestModal
+                  disabled={numOfTickets.sum - keys(seat).length !== 0}
+                >
+                  <GuestContainer>
+                    <GuestSignup />
+                  </GuestContainer>
+                </GuestModal>
+              ) : (
+                <ContinueButton
+                  disabled={numOfTickets.sum - keys(seat).length !== 0}
+                  onClick={handleContinueButton}
+                  type='submit'
+                >
+                  {spinner ? (
+                    "Continue"
+                  ) : (
+                    <Spinner animation='border' role='status'>
+                      <span className='visually-hidden'>Loading...</span>
+                    </Spinner>
+                  )}
+                </ContinueButton>
+              )}
             </SeatsContainer>
           </SeatsModal>
         </TicketOptions>

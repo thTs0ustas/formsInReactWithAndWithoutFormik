@@ -1,4 +1,5 @@
 export { Ticket } from "./ticket";
 export { SeatMatrix } from "./seatsGrid";
 export { Reservation } from "./reservation";
-export { LoginForm } from "./signUpForm";
+export { LoginForm } from "./signInForm";
+export { GuestSignup } from "./guestSignUp";

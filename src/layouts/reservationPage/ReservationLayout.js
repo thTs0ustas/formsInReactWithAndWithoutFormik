@@ -7,12 +7,13 @@ import NavBar from "../../components/NavBar";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 
 const ReservationLayout = () => {
+  const username = sessionStorage.getItem("username");
   return (
     <>
       <Header>
         <SignUpBar>
           <div>
-            <SignupBarPart />
+            <SignupBarPart username={username} />
           </div>
         </SignUpBar>
         <NavDiv>

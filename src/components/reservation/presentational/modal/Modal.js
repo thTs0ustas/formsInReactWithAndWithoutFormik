@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader } from "react-bootstrap";
 import { ContinueButton } from "../../../../theme";
-import { ModalContainer } from "../styledComponents/styles";
+import { ModalContainer } from "../styledComponents";
 import { keys } from "lodash";
 
 const SeatsModal = ({ children, disabled, sum, seat }) => {
@@ -31,12 +31,13 @@ const SeatsModal = ({ children, disabled, sum, seat }) => {
         <ModalBody>{children}</ModalBody>
         <Modal.Footer>
           <p>
-            Remaining seats{" "}
+            can choose{" "}
             <strong>
               {sum - keys(seat).length > -1
                 ? sum - keys(seat).length
                 : "Deselect some seats"}
-            </strong>
+            </strong>{" "}
+            more seat(s)
           </p>
         </Modal.Footer>
       </ModalContainer>
