@@ -20,7 +20,7 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
-import { PromoMember, PromoStudents } from "../../components";
+import { PromoMember, PromoStudents, Switch } from "../../components";
 
 const HomePageLayout = () => {
   const username = sessionStorage.getItem("username");
@@ -28,6 +28,7 @@ const HomePageLayout = () => {
     <HomeDiv>
       <Header mainPage={false}>
         <SignUpBar>
+          <Switch />
           <div>
             <SignupBarPart username={username} />
           </div>

@@ -16,7 +16,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  top: 56px;
+  top: 32px;
   z-index: 9999;
   padding: 2%;
 

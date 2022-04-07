@@ -49,8 +49,12 @@ const newTicketAction = (payload) => ({
 const resetReservation = () => ({
   type: actionTypes.resetReservation,
 });
+const changeTheme = () => ({
+  type: actionTypes.changeTheme,
+});
 
 export {
+  changeTheme,
   resetReservation,
   addSeatAction,
   newTicketAction,

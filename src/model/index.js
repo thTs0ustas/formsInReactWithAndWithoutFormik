@@ -12,5 +12,6 @@ export {
   addTicketAction,
   removeTicketAction,
   resetReservation,
+  changeTheme,
 } from "./actions";
 export { Provider, useProvider } from "./store/state";

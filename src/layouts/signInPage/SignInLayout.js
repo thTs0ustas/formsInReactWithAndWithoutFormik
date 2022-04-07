@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginForm } from "../../components";
+import { LoginForm, Switch } from "../../components";
 import { Login, SignInMain, Wrapper } from "./styledComponents/styles";
 import { Header, Nav, NavDiv, SignInDiv, SignUpBar } from "../../theme";
 import Footer from "../../components/footer/Footer";
@@ -12,6 +12,7 @@ const SignInLayout = () => {
     <SignInDiv>
       <Header>
         <SignUpBar>
+          <Switch />
           <div>
             <SignupBarPart username={username} />
           </div>

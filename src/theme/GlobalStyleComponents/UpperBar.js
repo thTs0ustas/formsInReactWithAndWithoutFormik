@@ -6,12 +6,23 @@ const SignInDiv = styled.div`
 
 const SignUpBar = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   background-color: black;
-  & div {
+  align-items: center;
+  padding-left: 15px;
+  & div:first-child {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    //max-width: 1440px;
+    margin-left: 1vw;
+  }
+  & div:last-child {
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     //max-width: 1440px;
     padding: 0 1vw;
   }
