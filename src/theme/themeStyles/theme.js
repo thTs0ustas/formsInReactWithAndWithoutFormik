@@ -9,11 +9,11 @@ export const theme = {
     border: "#000",
   },
   dark: {
-    bgMain: `rgb(45, 3, 23)`,
-    logo: "#ff8e56",
-    primary: "#139df1",
-    secondary: "#1980fa",
-    white: "#858282",
-    light: "#5b5b5b",
+    bgMain: "#162e52",
+    logo: "#a24223",
+    primary: "#504473",
+    secondary: "#72727c",
+    white: "#d0cfcf",
+    light: "#9bb28a",
   },
 };

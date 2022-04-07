@@ -21,7 +21,7 @@ export const Switch = () => {
           visibility: theme ? "hidden" : "visible",
         }}
       />
-      <CheckBox id='checkbox' type='checkbox' />
+      <CheckBox id='checkbox' type='checkbox' checked={!theme} />
       <CheckBoxLabel htmlFor='checkbox' />
       <BsFillSunFill
         color='crimson'

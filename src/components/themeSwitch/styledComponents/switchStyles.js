@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const CheckBoxWrapper = styled.div`
   position: relative;
-  z-index: 100;
-  background: transparent;
 `;
 const CheckBoxLabel = styled.label`
   position: absolute;
@@ -32,6 +30,9 @@ const CheckBox = styled.input`
   border-radius: 15px;
   width: 50px;
   height: 24px;
+  z-index: 100;
+  cursor: pointer;
+  background: transparent;
   &:checked + ${CheckBoxLabel} {
     background: ${({ theme }) => theme.primary};
     &::after {
