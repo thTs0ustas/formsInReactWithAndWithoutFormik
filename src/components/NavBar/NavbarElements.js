@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import "./index";
 
 //Animations for When the User Clicks the Burger
 export const letterAnimation = keyframes`

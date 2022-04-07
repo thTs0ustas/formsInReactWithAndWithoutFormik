@@ -1,15 +1,15 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-// import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import {
   Archive,
   Card,
   ComingUp,
   Features,
   HomeDiv,
-  Promos,
   PromoCard,
+  Promos,
   Typography,
   VideoWallDiv,
 } from "./styledComponents/styles";
@@ -20,7 +20,7 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
-import { PromoStudents, PromoMember } from "../../components/Promos/index";
+import { PromoMember, PromoStudents } from "../../components";
 
 const HomePageLayout = () => {
   const username = sessionStorage.getItem("username");
@@ -58,11 +58,11 @@ const HomePageLayout = () => {
           </ComingUp>
           <Promos>
             <Row>
-              <Col md={6} >
-                  <PromoMember />
+              <Col md={6}>
+                <PromoMember />
               </Col>
               <Col md={6}>
-                   <PromoStudents />
+                <PromoStudents />
               </Col>
             </Row>
           </Promos>

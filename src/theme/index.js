@@ -1,6 +1,12 @@
 export { ContinueButton } from "./GlobalStyles/ContinueButton";
 export { Logo } from "./GlobalStyles/Logo";
-export { Input, InputField, SelectContainer } from "./GlobalStyles/Input";
+export {
+  Input,
+  InputField,
+  SelectContainer,
+  InputFieldContainer,
+  InputError,
+} from "./GlobalStyles/Input";
 export { Footer } from "./GlobalStyles/Footer";
 export { Header } from "./GlobalStyles/Header";
 export { Nav, NavItem, NavDiv } from "./GlobalStyles/Navigation";

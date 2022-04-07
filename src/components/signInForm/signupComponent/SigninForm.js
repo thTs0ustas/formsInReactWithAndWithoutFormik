@@ -7,7 +7,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { ContinueButton } from "../styledComponents";
-import { InputField } from "../../../theme";
+import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { useLoginForm } from "../hooks";
 
 export const SignInForm = ({ isInModal }) => {
@@ -22,8 +22,8 @@ export const SignInForm = ({ isInModal }) => {
             password: values.password,
           })
           .then((res) => {
-            setState(res.data);
             resetForm();
+            setState(res.data);
           })
           .then(() => setSubmitting(false));
       }}
@@ -36,46 +36,39 @@ export const SignInForm = ({ isInModal }) => {
     >
       {(formik) => (
         <Form className='w-100'>
-          <div>
+          <InputFieldContainer>
             <InputField
               id='username'
               name='username'
               placeholder='Username'
-              className={`  d-inline-block
-                  ${
-                    formik.touched.username && formik.errors.username
-                      ? "form-control is-invalid"
-                      : "form-control"
-                  }`}
+              className={
+                formik.touched.username &&
+                formik.errors.username &&
+                "is-invalid"
+              }
               type='text'
             />
             {formik.touched.username && formik.errors.username ? (
-              <div className='invalid-feedback text-black fw-bold '>
-                {formik.errors.username}
-              </div>
+              <InputError>{formik.errors.username}</InputError>
             ) : null}
-          </div>
+          </InputFieldContainer>
 
-          <div>
+          <InputFieldContainer>
             <InputField
               id='password'
               name='password'
               placeholder='Password'
-              className={`  d-inline-block 
-                  ${
-                    formik.touched.username && formik.errors.username
-                      ? "form-control is-invalid"
-                      : "form-control"
-                  }
-                  `}
+              className={
+                formik.touched.password &&
+                formik.errors.password &&
+                "is-invalid"
+              }
               type='password'
             />
             {formik.touched.password && formik.errors.password ? (
-              <div className='invalid-feedback text-black fw-bold'>
-                {formik.errors.password}
-              </div>
+              <InputError>{formik.errors.password}</InputError>
             ) : null}
-          </div>
+          </InputFieldContainer>
 
           <ContinueButton type='submit' disabled={formik.isSubmitting}>
             {formik.isSubmitting ? "Please wait..." : "Continue"}

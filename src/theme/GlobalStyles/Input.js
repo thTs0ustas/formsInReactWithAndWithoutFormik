@@ -2,6 +2,17 @@ import styled from "styled-components";
 import { Field } from "formik";
 import { FloatingLabel, Form } from "react-bootstrap";
 
+export const InputFieldContainer = styled.div`
+  position: relative;
+  margin-top: 5px;
+`;
+
+export const InputError = styled.div`
+  position: absolute;
+  top: -12px;
+  color: ${({ theme }) => theme.logo};
+  font-weight: bold;
+`;
 export const InputField = styled(Field)`
   max-width: 418px;
   background-color: #340505;
@@ -10,7 +21,15 @@ export const InputField = styled(Field)`
   width: 100%;
   height: 45px;
   border-radius: 1px;
-
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-clip: padding-box;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  appearance: none;
+  margin-top: 10px;
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,

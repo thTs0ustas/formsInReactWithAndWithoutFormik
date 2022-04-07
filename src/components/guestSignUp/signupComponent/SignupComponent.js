@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
-import { InputField } from "../../../theme";
+import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { ContinueButton } from "../../signInForm";
 import { useGuestSignup } from "../hooks/useGuestSignup";
 
@@ -36,64 +36,57 @@ const SignupComponent = () => {
     >
       {(formik) => (
         <Form className='w-100'>
-          <div>
+          <InputFieldContainer>
             <InputField
               id='first_name'
               name='first_name'
               placeholder='First name'
-              className={`  d-inline-block
-                  ${
-                    formik.touched.first_name && formik.errors.first_name
-                      ? "form-control is-invalid"
-                      : "form-control"
-                  }`}
               type='text'
+              className={
+                formik.touched.first_name &&
+                formik.errors.first_name &&
+                "is-invalid"
+              }
             />
             {formik.touched.first_name && formik.errors.first_name ? (
-              <div className='invalid-feedback text-black fw-bold '>
-                {formik.errors.first_name}
-              </div>
+              <InputError>{formik.errors.first_name}</InputError>
             ) : null}
-          </div>
+          </InputFieldContainer>
 
-          <div>
+          <InputFieldContainer>
             <InputField
               id='last_name'
               name='last_name'
               placeholder='Last name'
-              className={`  d-inline-block
-                  ${
-                    formik.touched.last_name && formik.errors.last_name
-                      ? "form-control is-invalid"
-                      : "form-control"
-                  }`}
               type='text'
+              className={
+                formik.touched.first_name &&
+                formik.errors.first_name &&
+                "is-invalid"
+              }
             />
             {formik.touched.last_name && formik.errors.last_name ? (
-              <div className='invalid-feedback text-black fw-bold '>
-                {formik.errors.last_name}
-              </div>
+              <InputError>{formik.errors.last_name}</InputError>
             ) : null}
-          </div>
-          <div>
+          </InputFieldContainer>
+
+          <InputFieldContainer>
             <InputField
               id='email'
               name='email'
               placeholder='Email'
-              className={`  d-inline-block
-                  ${
-                    formik.touched.email && formik.errors.email
-                      ? "form-control is-invalid"
-                      : "form-control"
-                  }`}
               type='text'
+              className={
+                formik.touched.first_name &&
+                formik.errors.first_name &&
+                "is-invalid"
+              }
             />
             {formik.touched.email && formik.errors.email ? (
-              <div className='invalid-feedback text-black fw-bold '>
-                {formik.errors.email}
-              </div>
+              <InputError>{formik.errors.email}</InputError>
             ) : null}
-          </div>
+          </InputFieldContainer>
+
           <ContinueButton type='submit' disabled={formik.isSubmitting}>
             {formik.isSubmitting ? "Please wait..." : "Continue"}
           </ContinueButton>

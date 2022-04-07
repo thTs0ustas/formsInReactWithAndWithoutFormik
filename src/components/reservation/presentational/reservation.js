@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { keys } from "lodash";
+import { MdEventSeat } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 import { SeatMatrix } from "../../seatsGrid";
 import { TicketButton } from "./ticketButton/ticketButton";
@@ -38,8 +40,6 @@ import { SeatsModal } from "./modal/Modal";
 import { GuestModal } from "./guestModal/GuestModal";
 
 import { GuestSignup } from "../../guestSignUp";
-import { MdEventSeat } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 
 export const Reservation = ({
   BASE_URL,
