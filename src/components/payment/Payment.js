@@ -8,10 +8,12 @@ import { responseAction, useProvider } from "../../model";
 import { Spinner } from "react-bootstrap";
 
 export const Payment = () => {
-  const [_, dispatch] = useProvider();
+  const [, dispatch] = useProvider();
   const navigate = useNavigate();
 
-  const { BASE_URL, seat, screening } = JSON.parse(window.sessionStorage.getItem("request"));
+  const { BASE_URL, seat, screening } = JSON.parse(
+    window.sessionStorage.getItem("request")
+  );
   const username = window.sessionStorage.getItem("username");
 
   React.useEffect(() => {
@@ -30,8 +32,8 @@ export const Payment = () => {
       })
       .then(({ data }) => dispatch(responseAction(data)))
       .then(() => window.sessionStorage.removeItem("request"))
-      .then(() => navigate(`/reservations/${username && "guest"}/new`))
-      .catch((err) => console.log(err)); // TODO: handle error with new action
+      .then(() => navigate(`/${username}/tickets/new`))
+      .catch((err) => alert(err)); // TODO: handle error with new action
   }, []);
 
   return (

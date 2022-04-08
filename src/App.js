@@ -19,7 +19,7 @@ function App() {
           <Route path='/' element={<HomePageLayout />} />
           <Route path='/login' element={<SignInLayout />} />
           <Route path='/payments' element={<Payment />} />
-          <Route path='/payments/payment_success' element={<Ticket />} />
+          <Route path='/:username/tickets/new' element={<Ticket />} />
           <Route path='/payments/payment_cancel' element={<div>Cancel</div>} />
           <Route path='/reservation' element={<ReservationLayout />} />
         </Routes>

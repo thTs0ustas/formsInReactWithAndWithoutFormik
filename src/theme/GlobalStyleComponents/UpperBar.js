@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const SignInDiv = styled.div`
-  background-color: #94002e;
+  background-color: ${({ theme }) => theme.bgMain};
 `;
 
 const SignUpBar = styled.div`
@@ -15,7 +15,7 @@ const SignUpBar = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    //max-width: 1440px;
+
     margin-left: 1vw;
   }
   & div:last-child {

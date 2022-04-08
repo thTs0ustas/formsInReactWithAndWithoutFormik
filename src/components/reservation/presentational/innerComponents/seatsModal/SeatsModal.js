@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader } from "react-bootstrap";
-import { ContinueButton } from "../../../../theme";
-import { ModalContainer } from "../styledComponents";
+import { ContinueButton } from "../../../../../theme";
+import { ModalContainer } from "../../styledComponents";
 import { keys } from "lodash";
 
 const SeatsModal = ({ children, disabled, sum, seat }) => {

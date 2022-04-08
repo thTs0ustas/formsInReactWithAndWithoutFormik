@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import axios from "axios";
-import { differenceWith, isEqual, toPairs } from "lodash";
+import { differenceWith, flatMap, isEqual, toPairs } from "lodash";
 
 import {
   addSeatAction,
@@ -28,16 +28,20 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
   }, []);
 
   useEffect(() => {
-    const diff = differenceWith(
-      toPairs(inputValues),
-      toPairs(historyState.current),
-      isEqual
-    )[0]?.[0];
+    const diff = flatMap(
+      differenceWith(
+        toPairs(inputValues),
+        toPairs(historyState.current),
+        isEqual
+      )
+    )[0];
 
     fetchRequest({
       types: nextRequest(inputValues.auditorium, inputValues.screening)[diff],
       action: requestAction,
-    })({ dispatch, baseUrl: BASE_URL });
+      baseUrl: BASE_URL,
+      dispatch,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValues]);
 
