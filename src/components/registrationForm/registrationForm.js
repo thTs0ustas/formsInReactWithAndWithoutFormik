@@ -204,7 +204,7 @@ export const RegistrationForm = () => {
                       type="text"
                       id="postal"
                       name="postal"
-                      placeholder="Enter your Postal"
+                      placeholder="Enter your postal code"
                     ></InputBox>
                     {formik.touched.postal && formik.errors.postal ? (
                       <div className="invalid-feedback text-black fw-bold">
