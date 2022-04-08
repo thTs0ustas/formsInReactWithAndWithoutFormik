@@ -8,7 +8,7 @@ export const BurgerButton = styled.button`
 		align-items: center;
 		justify-content: center;
 		border-radius: 2px;
-		color: white;
+		color: ${(props) => props.theme.white};
 		border: 1px solid white;
 		width: 30px;
 		height: 30px;

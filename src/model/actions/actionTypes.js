@@ -12,5 +12,6 @@ const actionTypes = {
   removeTicket: "REMOVE_TICKET",
   search: "SEARCH",
   resetReservation: "RESET_RESERVATION",
+  changeTheme: "CHANGE_THEME",
 };
 export { actionTypes };

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader } from "react-bootstrap";
 import { ContinueButton } from "../../../../theme";
-import { ModalContainer } from "../styledComponents/styles";
+import { ModalContainer } from "../styledComponents";
+import { keys } from "lodash";
 
-const SeatsModal = ({ children, disabled }) => {
+const SeatsModal = ({ children, disabled, sum, seat }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -13,7 +14,6 @@ const SeatsModal = ({ children, disabled }) => {
   };
 
   return (
-    //must be !disabled to show modal
     <>
       <ContinueButton disabled={!disabled} onClick={handleShow}>
         Next
@@ -29,6 +29,17 @@ const SeatsModal = ({ children, disabled }) => {
           <Modal.Title>SELECT YOU SEATS</Modal.Title>
         </ModalHeader>
         <ModalBody>{children}</ModalBody>
+        <Modal.Footer>
+          <p>
+            can choose{" "}
+            <strong>
+              {sum - keys(seat).length > -1
+                ? sum - keys(seat).length
+                : "Deselect some seats"}
+            </strong>{" "}
+            more seat(s)
+          </p>
+        </Modal.Footer>
       </ModalContainer>
     </>
   );

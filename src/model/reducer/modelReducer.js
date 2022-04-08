@@ -65,7 +65,10 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.userInfo.tickets.push(payload);
       });
-
+    case actionTypes.changeTheme:
+      return produce(state, (draft) => {
+        draft.theme = !draft.theme;
+      });
     default:
       return state;
   }
