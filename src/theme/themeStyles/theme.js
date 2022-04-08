@@ -1,5 +1,6 @@
 export const theme = {
   light: {
+    dark: "#340505",
     bgMain: "#6e0b24",
     logo: "#FF9D69",
     primary: "#b09661",

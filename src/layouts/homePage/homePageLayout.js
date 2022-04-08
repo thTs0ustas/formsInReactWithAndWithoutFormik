@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -21,9 +21,15 @@ import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
 import { PromoMember, PromoStudents, Switch } from "../../components";
+import { useProvider, userLoginAction } from "../../model";
 
 const HomePageLayout = () => {
   const username = sessionStorage.getItem("username");
+  const token = sessionStorage.getItem("token");
+  const [, dispatch] = useProvider();
+  useEffect(() => {
+    if (username) dispatch(userLoginAction({ username, token }));
+  }, []);
   return (
     <HomeDiv>
       <Header mainPage={false}>

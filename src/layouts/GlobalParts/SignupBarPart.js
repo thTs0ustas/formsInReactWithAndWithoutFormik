@@ -4,9 +4,31 @@ import { useNavigate } from "react-router-dom";
 
 import { NavDropdownDiv } from "../homePage/styledComponents/styles";
 import { SignInButton, SignUpButton } from "../../theme";
+import { useProvider, userLogoutAction } from "../../model";
+import axios from "axios";
 
 export const SignupBarPart = ({ username = null }) => {
+  const [{ userInfo, BASE_URL }, dispatch] = useProvider();
   const navigate = useNavigate();
+
+  const loginOut = () => {
+    axios
+      .post(
+        `${BASE_URL}/users/logout`,
+        { username },
+        {
+          headers: {
+            authorization: "Bearer " + userInfo.token,
+          },
+        }
+      )
+      .then(() => {
+        sessionStorage.removeItem("username");
+        sessionStorage.removeItem("token");
+        navigate("/");
+      });
+  };
+
   return !username ? (
     <>
       <SignUpButton>Sign Up</SignUpButton>
@@ -21,10 +43,8 @@ export const SignupBarPart = ({ username = null }) => {
       <NavDropdown.Item
         eventKey='4.2'
         onClick={() => {
-          sessionStorage.removeItem("username");
-          sessionStorage.removeItem("token");
-          navigate("/");
-          window.location.reload();
+          dispatch(userLogoutAction());
+          loginOut();
         }}
       >
         Sign Out

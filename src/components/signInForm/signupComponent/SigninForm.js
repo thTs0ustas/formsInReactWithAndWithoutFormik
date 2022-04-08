@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Formik } from "formik";
 
 import * as Yup from "yup";
@@ -9,12 +9,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ContinueButton } from "../styledComponents";
 import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { useLoginForm } from "../hooks";
+import { errorHandling } from "../errors/errorHandling";
 
 export const SignInForm = ({ isInModal }) => {
+  let [error, setError] = useState("");
   const { setState } = useLoginForm(isInModal);
   return (
     <Formik
-      initialValues={{ username: "", password: "" }}
+      initialValues={{ username: "", password: "", error: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         axios
           .post("http://localhost:4000/users/login", {
@@ -22,10 +24,16 @@ export const SignInForm = ({ isInModal }) => {
             password: values.password,
           })
           .then((res) => {
-            resetForm();
-            setState(res.data);
+            if (errorHandling(res.data)) {
+              setError(res.data.message);
+              resetForm();
+            } else {
+              resetForm();
+              setState(res.data);
+            }
           })
-          .then(() => setSubmitting(false));
+          .then(() => setSubmitting(false))
+          .catch((error) => alert(error.message));
       }}
       validationSchema={Yup.object({
         username: Yup.string()
@@ -50,6 +58,8 @@ export const SignInForm = ({ isInModal }) => {
             />
             {formik.touched.username && formik.errors.username ? (
               <InputError>{formik.errors.username}</InputError>
+            ) : error ? (
+              <InputError>{error}</InputError>
             ) : null}
           </InputFieldContainer>
 
@@ -67,6 +77,8 @@ export const SignInForm = ({ isInModal }) => {
             />
             {formik.touched.password && formik.errors.password ? (
               <InputError>{formik.errors.password}</InputError>
+            ) : error ? (
+              <InputError>{error}</InputError>
             ) : null}
           </InputFieldContainer>
 
