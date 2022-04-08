@@ -31,7 +31,6 @@ export const RegistrationForm = () => {
       <Container>
         <h1>Registration</h1>
         <h3>Your Account Details</h3>
-
         <Formik
           initialValues={INITIAL_STATE}
           onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -45,7 +44,7 @@ export const RegistrationForm = () => {
                 email: values.email,
                 address: values.address,
                 postal: values.postal,
-                birth_date: values.birth_date,
+                birth_date: values.birth_date
               })
               .then((res) => {
                 resetForm();
