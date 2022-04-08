@@ -4,11 +4,14 @@ import { Ticket } from "./components";
 import { Payment } from "./components/payment/Payment";
 import { HomePageLayout, ReservationLayout, SignInLayout } from "./layouts";
 import { ThemeProvider } from "styled-components";
-//delete
+import { InfoPage } from "./layouts/Info";
+
+
+
 import { theme } from "./theme";
 
 // import { Navbar } from "react-bootstrap";
-//Imports components for Homepage to see them rendered
+
 
 function App() {
   const [theming, setTheming] = useState(true);
@@ -24,6 +27,8 @@ function App() {
           <Route path='/payments/payment_success' element={<Ticket />} />
           <Route path='/payments/payment_cancel' element={<div>Cancel</div>} />
           <Route path='/reservation' element={<ReservationLayout />} />
+          <Route path='/info' element={<InfoPage />} />
+          
         </Routes>
       </div>
     </ThemeProvider>
