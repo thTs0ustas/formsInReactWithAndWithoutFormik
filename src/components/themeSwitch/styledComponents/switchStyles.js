@@ -34,6 +34,7 @@ const CheckBox = styled.input`
   cursor: pointer;
   background: transparent;
   &:checked + ${CheckBoxLabel} {
+    cursor: pointer;
     background: ${({ theme }) => theme.primary};
     &::after {
       content: "";

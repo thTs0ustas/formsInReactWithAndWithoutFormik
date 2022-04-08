@@ -10,7 +10,7 @@ import { BsFillSunFill } from "react-icons/bs";
 export const Switch = () => {
   const [{ theme }, dispatch] = useProvider(["theme"]);
   return (
-    <CheckBoxWrapper onChange={() => dispatch(changeTheme())}>
+    <CheckBoxWrapper>
       <IoMoon
         color='crimson'
         style={{
@@ -21,7 +21,12 @@ export const Switch = () => {
           visibility: theme ? "hidden" : "visible",
         }}
       />
-      <CheckBox id='checkbox' type='checkbox' checked={!theme} />
+      <CheckBox
+        id='checkbox'
+        type='checkbox'
+        checked={!theme}
+        onChange={() => dispatch(changeTheme())}
+      />
       <CheckBoxLabel htmlFor='checkbox' />
       <BsFillSunFill
         color='crimson'
