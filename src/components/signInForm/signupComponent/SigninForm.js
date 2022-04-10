@@ -10,8 +10,11 @@ import { ContinueButton } from "../styledComponents";
 import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { useLoginForm } from "../hooks";
 import { errorHandling } from "../errors/errorHandling";
+import { handleError } from "../../../model/actions";
+import { useProvider } from "../../../model";
 
 export const SignInForm = ({ isInModal }) => {
+  const [, dispatch] = useProvider();
   let [error, setError] = useState("");
   const { setState } = useLoginForm(isInModal);
   return (
@@ -25,7 +28,12 @@ export const SignInForm = ({ isInModal }) => {
           })
           .then((res) => {
             if (errorHandling(res.data)) {
-              setError(res.data.message);
+              dispatch(
+                handleError({
+                  message: res.data.message,
+                  time: new Date().getTime(),
+                })
+              );
               resetForm();
             } else {
               resetForm();
@@ -33,7 +41,14 @@ export const SignInForm = ({ isInModal }) => {
             }
           })
           .then(() => setSubmitting(false))
-          .catch((error) => alert(error.message));
+          .catch((error) =>
+            dispatch(
+              handleError({
+                message: error.message,
+                time: new Date().getTime(),
+              })
+            )
+          );
       }}
       validationSchema={Yup.object({
         username: Yup.string()

@@ -8,6 +8,7 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 
 const ReservationLayout = () => {
   const username = sessionStorage.getItem("username");
+
   return (
     <>
       <Header>
@@ -29,6 +30,7 @@ const ReservationLayout = () => {
         </MoviePoster>
         <Reservation />
       </ReservationContainer>
+
       <Footer />
     </>
   );

@@ -4,6 +4,7 @@ import { map } from "lodash";
 import { useNavigate } from "react-router-dom";
 import { responseAction, useProvider } from "../../../model";
 import { price } from "../../reservation/helpers";
+import { handleError } from "../../../model/actions";
 
 const usePayment = () => {
   const [, dispatch] = useProvider();
@@ -31,7 +32,11 @@ const usePayment = () => {
       .then(({ data }) => dispatch(responseAction(data)))
       .then(() => window.sessionStorage.removeItem("request"))
       .then(() => navigate(`/${username}/tickets/new`))
-      .catch((err) => alert(err)); // TODO: handle error with new action
+      .catch((error) =>
+        dispatch(
+          handleError({ message: error.message, time: new Date().getTime() })
+        )
+      );
   }, []);
 };
 

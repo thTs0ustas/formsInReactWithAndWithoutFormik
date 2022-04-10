@@ -1,6 +1,7 @@
 import axios from "axios";
+import { handleError } from "../model/actions";
 
-export const paymentWithStripe = (url, data, request) => {
+export const paymentWithStripe = (url, data, request, dispatch) => {
   window.sessionStorage.setItem("request", JSON.stringify(request));
   axios
     .post(`${url}/payments/create-checkout`, data, {
@@ -14,9 +15,13 @@ export const paymentWithStripe = (url, data, request) => {
       return Promise.reject(data);
     })
     .then((data) => window.location.replace(data.url))
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
       window.sessionStorage.removeItem("request");
-      return Promise.reject(err);
+      dispatch(
+        handleError({
+          message: error.message,
+          time: new Date().getTime(),
+        })
+      );
     });
 };

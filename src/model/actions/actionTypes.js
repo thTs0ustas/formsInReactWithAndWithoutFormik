@@ -14,5 +14,6 @@ const actionTypes = {
   resetReservation: "RESET_RESERVATION",
   changeTheme: "CHANGE_THEME",
   initStore: "INIT_STORE",
+  newError: "NEW_ERROR",
 };
 export { actionTypes };

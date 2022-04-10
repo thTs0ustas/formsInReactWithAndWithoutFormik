@@ -8,9 +8,9 @@ import { useProvider, userLogoutAction } from "../../model";
 import axios from "axios";
 
 export const SignupBarPart = ({ username = null }) => {
-  const [{ userInfo, BASE_URL }, dispatch] = useProvider();
+  const [{ BASE_URL }, dispatch] = useProvider();
   const navigate = useNavigate();
-
+  const token = window.sessionStorage.getItem("token");
   const loginOut = () => {
     axios
       .post(
@@ -18,7 +18,7 @@ export const SignupBarPart = ({ username = null }) => {
         { username },
         {
           headers: {
-            authorization: "Bearer " + userInfo.token,
+            authorization: "Bearer " + token,
           },
         }
       )
@@ -26,7 +26,8 @@ export const SignupBarPart = ({ username = null }) => {
         sessionStorage.removeItem("username");
         sessionStorage.removeItem("token");
         navigate("/");
-      });
+      })
+      .catch((e) => alert(e.message));
   };
 
   return !username ? (

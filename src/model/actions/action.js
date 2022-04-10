@@ -56,8 +56,13 @@ const resetReservation = () => ({
 const changeTheme = () => ({
   type: actionTypes.changeTheme,
 });
+const handleError = (payload) => ({
+  type: actionTypes.newError,
+  payload,
+});
 
 export {
+  handleError,
   initStore,
   changeTheme,
   resetReservation,

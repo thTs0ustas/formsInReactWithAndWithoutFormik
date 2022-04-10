@@ -54,7 +54,8 @@ const ReservationContainer = () => {
           data: dataForPayment(numOfTickets),
           username,
         },
-        { BASE_URL, seat: inputValues.seat, screening: inputValues.screening }
+        { BASE_URL, seat: inputValues.seat, screening: inputValues.screening },
+        dispatch
       );
   };
 

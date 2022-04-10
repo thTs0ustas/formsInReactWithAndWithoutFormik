@@ -28,6 +28,7 @@ const INITIAL_STATE = {
     reviews: {},
   },
   theme: "true",
+  error: { message: "", time: "" },
 };
 
 export { INITIAL_STATE };

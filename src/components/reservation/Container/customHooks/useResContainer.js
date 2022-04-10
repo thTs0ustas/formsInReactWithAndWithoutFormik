@@ -10,20 +10,28 @@ import {
 } from "../../../../model";
 
 import { fetchRequest, nextRequest } from "../../helpers";
+import { handleError } from "../../../../model/actions";
 
 export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
   const historyState = useRef({});
 
   useEffect(() => {
     historyState.current = inputValues;
-    axios.get(`${BASE_URL}/movies`).then((response) => {
-      dispatch(
-        requestAction({
-          key: "movies",
-          value: response.data,
-        })
+    axios
+      .get(`${BASE_URL}/movies`)
+      .then((response) => {
+        dispatch(
+          requestAction({
+            key: "movies",
+            value: response.data,
+          })
+        );
+      })
+      .catch((error) =>
+        dispatch(
+          handleError({ message: error.message, time: new Date().getTime() })
+        )
       );
-    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

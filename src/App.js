@@ -12,10 +12,15 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
 import { useProvider } from "./model";
 import { useApp } from "./useApp";
+import { ToastContainer } from "react-bootstrap";
+import { AlertToast } from "./components/alertToast/Toast";
 
 function App() {
   const navigate = useNavigate();
   const [state] = useProvider(["theme"]);
+
+  const [{ error }] = useProvider(["error"]);
+
   useApp();
   return (
     <ThemeProvider theme={state.theme ? theme.light : theme.dark}>
@@ -31,6 +36,12 @@ function App() {
           <Route path='/reservation' element={<ReservationLayout />} />
         </Routes>
       </div>
+      <ToastContainer
+        style={{ position: "sticky", zIndex: 10001 }}
+        position={"top-end"}
+      >
+        {error && <AlertToast error={error} />}
+      </ToastContainer>
     </ThemeProvider>
   );
 }
