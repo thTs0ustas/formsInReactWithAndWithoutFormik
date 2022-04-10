@@ -1,5 +1,4 @@
 import React from "react";
-import { useProvider } from "../../model";
 import { random } from "lodash";
 import { Barcode } from "./barcode/Barcode";
 import { Serial } from "./styledComponents/Serial";
@@ -11,19 +10,11 @@ import { BiggerTd } from "./styledComponents/BiggerTd";
 import { Cinema, Info, MovieTitle, Title } from "./styledComponents/Misc";
 
 const Ticket = () => {
-  const username = window.sessionStorage.getItem("username");
-  const [{ tickets, Reservations }] = useProvider([
-    "userInfo.tickets",
-    "reservation.response.Reservations",
-  ]);
-
-  // useTicket({ username, reservationId: Reservations.at(-1).id });
-
   return (
     <TicketContainer>
       <HolesTop />
       <Title>
-        <Cinema>CLASSIC CINEMA PRESENTS</Cinema>
+        <Cinema>RETRO CINEMA PRESENTS</Cinema>
         <MovieTitle>BATMAN</MovieTitle>
       </Title>
       <div className='poster'>

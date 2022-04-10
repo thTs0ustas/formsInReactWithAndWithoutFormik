@@ -1,5 +1,9 @@
 import { actionTypes } from "./actionTypes";
 
+const initStore = (payload) => ({
+  type: actionTypes.initStore,
+  payload,
+});
 const requestAction = (payload) => ({
   type: actionTypes.request,
   payload,
@@ -54,6 +58,7 @@ const changeTheme = () => ({
 });
 
 export {
+  initStore,
   changeTheme,
   resetReservation,
   addSeatAction,

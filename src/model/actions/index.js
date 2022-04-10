@@ -1,5 +1,6 @@
 export { actionTypes } from "./actionTypes";
 export {
+  initStore,
   changeTheme,
   addSeatAction,
   newTicketAction,

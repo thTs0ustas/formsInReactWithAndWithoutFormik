@@ -11,11 +11,12 @@ import {
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
 import { useProvider } from "./model";
+import { useApp } from "./useApp";
 
 function App() {
   const navigate = useNavigate();
   const [state] = useProvider(["theme"]);
-
+  useApp();
   return (
     <ThemeProvider theme={state.theme ? theme.light : theme.dark}>
       <GlobalStyles />

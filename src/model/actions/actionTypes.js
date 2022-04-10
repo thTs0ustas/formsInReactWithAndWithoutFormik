@@ -13,5 +13,6 @@ const actionTypes = {
   search: "SEARCH",
   resetReservation: "RESET_RESERVATION",
   changeTheme: "CHANGE_THEME",
+  initStore: "INIT_STORE",
 };
 export { actionTypes };

@@ -44,7 +44,6 @@ const ReservationContainer = () => {
       filter(undefined)
     )(tickets);
 
-  console.log(dataForPayment(numOfTickets));
   const handleContinueButton = (ev) => {
     ev.preventDefault();
     setSpinner(!spinner);

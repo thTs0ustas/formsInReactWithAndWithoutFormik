@@ -1,18 +1,6 @@
 import React, { useMemo } from "react";
-import styled from "styled-components";
 import { map, random } from "lodash";
-
-const BlackBar = styled.td`
-  height: 50px;
-  width: 10px;
-  background-color: black;
-`;
-const WhiteBar = styled.td`
-  height: 50px;
-  width: 10px;
-  background-color: white;
-`;
-const BarcodeTr = styled.tr``;
+import { BlackBar, WhiteBar } from "./styledComponents/Bars";
 
 export const Barcode = () => {
   const code = useMemo(
@@ -24,10 +12,10 @@ export const Barcode = () => {
   );
 
   return (
-    <BarcodeTr>
+    <tr>
       {map(code, (data, i) =>
         data === 1 ? <WhiteBar key={i} /> : <BlackBar key={i} />
       )}
-    </BarcodeTr>
+    </tr>
   );
 };

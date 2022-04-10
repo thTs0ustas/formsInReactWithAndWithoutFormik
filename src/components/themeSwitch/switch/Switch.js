@@ -9,6 +9,7 @@ import { BsFillSunFill } from "react-icons/bs";
 
 export const Switch = () => {
   const [{ theme }, dispatch] = useProvider(["theme"]);
+
   return (
     <CheckBoxWrapper>
       <IoMoon

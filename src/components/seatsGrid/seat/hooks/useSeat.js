@@ -1,5 +1,5 @@
 import { useProvider } from "../../../../model";
-import { keys } from "lodash";
+import { keys, some } from "lodash";
 
 export const useSeat = (seatInfo, handleSeatRemove, handleSeatAdd) => {
   const [state] = useProvider([
@@ -9,7 +9,9 @@ export const useSeat = (seatInfo, handleSeatRemove, handleSeatAdd) => {
   ]);
   const { seat, sum, reservedSeats } = state;
   const exists = !!seat[seatInfo.id];
-  const isAlreadyTaken = reservedSeats?.find(
+
+  const isAlreadyTaken = some(
+    reservedSeats,
     (item) => item["seats_id"] === seatInfo.id
   );
 

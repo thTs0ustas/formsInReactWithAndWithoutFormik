@@ -27,7 +27,7 @@ const INITIAL_STATE = {
     tickets: [],
     reviews: {},
   },
-  theme: true,
+  theme: "true",
 };
 
 export { INITIAL_STATE };

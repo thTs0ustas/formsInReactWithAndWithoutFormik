@@ -8,8 +8,6 @@ export const theme = {
     secondary: "#ffebc6",
     white: "#ffffff",
     border: "#000",
-    circleSize: 50,
-    ticketSize: 400,
   },
   dark: {
     bgMain: "#162e52",

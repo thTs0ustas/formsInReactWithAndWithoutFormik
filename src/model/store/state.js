@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { get, isEmpty, reduce } from "lodash";
 import { createContext, useContextSelector } from "use-context-selector";
 
@@ -8,8 +8,8 @@ import { INITIAL_STATE } from "../constants/constants";
 const Model = createContext({});
 
 const Provider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(modelReducer, INITIAL_STATE, (path) => path);
-  const value = [state, dispatch];
+  const [state, dispatch] = React.useReducer(modelReducer, INITIAL_STATE);
+  const value = useMemo(() => [state, dispatch], [state, dispatch]);
   return <Model.Provider value={value}>{children}</Model.Provider>;
 };
 Provider.displayName = "Model";
@@ -22,11 +22,15 @@ const useProvider = (selectors = []) => {
           selectors,
           (st, path) => ({
             ...st,
-            [path.split(".")[1] ? path.split(".").at(-1) : path]: get(state[0], path),
+            [path.split(".")[1] ? path.split(".").at(-1) : path]: get(
+              state[0],
+              path
+            ),
           }),
           {}
         )
   );
+
   const dispatch = useContextSelector(Model, (v) => v[1]);
   if (!state || !dispatch) {
     throw new Error("useProvider must be used within a Provider");

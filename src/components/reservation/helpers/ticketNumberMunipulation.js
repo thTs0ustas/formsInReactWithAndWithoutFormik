@@ -1,12 +1,13 @@
 import { isEmpty } from "lodash";
 
-const disabledIncrement = (nValues, requests) =>
-  isEmpty(requests.seats) ||
-  requests.seats?.length === requests.reservedSeats?.length ||
-  requests.seats?.length - requests.reservedSeats?.length === nValues.sum;
-
-const disabledDecrement = (requests) =>
-  isEmpty(requests?.seats) ||
-  requests.seats?.length === requests.reservedSeats?.length;
+const disabledIncrement = (nValues, { seats, reservedSeats }) => {
+  return (
+    isEmpty(seats) ||
+    seats?.length === reservedSeats?.length ||
+    seats?.length - reservedSeats?.length === nValues.sum
+  );
+};
+const disabledDecrement = ({ seats, reservedSeats }) =>
+  isEmpty(seats) || seats?.length === reservedSeats?.length;
 
 export { disabledIncrement, disabledDecrement };
