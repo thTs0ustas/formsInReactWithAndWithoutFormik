@@ -11,29 +11,39 @@ import {
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
 import { useProvider } from "./model";
-import { useApp } from "./useApp";
 import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
 
 function App() {
   const navigate = useNavigate();
-  const [state] = useProvider(["theme"]);
 
-  const [{ error }] = useProvider(["error"]);
+  const [{ error, username, theme: theming }] = useProvider([
+    "error",
+    "theme",
+    "userInfo.username",
+  ]);
 
-  useApp();
   return (
-    <ThemeProvider theme={state.theme ? theme.light : theme.dark}>
+    <ThemeProvider theme={theming ? theme.light : theme.dark}>
       <GlobalStyles />
       <div className='App'>
         <Routes>
-          <Route path='/' element={<HomePageLayout />} />
-          <Route path='/login' element={<SignInLayout />} />
-          <Route path='/payments' element={<Payment />} />
-          <Route path='/:username/tickets/new' element={<Ticket />} />
-          <Route path='/ticket' element={<TicketLayout />} />
+          <Route path='/' element={<HomePageLayout username={username} />} />
+          <Route path='/login' element={<SignInLayout username={username} />} />
+          <Route path='/payments' element={<Payment username={username} />} />
+          <Route
+            path='/:username/tickets/new'
+            element={<Ticket username={username} />}
+          />
+          <Route
+            path='/ticket'
+            element={<TicketLayout username={username} />}
+          />
           <Route path='/payments/payment_cancel' element={<div>Cancel</div>} />
-          <Route path='/reservation' element={<ReservationLayout />} />
+          <Route
+            path='/reservation'
+            element={<ReservationLayout username={username} />}
+          />
         </Routes>
       </div>
       <ToastContainer

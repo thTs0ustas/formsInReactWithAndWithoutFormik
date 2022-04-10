@@ -6,8 +6,7 @@ import Footer from "../../components/footer/Footer";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import NavBar from "../../components/NavBar";
 
-const TicketLayout = () => {
-  const username = sessionStorage.getItem("username");
+const TicketLayout = ({ username }) => {
   return (
     <SignInDiv>
       <Header>

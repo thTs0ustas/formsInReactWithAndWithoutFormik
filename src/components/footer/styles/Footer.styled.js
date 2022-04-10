@@ -117,6 +117,7 @@ const Full = styled.div`
     &:focus {
       outline: none;
     }
+
     & ::placeholder {
       color: white;
     }

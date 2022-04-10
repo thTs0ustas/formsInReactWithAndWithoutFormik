@@ -6,9 +6,7 @@ import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 
-const ReservationLayout = () => {
-  const username = sessionStorage.getItem("username");
-
+const ReservationLayout = ({ username }) => {
   return (
     <>
       <Header>

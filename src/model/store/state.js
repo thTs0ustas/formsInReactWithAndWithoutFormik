@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { get, isEmpty, reduce } from "lodash";
 import { createContext, useContextSelector } from "use-context-selector";
 
@@ -8,7 +8,23 @@ import { INITIAL_STATE } from "../constants/constants";
 const Model = createContext({});
 
 const Provider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(modelReducer, INITIAL_STATE);
+  const items = sessionStorage.getItem("state");
+  const [state, dispatch] = React.useReducer(
+    modelReducer,
+    items ? JSON.parse(items) : INITIAL_STATE
+  );
+
+  useEffect(() => {
+    if (isEmpty(items)) {
+      sessionStorage.setItem("state", JSON.stringify(INITIAL_STATE));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isEmpty(items)) {
+      sessionStorage.setItem("state", JSON.stringify(state));
+    }
+  }, [state]);
   const value = useMemo(() => [state, dispatch], [state, dispatch]);
   return <Model.Provider value={value}>{children}</Model.Provider>;
 };

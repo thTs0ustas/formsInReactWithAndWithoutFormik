@@ -10,10 +10,11 @@ const usePayment = () => {
   const [, dispatch] = useProvider();
   const navigate = useNavigate();
 
-  const { BASE_URL, seat, screening } = JSON.parse(
-    window.sessionStorage.getItem("request")
-  );
-  const username = window.sessionStorage.getItem("username");
+  const { BASE_URL, seat, screening, username } = useProvider([
+    "userInfo.username" +
+      "BASE_URL,reservation.inputValues.seat" +
+      "reservation.inputValues.screening",
+  ]);
 
   React.useEffect(() => {
     axios

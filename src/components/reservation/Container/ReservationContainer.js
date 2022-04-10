@@ -10,14 +10,16 @@ import { filter, flow, keys, map, omit } from "lodash/fp";
 
 const ReservationContainer = () => {
   const [state, dispatch] = useProvider([
+    "userInfo.username",
     "reservation.inputValues",
     "reservation.requests",
     "reservation.response",
     "BASE_URL",
   ]);
 
-  const username = window.sessionStorage.getItem("username");
+  // const username = window.sessionStorage.getItem("username");
   const {
+    username,
     inputValues,
     requests,
     response,
