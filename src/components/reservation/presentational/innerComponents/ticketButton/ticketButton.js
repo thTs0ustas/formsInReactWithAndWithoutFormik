@@ -3,8 +3,8 @@ import {
   addTicketAction,
   removeTicketAction,
   useProvider,
-} from "../../../../model";
-import { ButtonForTickets } from "../styledComponents";
+} from "../../../../../model";
+import { ButtonForTickets } from "../../styledComponents";
 
 export const TicketButton = ({
   children,

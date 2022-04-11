@@ -6,6 +6,11 @@ export const modelReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case actionTypes.initStore:
+      return produce(state, () => {
+        return payload;
+      });
+
     case actionTypes.userLogin:
       return produce(state, (draft) => {
         draft.userInfo.username = payload.username;
@@ -69,6 +74,11 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.theme = !draft.theme;
       });
+    case actionTypes.newError:
+      return produce(state, (draft) => {
+        draft.error = payload;
+      });
+
     default:
       return state;
   }

@@ -7,18 +7,15 @@ export const useGuestSignup = () => {
   const [, dispatch] = useProvider();
 
   useEffect(() => {
-    console.log(state);
-    state?.Error && alert(state?.Error);
-    if (state && state.accessToken && state.username) {
-      window.sessionStorage.setItem("token", state.accessToken);
+    if (state && state["accessToken"] && state.username) {
+      window.sessionStorage.setItem("token", state["accessToken"]);
       window.sessionStorage.setItem("username", state.username);
       dispatch(
         userLoginAction({
           username: state.username,
-          token: state.accessToken,
+          token: state["accessToken"],
         })
       );
-      //Close Modal
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);

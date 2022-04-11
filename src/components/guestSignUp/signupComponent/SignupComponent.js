@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { ContinueButton } from "../../signInForm";
 import { useGuestSignup } from "../hooks/useGuestSignup";
+import { errorHandling } from "../errors/errorHandling";
 
 const SignupComponent = () => {
+  let [error, setError] = useState("");
   const { setState } = useGuestSignup();
   return (
     <Formik
@@ -19,8 +21,13 @@ const SignupComponent = () => {
             email: values.email,
           })
           .then((res) => {
-            resetForm();
-            setState(res.data);
+            if (errorHandling(res.data)) {
+              setError(res.data.message);
+              resetForm();
+            } else {
+              resetForm();
+              setState(res.data);
+            }
           })
           .then(() => setSubmitting(false));
       }}
@@ -50,6 +57,8 @@ const SignupComponent = () => {
             />
             {formik.touched.first_name && formik.errors.first_name ? (
               <InputError>{formik.errors.first_name}</InputError>
+            ) : error ? (
+              <InputError>{error}</InputError>
             ) : null}
           </InputFieldContainer>
 
@@ -67,6 +76,8 @@ const SignupComponent = () => {
             />
             {formik.touched.last_name && formik.errors.last_name ? (
               <InputError>{formik.errors.last_name}</InputError>
+            ) : error ? (
+              <InputError>{error}</InputError>
             ) : null}
           </InputFieldContainer>
 
@@ -84,6 +95,8 @@ const SignupComponent = () => {
             />
             {formik.touched.email && formik.errors.email ? (
               <InputError>{formik.errors.email}</InputError>
+            ) : error ? (
+              <InputError>{error}</InputError>
             ) : null}
           </InputFieldContainer>
 

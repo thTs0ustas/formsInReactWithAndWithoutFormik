@@ -22,8 +22,7 @@ import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
 import { PromoMember, PromoStudents, Switch } from "../../components";
 
-const HomePageLayout = () => {
-  const username = sessionStorage.getItem("username");
+const HomePageLayout = ({ username }) => {
   return (
     <HomeDiv>
       <Header mainPage={false}>

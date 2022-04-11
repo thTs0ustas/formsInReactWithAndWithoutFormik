@@ -27,7 +27,8 @@ const INITIAL_STATE = {
     tickets: [],
     reviews: {},
   },
-  theme: true,
+  theme: "true",
+  error: { message: "", time: "" },
 };
 
 export { INITIAL_STATE };

@@ -1,6 +1,6 @@
 import React from "react";
 import SocialIcons from "./SocialIcon";
-import { MenuContainer, Column, Title } from "./styles/Footer.styled";
+import { Column, MenuContainer, Title } from "./styles/Footer.styled";
 
 export default function Menu() {
   return (
@@ -9,13 +9,13 @@ export default function Menu() {
         <Title>Films</Title>
         <ul>
           <li>
-            <a href="#">Now Showing</a>
+            <a href='#'>Now Showing</a>
           </li>
           <li>
-            <a href="#">Coming soon</a>
+            <a href='#'>Coming soon</a>
           </li>
           <li>
-            <a href="#">Cameo at home</a>
+            <a href='#'>Cameo at home</a>
           </li>
         </ul>
       </Column>
@@ -23,25 +23,25 @@ export default function Menu() {
         <Title>Cinema info</Title>
         <ul>
           <li>
-            <a href="#">History</a>
+            <a href='#'>History</a>
           </li>
           <li>
-            <a href="#">Food & Drink</a>
+            <a href='#'>Food & Drink</a>
           </li>
           <li>
-            <a href="#">Accessibility</a>
+            <a href='#'>Accessibility</a>
           </li>
           <li>
-            <a href="#">Cinema Hire</a>
+            <a href='#'>Cinema Hire</a>
           </li>
           <li>
-            <a href="#">Ticket Prices</a>
+            <a href='#'>Ticket Prices</a>
           </li>
           <li>
-            <a href="#">Explore Belgrave</a>
+            <a href='#'>Explore Belgrave</a>
           </li>
           <li>
-            <a href="#">Moving Story Entertainment</a>
+            <a href='#'>Moving Story Entertainment</a>
           </li>
         </ul>
       </Column>
@@ -49,10 +49,10 @@ export default function Menu() {
         <Title>Contact us</Title>
         <ul>
           <li>
-            <a href="#">(03) 9754 7844</a>
+            <a href='#'>(03) 9754 7844</a>
           </li>
           <li>
-            <a href="#">Email Us</a>
+            <a href='#'>Email Us</a>
           </li>
         </ul>
         <SocialIcons />

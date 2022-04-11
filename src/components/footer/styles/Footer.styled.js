@@ -117,6 +117,7 @@ const Full = styled.div`
     &:focus {
       outline: none;
     }
+
     & ::placeholder {
       color: white;
     }
@@ -134,7 +135,7 @@ const SubscribeButton = styled.input`
   flex-grow: 2;
   border: none;
   padding: 5px;
-  font-size: 17px;
+
   background: #b09661;
   color: black;
   margin: 5px 5px 5px 0;

@@ -20,9 +20,10 @@ export const Nav = styled.nav`
   z-index: 9999;
   padding: 2%;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 800px) {
     //In smaller screens add different styling to the nav container
     position: static;
+    margin-top: 6px;
     background: linear-gradient(#94002e, #94002e);
     border-bottom: 2px solid #b09661;
     //when Burger is clicked turn it to full pageview
@@ -42,7 +43,7 @@ export const Nav = styled.nav`
 		`}
   }
   //Change the content when the screen height is too small
-  @media screen and (max-height: 726px) {
+  @media screen and (max-height: 800px) {
     ${({ isOpen }) =>
       isOpen &&
       `
@@ -53,7 +54,7 @@ export const Nav = styled.nav`
 
 //Container for the LOGO and the BURGER - styled for Mobile Screens
 export const MobileContainer = styled.div`
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 800px) {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,14 +1,15 @@
 import { forEach } from "lodash";
 import axios from "axios";
+import { handleError } from "../../../model/actions";
 
-const fetchRequest =
-  ({ types, action }) =>
-  ({ dispatch, baseUrl }) => {
-    forEach(
-      types?.split(" "),
-      (type) =>
-        type &&
-        axios.get(`${baseUrl}/${type}`).then((response) => {
+const fetchRequest = ({ types, action, dispatch, baseUrl }) => {
+  forEach(
+    types?.split(" "),
+    (type) =>
+      type &&
+      axios
+        .get(`${baseUrl}/${type}`)
+        .then((response) => {
           dispatch(
             action({
               key:
@@ -20,8 +21,13 @@ const fetchRequest =
             })
           );
         })
-    );
-  };
+        .catch((error) =>
+          dispatch(
+            handleError({ message: error.message, time: new Date().getTime() })
+          )
+        )
+  );
+};
 
 const nextRequest = (aId = null, sId = null) => ({
   movie: "cinema",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Formik } from "formik";
 
 import * as Yup from "yup";
@@ -9,12 +9,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ContinueButton } from "../styledComponents";
 import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { useLoginForm } from "../hooks";
+import { errorHandling } from "../errors/errorHandling";
+import { handleError } from "../../../model/actions";
+import { useProvider } from "../../../model";
 
 export const SignInForm = ({ isInModal }) => {
+  const [, dispatch] = useProvider();
+  let [error, setError] = useState("");
   const { setState } = useLoginForm(isInModal);
   return (
     <Formik
-      initialValues={{ username: "", password: "" }}
+      initialValues={{ username: "", password: "", error: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         axios
           .post("http://localhost:4000/users/login", {
@@ -22,10 +27,28 @@ export const SignInForm = ({ isInModal }) => {
             password: values.password,
           })
           .then((res) => {
-            resetForm();
-            setState(res.data);
+            if (errorHandling(res.data)) {
+              dispatch(
+                handleError({
+                  message: res.data.message,
+                  time: new Date().getTime(),
+                })
+              );
+              resetForm();
+            } else {
+              resetForm();
+              setState(res.data);
+            }
           })
-          .then(() => setSubmitting(false));
+          .then(() => setSubmitting(false))
+          .catch((error) =>
+            dispatch(
+              handleError({
+                message: error.message,
+                time: new Date().getTime(),
+              })
+            )
+          );
       }}
       validationSchema={Yup.object({
         username: Yup.string()
@@ -50,6 +73,8 @@ export const SignInForm = ({ isInModal }) => {
             />
             {formik.touched.username && formik.errors.username ? (
               <InputError>{formik.errors.username}</InputError>
+            ) : error ? (
+              <InputError>{error}</InputError>
             ) : null}
           </InputFieldContainer>
 
@@ -67,6 +92,8 @@ export const SignInForm = ({ isInModal }) => {
             />
             {formik.touched.password && formik.errors.password ? (
               <InputError>{formik.errors.password}</InputError>
+            ) : error ? (
+              <InputError>{error}</InputError>
             ) : null}
           </InputFieldContainer>
 

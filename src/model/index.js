@@ -1,5 +1,6 @@
 export {
   actionTypes,
+  initStore,
   addSeatAction,
   newTicketAction,
   removeSeatAction,

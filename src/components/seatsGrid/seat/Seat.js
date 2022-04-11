@@ -18,7 +18,7 @@ export const Seat = ({ seatInfo, handleSeatRemove, handleSeatAdd }) => {
     >
       <MdEventSeat
         size={25}
-        color={exists ? "crimson" : isAlreadyTaken ? "black" : "#FF9D69"}
+        color={isAlreadyTaken ? "black" : exists ? "crimson" : "#FF9D69"}
       />
     </IconDiv>
   );

@@ -2,10 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { keys } from "lodash";
 import { MdEventSeat } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 import { SeatMatrix } from "../../seatsGrid";
-import { TicketButton } from "./ticketButton/ticketButton";
+import {
+  BeAMember,
+  GuestModal,
+  SeatsModal,
+  TicketButton,
+} from "./innerComponents";
+
 import {
   disabledDecrement,
   disabledIncrement,
@@ -13,14 +19,11 @@ import {
   PRICING,
   setScreeningString,
 } from "../helpers";
+
 import {
-  ButtonForMembers,
   Container,
   GuestContainer,
   NumberOfTickets,
-  PleaseBeAMember,
-  PleaseBeAMemberHeader,
-  PleaseBeAMemberParagraph,
   Price,
   ReservationForm,
   ReservationInfoBar,
@@ -33,48 +36,32 @@ import {
   TicketOptions,
   TypeOfTicket,
 } from "./styledComponents";
+
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
-import { paymentWithStripe } from "../../../stripe/stripe";
-import { Spinner } from "react-bootstrap";
-import { SeatsModal } from "./modal/Modal";
-import { GuestModal } from "./guestModal/GuestModal";
 
 import { GuestSignup } from "../../guestSignUp";
 
 export const Reservation = ({
-  BASE_URL,
   handleChange,
   requests,
   spinner,
-  setSpinner,
+  username,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   state: { reservation },
   handleSeatRemove,
   handleSeatAdd,
+  handleContinueButton,
 }) => {
-  const username = window.sessionStorage.getItem("username");
-  const navigate = useNavigate();
-  const handleContinueButton = (ev) => {
-    ev.preventDefault();
-    setSpinner(!spinner);
-    if (username)
-      paymentWithStripe(
-        BASE_URL,
-        {
-          name: "Tickets",
-          price: price(numOfTickets) * 100,
-          quantity: numOfTickets.sum,
-          username,
-        },
-        { BASE_URL, seat, screening }
-      );
-  };
-
   return (
     <ReservationForm>
       <ReservationInfoBar>
         <SelectContainer controlId='floatingInput' label='Movie'>
-          <Input name='movie' onChange={(e) => handleChange(e)}>
+          <Input
+            id='movie'
+            name='movie'
+            value={movie}
+            onChange={(e) => handleChange(e)}
+          >
             <option value='' />
             {requests.movies.map(({ id, title }) => (
               <option key={id} value={title}>
@@ -85,7 +72,12 @@ export const Reservation = ({
         </SelectContainer>
 
         <SelectContainer controlId='floatingInput' label='Theater'>
-          <Input name='cinema' onChange={handleChange} disabled={!movie}>
+          <Input
+            name='cinema'
+            value={cinema}
+            onChange={handleChange}
+            disabled={!movie}
+          >
             <option value='' />
             {requests.cinemas.map(({ id, address }) => (
               <option key={id} value={address}>
@@ -97,6 +89,7 @@ export const Reservation = ({
 
         <SelectContainer controlId='floatingInput' label='Auditorium'>
           <Input
+            value={auditorium}
             name='auditorium'
             onChange={(e) => handleChange(e)}
             disabled={!cinema}
@@ -114,6 +107,7 @@ export const Reservation = ({
 
         <SelectContainer controlId='floatingInput' label='Screenings'>
           <Input
+            value={screening}
             name='screening'
             onChange={(e) => handleChange(e)}
             disabled={!auditorium}
@@ -140,7 +134,7 @@ export const Reservation = ({
               <TicketBarRight>
                 <TicketButton
                   left={true}
-                  disabled={disabledDecrement(requests)}
+                  disabled={!screening || disabledDecrement(requests)}
                   type='member'
                   subtract={true}
                 >
@@ -148,7 +142,9 @@ export const Reservation = ({
                 </TicketButton>
                 <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
                 <TicketButton
-                  disabled={disabledIncrement(numOfTickets, requests)}
+                  disabled={
+                    !screening || disabledIncrement(numOfTickets, requests)
+                  }
                   type='member'
                   add={true}
                 >
@@ -165,7 +161,7 @@ export const Reservation = ({
             <TicketBarRight>
               <TicketButton
                 left={true}
-                disabled={disabledDecrement(requests)}
+                disabled={!screening || disabledDecrement(requests)}
                 type='adult'
                 subtract={true}
               >
@@ -173,7 +169,9 @@ export const Reservation = ({
               </TicketButton>
               <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
               <TicketButton
-                disabled={disabledIncrement(numOfTickets, requests)}
+                disabled={
+                  !screening || disabledIncrement(numOfTickets, requests)
+                }
                 type='adult'
                 add={true}
               >
@@ -189,7 +187,7 @@ export const Reservation = ({
             <TicketBarRight>
               <TicketButton
                 left={true}
-                disabled={disabledDecrement(requests)}
+                disabled={!screening || disabledDecrement(requests)}
                 type='child'
                 subtract={true}
               >
@@ -197,7 +195,9 @@ export const Reservation = ({
               </TicketButton>
               <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
               <TicketButton
-                disabled={disabledIncrement(numOfTickets, requests)}
+                disabled={
+                  !screening || disabledIncrement(numOfTickets, requests)
+                }
                 type='child'
                 add={true}
               >
@@ -205,20 +205,7 @@ export const Reservation = ({
               </TicketButton>
             </TicketBarRight>
           </TicketBar>
-
-          <PleaseBeAMember>
-            <div>
-              <PleaseBeAMemberHeader>
-                Please be a member to buy tickets
-              </PleaseBeAMemberHeader>
-              <PleaseBeAMemberParagraph>
-                TERMS AND CONDITIONS APPLY{" "}
-              </PleaseBeAMemberParagraph>
-            </div>
-            <ButtonForMembers onClick={() => navigate("/login")}>
-              BE A MEMBER
-            </ButtonForMembers>
-          </PleaseBeAMember>
+          <BeAMember onClick={() => (fn) => fn("/login")} />
 
           <TicketInfo>
             <p>

@@ -18,7 +18,8 @@ const SeatMatrix = ({ seats, handleSeatRemove, handleSeatAdd }) => {
       <SeatsContainer>
         {seatsCol(seats).map((seatArr, index) => {
           let counter = seatArr.length / auditorium[2];
-          let cols = chunk(seatArr, Math.floor(counter));
+          let cols = chunk(seatArr, Math.round(counter));
+
           return (
             <Row key={index}>
               {map(cols, (column, i) => (
