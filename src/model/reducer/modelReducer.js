@@ -78,7 +78,6 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.error = payload;
       });
-
     default:
       return state;
   }

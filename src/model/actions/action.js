@@ -24,6 +24,7 @@ const addTicketAction = (payload) => ({
   type: actionTypes.addTicket,
   payload,
 });
+
 const removeTicketAction = (payload) => ({
   type: actionTypes.removeTicket,
   payload,

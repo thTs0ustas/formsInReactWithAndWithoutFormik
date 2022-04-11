@@ -24,7 +24,7 @@ const Provider = ({ children }) => {
     if (!isEmpty(items)) {
       sessionStorage.setItem("state", JSON.stringify(state));
     }
-  }, [state]);
+  }, [state, items]);
   const value = useMemo(() => [state, dispatch], [state, dispatch]);
   return <Model.Provider value={value}>{children}</Model.Provider>;
 };
@@ -39,10 +39,7 @@ const useProvider = (selectors = []) => {
           selectors,
           (st, path) => ({
             ...st,
-            [path.split(".")[1] ? path.split(".").at(-1) : path]: get(
-              state[0],
-              path
-            ),
+            [path.split(".")[1] ? path.split(".").at(-1) : path]: get(state[0], path),
           }),
           {}
         )

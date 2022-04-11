@@ -10,10 +10,12 @@ const usePayment = () => {
   const [, dispatch] = useProvider();
   const navigate = useNavigate();
 
-  const { BASE_URL, seat, screening, username } = useProvider([
-    "userInfo.username" +
-      "BASE_URL,reservation.inputValues.seat" +
-      "reservation.inputValues.screening",
+  const [{ BASE_URL, numOfTickets, seat, screening, username }] = useProvider([
+    "userInfo.username",
+    "BASE_URL",
+    "reservation.inputValues.numOfTickets",
+    "reservation.inputValues.seat",
+    "reservation.inputValues.screening",
   ]);
 
   React.useEffect(() => {
@@ -21,7 +23,7 @@ const usePayment = () => {
       .post(`${String(BASE_URL)}/reservations/users/${username}/new`, {
         data: {
           screening_id: +screening,
-          price: +price(seat),
+          price: +price(numOfTickets),
           seats: map(seat, (seat) => ({
             id: seat.id,
             discount_type: "adult",
@@ -30,13 +32,12 @@ const usePayment = () => {
           })),
         },
       })
+      // .then(() => dispatch(resetReservation()))
       .then(({ data }) => dispatch(responseAction(data)))
-      .then(() => window.sessionStorage.removeItem("request"))
+
       .then(() => navigate(`/${username}/tickets/new`))
       .catch((error) =>
-        dispatch(
-          handleError({ message: error.message, time: new Date().getTime() })
-        )
+        dispatch(handleError({ message: error.message, time: new Date().getTime() }))
       );
   }, []);
 };

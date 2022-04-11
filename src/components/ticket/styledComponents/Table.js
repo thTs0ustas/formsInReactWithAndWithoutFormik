@@ -27,6 +27,6 @@ export const Table = styled.table`
 
   & td {
     width: 33%;
-    font-size: 16px;
+    font-size: 12px;
   }
 `;

@@ -11,14 +11,15 @@ import { filter, flow, keys, map, omit } from "lodash/fp";
 const ReservationContainer = () => {
   const [state, dispatch] = useProvider([
     "userInfo.username",
+    "userInfo.token",
     "reservation.inputValues",
     "reservation.requests",
     "reservation.response",
     "BASE_URL",
   ]);
 
-  // const username = window.sessionStorage.getItem("username");
   const {
+    token,
     username,
     inputValues,
     requests,
@@ -57,7 +58,8 @@ const ReservationContainer = () => {
           username,
         },
         { BASE_URL, seat: inputValues.seat, screening: inputValues.screening },
-        dispatch
+        dispatch,
+        token
       );
   };
 
@@ -87,4 +89,4 @@ const ReservationContainer = () => {
   return <Reservation {...props} />;
 };
 
-export default ReservationContainer;
+export { ReservationContainer };

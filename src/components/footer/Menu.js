@@ -4,7 +4,7 @@ import { Column, MenuContainer, Title } from "./styles/Footer.styled";
 
 export default function Menu() {
   return (
-    <MenuContainer>
+    <MenuContainer id='container'>
       <Column>
         <Title>Films</Title>
         <ul>
