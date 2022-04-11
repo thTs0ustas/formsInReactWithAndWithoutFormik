@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Ticket } from "./components";
 import { Payment } from "./components/payment/Payment";
 import {
@@ -15,8 +15,6 @@ import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
 
 function App() {
-  const navigate = useNavigate();
-
   const [{ error, username, theme: theming }] = useProvider([
     "error",
     "theme",

@@ -9,7 +9,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    background: ${({ theme }) => theme.bgMain};
+    background: ${({ theme }) => theme["bgMain"]};
     margin: 0;
     
     font-family: "Nunito Sans", sans-serif;

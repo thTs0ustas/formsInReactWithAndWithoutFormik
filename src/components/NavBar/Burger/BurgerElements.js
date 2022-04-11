@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const BurgerButton = styled.button`
   @media screen and (max-width: 800px) {
-    border: none;
     display: flex;
     background-color: transparent;
     align-items: center;

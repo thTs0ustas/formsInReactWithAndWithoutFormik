@@ -2,15 +2,11 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 import { differenceWith, flatMap, isEqual, toPairs } from "lodash";
 
-import {
-  addSeatAction,
-  inputChangeAction,
-  removeSeatAction,
-  requestAction,
-} from "../../../../model";
+import { addSeatAction, inputChangeAction, removeSeatAction, requestAction } from "../../../../model";
 
 import { fetchRequest, nextRequest } from "../../helpers";
 import { handleError } from "../../../../model/actions";
+
 
 export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
   const historyState = useRef({});
@@ -32,7 +28,6 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
           handleError({ message: error.message, time: new Date().getTime() })
         )
       );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -50,7 +45,6 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
       baseUrl: BASE_URL,
       dispatch,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValues]);
 
   const handleSeatAdd = (seat) => {

@@ -28,6 +28,7 @@ const Provider = ({ children }) => {
   const value = useMemo(() => [state, dispatch], [state, dispatch]);
   return <Model.Provider value={value}>{children}</Model.Provider>;
 };
+
 Provider.displayName = "Model";
 
 const useProvider = (selectors = []) => {
