@@ -6,3 +6,5 @@ export { GuestSignup } from "./guestSignUp";
 export { PromoStudents } from "./Promos";
 export { PromoMember } from "./Promos";
 export { Switch } from "./themeSwitch";
+export { MainPhoto } from "./moviePage";
+export { MainText } from "./moviePage";

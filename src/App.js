@@ -7,6 +7,7 @@ import {
   ReservationLayout,
   SignInLayout,
   TicketLayout,
+  MoviePageLayout,
 } from "./layouts";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
@@ -42,6 +43,7 @@ function App() {
             path='/reservation'
             element={<ReservationLayout username={username} />}
           />
+          <Route path='/movie' element={<MoviePageLayout />} />
         </Routes>
       </div>
       <ToastContainer
