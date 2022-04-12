@@ -15,7 +15,7 @@ const ReservationInfoBar = styled.div`
   justify-content: center;
   align-items: center;
   height: 60px;
-  background-color: black;
+  background-color: #000;
   width: 100%;
   max-width: 1520px;
 `;

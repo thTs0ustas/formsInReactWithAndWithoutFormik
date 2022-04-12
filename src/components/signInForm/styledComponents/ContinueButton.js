@@ -8,7 +8,7 @@ export const ContinueButton = styled.button`
   text-transform: uppercase;
   text-align: center;
   border: 0;
-  color: black;
+  color: #000;
   font-size: 18px;
 
   text-decoration: none;
@@ -16,7 +16,7 @@ export const ContinueButton = styled.button`
   transition: 0.3s ease-out 0s;
 
   &:hover {
-    color: black;
+    color: #000;
     background-color: ${({ theme }) => theme.secondary};
   }
 `;

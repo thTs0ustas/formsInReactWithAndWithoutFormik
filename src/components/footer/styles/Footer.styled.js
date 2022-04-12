@@ -12,7 +12,7 @@ const StyledFooter = styled.footer`
     text-transform: uppercase;
     letter-spacing: 6px;
     text-align: center;
-    color: white;
+    color: ${({ theme }) => theme.white};
 
     @media (max-width: 630px) {
       letter-spacing: 0;
@@ -27,7 +27,7 @@ const StyledFooter = styled.footer`
   }
   .description p {
     margin: 0 auto;
-    color: white;
+    color: ${({ theme }) => theme.white};
   }
   /* .description p a {
     color: #b09661;
@@ -77,7 +77,7 @@ const Half = styled.div`
 
 const Input = styled.input`
   width: 48%;
-  border: 1px solid white;
+  border: 1px solid ${({ theme }) => theme.white};
   outline: 0;
   padding: 10px;
   height: 44px;
@@ -87,7 +87,7 @@ const Input = styled.input`
     outline: none;
   }
   &::placeholder {
-    color: white;
+    color: ${({ theme }) => theme.white};
   }
   &:focus::placeholder {
     color: transparent;
@@ -104,7 +104,7 @@ const Full = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border: 1px solid white;
+  border: 1px solid ${({ theme }) => theme.white};
   padding: 2px;
   width: 100%;
   height: 44px;
@@ -119,7 +119,7 @@ const Full = styled.div`
     }
 
     & ::placeholder {
-      color: white;
+      color: ${({ theme }) => theme.white};
     }
     &:focus::placeholder {
       color: transparent;
@@ -136,7 +136,7 @@ const SubscribeButton = styled.input`
   border: none;
   padding: 5px;
 
-  background: #b09661;
+  background: ${({ theme }) => theme.primary};
   color: black;
   margin: 5px 5px 5px 0;
   font-size: 17px;
@@ -144,7 +144,7 @@ const SubscribeButton = styled.input`
   transition: 0.3s linear;
   cursor: pointer;
   &:hover {
-    background-color: #c1ad83;
+    background-color: ${({ theme }) => theme.secondary};
   }
 
   @media (max-width: 630px) {
@@ -186,11 +186,11 @@ const Column = styled.div`
   & ul li a {
     display: block;
     margin-bottom: 6px;
-    color: #fff;
+    color: ${({ theme }) => theme.white};
     text-decoration: none;
 
     &:hover {
-      color: #b09661;
+      color: ${({ theme }) => theme.primary};
     }
   }
 
@@ -200,7 +200,7 @@ const Column = styled.div`
 `;
 const Title = styled.div`
   margin-bottom: 20px;
-  color: #b09661;
+  color: ${({ theme }) => theme.primary};
   text-transform: uppercase;
 
   @media (max-width: 630px) {

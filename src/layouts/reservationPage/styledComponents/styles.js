@@ -12,7 +12,7 @@ const MoviePoster = styled.div`
   min-height: 250px;
   max-height: 550px;
   height: 40vw;
-  background-color: #a5f1d2;
+  background-color: ${({ theme }) => theme.bgMain};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

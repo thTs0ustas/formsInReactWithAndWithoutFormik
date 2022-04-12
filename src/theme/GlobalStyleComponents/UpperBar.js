@@ -32,7 +32,7 @@ const SignUpButton = styled.button`
   width: 100px;
   background-color: black;
 
-  color: aliceblue;
+  color: ${({ theme }) => theme.white};
   border: 0;
   transition: 0.1s linear;
   margin-right: 5px;

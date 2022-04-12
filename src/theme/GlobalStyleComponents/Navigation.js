@@ -15,7 +15,7 @@ const Nav = styled.nav`
 `;
 const NavItem = styled.div`
   text-align: center;
-  background-color: coral;
+  background-color: ${({ theme }) => theme.logo};
   flex-grow: 1;
 `;
 export { Nav, NavItem, NavDiv };

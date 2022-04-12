@@ -9,12 +9,12 @@ export const StyledSocialIcons = styled.div`
     list-style: none;
   }
   a {
-    color: #b09661;
+    color: ${({ theme }) => theme.primary};
     margin-right: 10px;
     text-decoration: none;
 
     &:hover {
-      color: white;
+      color: ${({ theme }) => theme.white};
     }
   }
 

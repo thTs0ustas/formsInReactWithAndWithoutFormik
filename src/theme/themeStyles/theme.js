@@ -7,6 +7,7 @@ export const theme = {
     secondary2: "#ffda8a",
     secondary: "#ffebc6",
     white: "#ffffff",
+    light: "#e7e7ff",
     border: "#000",
   },
   dark: {
