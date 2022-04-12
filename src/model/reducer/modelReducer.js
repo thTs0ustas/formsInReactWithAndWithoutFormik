@@ -66,6 +66,11 @@ export const modelReducer = (state, action) => {
         draft.userInfo.tickets.push(payload);
       });
 
+    case actionTypes.getMoviesForHome:
+      return produce(state, (draft) => {
+        draft.homepage.movies.push(payload);
+      });
+
     default:
       return state;
   }

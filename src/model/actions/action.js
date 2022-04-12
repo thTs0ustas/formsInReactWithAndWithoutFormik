@@ -50,6 +50,11 @@ const resetReservation = () => ({
   type: actionTypes.resetReservation,
 });
 
+const moviesToHomeLayout = (payload) => ({
+  type: actionTypes.getMoviesForHome,
+  payload,
+});
+
 export {
   resetReservation,
   addSeatAction,
@@ -62,5 +67,6 @@ export {
   userLogoutAction,
   inputChangeAction,
   addTicketAction,
+  moviesToHomeLayout,
   removeTicketAction,
 };

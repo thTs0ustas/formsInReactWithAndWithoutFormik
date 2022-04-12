@@ -5,6 +5,7 @@ const actionTypes = {
   removeSeat: "SEAT_REMOVE",
   reservedSeats: "RESERVED_SEATS",
   response: "RESPONSE",
+  getMoviesForHome: "GET_MOVIES_FOR_HOME",
   userLogin: "USER_LOGIN",
   userLogout: "USER_LOGOUT",
   newTicket: "NEW_TICKET",
