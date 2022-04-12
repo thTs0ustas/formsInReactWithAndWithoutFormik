@@ -17,10 +17,12 @@ export const modelReducer = (state, action) => {
         draft.userInfo.username = payload.username;
         draft.userInfo.token = payload.token;
       });
+
     case actionTypes.userLogout:
       return produce(state, (draft) => {
         draft.userInfo = {};
       });
+
     case actionTypes.request:
       return produce(state, (draft) => {
         draft.reservation.requests[payload.key] = payload.value;
@@ -81,6 +83,7 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.reservation.response = payload;
       });
+
     case actionTypes.resetReservation:
       return produce(state, (draft) => {
         draft.reservation = INITIAL_STATE.reservation;
@@ -90,14 +93,17 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.userInfo.tickets.push(payload);
       });
+
     case actionTypes.changeTheme:
       return produce(state, (draft) => {
         draft.theme = !draft.theme;
       });
+
     case actionTypes.newError:
       return produce(state, (draft) => {
         draft.error = payload;
       });
+
     default:
       return state;
   }

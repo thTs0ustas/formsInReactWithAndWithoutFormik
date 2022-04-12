@@ -14,7 +14,7 @@ import { isEmpty } from "lodash";
 const Ticket = ({ title = "batman" }) => {
   useTicket();
   const [{ tickets }] = useProvider(["userInfo.tickets"]);
-  return isEmpty(tickets) ? null : (
+  return !isEmpty(tickets) ? (
     <>
       {tickets.at(-1).seats.map(({ id, cost, row, number, barcode, numbers }) => (
         <TicketContainer key={id}>
@@ -74,7 +74,7 @@ const Ticket = ({ title = "batman" }) => {
         </TicketContainer>
       ))}
     </>
-  );
+  ) : null;
 };
 
 export { Ticket };

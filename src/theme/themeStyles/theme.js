@@ -12,9 +12,9 @@ export const theme = {
   dark: {
     bgMain: "#162e52",
     logo: "#a24223",
-    primary: "#504473",
-    secondary: "#72727c",
-    white: "#d0cfcf",
-    light: "#9bb28a",
+    primary: "#7a67a0",
+    secondary: "#bfc4d2",
+    white: "#e7eeff",
+    light: "#e7e7ff",
   },
 };
