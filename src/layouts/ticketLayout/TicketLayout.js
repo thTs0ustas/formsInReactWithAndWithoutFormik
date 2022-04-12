@@ -23,7 +23,9 @@ const TicketLayout = ({ username }) => {
           </Nav>
         </NavDiv>
       </Header>
-      <Ticket />
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <Ticket />
+      </div>
       <Footer />
     </SignInDiv>
   );

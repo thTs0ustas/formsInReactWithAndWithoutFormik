@@ -16,7 +16,7 @@ const Ticket = ({ title = "batman" }) => {
   const [{ tickets }] = useProvider(["userInfo.tickets"]);
   return isEmpty(tickets) ? null : (
     <>
-      {tickets.at(-1).seats.map(({ id, row, number, barcode, numbers }) => (
+      {tickets.at(-1).seats.map(({ id, cost, row, number, barcode, numbers }) => (
         <TicketContainer key={id}>
           <HolesTop />
           <Title>
@@ -49,7 +49,7 @@ const Ticket = ({ title = "batman" }) => {
                   <th>TIME</th>
                 </tr>
                 <tr>
-                  <td>{/*{price}*/}0,00 €</td>
+                  <td>{cost}.00 €</td>
                   <td>{tickets.at(-1).date.split("-").reverse().join("/")}</td>
                   <td>{tickets.at(-1).start}</td>
                 </tr>

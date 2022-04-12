@@ -11,6 +11,7 @@ export const useLoginForm = (isInModal = false) => {
     },
     dispatch,
   ] = useProvider(["userInfo"]);
+
   const navigate = useNavigate();
 
   useEffect(() => {

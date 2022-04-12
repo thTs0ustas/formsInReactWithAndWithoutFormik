@@ -1,6 +1,7 @@
 import { actionTypes } from "../actions";
 import produce from "immer";
 import { INITIAL_STATE } from "../constants/constants";
+import { filter } from "lodash/fp";
 
 export const modelReducer = (state, action) => {
   const { type, payload } = action;
@@ -27,7 +28,26 @@ export const modelReducer = (state, action) => {
 
     case actionTypes.addSeat:
       return produce(state, (draft) => {
-        draft.reservation.inputValues.seat[payload.value.id] = payload.value;
+        let { adult, child, member } = state.reservation.inputValues.numOfTickets;
+        let adultSeat = filter({ discount_type: "adult" })(state.reservation.inputValues.seat);
+        let childSeat = filter({ discount_type: "child" })(state.reservation.inputValues.seat);
+        let memberSeat = filter({ discount_type: "member" })(state.reservation.inputValues.seat);
+
+        if (adultSeat.length < adult)
+          draft.reservation.inputValues.seat[payload.value.id] = {
+            ...payload.value,
+            discount_type: "adult",
+          };
+        else if (childSeat.length < child)
+          draft.reservation.inputValues.seat[payload.value.id] = {
+            ...payload.value,
+            discount_type: "child",
+          };
+        else if (memberSeat.length < member)
+          draft.reservation.inputValues.seat[payload.value.id] = {
+            ...payload.value,
+            discount_type: "member",
+          };
       });
 
     case actionTypes.addTicket:

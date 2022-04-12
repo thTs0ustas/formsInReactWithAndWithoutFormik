@@ -25,11 +25,11 @@ export const useTicket = () => {
           .slice(0, 5),
         seats: reservedSeats.map((seat) => ({
           id: seat["Seat"].id,
-          cost: seat["total_cost"],
+          cost: seat["cost"],
           row: seat["Seat"]["row_letter"],
-          number: seat["Seat"]["row_num"],
-          barcode: barcode().barcode,
-          numbers: barcode().numbers,
+          number: seat["Seat"]["seat_num"],
+          barcode: barcode().barcode.join(""),
+          numbers: barcode().numbers.join(""),
         })),
       };
       dispatch(newTicketAction(payload));
