@@ -88,10 +88,10 @@ const DaysButton = styled.a`
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border: 2px solid #b09661;
   color: #ffebc6;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
   text-decoration: none;
@@ -106,13 +106,13 @@ const DaysButton = styled.a`
     width: 100%;
     margin-bottom: 10px;
     padding: 4px 8px;
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
   }
 
   @media screen and (max-width: 480px) {
     width: 100%;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   @media screen and (max-width: 360px) {
