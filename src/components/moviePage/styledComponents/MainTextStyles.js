@@ -75,12 +75,6 @@ const Paragraph = styled.p`
   }
 `;
 
-const Description = styled(Paragraph)`
-  @media screen and (max-width: 768px) {
-    width: 50%;
-  }
-`;
-
 const DaysDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -167,7 +161,6 @@ export {
   MainTitle,
   SectionTitle,
   Paragraph,
-  Description,
   DaysDiv,
   DaysButton,
   SessionDiv,
