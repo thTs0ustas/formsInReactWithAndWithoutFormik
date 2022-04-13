@@ -7,6 +7,7 @@ import {
   inputChangeAction,
   removeSeatAction,
   requestAction,
+  resetReservation,
 } from "../../../../model";
 
 import { fetchRequest, nextRequest, PRICING } from "../../helpers";
@@ -17,11 +18,11 @@ import { useParams } from "react-router-dom";
 export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
   const historyState = useRef({});
   const { title } = useParams();
-  useEffect(() => {
-    console.log(title);
-    historyState.current = inputValues;
-    axios
-      .get(`${BASE_URL}/movies/${title}`)
+
+  useEffect(async () => {
+    dispatch(resetReservation());
+    await axios
+      .get(`${BASE_URL}/movies`)
       .then((response) => {
         dispatch(
           requestAction({

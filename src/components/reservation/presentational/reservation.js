@@ -38,7 +38,7 @@ import { GuestSignup } from "../../guestSignUp";
 import { MoviePoster } from "./styledComponents/MoviePoster";
 
 export const Reservation = ({
-  title,
+  title: paramsTitle,
   handleChange,
   requests,
   spinner,
@@ -53,16 +53,26 @@ export const Reservation = ({
     <>
       <MoviePoster>
         <img
-          src={require(`../../../assets/imgs/${title.toLowerCase().replace(" ", "")}.jpg`)}
+          src={require(`../../../assets/imgs/${
+            movie
+              ? movie.toLowerCase().replace(" ", "")
+              : paramsTitle
+              ? paramsTitle.toLowerCase().replace(" ", "")
+              : "movie-theater"
+          }.jpg`)}
           alt='poster'
         />
       </MoviePoster>
       <ReservationForm>
         <ReservationInfoBar>
           <SelectContainer controlId='floatingInput' label='Movie'>
-            <Input id='movie' name='movie' value={movie} onChange={(e) => handleChange(e)}>
+            <Input value={movie || paramsTitle} id='movie' name='movie' onChange={handleChange}>
               <option value={""}></option>
-              <option value={requests.movies.title}>{requests.movies.title}</option>
+              {requests.movies.map(({ id, title }) => (
+                <option key={id} value={title}>
+                  {title}
+                </option>
+              ))}
             </Input>
           </SelectContainer>
 
