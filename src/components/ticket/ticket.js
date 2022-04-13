@@ -11,20 +11,23 @@ import { useProvider } from "../../model";
 import { useTicket } from "./hooks/useTicket";
 import { isEmpty } from "lodash";
 
-const Ticket = ({ title = "batman" }) => {
+const Ticket = () => {
   useTicket();
   const [{ tickets }] = useProvider(["userInfo.tickets"]);
   return !isEmpty(tickets) ? (
     <>
-      {tickets.at(-1).seats.map(({ id, cost, row, number, barcode, numbers }) => (
+      {tickets.at(-1).seats.map(({ id, movie, cost, row, number, barcode, numbers }) => (
         <TicketContainer key={id}>
           <HolesTop />
           <Title>
             <Cinema>RETRO CINEMA PRESENTS</Cinema>
-            <MovieTitle>{title}</MovieTitle>
+            <MovieTitle>{movie.toUpperCase()}</MovieTitle>
           </Title>
           <div className='poster'>
-            <img src={require(`../../assets/imgs/${title}.jpg`)} alt={`Movie: ${title}`} />
+            <img
+              src={require(`../../assets/imgs/${movie.toLowerCase().replace(" ", "")}.jpg`)}
+              alt={`Movie: ${movie}`}
+            />
           </div>
           <Info>
             <Table>

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { keys, map } from "lodash";
+import { keys } from "lodash";
 import { MdEventSeat } from "react-icons/md";
 import { Spinner } from "react-bootstrap";
 
@@ -54,11 +54,7 @@ export const Reservation = ({
       <MoviePoster>
         <img
           src={require(`../../../assets/imgs/${
-            movie
-              ? movie.toLowerCase().replace(" ", "")
-              : paramsTitle
-              ? paramsTitle.toLowerCase().replace(" ", "")
-              : "movie-theater"
+            movie ? movie.toLowerCase().replace(" ", "") : "movie-theater"
           }.jpg`)}
           alt='poster'
         />
@@ -67,12 +63,12 @@ export const Reservation = ({
         <ReservationInfoBar>
           <SelectContainer controlId='floatingInput' label='Movie'>
             <Input value={movie || paramsTitle} id='movie' name='movie' onChange={handleChange}>
-              <option value={""}></option>
-              {map(requests.movies, ({ Movie: { id, title } }) => (
-                <option key={id} value={title}>
-                  {title}
-                </option>
-              ))}
+              <option value={requests.movies.title}>{requests.movies.title}</option>
+              {/*{map(requests.movies, ({ id, title }) => (*/}
+              {/*  <option key={id} value={title}>*/}
+              {/*    {title}*/}
+              {/*  </option>*/}
+              {/*))}*/}
             </Input>
           </SelectContainer>
 
@@ -140,7 +136,13 @@ export const Reservation = ({
                   </TicketButton>
                   <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
                   <TicketButton
-                    disabled={!screening || disabledIncrement(numOfTickets, requests)}
+                    disabled={
+                      !screening ||
+                      disabledIncrement(numOfTickets, {
+                        seats: requests.seats[auditorium[0]],
+                        reservedSeats: requests.reservedSeats[screening],
+                      })
+                    }
                     type='member'
                     add={true}
                   >
@@ -157,7 +159,13 @@ export const Reservation = ({
               <TicketBarRight>
                 <TicketButton
                   left={true}
-                  disabled={!screening || disabledDecrement(requests)}
+                  disabled={
+                    !screening ||
+                    disabledIncrement(numOfTickets, {
+                      seats: requests.seats[auditorium[0]],
+                      reservedSeats: requests.reservedSeats[screening],
+                    })
+                  }
                   type='adult'
                   subtract={true}
                 >
@@ -165,7 +173,13 @@ export const Reservation = ({
                 </TicketButton>
                 <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
                 <TicketButton
-                  disabled={!screening || disabledIncrement(numOfTickets, requests)}
+                  disabled={
+                    !screening ||
+                    disabledIncrement(numOfTickets, {
+                      seats: requests.seats[auditorium[0]],
+                      reservedSeats: requests.reservedSeats[screening],
+                    })
+                  }
                   type='adult'
                   add={true}
                 >
@@ -181,7 +195,13 @@ export const Reservation = ({
               <TicketBarRight>
                 <TicketButton
                   left={true}
-                  disabled={!screening || disabledDecrement(requests)}
+                  disabled={
+                    !screening ||
+                    disabledIncrement(numOfTickets, {
+                      seats: requests.seats[auditorium[0]],
+                      reservedSeats: requests.reservedSeats[screening],
+                    })
+                  }
                   type='child'
                   subtract={true}
                 >
@@ -189,7 +209,13 @@ export const Reservation = ({
                 </TicketButton>
                 <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
                 <TicketButton
-                  disabled={!screening || disabledIncrement(numOfTickets, requests)}
+                  disabled={
+                    !screening ||
+                    disabledIncrement(numOfTickets, {
+                      seats: requests.seats[auditorium[0]],
+                      reservedSeats: requests.reservedSeats[screening],
+                    })
+                  }
                   type='child'
                   add={true}
                 >
@@ -214,7 +240,7 @@ export const Reservation = ({
                 <SeatsGrid>
                   <SeatMatrix
                     state={reservation}
-                    seats={requests.seats}
+                    seats={requests.seats[auditorium[0]]}
                     handleSeatRemove={handleSeatRemove}
                     handleSeatAdd={handleSeatAdd}
                   />

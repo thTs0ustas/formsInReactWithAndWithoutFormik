@@ -20,6 +20,7 @@ const CarouselHero = () => {
       setMovie([...res.data]);
     });
   };
+
   useEffect(() => {
     getMovie();
   }, []);
@@ -38,7 +39,7 @@ const CarouselHero = () => {
               <p>{description}</p>
               <CarouselButton>
                 <ButtonIcon />
-                <Link to={`/reservation/${title}`}>Book Now</Link>
+                <Link to={`/reservation/${item.id}`}>Book Now</Link>
               </CarouselButton>
             </Carousel.Caption>
           </Carousel.Item>
