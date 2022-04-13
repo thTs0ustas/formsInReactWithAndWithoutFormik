@@ -25,7 +25,7 @@ function App() {
           <Route path='/payments' element={<Payment username={username} />} />
           <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
           <Route path='/payments/payment_cancel' element={<div>Cancel</div>} />
-          <Route path='/reservation' element={<ReservationLayout username={username} />} />
+          <Route path='/reservation/:title' element={<ReservationLayout username={username} />} />
         </Routes>
       </div>
       <ToastContainer style={{ position: "sticky", zIndex: 10001 }} position={"top-end"}>

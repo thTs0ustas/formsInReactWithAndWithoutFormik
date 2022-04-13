@@ -12,14 +12,16 @@ import {
 import { fetchRequest, nextRequest, PRICING } from "../../helpers";
 import { handleError } from "../../../../model/actions";
 import { filter, flow, keys, map, omit } from "lodash/fp";
+import { useParams } from "react-router-dom";
 
 export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
   const historyState = useRef({});
-
+  const { title } = useParams();
   useEffect(() => {
+    console.log(title);
     historyState.current = inputValues;
     axios
-      .get(`${BASE_URL}/movies`)
+      .get(`${BASE_URL}/movies/${title}`)
       .then((response) => {
         dispatch(
           requestAction({
@@ -87,5 +89,5 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
     );
   };
 
-  return { handleSeatAdd, handleSeatRemove, handleChange, dataForPayment };
+  return { handleSeatAdd, title, handleSeatRemove, handleChange, dataForPayment };
 };

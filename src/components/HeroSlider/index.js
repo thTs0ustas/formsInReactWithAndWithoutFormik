@@ -9,7 +9,7 @@ import axios from "axios";
 const CarouselHero = () => {
   //boostrap code
   const [index, setIndex] = useState(0);
-  const handleSelect = (selectedIndex, e) => {
+  const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
 
@@ -17,9 +17,7 @@ const CarouselHero = () => {
   const [movie, setMovie] = useState([]);
   const getMovie = () => {
     axios.get("http://localhost:4000/moviesOfTheMonth").then((res) => {
-      const myMovie = res.data;
-      myMovie.push();
-      setMovie(myMovie);
+      setMovie([...res.data]);
     });
   };
   useEffect(() => {
@@ -32,7 +30,7 @@ const CarouselHero = () => {
         return (
           <Carousel.Item key={id} interval={3000}>
             <img
-              src={require(`../../assets/imgs/batman.jpg`)}
+              src={require(`../../assets/imgs/${title.toLowerCase().replace(" ", "")}.jpg`)}
               alt='First slide'
             />
             <Carousel.Caption>
@@ -40,7 +38,7 @@ const CarouselHero = () => {
               <p>{description}</p>
               <CarouselButton>
                 <ButtonIcon />
-                <Link to='/reservation'>Book Now</Link>
+                <Link to={`/reservation/${title}`}>Book Now</Link>
               </CarouselButton>
             </Carousel.Caption>
           </Carousel.Item>

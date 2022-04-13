@@ -16,6 +16,8 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.userInfo.username = payload.username;
         draft.userInfo.token = payload.token;
+        draft.userInfo.reviews = {};
+        draft.userInfo.tickets = [];
       });
 
     case actionTypes.userLogout:

@@ -45,7 +45,7 @@ const ReservationContainer = () => {
       );
   };
 
-  const { handleSeatAdd, handleSeatRemove, handleChange, dataForPayment } = useResContainer({
+  const { handleSeatAdd, title, handleSeatRemove, handleChange, dataForPayment } = useResContainer({
     BASE_URL,
     inputValues,
     dispatch,
@@ -53,6 +53,7 @@ const ReservationContainer = () => {
   });
 
   const props = {
+    title,
     handleContinueButton,
     handleChange,
     handleSeatRemove,

@@ -48,7 +48,7 @@
       "react/no-unknown-property": 1,
       "react/sort-prop-types": 1,
       "react/jsx-curly-brace-presence": [1, "never"],
-      "react/jsx-curly-newline": [1, { "multiline": "always", "singleline": "never" }],
+      "react/jsx-curly-newline": true,
       "react/no-array-index-key": 1,
       "react/jsx-key": 1,
       "react/jsx-no-constructed-context-values": 1
