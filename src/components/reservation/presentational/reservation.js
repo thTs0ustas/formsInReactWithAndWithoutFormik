@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { keys } from "lodash";
+import { keys, map } from "lodash";
 import { MdEventSeat } from "react-icons/md";
 import { Spinner } from "react-bootstrap";
 
@@ -68,7 +68,7 @@ export const Reservation = ({
           <SelectContainer controlId='floatingInput' label='Movie'>
             <Input value={movie || paramsTitle} id='movie' name='movie' onChange={handleChange}>
               <option value={""}></option>
-              {requests.movies.map(({ id, title }) => (
+              {map(requests.movies, ({ Movie: { id, title } }) => (
                 <option key={id} value={title}>
                   {title}
                 </option>

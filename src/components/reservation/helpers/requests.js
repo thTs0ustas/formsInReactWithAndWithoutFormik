@@ -13,6 +13,7 @@ const fetchRequest = ({ types, action, dispatch, baseUrl }) => {
           dispatch(
             action({
               key:
+                type.split("/")[0] === "screening" ||
                 type.split("/")[0] === "seat" ||
                 type.split("/")[0] === "reservedSeat"
                   ? `${type.split("/")[0]}s`
@@ -22,17 +23,15 @@ const fetchRequest = ({ types, action, dispatch, baseUrl }) => {
           );
         })
         .catch((error) =>
-          dispatch(
-            handleError({ message: error.message, time: new Date().getTime() })
-          )
+          dispatch(handleError({ message: error.message, time: new Date().getTime() }))
         )
   );
 };
 
-const nextRequest = (aId = null, sId = null) => ({
+const nextRequest = (mT, aId = null, sId = null) => ({
   movie: "cinema",
   cinema: "auditorium",
-  auditorium: "screening",
+  auditorium: `screening/${mT}`,
   screening: `seat/${aId[0]} reservedSeat/${sId} `,
 });
 

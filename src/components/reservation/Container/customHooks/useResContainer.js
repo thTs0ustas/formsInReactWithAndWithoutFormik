@@ -22,7 +22,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
   useEffect(async () => {
     dispatch(resetReservation());
     await axios
-      .get(`${BASE_URL}/movies`)
+      .get(`${BASE_URL}/moviesOfTheMonth`)
       .then((response) => {
         dispatch(
           requestAction({
@@ -42,7 +42,7 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
     )[0];
 
     fetchRequest({
-      types: nextRequest(inputValues.auditorium, inputValues.screening)[diff],
+      types: nextRequest(inputValues.movie, inputValues.auditorium, inputValues.screening)[diff],
       action: requestAction,
       baseUrl: BASE_URL,
       dispatch,
