@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import {map} from 'lodash'
+import axios from 'axios'
 import {
   TextContainer,
   MainTitle,
@@ -11,39 +13,53 @@ import {
 } from "./styledComponents/MainTextStyles";
 
 const MainText = () => {
+  const [movie, setMovie] = useState([]);
+  const getMovie = () => {
+    axios.get("http://localhost:4000/moviesOfTheMonth/1").then((res) => {
+      const myMovie = res.data;
+      console.log(myMovie)
+      setMovie(myMovie);
+    });
+  };
+  useEffect(() => {
+    getMovie();
+  }, []);
+
+  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  let movieDates = [...new Set(map(movie.Screenings, (item) => days[new Date(item.movie_date).getDay()]))]
+  let movieTime = [...new Set(map(movie.Screenings, (item) => item.movie_starts.split("T")[1].slice(0, 5)))]
+
   return (
     <TextContainer>
       <MainTitle>Book Tickets</MainTitle>
       <SectionTitle>Select Day</SectionTitle>
-      <DaysDiv>
-        <DaysButton href=''>Monday</DaysButton>
-        <DaysButton href=''>Tuesday</DaysButton>
-        <DaysButton href=''>Wednesday</DaysButton>
-        <DaysButton href=''>Thursday</DaysButton>
-        <DaysButton href=''>Friday</DaysButton>
-        <DaysButton href=''>Saturday</DaysButton>
-        <DaysButton href=''>Sunday</DaysButton>
-      </DaysDiv>
-      <SectionTitle>Book a session</SectionTitle>
-      <SessionDiv>
-        <SessionButton href=''>17:00</SessionButton>
-        <SessionButton href=''>20:00</SessionButton>
-        <SessionButton href=''>23:00</SessionButton>
-      </SessionDiv>
+            <DaysDiv>
+              {map(movieDates, (item) => 
+                  <DaysButton href=''>{item}</DaysButton>
+              )}
+            </DaysDiv>
+            <SectionTitle>Book a session</SectionTitle>
+            <SessionDiv>
+            {map(movieTime, (item) => 
+              <SessionButton href=''>{item}</SessionButton>
+            )}
+            </SessionDiv>
+
       <SectionTitle>The Story</SectionTitle>
-      <Paragraph>
-        A criminal pleads insanity and is admitted to a mental institution,
-        where he rebels against the oppressive nurse and rallies up the scared
-        patients.
-      </Paragraph>
-      <SectionTitle>Duration</SectionTitle>
-      <Paragraph>133</Paragraph>
-      <SectionTitle>Genre</SectionTitle>
-      <Paragraph>Drama</Paragraph>
-      <SectionTitle>Release Year</SectionTitle>
-      <Paragraph>1975</Paragraph>
+            <Paragraph>
+              {movie?.Movie?.description}
+            </Paragraph>
+            <SectionTitle>Duration</SectionTitle>
+            <Paragraph>{movie.Movie?.duration}</Paragraph>
+            <SectionTitle>Genre</SectionTitle>
+            <Paragraph>{movie.Movie?.genre}</Paragraph>
+            <SectionTitle>Release Year</SectionTitle>
+            <Paragraph>1975</Paragraph>
+
     </TextContainer>
   );
 };
 
 export default MainText;
+
+  
