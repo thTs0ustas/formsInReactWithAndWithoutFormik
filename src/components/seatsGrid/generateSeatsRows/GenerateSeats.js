@@ -8,9 +8,9 @@ const GenerateSeats = (seatNumbers, handleSeatRemove, handleSeatAdd) => {
       {seatNumbers.map((seatNumber) => (
         <Seat
           key={seatNumber.id}
-          seatInfo={seatNumber}
           handleSeatRemove={handleSeatRemove}
           handleSeatAdd={handleSeatAdd}
+          seatInfo={seatNumber}
         />
       ))}
     </SeatDiv>

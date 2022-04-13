@@ -2,16 +2,15 @@ import styled from "styled-components";
 
 const ReservationContainer = styled.main`
   background-color: ${({ theme }) => theme.bgMain};
-
   width: 100%;
 `;
 
 const MoviePoster = styled.div`
   margin: 0 auto;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1520px;
   min-height: 250px;
-  max-height: 360px;
+  max-height: 550px;
   height: 40vw;
   background-color: #a5f1d2;
   display: flex;
@@ -20,8 +19,10 @@ const MoviePoster = styled.div`
   align-items: center;
 
   & img {
-    image-rendering: optimizeQuality;
+    object-position: bottom;
     object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 `;
 

@@ -6,15 +6,8 @@ const HomeDiv = styled.div`
 `;
 
 const VideoWallDiv = styled.div`
-  position: relative;
   min-height: 400px;
-  max-height: 1000px;
-  height: 40vw;
   background-color: #a5f1d2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
 `;
 
 const NavDropdownDiv = styled(NavDropdown)`
@@ -40,7 +33,7 @@ const NavDropdownDiv = styled(NavDropdown)`
     z-index: -1;
     &[class*="show"] {
       width: fit-content;
-      z-index: 1;
+      z-index: 10000;
 
       background-color: ${({ theme }) => theme.secondary};
       border-radius: 0;
@@ -165,13 +158,13 @@ const PromoCard = styled.div`
   margin: 10px auto 10px auto;
 
   height: 35vw;
-  min-height: 120px;
+  min-height: 300px;
   max-height: 500px;
   border: 1px solid #000;
   width: 42vw;
   min-width: 250px;
   max-width: 650px;
-
+  
   @media (max-width: 576px) {
     width: 90vw;
     height: 85vw;

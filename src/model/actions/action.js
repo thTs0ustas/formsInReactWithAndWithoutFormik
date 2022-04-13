@@ -49,6 +49,9 @@ const newTicketAction = (payload) => ({
 const resetReservation = () => ({
   type: actionTypes.resetReservation,
 });
+const changeTheme = () => ({
+  type: actionTypes.changeTheme,
+});
 
 const moviesToHomeLayout = (payload) => ({
   type: actionTypes.getMoviesForHome,
@@ -56,6 +59,7 @@ const moviesToHomeLayout = (payload) => ({
 });
 
 export {
+  changeTheme,
   resetReservation,
   addSeatAction,
   newTicketAction,

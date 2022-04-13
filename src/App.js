@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
-
+import React from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { Ticket } from "./components";
 import { Payment } from "./components/payment/Payment";
 import { HomePageLayout, ReservationLayout, SignInLayout } from "./layouts";
-
 import { ThemeProvider } from "styled-components";
-import { theme } from "./theme";
+import { GlobalStyles, theme } from "./theme";
+import { useProvider } from "./model";
 
 function App() {
-  const [theming, setTheming] = useState(true);
+  const navigate = useNavigate();
+  const [state] = useProvider(["theme"]);
+
   return (
-    <ThemeProvider theme={theming ? theme.light : theme.dark}>
-      <input type='checkbox' onChange={() => setTheming(!theming)}></input>
+    <ThemeProvider theme={state.theme ? theme.light : theme.dark}>
+      <GlobalStyles />
       <div className='App'>
         <Routes>
           <Route path='/' element={<HomePageLayout />} />

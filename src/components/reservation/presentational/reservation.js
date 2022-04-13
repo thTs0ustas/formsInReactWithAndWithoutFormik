@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { keys } from "lodash";
+import { MdEventSeat } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 import { SeatMatrix } from "../../seatsGrid";
 import { TicketButton } from "./ticketButton/ticketButton";
@@ -14,6 +16,7 @@ import {
 import {
   ButtonForMembers,
   Container,
+  GuestContainer,
   NumberOfTickets,
   PleaseBeAMember,
   PleaseBeAMemberHeader,
@@ -21,43 +24,50 @@ import {
   Price,
   ReservationForm,
   ReservationInfoBar,
+  SeatLegend,
   SeatsContainer,
   SeatsGrid,
   TicketBar,
   TicketBarRight,
+  TicketInfo,
   TicketOptions,
   TypeOfTicket,
-} from "./styledComponents/styles";
+} from "./styledComponents";
 import { ContinueButton, Input, SelectContainer } from "../../../theme";
 import { paymentWithStripe } from "../../../stripe/stripe";
 import { Spinner } from "react-bootstrap";
 import { SeatsModal } from "./modal/Modal";
+import { GuestModal } from "./guestModal/GuestModal";
+
+import { GuestSignup } from "../../guestSignUp";
 
 export const Reservation = ({
   BASE_URL,
   handleChange,
   requests,
   spinner,
-  username,
   setSpinner,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   state: { reservation },
   handleSeatRemove,
   handleSeatAdd,
 }) => {
+  const username = window.sessionStorage.getItem("username");
+  const navigate = useNavigate();
   const handleContinueButton = (ev) => {
     ev.preventDefault();
     setSpinner(!spinner);
-    paymentWithStripe(
-      BASE_URL,
-      {
-        name: "Tickets",
-        price: price(numOfTickets) * 100,
-        quantity: numOfTickets.sum,
-        username,
-      },
-      { BASE_URL, seat, screening }
-    );
+    if (username)
+      paymentWithStripe(
+        BASE_URL,
+        {
+          name: "Tickets",
+          price: price(numOfTickets) * 100,
+          quantity: numOfTickets.sum,
+          username,
+        },
+        { BASE_URL, seat, screening }
+      );
   };
 
   return (
@@ -121,7 +131,7 @@ export const Reservation = ({
       </ReservationInfoBar>
       <Container>
         <TicketOptions>
-          {username || (
+          {!username || (
             <TicketBar>
               <div>
                 <TypeOfTicket>Member</TypeOfTicket>
@@ -205,25 +215,26 @@ export const Reservation = ({
                 TERMS AND CONDITIONS APPLY{" "}
               </PleaseBeAMemberParagraph>
             </div>
-            <ButtonForMembers>BE A MEMBER</ButtonForMembers>
+            <ButtonForMembers onClick={() => navigate("/login")}>
+              BE A MEMBER
+            </ButtonForMembers>
           </PleaseBeAMember>
 
-          <div style={{ width: "100%", textAlign: "center" }}>
+          <TicketInfo>
             <p>
-              You choose <strong>{numOfTickets.sum}</strong> tickets
+              You choose <strong>{numOfTickets.sum}</strong> ticket(s)
             </p>
-            <p>
-              Remaining seats{" "}
-              <strong>
-                {numOfTickets.sum - keys(seat).length > -1
-                  ? numOfTickets.sum - keys(seat).length
-                  : "Deselect some seats"}
-              </strong>
-            </p>
-            <p>Price: {price(numOfTickets).toFixed(2)}€</p>
-          </div>
 
-          <SeatsModal disabled={numOfTickets.sum - keys(seat).length !== 0}>
+            <p>
+              Price: <strong>{price(numOfTickets).toFixed(2)}</strong>€
+            </p>
+          </TicketInfo>
+
+          <SeatsModal
+            disabled={numOfTickets.sum > 0}
+            sum={numOfTickets?.sum}
+            seat={seat}
+          >
             <SeatsContainer disable={screening && numOfTickets.sum > 0}>
               <SeatsGrid>
                 <SeatMatrix
@@ -233,19 +244,43 @@ export const Reservation = ({
                   handleSeatAdd={handleSeatAdd}
                 />
               </SeatsGrid>
-              <ContinueButton
-                disabled={numOfTickets.sum - keys(seat).length !== 0}
-                onClick={handleContinueButton}
-                type='submit'
-              >
-                {spinner ? (
-                  "Continue"
-                ) : (
-                  <Spinner animation='border' role='status'>
-                    <span className='visually-hidden'>Loading...</span>
-                  </Spinner>
-                )}
-              </ContinueButton>
+              <SeatLegend>
+                <div>
+                  <MdEventSeat size={25} color='black' />
+                  <span>Seat is already taken.</span>
+                </div>
+                <div>
+                  <MdEventSeat size={25} color='#FF9D69' />
+                  <span>Seat is open.</span>
+                </div>
+                <div>
+                  <MdEventSeat size={25} color='crimson' />
+                  <span>Seat is checked.</span>
+                </div>
+              </SeatLegend>
+              {!username ? (
+                <GuestModal
+                  disabled={numOfTickets.sum - keys(seat).length !== 0}
+                >
+                  <GuestContainer>
+                    <GuestSignup />
+                  </GuestContainer>
+                </GuestModal>
+              ) : (
+                <ContinueButton
+                  disabled={numOfTickets.sum - keys(seat).length !== 0}
+                  onClick={handleContinueButton}
+                  type='submit'
+                >
+                  {spinner ? (
+                    "Continue"
+                  ) : (
+                    <Spinner animation='border' role='status'>
+                      <span className='visually-hidden'>Loading...</span>
+                    </Spinner>
+                  )}
+                </ContinueButton>
+              )}
             </SeatsContainer>
           </SeatsModal>
         </TicketOptions>

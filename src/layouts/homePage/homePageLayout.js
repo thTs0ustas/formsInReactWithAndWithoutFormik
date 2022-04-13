@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import {
   Archive,
   Card,
@@ -12,19 +12,16 @@ import {
   Promos,
   Typography,
   VideoWallDiv,
-  VideoWallInfo,
-
 } from "./styledComponents/styles";
 
-import {   
-  MoviesMonthImg,
-  MoviesMonthScreeningContainer,
-  MoviesMonthScreeningItem,
-} from "../../components/moviesOfTheMonth/styledComponents/styles";
+import { Header, SignUpBar } from "../../theme";
 
-import { Header, Nav, NavDiv, NavItem, SignUpBar } from "../../theme";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
+import NavBar from "../../components/NavBar";
+import CarouselHero from "../../components/HeroSlider";
+import { PromoMember, PromoStudents, Switch } from "../../components";
+import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
 
 const HomePageLayout = () => {
   const username = sessionStorage.getItem("username");
@@ -32,29 +29,14 @@ const HomePageLayout = () => {
     <HomeDiv>
       <Header mainPage={false}>
         <SignUpBar>
+          <Switch />
           <div>
             <SignupBarPart username={username} />
           </div>
         </SignUpBar>
         <VideoWallDiv>
-          <NavDiv>
-            <Nav>
-              <NavItem>1</NavItem>
-              <NavItem>2</NavItem>
-              <NavItem>3</NavItem>
-              <NavItem>4</NavItem>
-              <NavItem>5</NavItem>
-              <NavItem>6</NavItem>
-              <NavItem>7</NavItem>
-            </Nav>
-          </NavDiv>
-          <VideoWallInfo>
-            <p>Small Description</p>
-            <h2>Movie Title</h2>
-            <Link to='/reservation'>
-              <button>BOOK TICKETS</button>
-            </Link>
-          </VideoWallInfo>
+          <NavBar />
+          <CarouselHero />
         </VideoWallDiv>
       </Header>
       <div>
@@ -97,13 +79,14 @@ const HomePageLayout = () => {
               </Col>
             </Row>
           </ComingUp>
+          {/* <MoviesOfTheMonth /> */}
           <Promos>
             <Row>
-              <Col sm={6}>
-                <PromoCard />
+              <Col md={6}>
+                <PromoMember />
               </Col>
-              <Col sm={6}>
-                <PromoCard />
+              <Col md={6}>
+                <PromoStudents />
               </Col>
             </Row>
           </Promos>
