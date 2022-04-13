@@ -1,13 +1,12 @@
 import axios from "axios";
 import { handleError } from "../model/actions";
 
-export const paymentWithStripe = (url, data, request, dispatch) => {
-  window.sessionStorage.setItem("request", JSON.stringify(request));
+export const paymentWithStripe = (url, data, request, dispatch, token) => {
   axios
     .post(`${url}/payments/create-checkout`, data, {
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        authorization: `Bearer ${token}`,
       },
     })
     .then(({ data }) => {

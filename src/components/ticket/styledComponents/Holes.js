@@ -31,7 +31,7 @@ export const HolesTop = styled.div`
 export const HolesLower = styled.div`
   position: relative;
   margin: 25px;
-  border: 1px dashed #aaa;
+  border: 1px dashed ${({ theme }) => theme.light};
 
   &:before,
   &:after {

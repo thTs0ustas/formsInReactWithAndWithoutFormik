@@ -1,33 +1,43 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { newTicketAction, resetReservation, useProvider } from "../../../model";
+import { map, random } from "lodash";
 
-import axios from "axios";
-import { newTicketAction, useProvider } from "../../../model";
-import { handleError } from "../../../model/actions";
+export const useTicket = () => {
+  const [{ response }, dispatch] = useProvider(["reservation.response"]);
 
-export const useTicket = ({ username, reservationId }) => {
-  const [state, dispatch] = useProvider(["BASE_URL"]);
-
-  const navigate = useNavigate();
+  const barcode = () => {
+    const numbers = map(Array(12), () => random(0, 9));
+    const barcode = map(Array(152), () => random(0, 1));
+    return { barcode, numbers };
+  };
 
   useEffect(() => {
-    if (!window.sessionStorage.getItem("token")) {
-      navigate("/login");
-    } else {
-      axios
-        .get(
-          `${state.BASE_URL}/reservations/users/${username}/ticket/${reservationId}`
-        )
-        .then(({ data }) => dispatch(newTicketAction({ data })))
-        .catch((error) =>
-          dispatch(
-            handleError({
-              message: error.message,
-              time: new Date().getTime(),
-            })
-          )
-        );
+    if (response) {
+      const { userWithNewRes, reservedSeats } = response;
+
+      const payload = {
+        userid: userWithNewRes.id,
+        reservationId: userWithNewRes["Reservations"].at(-1).id,
+        hall: userWithNewRes["Reservations"][0]["Screening"]["auditorium_id"],
+        date: userWithNewRes["Reservations"][0]["Screening"]["movie_date"].split("T")[0],
+        start: userWithNewRes["Reservations"][0]["Screening"]["movie_starts"]
+          .split("T")[1]
+          .slice(0, 5),
+        seats: reservedSeats.map((seat) => ({
+          id: seat["Seat"].id,
+          cost: seat["cost"],
+          row: seat["Seat"]["row_letter"],
+          number: seat["Seat"]["seat_num"],
+          barcode: barcode().barcode.join(""),
+          numbers: barcode().numbers.join(""),
+        })),
+      };
+      dispatch(newTicketAction(payload));
+      dispatch(resetReservation());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [response]);
+
+  return {
+    response,
+  };
 };

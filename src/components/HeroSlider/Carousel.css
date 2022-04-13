@@ -19,10 +19,10 @@
 }
 
 .carousel img {
-  height: 95vh;
+  min-height: 95vh;
   width: 100%;
-  object-fit: cover;
   opacity: 50%;
+  object-fit: cover;
 }
 
 /*
@@ -41,6 +41,7 @@
 @media screen and (max-width: 1100px) {
   .carousel img {
     height: 65vh;
+
   }
 }
 @media screen and (max-width: 800px) {

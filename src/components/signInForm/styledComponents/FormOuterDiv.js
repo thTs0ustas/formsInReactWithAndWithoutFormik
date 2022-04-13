@@ -14,7 +14,7 @@ export const FormOuterDiv = styled.div`
   @media (max-width: 768px) {
     & h1 {
       font-size: 20px;
-      color: #ffebc6;
+      color: ${({ theme }) => theme.secondary};
     }
     & p {
       margin-top: 20px;

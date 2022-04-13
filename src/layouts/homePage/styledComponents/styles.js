@@ -7,7 +7,7 @@ const HomeDiv = styled.div`
 
 const VideoWallDiv = styled.div`
   min-height: 400px;
-  background-color: #a5f1d2;
+  background-color: ${({ theme }) => theme.bgMain};
 `;
 
 const NavDropdownDiv = styled(NavDropdown)`
@@ -20,7 +20,7 @@ const NavDropdownDiv = styled(NavDropdown)`
     width: 120px;
     background-color: ${({ theme }) => theme.primary};
     transition: background-color 0.3s ease-in-out;
-    color: black;
+    color: #000;
 
     &:hover,
     &:active,
@@ -40,7 +40,7 @@ const NavDropdownDiv = styled(NavDropdown)`
 
       & a {
         text-decoration: none;
-        color: black;
+        color: #000;
       }
     }
   }
@@ -131,7 +131,7 @@ const PromoCard = styled.div`
   width: 42vw;
   min-width: 250px;
   max-width: 650px;
-  
+
   @media (max-width: 576px) {
     width: 90vw;
     height: 85vw;

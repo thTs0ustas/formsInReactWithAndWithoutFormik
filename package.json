@@ -40,7 +40,7 @@
       "react/jsx-no-target-blank": 1,
       "react/jsx-no-script-url": 1,
       "react/jsx-props-no-spreading": 1,
-      "prefer-spread": [1, { "ignoreArrays": 1 }],
+      "prefer-spread": [1],
       "react/destructuring-assignment": 1,
       "react-hooks/exhaustive-deps": 1,
       "react/default-props-match-prop-types": 1,
@@ -48,8 +48,7 @@
       "react/no-unknown-property": 1,
       "react/sort-prop-types": 1,
       "react/jsx-curly-brace-presence": [1, "never"],
-      "react/jsx-curly-newline": [1, { "multiline": "always", "singleline": "never" }],
-      "promise/always-return": 1,
+      "react/jsx-curly-newline": true,
       "react/no-array-index-key": 1,
       "react/jsx-key": 1,
       "react/jsx-no-constructed-context-values": 1

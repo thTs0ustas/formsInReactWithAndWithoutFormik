@@ -5,20 +5,19 @@ import { Reservation } from "../presentational/reservation";
 import { useProvider } from "../../../model";
 import { useResContainer } from "./customHooks/useResContainer";
 import { paymentWithStripe } from "../../../stripe/stripe";
-import { PRICING } from "../helpers";
-import { filter, flow, keys, map, omit } from "lodash/fp";
 
 const ReservationContainer = () => {
   const [state, dispatch] = useProvider([
     "userInfo.username",
+    "userInfo.token",
     "reservation.inputValues",
     "reservation.requests",
     "reservation.response",
     "BASE_URL",
   ]);
 
-  // const username = window.sessionStorage.getItem("username");
   const {
+    token,
     username,
     inputValues,
     requests,
@@ -29,22 +28,6 @@ const ReservationContainer = () => {
 
   const navigate = useNavigate();
   const [spinner, setSpinner] = useState(true);
-
-  const dataForPayment = (tickets) =>
-    flow(
-      omit("sum"),
-      keys,
-      map((ticket) => {
-        if (tickets[ticket] > 0) {
-          return {
-            name: `${ticket} ticket`.toUpperCase(),
-            price: PRICING[ticket] * 100,
-            quantity: tickets[ticket],
-          };
-        }
-      }),
-      filter(undefined)
-    )(tickets);
 
   const handleContinueButton = (ev) => {
     ev.preventDefault();
@@ -57,11 +40,12 @@ const ReservationContainer = () => {
           username,
         },
         { BASE_URL, seat: inputValues.seat, screening: inputValues.screening },
-        dispatch
+        dispatch,
+        token
       );
   };
 
-  const { handleSeatAdd, handleSeatRemove, handleChange } = useResContainer({
+  const { handleSeatAdd, title, handleSeatRemove, handleChange, dataForPayment } = useResContainer({
     BASE_URL,
     inputValues,
     dispatch,
@@ -69,6 +53,7 @@ const ReservationContainer = () => {
   });
 
   const props = {
+    title,
     handleContinueButton,
     handleChange,
     handleSeatRemove,
@@ -87,4 +72,4 @@ const ReservationContainer = () => {
   return <Reservation {...props} />;
 };
 
-export default ReservationContainer;
+export { ReservationContainer };

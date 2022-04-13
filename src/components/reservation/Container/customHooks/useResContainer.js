@@ -2,18 +2,26 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 import { differenceWith, flatMap, isEqual, toPairs } from "lodash";
 
-import { addSeatAction, inputChangeAction, removeSeatAction, requestAction } from "../../../../model";
+import {
+  addSeatAction,
+  inputChangeAction,
+  removeSeatAction,
+  requestAction,
+  resetReservation,
+} from "../../../../model";
 
-import { fetchRequest, nextRequest } from "../../helpers";
+import { fetchRequest, nextRequest, PRICING } from "../../helpers";
 import { handleError } from "../../../../model/actions";
-
+import { filter, flow, keys, map, omit } from "lodash/fp";
+import { useParams } from "react-router-dom";
 
 export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
   const historyState = useRef({});
+  const { title } = useParams();
 
-  useEffect(() => {
-    historyState.current = inputValues;
-    axios
+  useEffect(async () => {
+    dispatch(resetReservation());
+    await axios
       .get(`${BASE_URL}/movies`)
       .then((response) => {
         dispatch(
@@ -24,19 +32,13 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
         );
       })
       .catch((error) =>
-        dispatch(
-          handleError({ message: error.message, time: new Date().getTime() })
-        )
+        dispatch(handleError({ message: error.message, time: new Date().getTime() }))
       );
   }, []);
 
   useEffect(() => {
     const diff = flatMap(
-      differenceWith(
-        toPairs(inputValues),
-        toPairs(historyState.current),
-        isEqual
-      )
+      differenceWith(toPairs(inputValues), toPairs(historyState.current), isEqual)
     )[0];
 
     fetchRequest({
@@ -46,6 +48,22 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
       dispatch,
     });
   }, [inputValues]);
+
+  const dataForPayment = (tickets) =>
+    flow(
+      omit("sum"),
+      keys,
+      map((ticket) => {
+        if (tickets[ticket] > 0) {
+          return {
+            name: `${ticket} ticket`.toUpperCase(),
+            price: PRICING[ticket] * 100,
+            quantity: tickets[ticket],
+          };
+        }
+      }),
+      filter(undefined)
+    )(tickets);
 
   const handleSeatAdd = (seat) => {
     historyState.current = inputValues;
@@ -72,5 +90,5 @@ export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
     );
   };
 
-  return { handleSeatAdd, handleSeatRemove, handleChange };
+  return { handleSeatAdd, title, handleSeatRemove, handleChange, dataForPayment };
 };

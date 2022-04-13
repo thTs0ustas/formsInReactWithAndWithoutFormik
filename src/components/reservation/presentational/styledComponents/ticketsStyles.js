@@ -26,7 +26,7 @@ const TicketInfo = styled.div`
   & p:first-child {
     text-transform: uppercase;
     font-size: 18px;
-    color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary}
     border-bottom: 1px solid #b09661;
 
     & strong {
@@ -38,7 +38,7 @@ const TicketInfo = styled.div`
     text-transform: uppercase;
     font-size: 18px;
     color: ${({ theme }) => theme.secondary};
-    border-bottom: 1px solid #b09661;
+    border-bottom: 1px solid ${({ theme }) => theme.primary}
 
     & strong {
       color: ${({ theme }) => theme.primary};
@@ -75,8 +75,7 @@ const NumberOfTickets = styled.p`
   color: ${({ theme }) => theme.secondary2};
 `;
 const ButtonForTickets = styled.button`
-  border-radius: ${({ left = false }) =>
-    left ? "3px 0 0 3px " : "0 3px 3px 0"};
+  border-radius: ${({ left = false }) => (left ? "3px 0 0 3px " : "0 3px 3px 0")};
   background-color: ${({ theme }) => theme.logo};
   width: 34px;
   height: 34px;
