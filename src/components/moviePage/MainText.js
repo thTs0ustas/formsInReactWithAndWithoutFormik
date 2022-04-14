@@ -54,7 +54,7 @@ const MainText = () => {
             <SectionTitle>Genre</SectionTitle>
             <Paragraph>{movie.Movie?.genre}</Paragraph>
             <SectionTitle>Release Year</SectionTitle>
-            <Paragraph>1975</Paragraph>
+            <Paragraph>{movie.Movie?.release_year}</Paragraph>
 
     </TextContainer>
   );
