@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Reservation } from "../presentational/reservation";
 import { useProvider } from "../../../model";
 import { useResContainer } from "./customHooks/useResContainer";
-import { paymentWithStripe } from "../../../stripe/stripe";
+
+import { handleChange, handleSeatAdd, handleSeatRemove } from "../helpers";
+import { useContinueButtonHandler } from "./customHooks/useContinueButtonHandler";
 
 const ReservationContainer = () => {
   const [state, dispatch] = useProvider([
@@ -17,47 +19,30 @@ const ReservationContainer = () => {
   ]);
 
   const {
-    token,
     username,
     inputValues,
     requests,
-    response,
     inputValues: { numOfTickets },
     BASE_URL,
   } = state;
 
   const navigate = useNavigate();
-  const [spinner, setSpinner] = useState(true);
 
-  const handleContinueButton = (ev) => {
-    ev.preventDefault();
-    setSpinner(!spinner);
-    if (username)
-      paymentWithStripe(
-        BASE_URL,
-        {
-          data: dataForPayment(numOfTickets),
-          username,
-        },
-        { BASE_URL, seat: inputValues.seat, screening: inputValues.screening },
-        dispatch,
-        token
-      );
-  };
-
-  const { handleSeatAdd, title, handleSeatRemove, handleChange, dataForPayment } = useResContainer({
+  const { spinner, setSpinner, handleContinueButton } = useContinueButtonHandler(
     BASE_URL,
-    inputValues,
+    numOfTickets
+  );
+
+  useResContainer({
+    BASE_URL,
     dispatch,
-    response,
   });
 
   const props = {
-    title,
     handleContinueButton,
-    handleChange,
-    handleSeatRemove,
-    handleSeatAdd,
+    handleChange: handleChange(dispatch),
+    handleSeatRemove: handleSeatRemove(dispatch),
+    handleSeatAdd: handleSeatAdd(dispatch),
     spinner,
     setSpinner,
     navigate,
