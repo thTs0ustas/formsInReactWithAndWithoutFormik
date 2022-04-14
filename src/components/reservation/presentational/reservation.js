@@ -1,19 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { keys, map } from "lodash";
+
+import { keys } from "lodash";
 import { MdEventSeat } from "react-icons/md";
 import { Spinner } from "react-bootstrap";
 
 import { SeatMatrix } from "../../seatsGrid";
-import { BeAMember, GuestModal, SeatsModal, TicketButton } from "./innerComponents";
-
+import { GuestSignup } from "../../guestSignUp";
 import {
-  disabledDecrement,
-  disabledIncrement,
-  price,
-  PRICING,
-  setScreeningString,
-} from "../helpers";
+  BeAMember,
+  GuestModal,
+  MoviePoster,
+  SeatsModal,
+  SelectInputs,
+  TicketButton,
+} from "./innerComponents";
+
+import { disabledDecrement, disabledIncrement, price, PRICING } from "../helpers";
 
 import {
   Container,
@@ -21,7 +23,6 @@ import {
   NumberOfTickets,
   Price,
   ReservationForm,
-  ReservationInfoBar,
   SeatLegend,
   SeatsContainer,
   SeatsGrid,
@@ -32,13 +33,10 @@ import {
   TypeOfTicket,
 } from "./styledComponents";
 
-import { ContinueButton, Input, SelectContainer } from "../../../theme";
-
-import { GuestSignup } from "../../guestSignUp";
-import { MoviePoster } from "./styledComponents/MoviePoster";
+import { ContinueButton } from "../../../theme";
 
 export const Reservation = ({
-  title: paramsTitle,
+  image,
   handleChange,
   requests,
   spinner,
@@ -49,78 +47,19 @@ export const Reservation = ({
   handleSeatAdd,
   handleContinueButton,
 }) => {
+  console.log(movie);
   return (
     <>
-      <MoviePoster>
-        <img
-          src={require(`../../../assets/imgs/${
-            movie
-              ? movie.toLowerCase().replace(" ", "")
-              : paramsTitle
-              ? paramsTitle.toLowerCase().replace(" ", "")
-              : "movie-theater"
-          }.jpg`)}
-          alt='poster'
-        />
-      </MoviePoster>
+      <MoviePoster image={image} />
       <ReservationForm>
-        <ReservationInfoBar>
-          <SelectContainer controlId='floatingInput' label='Movie'>
-            <Input value={movie || paramsTitle} id='movie' name='movie' onChange={handleChange}>
-              <option value={""}></option>
-              {map(requests.movies, ({ Movie: { id, title } }) => (
-                <option key={id} value={title}>
-                  {title}
-                </option>
-              ))}
-            </Input>
-          </SelectContainer>
-
-          <SelectContainer controlId='floatingInput' label='Theater'>
-            <Input name='cinema' value={cinema} onChange={handleChange} disabled={!movie}>
-              <option value='' />
-              {requests.cinemas.map(({ id, address }) => (
-                <option key={id} value={address}>
-                  {address}
-                </option>
-              ))}
-            </Input>
-          </SelectContainer>
-
-          <SelectContainer controlId='floatingInput' label='Auditorium'>
-            <Input
-              value={auditorium}
-              name='auditorium'
-              onChange={(e) => handleChange(e)}
-              disabled={!cinema}
-            >
-              <option value='' />
-              {requests.auditoriums.map(({ id, hall_num, columns }) => {
-                return (
-                  <option key={id} value={[id, columns]}>
-                    {`Hall ${hall_num}`}
-                  </option>
-                );
-              })}
-            </Input>
-          </SelectContainer>
-
-          <SelectContainer controlId='floatingInput' label='Screenings'>
-            <Input
-              value={screening}
-              name='screening'
-              onChange={(e) => handleChange(e)}
-              disabled={!auditorium}
-            >
-              <option value='' />
-              {requests.screenings.map(({ id, movie_starts, movie_ends, movie_date }) => (
-                <option key={id} value={id}>
-                  {setScreeningString(movie_starts, movie_ends, movie_date)}
-                </option>
-              ))}
-            </Input>
-          </SelectContainer>
-        </ReservationInfoBar>
+        <SelectInputs
+          handleChange={handleChange}
+          auditorium={auditorium}
+          screening={screening}
+          requests={requests}
+          cinema={cinema}
+          movie={movie}
+        />
         <Container>
           <TicketOptions>
             {!username || (
@@ -140,7 +79,13 @@ export const Reservation = ({
                   </TicketButton>
                   <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
                   <TicketButton
-                    disabled={!screening || disabledIncrement(numOfTickets, requests)}
+                    disabled={
+                      !screening ||
+                      disabledIncrement(numOfTickets, {
+                        seats: requests.seats[auditorium[0]],
+                        reservedSeats: requests.reservedSeats[screening],
+                      })
+                    }
                     type='member'
                     add={true}
                   >
@@ -157,7 +102,13 @@ export const Reservation = ({
               <TicketBarRight>
                 <TicketButton
                   left={true}
-                  disabled={!screening || disabledDecrement(requests)}
+                  disabled={
+                    !screening ||
+                    disabledIncrement(numOfTickets, {
+                      seats: requests.seats[auditorium[0]],
+                      reservedSeats: requests.reservedSeats[screening],
+                    })
+                  }
                   type='adult'
                   subtract={true}
                 >
@@ -165,7 +116,13 @@ export const Reservation = ({
                 </TicketButton>
                 <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
                 <TicketButton
-                  disabled={!screening || disabledIncrement(numOfTickets, requests)}
+                  disabled={
+                    !screening ||
+                    disabledIncrement(numOfTickets, {
+                      seats: requests.seats[auditorium[0]],
+                      reservedSeats: requests.reservedSeats[screening],
+                    })
+                  }
                   type='adult'
                   add={true}
                 >
@@ -181,7 +138,13 @@ export const Reservation = ({
               <TicketBarRight>
                 <TicketButton
                   left={true}
-                  disabled={!screening || disabledDecrement(requests)}
+                  disabled={
+                    !screening ||
+                    disabledIncrement(numOfTickets, {
+                      seats: requests.seats[auditorium[0]],
+                      reservedSeats: requests.reservedSeats[screening],
+                    })
+                  }
                   type='child'
                   subtract={true}
                 >
@@ -189,7 +152,13 @@ export const Reservation = ({
                 </TicketButton>
                 <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
                 <TicketButton
-                  disabled={!screening || disabledIncrement(numOfTickets, requests)}
+                  disabled={
+                    !screening ||
+                    disabledIncrement(numOfTickets, {
+                      seats: requests.seats[auditorium[0]],
+                      reservedSeats: requests.reservedSeats[screening],
+                    })
+                  }
                   type='child'
                   add={true}
                 >
@@ -214,7 +183,7 @@ export const Reservation = ({
                 <SeatsGrid>
                   <SeatMatrix
                     state={reservation}
-                    seats={requests.seats}
+                    seats={requests.seats[auditorium[0]]}
                     handleSeatRemove={handleSeatRemove}
                     handleSeatAdd={handleSeatAdd}
                   />
@@ -261,18 +230,4 @@ export const Reservation = ({
       </ReservationForm>
     </>
   );
-};
-
-Reservation.propTypes = {
-  requests: PropTypes.object,
-  handleSeatAdd: PropTypes.func,
-  handleSeatRemove: PropTypes.func,
-  handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  inputValues: PropTypes.object,
-  price: PropTypes.string,
-  screening: PropTypes.object,
-  setSeat: PropTypes.func,
-  setSpinner: PropTypes.func,
-  setTicket: PropTypes.func,
 };

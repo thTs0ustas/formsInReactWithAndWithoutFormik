@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MoviePoster = styled.div`
+const MoviePosterStyles = styled.div`
   margin: 0 auto;
   width: 100%;
   max-width: 1520px;
@@ -21,4 +21,4 @@ const MoviePoster = styled.div`
   }
 `;
 
-export { MoviePoster };
+export { MoviePosterStyles };
