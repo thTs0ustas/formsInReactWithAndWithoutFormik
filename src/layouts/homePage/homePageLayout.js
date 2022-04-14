@@ -14,6 +14,13 @@ import {
   VideoWallDiv,
 } from "./styledComponents/styles";
 
+
+import {   
+  MoviesMonthImg,
+  MoviesMonthScreeningContainer,
+  MoviesMonthScreeningItem, 
+} from "../../components/moviesOfTheMonth/styledComponents/styles";
+
 import { Header, SignUpBar } from "../../theme";
 
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
@@ -45,41 +52,8 @@ const HomePageLayout = () => {
             <h2>Title</h2>
             <p>Under Title</p>
           </Typography>
-          <ComingUp>
-            <Row className='flex-nowrap'>
-              <Col md={4} sm={6} xs={12}>
-                <MoviesMonthImg src="../../assets/small-images/movie_11-min.jpg" />
-                <p>M</p>
-                <h2><a href="">Matrix</a></h2>
-                <MoviesMonthScreeningContainer>
-                  <MoviesMonthScreeningItem>03:50 PM </MoviesMonthScreeningItem>
-                  <MoviesMonthScreeningItem>06:50 PM</MoviesMonthScreeningItem>
-                  <MoviesMonthScreeningItem>09:50 PM</MoviesMonthScreeningItem>
-                </MoviesMonthScreeningContainer>
-              </Col>
-              <Col md={4} sm={6} xs={12}>
-                <MoviesMonthImg src="../../assets/small-images/movie_21-min.jpg" />
-                <p>M</p>
-                <h2><a href="">A New Hope</a></h2>
-                <MoviesMonthScreeningContainer>
-                  <MoviesMonthScreeningItem>03:50 PM </MoviesMonthScreeningItem>
-                  <MoviesMonthScreeningItem>06:50 PM</MoviesMonthScreeningItem>
-                  <MoviesMonthScreeningItem>09:50 PM</MoviesMonthScreeningItem>
-                </MoviesMonthScreeningContainer>
-              </Col>
-              <Col md={4} sm={6} xs={12}>
-                <MoviesMonthImg src="../../assets/small-images/movie_10-min.jpg" />
-                <p>M</p>
-                <h2><a href="">Empire Strikes Back</a></h2>
-                <MoviesMonthScreeningContainer>
-                  <MoviesMonthScreeningItem>03:50 PM </MoviesMonthScreeningItem>
-                  <MoviesMonthScreeningItem>06:50 PM</MoviesMonthScreeningItem>
-                  <MoviesMonthScreeningItem>09:50 PM</MoviesMonthScreeningItem>
-                </MoviesMonthScreeningContainer>
-              </Col>
-            </Row>
-          </ComingUp>
-          {/* <MoviesOfTheMonth /> */}
+          
+          <MoviesOfTheMonth />
           <Promos>
             <Row>
               <Col md={6}>

@@ -82,6 +82,7 @@ const Features = styled.div`
 const ComingUp = styled.div`
   background-color: ${({ theme }) => theme.bgMain };
   padding: 10px 0;
+  overflow: auto;
 
   & p {
     margin-left: 25px;
@@ -93,7 +94,6 @@ const ComingUp = styled.div`
     margin-left: 25px;
     font-weight: bolder;
     text-transform: uppercase;
-    font-family: futura-pt;
     color: ${({ theme }) => theme.white };
   }
 

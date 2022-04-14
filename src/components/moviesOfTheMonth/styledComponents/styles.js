@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import {  Col } from 'react-bootstrap';
 // const ComingUp = styled.div`
 //   background-color: ${({ theme }) => theme.bgMain };
 //   padding: 10px 0;
@@ -82,8 +82,15 @@ const MoviesMonthScreeningItem = styled.div`
 `;
 
 
+const ColStyled = styled(Col)`
+  & h2 {}
+  & p {}
+`;
+
+
 export {
     // ComingUp,
+  ColStyled,
     MoviesMonthImg,
     MoviesMonthScreeningContainer,
     MoviesMonthScreeningItem,

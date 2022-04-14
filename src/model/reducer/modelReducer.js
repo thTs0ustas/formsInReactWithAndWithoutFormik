@@ -65,19 +65,16 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.userInfo.tickets.push(payload);
       });
-<<<<<<< HEAD
 
     case actionTypes.getMoviesForHome:
       return produce(state, (draft) => {
         draft.homepage.movies.push(payload);
       });
 
-=======
     case actionTypes.changeTheme:
       return produce(state, (draft) => {
         draft.theme = !draft.theme;
       });
->>>>>>> reservation-layout
     default:
       return state;
   }
