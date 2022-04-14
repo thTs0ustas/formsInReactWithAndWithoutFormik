@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Reservation } from "../presentational/reservation";
 import { useProvider } from "../../../model";
@@ -22,12 +22,16 @@ const ReservationContainer = () => {
     username,
     inputValues,
     requests,
+
     inputValues: { numOfTickets },
     BASE_URL,
   } = state;
 
   const navigate = useNavigate();
 
+  const data = useLocation();
+
+  console.log(data);
   const { spinner, setSpinner, handleContinueButton } = useContinueButtonHandler(
     BASE_URL,
     numOfTickets
@@ -39,6 +43,7 @@ const ReservationContainer = () => {
   });
 
   const props = {
+    image: data.state,
     handleContinueButton,
     handleChange: handleChange(dispatch),
     handleSeatRemove: handleSeatRemove(dispatch),

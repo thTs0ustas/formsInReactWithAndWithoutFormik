@@ -36,6 +36,7 @@ import {
 import { ContinueButton } from "../../../theme";
 
 export const Reservation = ({
+  image,
   handleChange,
   requests,
   spinner,
@@ -46,9 +47,10 @@ export const Reservation = ({
   handleSeatAdd,
   handleContinueButton,
 }) => {
+  console.log(movie);
   return (
     <>
-      <MoviePoster movie={movie} />
+      <MoviePoster image={image} />
       <ReservationForm>
         <SelectInputs
           handleChange={handleChange}

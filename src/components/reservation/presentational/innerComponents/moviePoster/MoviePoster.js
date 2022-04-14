@@ -1,12 +1,10 @@
 import React from "react";
 import { MoviePosterStyles } from "../../styledComponents";
 
-const MoviePoster = ({ movie }) => (
+const MoviePoster = ({ image }) => (
   <MoviePosterStyles>
     <img
-      src={require(`../../../../../assets/imgs/${
-        movie ? movie.toLowerCase().replace(" ", "") : "movie-theater"
-      }.jpg`)}
+      src={image ? image : require(`../../../../../assets/imgs/movie-theater.jpg`)}
       alt='poster'
     />
   </MoviePosterStyles>
