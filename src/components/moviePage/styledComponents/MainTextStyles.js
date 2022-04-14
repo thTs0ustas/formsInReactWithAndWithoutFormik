@@ -128,6 +128,7 @@ const SessionButton = styled.a`
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 50px;
+  margin-left: 10px;
   padding: 5px 10px;
   border: 2px solid transparent;
   background-color: #b09661;
