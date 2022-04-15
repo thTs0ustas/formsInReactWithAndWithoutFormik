@@ -3,8 +3,8 @@ import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 import { Switch } from "../../components";
 import NavBar from "../../components/NavBar";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
-import { MainPhoto, MainText } from "../../components";
 import Footer from "../../components/footer/Footer";
+import MoviePageContainer from "../../components/moviePage/MoviePageContainer";
 
 const MoviePageLayout = () => {
   return (
@@ -22,11 +22,7 @@ const MoviePageLayout = () => {
           </Nav>
         </NavDiv>
       </Header>
-      <div>
-        <MainPhoto />
-        <MainText />
-      </div>
-
+      <MoviePageContainer />
       <Footer />
     </>
   );
