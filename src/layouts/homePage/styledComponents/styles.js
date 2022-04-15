@@ -17,7 +17,7 @@ const NavDropdownDiv = styled(NavDropdown)`
     padding: 5px 5px;
     display: inline-block;
     text-align: center;
-    width: 120px;
+    min-width: 120px;
     background-color: ${({ theme }) => theme.primary};
     transition: background-color 0.3s ease-in-out;
     color: #000;

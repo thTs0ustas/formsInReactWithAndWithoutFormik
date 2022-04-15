@@ -11,6 +11,7 @@ import { useContinueButtonHandler } from "./customHooks/useContinueButtonHandler
 const ReservationContainer = () => {
   const [state, dispatch] = useProvider([
     "userInfo.username",
+    "userInfo.isMember",
     "userInfo.token",
     "reservation.inputValues",
     "reservation.requests",
@@ -22,7 +23,7 @@ const ReservationContainer = () => {
     username,
     inputValues,
     requests,
-
+    isMember,
     inputValues: { numOfTickets },
     BASE_URL,
   } = state;
@@ -42,6 +43,7 @@ const ReservationContainer = () => {
   });
 
   const props = {
+    isMember,
     image: data.state,
     handleContinueButton,
     handleChange: handleChange(dispatch),

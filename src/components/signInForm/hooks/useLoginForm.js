@@ -5,6 +5,7 @@ import { useProvider, userLoginAction } from "../../../model";
 
 export const useLoginForm = (isInModal = false) => {
   const [state, setState] = useState(null);
+  console.log(state);
   const [
     {
       userInfo: { username, token },
@@ -25,6 +26,7 @@ export const useLoginForm = (isInModal = false) => {
         userLoginAction({
           username: state.username,
           token: state.accessToken,
+          isMember: state.isMember,
         })
       );
       isInModal || navigate("/");

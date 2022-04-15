@@ -36,6 +36,7 @@ import {
 import { ContinueButton } from "../../../theme";
 
 export const Reservation = ({
+  isMember,
   image,
   handleChange,
   requests,
@@ -58,7 +59,7 @@ export const Reservation = ({
         />
         <Container>
           <TicketOptions>
-            {!username || (
+            {!isMember || (
               <TicketBar>
                 <div>
                   <TypeOfTicket>Member</TypeOfTicket>
