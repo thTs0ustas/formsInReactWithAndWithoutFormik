@@ -1,3 +1,5 @@
+export { selectors } from "./selectors/selectors";
+
 export {
   actionTypes,
   initStore,
@@ -15,4 +17,5 @@ export {
   resetReservation,
   changeTheme,
 } from "./actions";
+
 export { Provider, useProvider } from "./store/state";

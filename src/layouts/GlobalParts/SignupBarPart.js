@@ -8,10 +8,7 @@ import { useProvider, userLogoutAction } from "../../model";
 import axios from "axios";
 
 export const SignupBarPart = ({ username = null }) => {
-  const [{ BASE_URL, token }, dispatch] = useProvider([
-    "BASE_URL",
-    "userInfo.token",
-  ]);
+  const [{ BASE_URL, token }, dispatch] = useProvider(["BASE_URL", "userInfo.token"]);
   const navigate = useNavigate();
 
   const loginOut = () => {
@@ -21,7 +18,7 @@ export const SignupBarPart = ({ username = null }) => {
         { username },
         {
           headers: {
-            authorization: "Bearer " + token,
+            Authorization: "Bearer " + token,
           },
         }
       )

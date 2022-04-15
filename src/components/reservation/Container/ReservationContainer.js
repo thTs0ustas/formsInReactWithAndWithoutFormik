@@ -31,7 +31,6 @@ const ReservationContainer = () => {
 
   const data = useLocation();
 
-  console.log(data);
   const { spinner, setSpinner, handleContinueButton } = useContinueButtonHandler(
     BASE_URL,
     numOfTickets

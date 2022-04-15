@@ -12,8 +12,9 @@ export const useResContainer = ({ BASE_URL, dispatch }) => {
   useEffect(async () => {
     dispatch(resetReservation());
     await axios
-      .get(`${BASE_URL}/moviesOfTheMonth/${id}`)
+      .get(`${BASE_URL}/moviesOfTheMonth/reservation/${id}`)
       .then(({ data }) => {
+        console.log(data);
         dispatch(requestAction(data));
         const { title } = get(data, "movie.Movie");
         dispatch(

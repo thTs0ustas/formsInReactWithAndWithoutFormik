@@ -42,12 +42,8 @@ export const Reservation = ({
   spinner,
   username,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
-  state: { reservation },
-  handleSeatRemove,
-  handleSeatAdd,
   handleContinueButton,
 }) => {
-  console.log(movie);
   return (
     <>
       <MoviePoster image={image} />
@@ -71,7 +67,13 @@ export const Reservation = ({
                 <TicketBarRight>
                   <TicketButton
                     left={true}
-                    disabled={!screening || disabledDecrement(requests)}
+                    disabled={
+                      !screening ||
+                      disabledDecrement({
+                        seats: requests.seats[auditorium[0]],
+                        reservedSeats: requests.reservedSeats[screening],
+                      })
+                    }
                     type='member'
                     subtract={true}
                   >
@@ -104,7 +106,7 @@ export const Reservation = ({
                   left={true}
                   disabled={
                     !screening ||
-                    disabledIncrement(numOfTickets, {
+                    disabledDecrement({
                       seats: requests.seats[auditorium[0]],
                       reservedSeats: requests.reservedSeats[screening],
                     })
@@ -140,7 +142,7 @@ export const Reservation = ({
                   left={true}
                   disabled={
                     !screening ||
-                    disabledIncrement(numOfTickets, {
+                    disabledDecrement({
                       seats: requests.seats[auditorium[0]],
                       reservedSeats: requests.reservedSeats[screening],
                     })
@@ -181,12 +183,7 @@ export const Reservation = ({
             <SeatsModal disabled={numOfTickets.sum > 0} sum={numOfTickets?.sum} seat={seat}>
               <SeatsContainer disable={screening && numOfTickets.sum > 0}>
                 <SeatsGrid>
-                  <SeatMatrix
-                    state={reservation}
-                    seats={requests.seats[auditorium[0]]}
-                    handleSeatRemove={handleSeatRemove}
-                    handleSeatAdd={handleSeatAdd}
-                  />
+                  <SeatMatrix />
                 </SeatsGrid>
                 <SeatLegend>
                   <div>

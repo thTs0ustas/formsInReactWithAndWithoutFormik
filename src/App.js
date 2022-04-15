@@ -4,15 +4,16 @@ import { Payment } from "./components/payment/Payment";
 import { HomePageLayout, ReservationLayout, SignInLayout, TicketLayout } from "./layouts";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
-import { useProvider } from "./model";
+import { selectors, useProvider } from "./model";
 import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
+import { CancelPayment } from "./components";
 
 function App() {
   const [{ error, username, theme: theming }] = useProvider([
-    "error",
-    "theme",
-    "userInfo.username",
+    selectors.error,
+    selectors.username,
+    selectors.theme,
   ]);
 
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route path='/login' element={<SignInLayout username={username} />} />
           <Route path='/payments' element={<Payment username={username} />} />
           <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
-          <Route path='/payments/payment_cancel' element={<div>Cancel</div>} />
+          <Route path='/payments/payment_cancel' element={<CancelPayment />} />
           <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
         </Routes>
       </div>

@@ -25,18 +25,8 @@
   object-fit: cover;
 }
 
-/*
-.carousel-control-prev-icon  {
 
-    border: 2px solid white;
-    border-radius: 50%;
-    width: 1.2rem;
-    height: 1.2rem;
-    background-size: 80% 80%;
-    transform: translateX(-50%);
-    text-align: center;
 
-} */
 
 @media screen and (max-width: 1100px) {
   .carousel img {

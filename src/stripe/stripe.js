@@ -6,7 +6,7 @@ export const paymentWithStripe = (url, data, request, dispatch, token) => {
     .post(`${url}/payments/create-checkout`, data, {
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
     .then(({ data }) => {

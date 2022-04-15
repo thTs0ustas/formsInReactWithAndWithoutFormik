@@ -8,7 +8,7 @@ const SelectInputs = ({ handleChange, requests, movie, cinema, auditorium, scree
     <ReservationInfoBar>
       <SelectContainer controlId='floatingInput' label='Movie'>
         <Input value={movie} id='movie' name='movie' onChange={handleChange}>
-          <option value={requests.movies.title}>{requests.movies.title}</option>
+          <option value={requests.movies?.title}>{requests.movies?.title}</option>
           {/*{map(requests.movies, ({ id, title }) => (*/}
           {/*  <option key={id} value={title}>*/}
           {/*    {title}*/}

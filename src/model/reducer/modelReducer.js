@@ -2,7 +2,7 @@ import { actionTypes } from "../actions";
 import produce from "immer";
 import { INITIAL_STATE } from "../constants/constants";
 import { filter } from "lodash/fp";
-import { map, omit, reduce } from "lodash";
+import { forEach, map, omit } from "lodash";
 
 export const modelReducer = (state, action) => {
   const { type, payload } = action;
@@ -27,33 +27,28 @@ export const modelReducer = (state, action) => {
       });
 
     case actionTypes.request:
+      let seats = {};
+      let reservedSeats = {};
       return produce(state, (draft) => {
         const {
           movie: { Movie },
           screenings,
           auditoriums,
         } = payload;
+        forEach(auditoriums, (item) => {
+          seats[item.id] = item.Seats;
+        });
+        forEach(screenings, (item) => {
+          reservedSeats[item.id] = item.ReservedSeats;
+        });
+
         draft.reservation.requests = {
           movies: Movie,
-          cinemas: map(auditoriums, (item) => item.Cinema),
+          cinemas: map(auditoriums, (item) => item["Cinema"]),
           auditoriums: map(auditoriums, (item) => omit(item, ["Cinema", "Seats"])),
           screenings: map(screenings, (item) => omit(item, ["ReservedSeats"])),
-          seats: reduce(
-            auditoriums,
-            (seats, item) => ({
-              ...seats,
-              [item.id]: item.Seats,
-            }),
-            {}
-          ),
-          reservedSeats: reduce(
-            screenings,
-            (seats, item) => ({
-              ...seats,
-              [item.id]: item.ReservedSeats,
-            }),
-            {}
-          ),
+          seats,
+          reservedSeats,
         };
       });
 

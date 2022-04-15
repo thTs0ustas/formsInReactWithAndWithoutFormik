@@ -6,3 +6,4 @@ export { GuestSignup } from "./guestSignUp";
 export { PromoStudents } from "./Promos";
 export { PromoMember } from "./Promos";
 export { Switch } from "./themeSwitch";
+export { CancelPayment } from "./cancelPayment/CancelPayment";

@@ -7,26 +7,27 @@ import { TicketContainer } from "./styledComponents/TicketContainer";
 import { Numbers } from "./styledComponents/Numbers";
 import { BiggerTd } from "./styledComponents/BiggerTd";
 import { Cinema, Info, MovieTitle, Title } from "./styledComponents/Misc";
-import { useProvider } from "../../model";
+import { selectors, useProvider } from "../../model";
 import { useTicket } from "./hooks/useTicket";
 import { isEmpty } from "lodash";
 
 const Ticket = () => {
   useTicket();
-  const [{ tickets }] = useProvider(["userInfo.tickets"]);
+  const [{ tickets, BASE_URL }] = useProvider([selectors.tickets, selectors.url]);
+  const recentTicket = tickets.at(-1);
   return !isEmpty(tickets) ? (
     <>
-      {tickets.at(-1).seats.map(({ id, movie, cost, row, number, barcode, numbers }) => (
+      {recentTicket.seats.map(({ id, title, cost, row, number, barcode, numbers }) => (
         <TicketContainer key={id}>
           <HolesTop />
           <Title>
             <Cinema>RETRO CINEMA PRESENTS</Cinema>
-            <MovieTitle>{movie.toUpperCase()}</MovieTitle>
+            <MovieTitle>{recentTicket.title.toUpperCase()}</MovieTitle>
           </Title>
           <div className='poster'>
             <img
-              src={require(`../../assets/imgs/${movie.toLowerCase().replace(" ", "")}.jpg`)}
-              alt={`Movie: ${movie}`}
+              src={`${BASE_URL}/images/movie_${recentTicket.id}.jpg`}
+              alt={`Movie: ${recentTicket.title}`}
             />
           </div>
           <Info>
@@ -38,7 +39,7 @@ const Ticket = () => {
                   <th>SEAT</th>
                 </tr>
                 <tr>
-                  <BiggerTd>{tickets.at(-1).hall}</BiggerTd>
+                  <BiggerTd>{recentTicket.hall}</BiggerTd>
                   <BiggerTd>{row}</BiggerTd>
                   <BiggerTd>{number}</BiggerTd>
                 </tr>
@@ -53,8 +54,8 @@ const Ticket = () => {
                 </tr>
                 <tr>
                   <td>{cost}.00 €</td>
-                  <td>{tickets.at(-1).date.split("-").reverse().join("/")}</td>
-                  <td>{tickets.at(-1).start}</td>
+                  <td>{recentTicket.date.split("-").reverse().join("/")}</td>
+                  <td>{recentTicket.start}</td>
                 </tr>
               </tbody>
             </Table>
