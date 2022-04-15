@@ -7,6 +7,7 @@ import {
   ReservationLayout,
   SignInLayout,
   ThanksForYourPaymentLayout,
+  ThankYouForYourThoughts,
   TicketLayout,
 } from "./layouts";
 import { ThemeProvider } from "styled-components";
@@ -29,12 +30,12 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePageLayout username={username} />} />
           <Route path='/login' element={<SignInLayout username={username} />} />
-          <Route path='/payments' element={<Payment username={username} />} />
-
-          <Route path='/payments/payment_cancel' element={<CancelPaymentLayout />} />
-          <Route path='/payments/payment_applied' element={<ThanksForYourPaymentLayout />} />
+          <Route path='/contactUs' element={<ThankYouForYourThoughts />} />
           <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
           <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
+          <Route path='/payments' element={<Payment username={username} />} />
+          <Route path='/payments/payment_cancel' element={<CancelPaymentLayout />} />
+          <Route path='/payments/payment_applied' element={<ThanksForYourPaymentLayout />} />
         </Routes>
       </div>
       <ToastContainer style={{ position: "sticky", zIndex: 10001 }} position={"top-end"}>
