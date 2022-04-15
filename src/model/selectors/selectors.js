@@ -7,6 +7,7 @@ export const selectors = {
   resScreenings: "reservation.requests.screenings",
   resSeats: "reservation.requests.seats",
   resReserved: "reservation.requests.reservedSeats",
+  resResponse: "reservation.response",
   inputMovies: "reservation.inputValues.movie",
   inputCinemas: "reservation.inputValues.cinema",
   inputAuditoriums: "reservation.inputValues.auditorium",

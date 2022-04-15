@@ -12,23 +12,25 @@ import { useTicket } from "./hooks/useTicket";
 import { isEmpty } from "lodash";
 
 const Ticket = () => {
+  const [{ tickets, BASE_URL }] = useProvider([
+    selectors.tickets,
+    selectors.url,
+    selectors.inputMovies,
+  ]);
   useTicket();
-  const [{ tickets, BASE_URL }] = useProvider([selectors.tickets, selectors.url]);
-  const recentTicket = tickets.at(-1);
+  const recentTicket = tickets?.at(-1);
+  console.log(recentTicket);
   return !isEmpty(tickets) ? (
     <>
-      {recentTicket.seats.map(({ id, title, cost, row, number, barcode, numbers }) => (
+      {recentTicket.seats.map(({ id, cost, row, number, barcode, numbers }) => (
         <TicketContainer key={id}>
           <HolesTop />
           <Title>
             <Cinema>RETRO CINEMA PRESENTS</Cinema>
-            <MovieTitle>{recentTicket.title.toUpperCase()}</MovieTitle>
+            <MovieTitle>{recentTicket.title?.toUpperCase()}</MovieTitle>
           </Title>
           <div className='poster'>
-            <img
-              src={`${BASE_URL}/images/movie_${recentTicket.id}.jpg`}
-              alt={`Movie: ${recentTicket.title}`}
-            />
+            <img src={`${BASE_URL}${recentTicket?.image}`} alt={`Movie: ${recentTicket?.title}`} />
           </div>
           <Info>
             <Table>
@@ -39,7 +41,7 @@ const Ticket = () => {
                   <th>SEAT</th>
                 </tr>
                 <tr>
-                  <BiggerTd>{recentTicket.hall}</BiggerTd>
+                  <BiggerTd>{recentTicket?.hall}</BiggerTd>
                   <BiggerTd>{row}</BiggerTd>
                   <BiggerTd>{number}</BiggerTd>
                 </tr>
@@ -54,8 +56,8 @@ const Ticket = () => {
                 </tr>
                 <tr>
                   <td>{cost}.00 €</td>
-                  <td>{recentTicket.date.split("-").reverse().join("/")}</td>
-                  <td>{recentTicket.start}</td>
+                  <td>{recentTicket?.date.split("-").reverse().join("/")}</td>
+                  <td>{recentTicket?.start}</td>
                 </tr>
               </tbody>
             </Table>
