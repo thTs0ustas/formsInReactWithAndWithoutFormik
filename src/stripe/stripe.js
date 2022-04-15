@@ -16,8 +16,6 @@ export const paymentWithStripe = (url, data, request, dispatch, token) => {
       })
       .then((data) => window.location.replace(data["url"]))
       .catch((error) => {
-        console.log(error);
-        window.sessionStorage.removeItem("request");
         dispatch(
           handleError({
             message: error.message,

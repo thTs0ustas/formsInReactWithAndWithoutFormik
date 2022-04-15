@@ -4,14 +4,14 @@ import { handleSeatAdd, handleSeatRemove } from "../../../reservation/helpers";
 
 export const useSeat = (id, seatInfo) => {
   const [{ seat, sum, reservedSeats, screening }, dispatch] = useProvider([
-    selectors.inputReserved,
+    selectors.resReserved,
     selectors.inputScreenings,
     selectors.inputSum,
     selectors.inputSeats,
   ]);
 
   const exists = !!seat[id];
-
+  console.log(reservedSeats);
   const isAlreadyTaken = some(reservedSeats?.[screening], (item) => item["seats_id"] === id);
 
   const handleClick = (event) => {

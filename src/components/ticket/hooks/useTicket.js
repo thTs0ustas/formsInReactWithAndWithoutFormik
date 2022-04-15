@@ -3,14 +3,11 @@ import { newTicketAction, resetReservation, useProvider } from "../../../model";
 import { map, random } from "lodash";
 
 export const useTicket = () => {
-  const [
-    {
-      response,
-      movie: { title, id },
-    },
-    dispatch,
-  ] = useProvider(["reservation.response", "reservation.inputValues.movie"]);
-
+  const [{ response, movie }, dispatch] = useProvider([
+    "reservation.response",
+    "reservation.inputValues.movie",
+  ]);
+  console.log(movie);
   const barcode = () => {
     const numbers = map(Array(12), () => random(0, 9));
     const barcode = map(Array(152), () => random(0, 1));
@@ -22,8 +19,8 @@ export const useTicket = () => {
       const { userWithNewRes, reservedSeats } = response;
 
       const payload = {
-        id,
-        title: `${title}`,
+        id: movie.id,
+        title: movie.title,
         userid: userWithNewRes.id,
         reservationId: userWithNewRes["Reservations"].at(-1).id,
         hall: userWithNewRes["Reservations"][0]["Screening"]["auditorium_id"],
@@ -40,7 +37,7 @@ export const useTicket = () => {
           numbers: barcode().numbers.join(""),
         })),
       };
-      console.log(payload);
+
       dispatch(newTicketAction(payload));
       dispatch(resetReservation());
     }
