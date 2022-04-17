@@ -9,7 +9,7 @@ import { chunk, keys } from "lodash";
 import { useState } from "react";
 import { PaginationBasic } from "./pagination/Pagination";
 
-const ShowMovies = ({ eventK }) => {
+const ShowUsers = ({ eventK }) => {
   const dividers = {
     fifty: 2,
     twenty: 5,
@@ -19,8 +19,9 @@ const ShowMovies = ({ eventK }) => {
 
   const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
   const [page, setPage] = useState(0);
+
   const PER_PAGES = Math.floor(tableData.length / itemsPerPage);
-  const slices = chunk(tableData, PER_PAGES);
+  const slices = tableData.length > PER_PAGES ? [tableData] : chunk(tableData, PER_PAGES);
   const numberOfPages = slices.length;
 
   return (
@@ -58,4 +59,4 @@ const ShowMovies = ({ eventK }) => {
   );
 };
 
-export { ShowMovies };
+export { ShowUsers };

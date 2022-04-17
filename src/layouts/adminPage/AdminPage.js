@@ -4,6 +4,7 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import React, { useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { ShowMovies } from "../../components/admin/movies/ShowMovies";
+import { ShowUsers } from "../../components/admin/users/ShowUser";
 
 const AdminPage = () => {
   const [key, setKey] = useState("home");
@@ -27,7 +28,9 @@ const AdminPage = () => {
         <Tab eventKey='movies' title='Movies'>
           <ShowMovies eventK={key} />
         </Tab>
-        <Tab eventKey='users' title='Users'></Tab>
+        <Tab eventKey='users' title='Users'>
+          <ShowUsers eventK={key} />
+        </Tab>
         <Tab eventKey='cinemas' title='Cinemas'></Tab>
         <Tab eventKey='halls' title='Halls'></Tab>
         <Tab eventKey='screenings' title='Screenings'></Tab>

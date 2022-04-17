@@ -1,6 +1,7 @@
 export { actionTypes } from "./actionTypes";
 export {
   adminMoviesAction,
+  adminUsersAction,
   initStore,
   handleError,
   changeTheme,

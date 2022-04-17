@@ -26,7 +26,7 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
           <td />
           <td />
         </tr>
-        {tableData.map((data) =>
+        {tableData?.map((data) =>
           checkTitle(data.title) ? (
             <tr key={data.id}>
               {columns.map(({ accessor }) => {
