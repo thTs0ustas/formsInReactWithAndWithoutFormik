@@ -4,6 +4,7 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
+  margin-bottom: 40px;
   width: 50%;
 
   @media screen and (max-width: 768px) {
