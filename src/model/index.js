@@ -2,6 +2,7 @@ export { selectors } from "./selectors/selectors";
 
 export {
   actionTypes,
+  adminMoviesAction,
   initStore,
   addSeatAction,
   newTicketAction,

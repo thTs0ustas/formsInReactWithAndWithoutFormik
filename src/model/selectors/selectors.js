@@ -23,4 +23,5 @@ export const selectors = {
   username: "userInfo.username",
   token: "userInfo.token",
   reviews: "userInfo.reviews",
+  admin: "admin",
 };

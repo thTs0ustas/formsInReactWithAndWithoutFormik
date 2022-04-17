@@ -1,5 +1,6 @@
 const actionTypes = {
   inputChange: "INPUT_CHANGE",
+  adminMovies: "ADMIN_MOVIES",
   request: "REQUEST",
   addSeat: "SEAT_ADD",
   removeSeat: "SEAT_REMOVE",

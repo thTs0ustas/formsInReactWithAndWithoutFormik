@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Payment } from "./components/payment/Payment";
 import {
+  AdminPage,
   CancelPaymentLayout,
   HomePageLayout,
   ReservationLayout,
@@ -15,6 +16,7 @@ import { GlobalStyles, theme } from "./theme";
 import { selectors, useProvider } from "./model";
 import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
+import { ShowMovies } from "./components/admin/movies/ShowMovies";
 
 function App() {
   const [{ error, username, theme: theming }] = useProvider([
@@ -28,14 +30,23 @@ function App() {
       <GlobalStyles />
       <div className='App'>
         <Routes>
-          <Route path='/' element={<HomePageLayout username={username} />} />
-          <Route path='/login' element={<SignInLayout username={username} />} />
-          <Route path='/contactUs' element={<ThankYouForYourThoughts />} />
-          <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
-          <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
-          <Route path='/payments' element={<Payment username={username} />} />
-          <Route path='/payments/payment_cancel' element={<CancelPaymentLayout />} />
-          <Route path='/payments/payment_applied' element={<ThanksForYourPaymentLayout />} />
+          <Route path='/'>
+            <Route index element={<HomePageLayout username={username} />} />
+            <Route path='login' element={<SignInLayout username={username} />} />
+            <Route path='contactUs' element={<ThankYouForYourThoughts />} />
+            <Route path='payments'>
+              <Route index element={<Payment username={username} />} />
+              <Route path='payment_cancel' element={<CancelPaymentLayout />} />
+              <Route path='payment_applied' element={<ThanksForYourPaymentLayout />} />
+            </Route>
+            <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
+            <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
+            <Route path='admin'>
+              <Route index element={<AdminPage />} />
+              <Route path='movies' element={<ShowMovies />} />
+            </Route>
+          </Route>
+          {/*<Route path='/payments' element={<Payment username={username} />} />*/}
         </Routes>
       </div>
       <ToastContainer style={{ position: "sticky", zIndex: 10001 }} position={"top-end"}>

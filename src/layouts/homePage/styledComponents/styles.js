@@ -31,6 +31,11 @@ const NavDropdownDiv = styled(NavDropdown)`
   }
   & div {
     z-index: -1;
+    &:not([class*="show"]) {
+      & a {
+        display: none;
+      }
+    }
     &[class*="show"] {
       width: fit-content;
       z-index: 10000;
