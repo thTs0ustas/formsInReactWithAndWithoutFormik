@@ -7,13 +7,12 @@ import { Container, Screen, SeatsContainer } from "../styledComponents";
 import { selectors, useProvider } from "../../../model";
 
 const SeatMatrix = () => {
-  const seatsCol = (seats) => map(groupBy(seats, "row_letter"));
   const [{ auditorium, seats }] = useProvider([selectors.inputAuditoriums, selectors.resSeats]);
+  const seatsCol = (seats) => map(groupBy(seats, "row_letter"));
 
   return (
     <Container>
       <Screen>Screen</Screen>
-
       <SeatsContainer>
         {seatsCol(seats[auditorium[0]]).map((seatArr, index) => {
           const numberOfColumns = Math.round(seatArr.length / auditorium[2]);

@@ -11,8 +11,8 @@ export const useSeat = (id, seatInfo) => {
   ]);
 
   const exists = !!seat[id];
-  console.log(reservedSeats);
-  const isAlreadyTaken = some(reservedSeats?.[screening], (item) => item["seats_id"] === id);
+
+  const isAlreadyTaken = some(reservedSeats?.[screening[0]], (item) => item["seats_id"] === id);
 
   const handleClick = (event) => {
     event.stopPropagation();

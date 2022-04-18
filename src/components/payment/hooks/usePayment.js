@@ -22,13 +22,13 @@ const usePayment = () => {
     axios
       .post(`${String(BASE_URL)}/reservations/users/${username}/new`, {
         data: {
-          screening_id: +screening,
+          screening_id: +screening[0],
           price: price(numOfTickets),
           seats: map(seat, (seat) => ({
             id: seat.id,
             discount_type: seat.discount_type,
             cost: PRICING[seat.discount_type],
-            screening_id: +screening,
+            screening_id: +screening[0],
           })),
         },
       })

@@ -9,11 +9,6 @@ const SelectInputs = ({ handleChange, requests, movie, cinema, auditorium, scree
       <SelectContainer controlId='floatingInput' label='Movie'>
         <Input value={movie} id='movie' name='movie' onChange={handleChange}>
           <option value={requests.movies?.title}>{requests.movies?.title}</option>
-          {/*{map(requests.movies, ({ id, title }) => (*/}
-          {/*  <option key={id} value={title}>*/}
-          {/*    {title}*/}
-          {/*  </option>*/}
-          {/*))}*/}
         </Input>
       </SelectContainer>
 
@@ -55,7 +50,7 @@ const SelectInputs = ({ handleChange, requests, movie, cinema, auditorium, scree
         >
           <option value='' />
           {requests.screenings.map(({ id, movie_starts, movie_ends, movie_date }) => (
-            <option key={id} value={id}>
+            <option key={id} value={[id, movie_date]}>
               {setScreeningString(movie_starts, movie_ends, movie_date)}
             </option>
           ))}

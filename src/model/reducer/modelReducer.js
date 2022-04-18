@@ -61,6 +61,7 @@ export const modelReducer = (state, action) => {
         let adultSeat = filter({ discount_type: "adult" })(state.reservation.inputValues.seat);
         let childSeat = filter({ discount_type: "child" })(state.reservation.inputValues.seat);
         let memberSeat = filter({ discount_type: "member" })(state.reservation.inputValues.seat);
+        // let studentSeat = filter({ discount_type: "student" })(state.reservation.inputValues.seat);
 
         if (adultSeat.length < adult)
           draft.reservation.inputValues.seat[payload.value.id] = {
@@ -76,6 +77,11 @@ export const modelReducer = (state, action) => {
           draft.reservation.inputValues.seat[payload.value.id] = {
             ...payload.value,
             discount_type: "member",
+          };
+        else
+          draft.reservation.inputValues.seat[payload.value.id] = {
+            ...payload.value,
+            discount_type: "student",
           };
       });
 
