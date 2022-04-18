@@ -4,6 +4,16 @@ const initStore = (payload) => ({
   type: actionTypes.initStore,
   payload,
 });
+
+const adminMoviesAction = (payload) => ({
+  type: actionTypes.adminMovies,
+  payload,
+});
+const adminUsersAction = (payload) => ({
+  type: actionTypes.adminUsers,
+  payload,
+});
+
 const requestAction = (payload) => ({
   type: actionTypes.request,
   payload,
@@ -63,6 +73,8 @@ const handleError = (payload) => ({
 });
 
 export {
+  adminUsersAction,
+  adminMoviesAction,
   handleError,
   initStore,
   changeTheme,

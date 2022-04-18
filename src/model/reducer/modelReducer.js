@@ -17,6 +17,9 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.userInfo.username = payload.username;
         draft.userInfo.token = payload.token;
+        draft.userInfo.isMember = payload.isMember;
+        draft.userInfo.isAdmin = payload.isAdmin;
+
         draft.userInfo.reviews = {};
         draft.userInfo.tickets = [];
       });
@@ -126,6 +129,15 @@ export const modelReducer = (state, action) => {
     case actionTypes.newError:
       return produce(state, (draft) => {
         draft.error = payload;
+      });
+
+    case actionTypes.adminMovies:
+      return produce(state, (draft) => {
+        draft.admin.movies = payload;
+      });
+    case actionTypes.adminUsers:
+      return produce(state, (draft) => {
+        draft.admin.users = payload;
       });
 
     default:

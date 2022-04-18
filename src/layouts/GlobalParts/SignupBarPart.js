@@ -4,11 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 import { NavDropdownDiv } from "../homePage/styledComponents/styles";
 import { SignInButton, SignUpButton } from "../../theme";
-import { useProvider, userLogoutAction } from "../../model";
+import { selectors, useProvider, userLogoutAction } from "../../model";
 import axios from "axios";
 
-export const SignupBarPart = ({ username = null }) => {
-  const [{ BASE_URL, token }, dispatch] = useProvider(["BASE_URL", "userInfo.token"]);
+export const SignupBarPart = () => {
+  const [{ username }] = useProvider([selectors.username]);
+  const [
+    {
+      BASE_URL,
+      userInfo: { token, isMember },
+    },
+    dispatch,
+  ] = useProvider(["BASE_URL", "userInfo"]);
   const navigate = useNavigate();
 
   const loginOut = () => {
@@ -37,10 +44,14 @@ export const SignupBarPart = ({ username = null }) => {
     </>
   ) : (
     <NavDropdownDiv title={username} id='nav-dropdown'>
-      <NavDropdown.Item eventKey='4.1'>Info</NavDropdown.Item>
-      <NavDropdown.Item eventKey='4.1'>Reservations</NavDropdown.Item>
-      <NavDropdown.Item eventKey='4.1'>Reviews</NavDropdown.Item>
-      <NavDropdown.Divider />
+      {isMember && (
+        <>
+          <NavDropdown.Item eventKey='4.1'>Info</NavDropdown.Item>
+          <NavDropdown.Item eventKey='4.1'>Reservations</NavDropdown.Item>
+          <NavDropdown.Item eventKey='4.1'>Reviews</NavDropdown.Item>
+          <NavDropdown.Divider />
+        </>
+      )}
       <NavDropdown.Item
         eventKey='4.2'
         onClick={() => {
