@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  CarouselItem,
   ColStyled,
   MoviesMonthImg,
   MoviesMonthScreeningContainer,
@@ -37,32 +38,38 @@ export const MoviesOfTheMonth = () => {
       </TitleHeader>
       <ShowingToday>
         <Carousel activeIndex={index} onSelect={handleSelect} fade>
-          {map(slices, (slice, i) => (
-            <Carousel.Item key={i} interval={3000} style={{ display: "flex" }}>
+          {map(slices, (slice, i) => {
+            return (
+            <CarouselItem key={i} interval={3000} style={{ display: "flex" }}>
               {map(
                 slice,
                 ({
                   Screenings,
                   Movie: { id, title, genre, image, Screening },
-                }) => (
+                }) => {
+                  {/* if(today === movieDate(movie_starts)) */}
+                  return (
                   <ColStyled key={id} md={4} sm={6} xs={12}>
                     <MoviesMonthImg src={`${state.BASE_URL}${image}`} />
-                    <p>{genre.replace(/^\w/, (c) => c.toUpperCase())}</p>
+                    <p>{genre.replace(/^\w/, (c) => c?.toUpperCase())}</p>
                     <h2>
                       <Link to={`/reservation/${id}`}>{title}</Link>
                     </h2>
                     <MoviesMonthScreeningContainer>
+                        
                       {map(Screenings, ({ id, movie_starts }) => (
+                       
                         <MoviesMonthScreeningItem key={id}>
-                          {movie_starts.split("T")[1].slice(0, 5)} PM
+                          {movie_starts.split("T")[1].slice(0, 5)}
                         </MoviesMonthScreeningItem>
+                        
                       ))}
                     </MoviesMonthScreeningContainer>
                   </ColStyled>
-                )
+                )}
               )}
-            </Carousel.Item>
-          ))}
+            </CarouselItem>
+          )})}
 
           {/*</Row>*/}
         </Carousel>

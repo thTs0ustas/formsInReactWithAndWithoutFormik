@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Col } from "react-bootstrap";
+import { Carousel, Col } from "react-bootstrap";
 
 const TitleHeader = styled.div`
   display: flex;
@@ -105,7 +105,15 @@ const ColStyled = styled(Col)`
   }
 `;
 
+
+const CarouselItem = styled(Carousel.Item)`
+background-color: ${({ theme }) => theme.bgMain};
+`;
+
+
+
 export {
+  CarouselItem,
   TitleHeader,
   ShowingToday,
   ColStyled,
