@@ -41,6 +41,7 @@ function App() {
             </Route>
             <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
             <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
+
             <Route path='admin'>
               <Route index element={<AdminPage />} />
               <Route path='movies' element={<ShowMovies />} />

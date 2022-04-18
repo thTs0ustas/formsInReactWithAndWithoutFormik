@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Accordion } from "react-bootstrap";
+import { Accordion, Button } from "react-bootstrap";
 import { UpdateMovieForm } from "./updateMovieForm/UpdateMovieForm";
+import { AddNewMovieForm } from "./addNewMovieForm/AddNewMovieForm";
 
 const TableBody = ({ tableData, columns, handleUpdateTable }) => {
   const [include, setInclude] = useState("");
   const [modalShow, setModalShow] = useState(false);
+  const [addNewModalShow, setAddNewModalShow] = useState(false);
   const [movieData, setMovieData] = useState(null);
 
   const handleModal = (data) => {
@@ -17,14 +19,18 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
     <>
       <tbody>
         <tr>
+          <td colSpan={6}>
+            <Button onClick={() => setAddNewModalShow(true)} variant='primary'>
+              Add New Movie
+            </Button>
+          </td>
+        </tr>
+        <tr>
           <td />
           <td>
             <input onChange={(e) => setInclude(e.target.value)} />
           </td>
-          <td />
-          <td />
-          <td />
-          <td />
+          <td colSpan={4} />
         </tr>
         {tableData?.map((data) =>
           checkTitle(data.title) ? (
@@ -58,6 +64,11 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
           onHide={() => setModalShow(false)}
         />
       )}
+      <AddNewMovieForm
+        handleUpdateTable={handleUpdateTable}
+        show={addNewModalShow}
+        onHide={() => setAddNewModalShow(false)}
+      />
     </>
   );
 };

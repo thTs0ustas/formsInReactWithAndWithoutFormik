@@ -18,10 +18,13 @@ const TableHeader = styled.th`
       : ""};
 
   &:first-child {
-    width: 50px !important;
+    width: 5% !important;
+  }
+  &:nth-child(2) {
+    width: 20% !important;
   }
   &:nth-child(3) {
-    width: 40% !important;
+    width: 20% !important;
   }
   &:nth-child(4) {
     width: 10% !important;
@@ -31,6 +34,12 @@ const TableHeader = styled.th`
   }
   &:nth-child(6) {
     width: 15% !important;
+  }
+  &:nth-child(7) {
+    width: 10% !important;
+  }
+  &:nth-child(8) {
+    width: 10% !important;
   }
 `;
 

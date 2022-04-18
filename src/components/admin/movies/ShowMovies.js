@@ -8,23 +8,24 @@ import { useAdminTable } from "./hooks/useAdminTable";
 import { chunk, keys } from "lodash";
 import { useState } from "react";
 import { PaginationBasic } from "./pagination/Pagination";
+import { TableContainer } from "./styledComponents/TableContainer";
 
 const ShowMovies = ({ eventK }) => {
   const dividers = {
-    fifty: 2,
-    twenty: 5,
+    fifty: 50,
+    twenty: 20,
     ten: 10,
   };
   const { tableData, setUpdateTable, setTableData, updateTable } = useAdminTable(eventK);
 
   const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
   const [page, setPage] = useState(0);
-  const PER_PAGES = Math.floor(tableData.length / itemsPerPage);
+  const PER_PAGES = Math.floor(tableData.length / (tableData.length / itemsPerPage));
   const slices = chunk(tableData, PER_PAGES);
   const numberOfPages = slices.length;
 
   return (
-    <div style={{ width: "80vw", margin: "0 auto" }}>
+    <TableContainer>
       <Table bordered hover style={{ backgroundColor: "white" }}>
         <TableHead {...{ columns, handleSorting: handleSorting(tableData, setTableData) }} />
         <TableBody
@@ -54,7 +55,7 @@ const ShowMovies = ({ eventK }) => {
           ))}
         </select>
       </div>
-    </div>
+    </TableContainer>
   );
 };
 

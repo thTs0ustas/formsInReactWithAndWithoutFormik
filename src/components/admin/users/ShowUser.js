@@ -11,8 +11,8 @@ import { PaginationBasic } from "./pagination/Pagination";
 
 const ShowUsers = ({ eventK }) => {
   const dividers = {
-    fifty: 2,
-    twenty: 5,
+    fifty: 50,
+    twenty: 20,
     ten: 10,
   };
   const { tableData, setUpdateTable, setTableData, updateTable } = useAdminTable(eventK);
@@ -20,7 +20,7 @@ const ShowUsers = ({ eventK }) => {
   const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
   const [page, setPage] = useState(0);
 
-  const PER_PAGES = Math.floor(tableData.length / itemsPerPage);
+  const PER_PAGES = Math.floor(tableData.length / (tableData.length / itemsPerPage));
   const slices = tableData.length > PER_PAGES ? [tableData] : chunk(tableData, PER_PAGES);
   const numberOfPages = slices.length;
 
