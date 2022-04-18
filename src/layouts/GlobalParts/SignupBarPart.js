@@ -1,6 +1,6 @@
 import React from "react";
 import { NavDropdown } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { NavDropdownDiv } from "../homePage/styledComponents/styles";
 import { SignInButton, SignUpButton } from "../../theme";
@@ -8,14 +8,13 @@ import { selectors, useProvider, userLogoutAction } from "../../model";
 import axios from "axios";
 
 export const SignupBarPart = () => {
-  const [{ username }] = useProvider([selectors.username]);
   const [
     {
       BASE_URL,
-      userInfo: { token, isMember },
+      userInfo: { token, isMember, username, isAdmin },
     },
     dispatch,
-  ] = useProvider(["BASE_URL", "userInfo"]);
+  ] = useProvider([selectors.url, selectors.userInfo]);
   const navigate = useNavigate();
 
   const loginOut = () => {
@@ -49,6 +48,11 @@ export const SignupBarPart = () => {
           <NavDropdown.Item eventKey='4.1'>Info</NavDropdown.Item>
           <NavDropdown.Item eventKey='4.1'>Reservations</NavDropdown.Item>
           <NavDropdown.Item eventKey='4.1'>Reviews</NavDropdown.Item>
+          {isAdmin && (
+            <NavDropdown.Item eventKey='4.1'>
+              <Link to={"/admin"}>Admin</Link>
+            </NavDropdown.Item>
+          )}
           <NavDropdown.Divider />
         </>
       )}
