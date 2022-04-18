@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 import axios from 'axios';
 import { Row, Col, NavItem } from 'react-bootstrap';
 import {
+  ShowingToday,
   MoviesMonthImg,
   MoviesMonthScreeningContainer,
   MoviesMonthScreeningItem,
-  ColStyled
+  ColStyled,
+  TitleHeader
 } from "./styledComponents/styles";
 import { useMoviesOfTheMonth } from "./hooks/useMoviesOfTheMonth";
 import { useProvider } from "../../model";
@@ -24,7 +26,12 @@ export const MoviesOfTheMonth = () => {
   console.log(state)
 
   return (
-    <ComingUp>
+    <>
+    <TitleHeader>
+      <h2>FILMS SHOWING TODAY</h2>
+      <p>See all films & session times</p>
+    </TitleHeader>
+    <ShowingToday>
       {/* edw tha mpei to 1o map gia to carousel */}
       <Row className='flex-nowrap'>
         {map(state.homepage.movies[0], ({ Screenings, Movie: { id, title, genre, image, Screening } }) =>
@@ -42,6 +49,7 @@ export const MoviesOfTheMonth = () => {
 
 
       </Row>
-    </ComingUp>
+    </ShowingToday>
+    </>
   )
 }
