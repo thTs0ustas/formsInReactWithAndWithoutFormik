@@ -1,14 +1,32 @@
 import { Header, SignUpBar } from "../../theme";
 import { Switch } from "../../components";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { ShowMovies } from "../../components/admin/movies/ShowMovies";
 import { ShowUsers } from "../../components/admin/users/ShowUser";
 import { TabsContainer } from "./styledComponents/TabsContainer";
+import { selectors, useProvider } from "../../model";
+import { useNavigate } from "react-router-dom";
+import { handleError } from "../../model/actions";
 
 const AdminPage = () => {
+  const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
+  const navigate = useNavigate();
   const [key, setKey] = useState("home");
+
+  useEffect(() => {
+    if (!userInfo.username && !userInfo.token && !userInfo.isAdmin) {
+      dispatch(
+        handleError({
+          message: "Unauthorised Access",
+          time: new Date().getTime(),
+        })
+      );
+      navigate("/");
+    }
+  }, []);
+
   return (
     <>
       <Header>
