@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { UpdateUserForm } from "./updateUserForm/UpdateUserForm";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { Data } from "./styledComponents/Data";
+import { decideTdData } from "./helpers/conditional";
 
 const TableBody = ({ tableData, columns, handleUpdateTable }) => {
   const [include, setInclude] = useState("");
@@ -25,15 +28,14 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
             data.username.includes(include) && (
               <tr key={data.id}>
                 {columns.map(({ accessor }) => {
-                  const tData = !data[accessor]
-                    ? "——"
-                    : accessor === "birth_date"
-                    ? new Date(data[accessor]).toLocaleDateString()
-                    : data[accessor];
+                  const tData = decideTdData(data, accessor, RiDeleteBin6Line);
                   return (
-                    <td onClick={() => handleModal(data)} key={accessor}>
+                    <Data
+                      onClick={() => (accessor !== "delete" ? handleModal(data) : alert("delete"))}
+                      key={accessor}
+                    >
                       {tData}
-                    </td>
+                    </Data>
                   );
                 })}
               </tr>
