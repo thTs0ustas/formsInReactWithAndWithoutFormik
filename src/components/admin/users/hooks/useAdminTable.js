@@ -4,14 +4,19 @@ import axios from "axios";
 import { handleError } from "../../../../model/actions";
 
 const useAdminTable = (eventK) => {
-  const [state, dispatch] = useProvider([selectors.url]);
+  const [state, dispatch] = useProvider([selectors.url, selectors.token, selectors.username]);
+
   const [tableData, setTableData] = useState([]);
   const [updateTable, setUpdateTable] = useState(true);
 
   useEffect(() => {
     if (eventK === "users") {
       axios
-        .get(`${state.BASE_URL}/users`)
+        .get(`${state.BASE_URL}/admin/${state.username}/getUsers`, {
+          headers: {
+            authorization: `Bearer ${state.token}`,
+          },
+        })
         .then(({ data }) => {
           setTableData(() => [...data]);
           dispatch(adminUsersAction(data));

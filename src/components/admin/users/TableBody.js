@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UpdateMovieForm } from "./updateMovieForm/UpdateMovieForm";
+import { UpdateUserForm } from "./updateUserForm/UpdateUserForm";
 
 const TableBody = ({ tableData, columns, handleUpdateTable }) => {
   const [include, setInclude] = useState("");
@@ -19,12 +19,6 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
           <td>
             <input onChange={(e) => setInclude(e.target.value)} />
           </td>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
         </tr>
         {tableData?.map(
           (data) =>
@@ -47,7 +41,7 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
         )}
       </tbody>
       {userData && (
-        <UpdateMovieForm
+        <UpdateUserForm
           handleUpdateTable={handleUpdateTable}
           show={modalShow}
           data={userData}
