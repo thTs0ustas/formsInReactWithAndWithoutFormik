@@ -26,18 +26,25 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
           <td />
           <td />
         </tr>
-        {tableData?.map((data) => (
-          <tr key={data.id}>
-            {columns.map(({ accessor }) => {
-              const tData = data[accessor] ? data[accessor] : "——";
-              return (
-                <td onClick={() => handleModal(data)} key={accessor}>
-                  {tData}
-                </td>
-              );
-            })}
-          </tr>
-        ))}
+        {tableData?.map(
+          (data) =>
+            data.username.includes(include) && (
+              <tr key={data.id}>
+                {columns.map(({ accessor }) => {
+                  const tData = !data[accessor]
+                    ? "——"
+                    : accessor === "birth_date"
+                    ? new Date(data[accessor]).toLocaleDateString()
+                    : data[accessor];
+                  return (
+                    <td onClick={() => handleModal(data)} key={accessor}>
+                      {tData}
+                    </td>
+                  );
+                })}
+              </tr>
+            )
+        )}
       </tbody>
       {userData && (
         <UpdateMovieForm

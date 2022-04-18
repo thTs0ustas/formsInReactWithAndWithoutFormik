@@ -5,6 +5,6 @@ export const columns = [
   { label: "Last Name", accessor: "last_name", sortable: true },
   { label: "Address", accessor: "address", sortable: true },
   { label: "Email", accessor: "email", sortable: true },
-  { label: "Postal", accessor: "postal", sortable: true },
+  { label: "Postal", accessor: "postal", sortable: false },
   { label: "Birth Date", accessor: "birth_date", sortable: true },
 ];
