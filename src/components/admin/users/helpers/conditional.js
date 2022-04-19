@@ -4,7 +4,7 @@ const decideTdData = (data, accessor, Icon) => {
   let tdData;
   switch (accessor) {
     case "birth_date":
-      tdData = data[accessor] ? new Date(data[accessor]).toLocaleDateString() : "——";
+      tdData = data[accessor] ? new Date(data[accessor]).toISOString().split("T")[0] : "——";
       break;
     case "delete":
       tdData = (

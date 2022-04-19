@@ -69,12 +69,8 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
     }),
   });
   useEffect(() => {
-    keys(formik.values).forEach((item) =>
-      formik.values[item]
-        ? formik.setFieldValue(item, formik.values[item], false)
-        : formik.setFieldValue(item, data[item], false)
-    );
-  }, [formik.values]);
+    keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
+  }, [data]);
 
   return (
     <Modal show={show} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
@@ -150,7 +146,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
               <Form.Control
                 onChange={formik.handleChange}
                 name='birth_date'
-                value={formik.values.birth_date || ""}
+                value={formik.values.birth_date?.split("T")[0] || ""}
                 type='date'
               />
             </Form.Group>
