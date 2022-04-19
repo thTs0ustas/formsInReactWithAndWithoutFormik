@@ -18,6 +18,7 @@ export {
   removeTicketAction,
   resetReservation,
   changeTheme,
+  adminMoviesOfTheMonthAction,
 } from "./actions";
 
 export { Provider, useProvider } from "./store/state";

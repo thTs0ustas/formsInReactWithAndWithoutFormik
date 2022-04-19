@@ -16,7 +16,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
       username: "",
       first_name: "",
       last_name: "",
-      address: data.address,
+      address: "",
       email: "",
       postal: "",
       birth_date: "",
@@ -70,8 +70,8 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
   });
 
   useEffect(() => {
-    keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
-  }, [data]);
+    if (show) keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
+  }, [data, show]);
 
   return (
     <Modal show={show} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
@@ -90,7 +90,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
             <Form.Control
               onChange={formik.handleChange}
               name='username'
-              value={formik.values.username || ""}
+              value={formik.values.username}
               type='text'
             />
           </Form.Group>
@@ -100,7 +100,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
             <Form.Control
               name='first_name'
               onChange={formik.handleChange}
-              value={formik.values.first_name || ""}
+              value={formik.values.first_name}
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='formGridDuration'>
@@ -108,7 +108,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
             <Form.Control
               onChange={formik.handleChange}
               name='last_name'
-              value={formik.values.last_name || ""}
+              value={formik.values.last_name}
               type='text'
             />
           </Form.Group>
@@ -117,7 +117,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
             <Form.Control
               onChange={formik.handleChange}
               name='email'
-              value={formik.values.email || ""}
+              value={formik.values.email}
               type='text'
             />
           </Form.Group>
@@ -127,7 +127,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
               <Form.Control
                 onChange={formik.handleChange}
                 name='address'
-                value={formik.values.address || ""}
+                value={formik.values.address}
                 type='text'
               />
             </Form.Group>
@@ -137,7 +137,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
               <Form.Control
                 onChange={formik.handleChange}
                 name='postal'
-                value={formik.values.postal || ""}
+                value={formik.values.postal}
                 type='text'
               ></Form.Control>
             </Form.Group>

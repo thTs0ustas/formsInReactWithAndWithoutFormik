@@ -19,7 +19,6 @@ const useAdminTable = (eventK) => {
           },
         })
         .then(({ data }) => {
-          console.log(data);
           setTableData(() => [...handleData(data)]);
           dispatch(adminUsersAction(data));
         })

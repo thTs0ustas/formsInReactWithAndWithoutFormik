@@ -17,5 +17,6 @@ const actionTypes = {
   changeTheme: "CHANGE_THEME",
   initStore: "INIT_STORE",
   newError: "NEW_ERROR",
+  adminMoviesOfTheMonth: "ADMIN_MOVIES_OF_THE_MONTH",
 };
 export { actionTypes };

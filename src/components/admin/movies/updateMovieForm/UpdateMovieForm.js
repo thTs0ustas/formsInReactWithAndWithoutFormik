@@ -66,8 +66,8 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
     }),
   });
   useEffect(() => {
-    keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
-  }, [data]);
+    if (show) keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
+  }, [data, show]);
 
   return (
     <Modal show={show} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
