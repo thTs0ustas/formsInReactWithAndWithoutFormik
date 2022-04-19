@@ -1,31 +1,31 @@
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { keys, map } from "lodash";
 import axios from "axios";
+import TimePicker from "react-bootstrap-time-picker";
 import { errorHandling } from "../../../signInForm/errors/errorHandling";
 import { handleError } from "../../../../model/actions";
 import { selectors, useProvider } from "../../../../model";
-import { genres } from "../data/genres";
 import { useEffect } from "react";
+import { keys } from "lodash";
 
-const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
+const UpdateScreeningsForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
   const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
 
   const formik = useFormik({
     initialValues: {
       title: "",
-      description: "",
-      genre: "",
-      duration: "",
-      release_year: "",
+      auditorium_id: 1,
+      movie_starts: "",
+      movie_ends: "",
+      movie_date: "",
     },
+
     onSubmit: (values) => {
       axios
         .put(
-          "http://localhost:4000/movies/update",
+          `http://localhost:4000/admin/update/user/${data.id}`,
           {
-            id: data.id,
             username: userInfo.username,
             values,
           },
@@ -46,8 +46,8 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
           }
         })
         .then(handleUpdateTable)
-        .then(onHide)
         .then(() => formik.resetForm())
+        .then(onHide)
         .catch((error) =>
           dispatch(
             handleError({
@@ -59,13 +59,14 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
     },
     validationSchema: Yup.object({
       title: Yup.string(),
-      description: Yup.string(),
-      genre: Yup.string(),
-      duration: Yup.number().min(1).max(400),
-      release_year: Yup.number().min(1890).max(2002),
+      movie_starts: Yup.string(),
+      movie_ends: Yup.string(),
+      movie_date: Yup.date(),
     }),
   });
+
   useEffect(() => {
+    console.log(data);
     keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
   }, [data]);
 
@@ -92,50 +93,40 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
           </Form.Group>
 
           <Form.Group className='mb-3' controlId='formBasicDescription'>
-            <Form.Label>Description</Form.Label>
+            <Form.Label>Hall</Form.Label>
             <Form.Control
-              name='description'
+              disabled
+              name='auditorium_id'
               onChange={formik.handleChange}
-              as='textarea'
-              rows={3}
-              value={formik.values.description || ""}
+              value={`Hall ${formik.values.auditorium_id}` || ""}
             />
           </Form.Group>
           <Row className='mb-3'>
-            <Form.Group as={Col} controlId='formGridDuration'>
-              <Form.Label>Duration</Form.Label>
-              <Form.Control
+            <Form.Group as={Col} className='mb-3' controlId='formGridDuration'>
+              <Form.Label>Movie Starts</Form.Label>
+
+              <TimePicker
                 onChange={formik.handleChange}
-                name='duration'
-                value={formik.values.duration || ""}
-                type='text'
+                value={formik.values.movie_starts}
+                step={30}
               />
             </Form.Group>
+            <Form.Group as={Col} className='mb-3' controlId='formGridDuration'>
+              <Form.Label>Movie Ends</Form.Label>
 
-            <Form.Group as={Col} controlId='formGridState'>
-              <Form.Label>Genre</Form.Label>
-              <Form.Select
+              <TimePicker
                 onChange={formik.handleChange}
-                name='genre'
-                value={formik.values.genre ? formik.values.genre : ""}
-                type='text'
-              >
-                <option>Choose...</option>
-                {map(genres, (genre, i) => (
-                  <option key={i} value={genre}>
-                    {genre}
-                  </option>
-                ))}
-              </Form.Select>
+                value={formik.values.movie_ends}
+                step={30}
+              />
             </Form.Group>
-
-            <Form.Group as={Col} controlId='formGridNumber'>
-              <Form.Label>Release Year</Form.Label>
+            <Form.Group as={Col} controlId='formGridDuration'>
+              <Form.Label>Movie Date</Form.Label>
               <Form.Control
                 onChange={formik.handleChange}
-                name='release_year'
-                value={formik.values.release_year || ""}
-                type='text'
+                name='movie_date'
+                value={formik.values.movie_date || ""}
+                type='date'
               />
             </Form.Group>
           </Row>
@@ -158,4 +149,4 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
   );
 };
 
-export { UpdateMovieForm };
+export { UpdateScreeningsForm };

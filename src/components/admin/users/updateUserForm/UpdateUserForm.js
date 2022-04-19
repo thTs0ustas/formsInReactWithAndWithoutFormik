@@ -68,6 +68,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
       birth_date: Yup.date(),
     }),
   });
+
   useEffect(() => {
     keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
   }, [data]);

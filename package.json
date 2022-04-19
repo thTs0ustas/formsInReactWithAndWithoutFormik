@@ -15,6 +15,7 @@
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.0",
+    "react-bootstrap-time-picker": "^2.0.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.2",
@@ -40,14 +41,19 @@
       "react/jsx-no-target-blank": 1,
       "react/jsx-no-script-url": 1,
       "react/jsx-props-no-spreading": 1,
-      "prefer-spread": [1],
+      "prefer-spread": [
+        1
+      ],
       "react/destructuring-assignment": 1,
       "react-hooks/exhaustive-deps": 1,
       "react/default-props-match-prop-types": 1,
       "react/no-unused-prop-types": 1,
       "react/no-unknown-property": 1,
       "react/sort-prop-types": 1,
-      "react/jsx-curly-brace-presence": [1, "never"],
+      "react/jsx-curly-brace-presence": [
+        1,
+        "never"
+      ],
       "react/jsx-curly-newline": true,
       "react/no-array-index-key": 1,
       "react/jsx-key": 1,
