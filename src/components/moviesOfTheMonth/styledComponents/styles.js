@@ -11,11 +11,41 @@ const TitleHeader = styled.div`
 
   & h2 {
     color: ${({ theme }) => theme.secondary};
+
   }
+    ${'' /* & h2:before {
+      right: 100%;
+      margin-right: 10px;
+      content: '';
+      display: inline-block;
+      flex-direction: column;
+      top: 50%;
+      width: 10000px;
+      height: 1px;
+      background-color: ${({ theme }) => theme.secondary};
+    }
+    & h2:after {
+      content: '';
+      display: inline-block;
+      flex-direction: column;
+      top: 50%;
+      width: 10000px;
+      height: 1px;
+      background-color: ${({ theme }) => theme.secondary};
+    } */}
 
   & p {
     color: ${({ theme }) => theme.primary};
+    &:hover {
+      color: ${({ theme }) => theme.white};
+    }
   }
+
+  & a {
+    text-decoration: none;
+  }
+
+  
 `;
 
 const ShowingToday = styled.div`
@@ -51,12 +81,11 @@ const ShowingToday = styled.div`
   }
 
   & img:hover {
-    opacity: 1;
+    filter: brightness(1.2);
   }
 `;
 
 const MoviesMonthImg = styled.img`
-  opacity: 0.7;
   object-fit: cover;
   image-rendering: optimizeQuality;
   margin: 0 auto;
@@ -108,6 +137,9 @@ const ColStyled = styled(Col)`
 
 const CarouselItem = styled(Carousel.Item)`
 background-color: ${({ theme }) => theme.bgMain};
+& img {
+  opacity: 1;
+}
 `;
 
 

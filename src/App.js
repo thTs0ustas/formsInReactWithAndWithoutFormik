@@ -6,6 +6,8 @@ import { HomePageLayout, ReservationLayout, SignInLayout } from "./layouts";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
 import { useProvider } from "./model";
+import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
+
 
 function App() {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ function App() {
       <div className='App'>
         <Routes>
           <Route path='/' element={<HomePageLayout />} />
+          <Route path='/nowshowing' element={<NowShowingLayout />} />
           <Route path='/login' element={<SignInLayout />} />
           <Route path='/payments' element={<Payment />} />
           <Route path='/payments/payment_success' element={<Ticket />} />

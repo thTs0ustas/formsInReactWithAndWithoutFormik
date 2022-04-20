@@ -34,7 +34,7 @@ export const MoviesOfTheMonth = () => {
     <>
       <TitleHeader>
         <h2>FILMS SHOWING TODAY</h2>
-        <p>See all films & session times</p>
+        <Link to={`/nowshowing`}><p>See all films & session times</p></Link>
       </TitleHeader>
       <ShowingToday>
         <Carousel activeIndex={index} onSelect={handleSelect} fade>

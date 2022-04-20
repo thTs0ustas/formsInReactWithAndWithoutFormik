@@ -58,6 +58,11 @@ const moviesToHomeLayout = (payload) => ({
   payload,
 });
 
+const moviesToNowShowing = (payload) => ({
+  type: actionTypes.getMoviesForNowShowing,
+  payload,
+})
+
 export {
   changeTheme,
   resetReservation,
@@ -72,5 +77,6 @@ export {
   inputChangeAction,
   addTicketAction,
   moviesToHomeLayout,
+  moviesToNowShowing,
   removeTicketAction,
 };
