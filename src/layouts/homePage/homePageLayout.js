@@ -21,8 +21,23 @@ import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
 import { PromoMember, PromoStudents, Switch } from "../../components";
+import { CardComponent } from "../../components";
 
 const HomePageLayout = ({ username }) => {
+  const genres = [
+    "action",
+    "adventure",
+    "animation",
+    "comedy",
+    "crime",
+    "drama",
+    "horror",
+    "mystery",
+    "sci-fi",
+    "thriller",
+    "war",
+    "western",
+  ];
   return (
     <HomeDiv>
       <Header mainPage={false}>
@@ -72,24 +87,13 @@ const HomePageLayout = ({ username }) => {
           </Typography>
           <Archive>
             <Row>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
+              {genres.map((genre) => {
+                return (
+                  <Col sm={6} key={genre}>
+                    <CardComponent genre={genre} />
+                  </Col>
+                );
+              })}
             </Row>
           </Archive>
         </Features>
@@ -98,5 +102,34 @@ const HomePageLayout = ({ username }) => {
     </HomeDiv>
   );
 };
+
+//               <Col sm={6}>
+//                 <PromoCard>
+//                   <CardComponent />
+//                 </PromoCard>
+//               </Col>
+//               <Col sm={6}>
+//                 <PromoCard />
+//               </Col>
+//               <Col sm={6}>
+//                 <PromoCard />
+//               </Col>
+//               <Col sm={6}>
+//                 <PromoCard />
+//               </Col>
+//               <Col sm={6}>
+//                 <PromoCard />
+//               </Col>
+//               <Col sm={6}>
+//                 <PromoCard />
+//               </Col>
+//             </Row>
+//           </Archive>
+//         </Features>
+//       </div>
+//       <Footer />
+//     </HomeDiv>
+//   );
+// };
 
 export { HomePageLayout };

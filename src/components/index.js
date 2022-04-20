@@ -5,4 +5,5 @@ export { LoginForm } from "./signInForm";
 export { GuestSignup } from "./guestSignUp";
 export { PromoStudents } from "./Promos";
 export { PromoMember } from "./Promos";
+export { CardComponent } from "./promoCard";
 export { Switch } from "./themeSwitch";
