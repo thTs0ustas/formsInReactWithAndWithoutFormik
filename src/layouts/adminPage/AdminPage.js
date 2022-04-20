@@ -6,7 +6,7 @@ import { Tabs } from "react-bootstrap";
 import { ShowMovies } from "../../components/admin/movies/ShowMovies";
 import { ShowUsers } from "../../components/admin/users/ShowUser";
 import { TabsContainer } from "./styledComponents/TabsContainer";
-import { selectors, useProvider } from "../../model";
+import { clearAdminAction, selectors, useProvider } from "../../model";
 import { useNavigate } from "react-router-dom";
 import { handleError } from "../../model/actions";
 import { TabStyled } from "./styledComponents/Tabs";
@@ -28,6 +28,9 @@ const AdminPage = () => {
       );
       navigate("/");
     }
+    return () => {
+      dispatch(clearAdminAction());
+    };
   }, []);
 
   return (

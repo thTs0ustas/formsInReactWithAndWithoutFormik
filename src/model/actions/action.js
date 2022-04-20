@@ -21,7 +21,9 @@ const adminUsersAction = (payload) => ({
   type: actionTypes.adminUsers,
   payload,
 });
-
+const clearAdminAction = () => ({
+  type: actionTypes.clearAdmin,
+});
 const requestAction = (payload) => ({
   type: actionTypes.request,
   payload,
@@ -81,6 +83,7 @@ const handleError = (payload) => ({
 });
 
 export {
+  clearAdminAction,
   adminMoviesNotPlayingAction,
   adminMoviesOfTheMonthAction,
   adminUsersAction,

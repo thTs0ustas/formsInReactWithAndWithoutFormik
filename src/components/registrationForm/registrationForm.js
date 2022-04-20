@@ -7,6 +7,9 @@ import { Container, InputBox, UserDetails } from "./styledComponents";
 import { ContinueButton } from "../form/styles/styles";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import { errorHandling } from "../signInForm/errors/errorHandling";
+import { handleError } from "../../model/actions";
+import { useProvider } from "../../model";
 
 const INITIAL_STATE = {
   username: "",
@@ -20,6 +23,7 @@ const INITIAL_STATE = {
 };
 
 export const RegistrationForm = () => {
+  const [, dispatch] = useProvider();
   const [, setResponse] = useState(null);
 
   return (
@@ -43,13 +47,29 @@ export const RegistrationForm = () => {
                 birth_date: values.birth_date,
               })
               .then((res) => {
-                resetForm();
-                setResponse(res.data);
+                if (errorHandling(res.data)) {
+                  dispatch(
+                    handleError({
+                      message: res.data.message,
+                      time: new Date().getTime(),
+                    })
+                  );
+                  resetForm();
+                } else {
+                  resetForm();
+                  setResponse(res.data);
+                }
+              })
+              .then(() => {
                 setSubmitting(false);
               })
-              .catch((err) => {
-                console.log(err);
-                setSubmitting(false);
+              .catch((error) => {
+                dispatch(
+                  handleError({
+                    message: error.message,
+                    time: new Date().getTime(),
+                  })
+                );
               });
           }}
           validationSchema={Yup.object({
