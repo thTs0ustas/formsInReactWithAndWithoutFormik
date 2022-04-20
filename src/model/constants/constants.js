@@ -6,6 +6,13 @@ const INITIAL_STATE = {
       auditorium: "",
       movie: "",
       screening: "",
+      numOfTickets: {
+        student: 0,
+        adult: 0,
+        child: 0,
+        member: 0,
+        sum: 0,
+      },
       seat: {},
     },
     requests: {
@@ -17,7 +24,15 @@ const INITIAL_STATE = {
     },
     response: null,
   },
-  userInfo: {},
+  userInfo: {
+    tickets: [],
+    reviews: {},
+  },
+  theme: "true",
+  error: { message: "", time: "" },
+  admin: {
+    movies: [],
+  },
 };
 
 export { INITIAL_STATE };

@@ -1,115 +1,161 @@
-import { omit, set } from "lodash";
-import { actionTypes } from "../actions/action";
+import { actionTypes } from "../actions";
+import produce from "immer";
+import { INITIAL_STATE } from "../constants/constants";
+import { filter } from "lodash/fp";
+import { forEach, map, omit } from "lodash";
 
-const userReducer = (state, action) => {
+export const modelReducer = (state, action) => {
   const { type, payload } = action;
+
   switch (type) {
+    case actionTypes.initStore:
+      return produce(state, () => {
+        return payload;
+      });
+
     case actionTypes.userLogin:
-      return set(state, "userInfo", payload);
+      return produce(state, (draft) => {
+        draft.userInfo.username = payload.username;
+        draft.userInfo.token = payload.token;
+        draft.userInfo.isMember = payload.isMember;
+        draft.userInfo.isAdmin = payload.isAdmin;
+        draft.userInfo.id = payload.id;
+
+        draft.userInfo.reviews = {};
+        draft.userInfo.tickets = [];
+      });
+
     case actionTypes.userLogout:
-      return set(state, "userInfo", {});
-    default:
-      return state;
-  }
-};
+      return produce(state, (draft) => {
+        draft.userInfo = {};
+      });
 
-const reservationReducer = (state, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
     case actionTypes.request:
-      return {
-        ...state,
-        reservation: {
-          ...state.reservation,
-          requests: {
-            ...state.reservation.requests,
-            [payload.key]: payload.value,
-          },
-        },
-      };
+      let seats = {};
+      let reservedSeats = {};
+      return produce(state, (draft) => {
+        const {
+          movie: { Movie },
+          screenings,
+          auditoriums,
+        } = payload;
+        forEach(auditoriums, (item) => {
+          seats[item.id] = item.Seats;
+        });
+        forEach(screenings, (item) => {
+          reservedSeats[item.id] = item.ReservedSeats;
+        });
+
+        draft.reservation.requests = {
+          movies: Movie,
+          cinemas: map(auditoriums, (item) => item["Cinema"]),
+          auditoriums: map(auditoriums, (item) => omit(item, ["Cinema", "Seats"])),
+          screenings: map(screenings, (item) => omit(item, ["ReservedSeats"])),
+          seats,
+          reservedSeats,
+        };
+      });
 
     case actionTypes.addSeat:
-      return {
-        ...state,
-        reservation: {
-          ...state.reservation,
-          inputValues: {
-            ...state.reservation.inputValues,
-            seat: { ...state.reservation.inputValues.seat, [payload.value.id]: payload.value },
-          },
-        },
-      };
+      return produce(state, (draft) => {
+        let { adult, child, member, student } = state.reservation.inputValues.numOfTickets;
+        let adultSeat = filter({ discount_type: "adult" })(state.reservation.inputValues.seat);
+        let childSeat = filter({ discount_type: "child" })(state.reservation.inputValues.seat);
+        let memberSeat = filter({ discount_type: "member" })(state.reservation.inputValues.seat);
+        let studentSeat = filter({ discount_type: "student" })(state.reservation.inputValues.seat);
+
+        if (adultSeat.length < adult)
+          draft.reservation.inputValues.seat[payload.value.id] = {
+            ...payload.value,
+            discount_type: "adult",
+          };
+        else if (childSeat.length < child)
+          draft.reservation.inputValues.seat[payload.value.id] = {
+            ...payload.value,
+            discount_type: "child",
+          };
+        else if (memberSeat.length < member)
+          draft.reservation.inputValues.seat[payload.value.id] = {
+            ...payload.value,
+            discount_type: "member",
+          };
+        else if (studentSeat.length < student)
+          draft.reservation.inputValues.seat[payload.value.id] = {
+            ...payload.value,
+            discount_type: "student",
+          };
+      });
+
+    case actionTypes.addTicket:
+      return produce(state, (draft) => {
+        draft.reservation.inputValues.numOfTickets[payload] += 1;
+        draft.reservation.inputValues.numOfTickets.sum += 1;
+      });
+
+    case actionTypes.removeTicket:
+      return produce(state, (draft) => {
+        draft.reservation.inputValues.numOfTickets[payload] -= 1;
+        draft.reservation.inputValues.numOfTickets.sum -= 1;
+      });
 
     case actionTypes.removeSeat:
-      return {
-        ...state,
-        reservation: {
-          ...state.reservation,
-          inputValues: {
-            ...state.reservation.inputValues,
-            seat: omit(state.reservation.inputValues.seat, [`${payload}`]), //.inputValues.seat.filter((s) => s.id === payload.id),
-          },
-        },
-      };
+      return produce(state, (draft) => {
+        delete draft.reservation.inputValues.seat[payload];
+      });
 
     case actionTypes.reservedSeats:
-      return {
-        ...state,
-        reservation: {
-          ...state.reservation,
-          requests: {
-            ...state.reservation.requests,
-            reservedSeats: [...payload.value],
-          },
-        },
-      };
+      return produce(state, (draft) => {
+        draft.reservation.requests.reservedSeats = payload.value;
+      });
 
     case actionTypes.inputChange:
-      return {
-        ...state,
-        reservation: {
-          ...state.reservation,
-          inputValues: {
-            ...state.reservation.inputValues,
-            [payload.name]: payload.value,
-          },
-        },
-      };
+      return produce(state, (draft) => {
+        draft.reservation.inputValues[payload.name] = payload.value;
+      });
 
     case actionTypes.response:
-      return {
-        ...state,
-        reservation: {
-          ...state.reservation,
-          response: payload,
-        },
-      };
+      return produce(state, (draft) => {
+        draft.reservation.response = payload;
+      });
+
+    case actionTypes.resetReservation:
+      return produce(state, (draft) => {
+        draft.reservation = INITIAL_STATE.reservation;
+      });
 
     case actionTypes.newTicket:
-      return {
-        ...state,
-        reservation: {
-          ...state.reservation,
-          ticket: payload,
-        },
-      };
-    case actionTypes.search:
-      return {
-        ...state,
-        search: {
-          ...state.search,
-          payload,
-        },
-      };
+      return produce(state, (draft) => {
+        draft.userInfo.tickets.push(payload);
+      });
+
+    case actionTypes.changeTheme:
+      return produce(state, (draft) => {
+        draft.theme = !draft.theme;
+      });
+
+    case actionTypes.newError:
+      return produce(state, (draft) => {
+        draft.error = payload;
+      });
+
+    case actionTypes.adminMovies:
+      return produce(state, (draft) => {
+        draft.admin.movies = payload;
+      });
+    case actionTypes.adminMoviesNotPlaying:
+      return produce(state, (draft) => {
+        draft.admin.moviesNotPlaying = payload;
+      });
+    case actionTypes.adminUsers:
+      return produce(state, (draft) => {
+        draft.admin.users = payload;
+      });
+    case actionTypes.adminMoviesOfTheMonth:
+      return produce(state, (draft) => {
+        draft.admin.moviesOfTheMonth = payload;
+      });
+
     default:
       return state;
   }
 };
-
-const combineReducers =
-  (...reducers) =>
-  (state, action) =>
-    reducers.reduce((acc, nextReducer) => nextReducer(acc, action), state);
-
-export const modelReducer = combineReducers(reservationReducer, userReducer);

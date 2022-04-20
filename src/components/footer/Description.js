@@ -1,0 +1,9 @@
+import React from "react";
+
+export default function Description() {
+  return (
+    <div className='description'>
+      <p>© Copyright 2022 Cameo Cinemas. 1628 Burwood Highway Belgrave 3160</p>
+    </div>
+  );
+}

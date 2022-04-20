@@ -1,35 +1,61 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-
-import { Reservation } from "./components/reservation";
-
-import { Ticket } from "./components/ticket/ticket";
-import HomePageLayout from "./layouts/homePage/homePageLayout";
-
-import "./App.css";
-import SignInLayout from "./layouts/signInPage/SignInLayout";
+import { Payment } from "./components/payment/Payment";
+import {
+  AdminPage,
+  CancelPaymentLayout,
+  HomePageLayout,
+  ReservationLayout,
+  SignInLayout,
+  ThanksForYourPaymentLayout,
+  ThankYouForYourThoughts,
+  TicketLayout,
+} from "./layouts";
 import SignUpLayout from "./layouts/signUpPage/SignUpLayout";
+
 import { ThemeProvider } from "styled-components";
-import { theme } from "./theme";
-
-// import { RegistrationForm } from "./components/registrationForm/RegistrationForm";
-
+import { GlobalStyles, theme } from "./theme";
+import { selectors, useProvider } from "./model";
+import { ToastContainer } from "react-bootstrap";
+import { AlertToast } from "./components/alertToast/Toast";
+import { ShowMovies } from "./components/admin/movies/ShowMovies";
 
 function App() {
-  const [theming, setTheming] = useState(true);
+  const [{ error, username, theme: theming }] = useProvider([
+    selectors.error,
+    selectors.username,
+    selectors.theme,
+  ]);
+
   return (
     <ThemeProvider theme={theming ? theme.light : theme.dark}>
-      TODO: switch for theme change
-      <div className="App">
+      <GlobalStyles />
+      <div className='App'>
         <Routes>
-          <Route exact path="/" element={<HomePageLayout />} />
-          <Route path="/login" element={<SignInLayout />} />
-          <Route path="/signup" element={<SignUpLayout />} />
+          <Route path='/'>
+            <Route index element={<HomePageLayout username={username} />} />
+            <Route path='login' element={<SignInLayout username={username} />} />
+            <Route path='contactUs' element={<ThankYouForYourThoughts />} />
+            <Route path="signup" element={<SignUpLayout />} />
+            <Route path='payments'>
+              <Route index element={<Payment username={username} />} />
+              <Route path='payment_cancel' element={<CancelPaymentLayout />} />
+              <Route path='payment_applied' element={<ThanksForYourPaymentLayout />} />
+            </Route>
+            <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
+            <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
 
-          <Route path="/users/:username/reservation" element={<Reservation />} />
-          <Route path="/users/:username/reservation/ticket" element={<Ticket />} />
+            <Route path='admin'>
+              <Route index element={<AdminPage />} />
+              <Route path='movies' element={<ShowMovies />} />
+            </Route>
+          </Route>
+          {/*<Route path='/payments' element={<Payment username={username} />} />*/}
         </Routes>
       </div>
+      <ToastContainer style={{ position: "sticky", zIndex: 10001 }} position={"top-end"}>
+        {error && <AlertToast error={error} />}
+      </ToastContainer>
     </ThemeProvider>
   );
 }

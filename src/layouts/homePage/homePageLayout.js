@@ -11,48 +11,29 @@ import {
   Promos,
   Typography,
   VideoWallDiv,
-  VideoWallInfo,
-} from "./styles";
-import { useNavigate } from "react-router-dom";
-import {
-  Footer,
-  Header,
-  Nav,
-  NavDiv,
-  NavItem,
-  SignUpBar,
-  SignUpButton,
-  SignInButton,
-} from "../../theme";
+} from "./styledComponents/styles";
 
-const HomePageLayout = () => {
-  const navigate = useNavigate();
+import { Header, SignUpBar } from "../../theme";
+
+import { SignupBarPart } from "../GlobalParts/SignupBarPart";
+import Footer from "../../components/footer/Footer";
+import NavBar from "../../components/NavBar";
+import CarouselHero from "../../components/HeroSlider";
+import { PromoMember, PromoStudents, Switch } from "../../components";
+
+const HomePageLayout = ({ username }) => {
   return (
     <HomeDiv>
       <Header mainPage={false}>
         <SignUpBar>
+          <Switch />
           <div>
-            <SignUpButton onClick={() => navigate("/signup")}>Sign Up</SignUpButton>
-            <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
+            <SignupBarPart username={username} />
           </div>
         </SignUpBar>
         <VideoWallDiv>
-          <NavDiv>
-            <Nav>
-              <NavItem>1</NavItem>
-              <NavItem>2</NavItem>
-              <NavItem>3</NavItem>
-              <NavItem>4</NavItem>
-              <NavItem>5</NavItem>
-              <NavItem>6</NavItem>
-              <NavItem>7</NavItem>
-            </Nav>
-          </NavDiv>
-          <VideoWallInfo>
-            <p>Small Description</p>
-            <h2>Movie Title</h2>
-            <button>BOOK TICKETS</button>
-          </VideoWallInfo>
+          <NavBar />
+          <CarouselHero />
         </VideoWallDiv>
       </Header>
       <div>
@@ -62,7 +43,7 @@ const HomePageLayout = () => {
             <p>Under Title</p>
           </Typography>
           <ComingUp>
-            <Row className="flex-nowrap">
+            <Row className='flex-nowrap'>
               <Col md={4} sm={6} xs={12}>
                 <Card />
               </Col>
@@ -76,11 +57,11 @@ const HomePageLayout = () => {
           </ComingUp>
           <Promos>
             <Row>
-              <Col sm={6}>
-                <PromoCard />
+              <Col md={6}>
+                <PromoMember />
               </Col>
-              <Col sm={6}>
-                <PromoCard />
+              <Col md={6}>
+                <PromoStudents />
               </Col>
             </Row>
           </Promos>
@@ -117,4 +98,4 @@ const HomePageLayout = () => {
   );
 };
 
-export default HomePageLayout;
+export { HomePageLayout };
