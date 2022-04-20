@@ -19,6 +19,7 @@ import { selectors, useProvider } from "./model";
 import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
 import { ShowMovies } from "./components/admin/movies/ShowMovies";
+import { Subscription } from "./components/subscription/Subscription";
 
 function App() {
   const [{ error, username, theme: theming }] = useProvider([
@@ -42,6 +43,7 @@ function App() {
               <Route path='payment_cancel' element={<CancelPaymentLayout />} />
               <Route path='payment_applied' element={<ThanksForYourPaymentLayout />} />
             </Route>
+            <Route path='payments/subscription' element={<Subscription />} />
             <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
             <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
 

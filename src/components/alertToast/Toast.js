@@ -15,7 +15,7 @@ const AlertToast = ({ error }) => {
       autohide
     >
       <ToastHeader closeButton={false}>
-        <strong className='me-auto'>Error</strong>
+        <strong className='me-auto'>Message</strong>
       </ToastHeader>
       <Toast.Body>{error.message}</Toast.Body>
     </ToastContainer>

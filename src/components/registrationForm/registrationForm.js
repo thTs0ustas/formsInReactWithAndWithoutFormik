@@ -7,9 +7,9 @@ import { Container, InputBox, UserDetails } from "./styledComponents";
 import { ContinueButton } from "../form/styles/styles";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import { selectors, useProvider } from "../../model";
 import { errorHandling } from "../signInForm/errors/errorHandling";
 import { handleError } from "../../model/actions";
-import { useProvider } from "../../model";
 
 const INITIAL_STATE = {
   username: "",
@@ -23,7 +23,7 @@ const INITIAL_STATE = {
 };
 
 export const RegistrationForm = () => {
-  const [, dispatch] = useProvider();
+  const [state, dispatch] = useProvider([selectors.url, selectors.token, selectors.username]);
   const [, setResponse] = useState(null);
 
   return (
@@ -33,43 +33,36 @@ export const RegistrationForm = () => {
         <h3>Your Account Details</h3>
         <Formik
           initialValues={INITIAL_STATE}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
-            console.log(values);
-            axios
-              .post("http://localhost:4000/users/create", {
-                username: values.username,
-                password: values.password,
-                first_name: values.first_name,
-                last_name: values.last_name,
-                email: values.email,
-                address: values.address,
-                postal: values.postal,
-                birth_date: values.birth_date,
+          onSubmit={async (values, { setSubmitting, resetForm }) => {
+            window.sessionStorage.setItem("values", JSON.stringify(values));
+            await axios
+              .post(`${state.BASE_URL}/payments/create-subscription`, {
+                data: [
+                  {
+                    name: "Membership",
+                    price: 1500 * 12,
+                    quantity: 1,
+                  },
+                ],
               })
-              .then((res) => {
-                if (errorHandling(res.data)) {
+              .then(({ data }) => {
+                if (errorHandling(data)) {
                   dispatch(
                     handleError({
-                      message: res.data.message,
+                      message: data.message,
                       time: new Date().getTime(),
                     })
                   );
+                  setSubmitting(false);
                   resetForm();
                 } else {
-                  resetForm();
-                  setResponse(res.data);
+                  if (data.url) return window.location.replace(data["url"]);
+                  return Promise.reject(data);
                 }
               })
-              .then(() => {
+              .catch(() => {
                 setSubmitting(false);
-              })
-              .catch((error) => {
-                dispatch(
-                  handleError({
-                    message: error.message,
-                    time: new Date().getTime(),
-                  })
-                );
+                resetForm();
               });
           }}
           validationSchema={Yup.object({
