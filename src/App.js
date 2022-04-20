@@ -36,7 +36,7 @@ function App() {
             <Route index element={<HomePageLayout username={username} />} />
             <Route path='login' element={<SignInLayout username={username} />} />
             <Route path='contactUs' element={<ThankYouForYourThoughts />} />
-            <Route path="signup" element={<SignUpLayout />} />
+            <Route path='signup' element={<SignUpLayout username={username} />} />
             <Route path='payments'>
               <Route index element={<Payment username={username} />} />
               <Route path='payment_cancel' element={<CancelPaymentLayout />} />

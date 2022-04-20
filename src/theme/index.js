@@ -10,12 +10,7 @@ export {
   InputFieldContainer,
   InputError,
 } from "./GlobalStyleComponents/Input";
-export { Footer } from "./GlobalStyleComponents/Footer";
+
 export { Header } from "./GlobalStyleComponents/Header";
 export { Nav, NavItem, NavDiv } from "./GlobalStyleComponents/Navigation";
-export {
-  SignUpButton,
-  SignUpBar,
-  SignInButton,
-  SignInDiv,
-} from "./GlobalStyleComponents/UpperBar";
+export { SignUpButton, SignUpBar, SignInButton, SignInDiv } from "./GlobalStyleComponents/UpperBar";
