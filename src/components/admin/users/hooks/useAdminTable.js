@@ -8,9 +8,10 @@ const useAdminTable = (eventK) => {
 
   const [tableData, setTableData] = useState([]);
   const [updateTable, setUpdateTable] = useState(true);
+  const [deletePrompt, setDeletePrompt] = useState(false);
 
   useEffect(() => {
-    if (eventK === "users") {
+    if (eventK === "users" || deletePrompt) {
       axios
         .get(`${state.BASE_URL}/admin/${state.username}/getUsers`, {
           headers: {
@@ -25,9 +26,9 @@ const useAdminTable = (eventK) => {
           dispatch(handleError({ message: error.message, time: new Date().getTime() }))
         );
     }
-  }, [eventK, updateTable]);
+  }, [eventK, updateTable, deletePrompt]);
 
-  return { tableData, setUpdateTable, setTableData, updateTable };
+  return { tableData, setUpdateTable, setTableData, updateTable, setDeletePrompt };
 };
 
 export { useAdminTable };

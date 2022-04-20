@@ -15,7 +15,8 @@ const ShowScreenings = ({ eventK }) => {
     twenty: 20,
     ten: 10,
   };
-  const { tableData, setUpdateTable, setTableData, updateTable } = useAdminTable(eventK);
+  const { tableData, setUpdateTable, setTableData, updateTable, setDeletePrompt } =
+    useAdminTable(eventK);
 
   const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
   const [page, setPage] = useState(0);
@@ -33,6 +34,7 @@ const ShowScreenings = ({ eventK }) => {
             columns,
             tableData: slices[page],
             handleUpdateTable: handleUpdateTable(updateTable, setUpdateTable),
+            setDeletePrompt,
           }}
         />
       </Table>

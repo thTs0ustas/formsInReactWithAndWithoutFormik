@@ -14,6 +14,7 @@ const useAdminTable = (eventK) => {
 
   const [tableData, setTableData] = useState([]);
   const [updateTable, setUpdateTable] = useState(true);
+  const [deletePrompt, setDeletePrompt] = useState(false);
 
   useEffect(() => {
     axios
@@ -26,12 +27,13 @@ const useAdminTable = (eventK) => {
         setTableData(() => [...handleData(data)]);
         dispatch(adminUsersAction(data));
       })
+      .then(() => deletePrompt && setDeletePrompt(false))
       .catch((error) =>
         dispatch(handleError({ message: error.message, time: new Date().getTime() }))
       );
-  }, [eventK, updateTable]);
+  }, [eventK, updateTable, deletePrompt]);
 
-  return { tableData, setUpdateTable, setTableData, updateTable };
+  return { tableData, setUpdateTable, setTableData, updateTable, setDeletePrompt };
 };
 
 export { useAdminTable };
