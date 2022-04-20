@@ -20,10 +20,12 @@ export const useLoginForm = (isInModal = false) => {
     if (state?.accessToken && state?.username) {
       window.sessionStorage.setItem("token", state.accessToken);
       window.sessionStorage.setItem("username", state.username);
+      window.sessionStorage.setItem("id", state.id);
       dispatch(
         userLoginAction({
           username: state.username,
           token: state.accessToken,
+          id: state.id,
         })
       );
       isInModal || navigate("/");

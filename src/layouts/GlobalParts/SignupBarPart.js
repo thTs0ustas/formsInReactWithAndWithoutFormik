@@ -23,6 +23,7 @@ export const SignupBarPart = ({ username = null }) => {
         onClick={() => {
           sessionStorage.removeItem("username");
           sessionStorage.removeItem("token");
+          localStorage.clear();
           navigate("/");
           window.location.reload();
         }}

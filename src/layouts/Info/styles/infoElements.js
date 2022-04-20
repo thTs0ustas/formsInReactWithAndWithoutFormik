@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 
+
 export const Section = styled.section`
     min-height: 100vh;
     background-color: ${(props) => props.theme.bgMain};
@@ -13,96 +14,74 @@ export const Section = styled.section`
 
 export const GridWrapper = styled.div`
     min-height: 80vh;
-    width: 80vw;
+    width: 60vw;
     display: grid;
-    grid-template-areas: "sidebar main main"; 
+    grid-gap: 10px;
+    grid-template-columns: 350px 1fr 1fr;
+    grid-template-rows: 300px 600px;
+    @media screen and (max-width: 1600px) {
+        width: 80vh;
+    }
 `;
 
 export const InfoSidebar = styled.div`
-    background-color: rgb(36, 3, 18);
-    grid-area: sidebar;
-    min-height: 100%;
+    background-color: #750f29;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    @media screen and (max-width: 1014px) {
+        grid-column: 1/4;
+        grid-row: 1/2;
+        align-items: center;
+    }
 `;
 
 export const InfoMain = styled.div`
-    grid-area: main;
-    min-height: 100%;
     padding: 0 20px;
-`;
-
-export const Div = styled.div`
-    display: flex;
-    height: 60px;
-    @media screen and (max-width: 655px) {
-        /* display:block; */
-        flex-direction: column;
-        height: auto;
+    grid-column: 2/4;
+    grid-row: 1/3;
+    overflow-y: auto;
+    @media screen and (max-width: 1014px) {
+        grid-column: 1/4;
+        grid-row: 2/4;
     }
-`;
-
-
-export const Input = styled.input`
-    flex: 30%;
-    padding: 10px;
-    width: 100%;
-    outline:none;
-    /* background-color: ${(props) => props.disabled ? "rgb(185, 185, 185)" : "white"}; */
-    background-color: white;
-    border: none;
-    border-bottom: 1px solid grey;
-    @media screen and (max-width: 655px) {
-        flex: 100%;
-    }
-    
-`;
-
-
-
-export const Label = styled.label`
-    
-    font-weight: 500;
-    background-color: rgb(38, 2, 20);
-    margin: auto auto;
-    color: white;
-    width: 150px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.183);
-    @media screen and (max-width: 655px) {
-        flex: 100%;
+    & div {
         width: 100%;
-        background-color: transparent;
+    }
+    //On smaller screens center the form
+    & form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+    /* width */
+    &::-webkit-scrollbar {
+    width: 12px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 20px ${(props) => props.theme.primary};;
+    border-radius: 10px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+    
+    background-color: #750f29;
+    background-color: ${(props) => props.theme.primary};
+    border-radius: 10px;
     }
 `;
+    
 
-const btn = styled.button`
-    outline: none;
-    border: none;
-    text-align: center;
-    padding: 10px 20px;
-    display: inline;
-    width: 120px;
-`;
 
-export const Submit = styled(btn)`
-    background-color: ${(props) => props.alternate ? "rgb(185, 185, 185)" : "red"};
-    color: ${(props) => props.alternate ? "#26262674" : "white"};
-    @media screen and (max-width: 655px) {
-        width: 50%;
-    }
-`;
-export const Edit = styled(btn)`
-    background-color: ${(props) => props.alternate ? "white" : "rgb(185, 185, 185)"};
-    margin-right: 10px;
-    @media screen and (max-width: 655px) {
-        width: 50%;
-    }
-`;
 
-export const ButtonDiv = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 10px;
-`;
+
+

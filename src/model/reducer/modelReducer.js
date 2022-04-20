@@ -10,6 +10,7 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.userInfo.username = payload.username;
         draft.userInfo.token = payload.token;
+        draft.userInfo.id = payload.id;
       });
     case actionTypes.userLogout:
       return produce(state, (draft) => {
