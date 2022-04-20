@@ -14,7 +14,15 @@
     
 }
 
+.carousel-control-prev {
 
+  margin-left: -93px;
+}
+
+.carousel-control-next {
+
+  margin-right: -93px;
+}
 
 
 .carousel-caption {

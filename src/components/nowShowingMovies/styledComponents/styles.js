@@ -34,7 +34,18 @@ const NowShowingStack = styled.li`
     margin: 0px;
     margin-bottom: 25px;
     & img {
-    width: inline;
+        width: inline;
+        ${'' /* min-width: 350px;
+        max-width: 450px; */}
+    }
+
+    & p {
+        margin-left: 0px;
+    }
+
+    & h2 {
+        margin-left: 0px;
+        width: 90%;
     }
 `;
 

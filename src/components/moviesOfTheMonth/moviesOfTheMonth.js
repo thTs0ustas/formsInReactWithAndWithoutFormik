@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import { ButtonIcon, CarouselButton } from "./";
 import { chunk, map } from "lodash";
 import { Link } from "react-router-dom";
+import "./moviesOfTheMonth.css";
 
 export const MoviesOfTheMonth = () => {
   const today = new Date().getDay();

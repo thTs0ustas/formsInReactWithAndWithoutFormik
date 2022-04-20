@@ -92,7 +92,7 @@ const MoviesMonthImg = styled.img`
   height: 15vw;
   min-height: 120px;
   max-height: 250px;
-  margin-left: 25px;
+  ${'' /* margin-left: 25px; */}
   width: 30vw;
   min-width: 250px;
   max-width: 400px;
