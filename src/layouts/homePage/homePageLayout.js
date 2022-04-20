@@ -4,8 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
   Archive,
-  Card,
-  ComingUp,
   Features,
   HomeDiv,
   PromoCard,
@@ -13,13 +11,6 @@ import {
   Typography,
   VideoWallDiv,
 } from "./styledComponents/styles";
-
-
-import {   
-  MoviesMonthImg,
-  MoviesMonthScreeningContainer,
-  MoviesMonthScreeningItem, 
-} from "../../components/moviesOfTheMonth/styledComponents/styles";
 
 import { Header, SignUpBar } from "../../theme";
 
@@ -48,11 +39,6 @@ const HomePageLayout = () => {
       </Header>
       <div>
         <Features>
-          <Typography>
-            <h2>Title</h2>
-            <p>Under Title</p>
-          </Typography>
-          
           <MoviesOfTheMonth />
           <Promos>
             <Row>

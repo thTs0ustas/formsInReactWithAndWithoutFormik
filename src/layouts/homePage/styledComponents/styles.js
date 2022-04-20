@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavDropdown } from "react-bootstrap";
 
 const HomeDiv = styled.div`
-  background-color: blueviolet;
+  background-color: ${({ theme }) => theme.bgMain};
 `;
 
 const VideoWallDiv = styled.div`
@@ -73,38 +73,38 @@ const VideoWallInfo = styled.div`
 `;
 
 const Features = styled.div`
-  background-color: cadetblue;
+  background-color: ${({ theme }) => theme.bgMain};
   margin: 0 auto;
   max-width: 1400px;
   overflow: hidden;
 `;
 
 const ComingUp = styled.div`
-  background-color: ${({ theme }) => theme.bgMain };
+  background-color: ${({ theme }) => theme.bgMain};
   padding: 10px 0;
   overflow: auto;
 
   & p {
     margin-left: 25px;
     font-weigth: 200;
-    color: ${({ theme }) => theme.secondary };
+    color: ${({ theme }) => theme.secondary};
   }
 
   & h2 {
     margin-left: 25px;
     font-weight: bolder;
     text-transform: uppercase;
-    color: ${({ theme }) => theme.white };
+    color: ${({ theme }) => theme.white};
   }
 
   & a {
     text-decoration: none;
     cursor: pointer;
-    color: ${({ theme }) => theme.white };
+    color: ${({ theme }) => theme.white};
   }
 
   & a:hover {
-    color: ${({ theme }) => theme.primary };
+    color: ${({ theme }) => theme.primary};
     -webkit-transition: color 0.3s ease-out 0s;
     -moz-transition: color 0.3s ease-out 0s;
     -ms-transition: color 0.3s ease-out 0s;
@@ -164,7 +164,7 @@ const PromoCard = styled.div`
   width: 42vw;
   min-width: 250px;
   max-width: 650px;
-  
+
   @media (max-width: 576px) {
     width: 90vw;
     height: 85vw;

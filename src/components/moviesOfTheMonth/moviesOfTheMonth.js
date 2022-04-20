@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { chunk, map } from "lodash";
 import { Link } from "react-router-dom";
 import "./moviesOfTheMonth.css";
+import { NowShowingStackHome } from "../nowShowingMovies/styledComponents/styles";
 
 export const MoviesOfTheMonth = () => {
   const today = new Date().getDay();
@@ -42,12 +43,9 @@ export const MoviesOfTheMonth = () => {
           return map(
             slice,
             ({ Screenings, Movie: { id, title, genre, image, Screening } }) => {
-              {
-                /* if(today === movieDate(movie_starts)) */
-              }
               return (
                 <ColStyled key={id}>
-                  <div>
+                  <NowShowingStackHome>
                     <MoviesMonthImg src={`${state.BASE_URL}${image}`} />
                     <p>{genre.replace(/^\w/, (c) => c?.toUpperCase())}</p>
                     <h2>
@@ -60,7 +58,7 @@ export const MoviesOfTheMonth = () => {
                         </MoviesMonthScreeningItem>
                       ))}
                     </MoviesMonthScreeningContainer>
-                  </div>
+                  </NowShowingStackHome>
                 </ColStyled>
               );
             }

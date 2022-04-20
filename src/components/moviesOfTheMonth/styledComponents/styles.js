@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Col } from "react-bootstrap";
 
 const TitleHeader = styled.div`
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,10 +29,9 @@ const TitleHeader = styled.div`
 const ShowingToday = styled.div`
   background-color: ${({ theme }) => theme.bgMain};
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+  padding-left: 5%;
   & p {
     font-weight: bold;
     color: ${({ theme }) => theme.secondary};
@@ -99,7 +99,7 @@ const MoviesMonthScreeningItem = styled.div`
 `;
 
 const ColStyled = styled(Col)`
-  width: 100%;
+  max-width: 1450px;
   display: flex;
   flex-direction: column;
   @media (max-width: 576px) {
