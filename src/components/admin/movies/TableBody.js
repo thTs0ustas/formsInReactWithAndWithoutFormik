@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Accordion, Button } from "react-bootstrap";
 import { UpdateMovieForm } from "./updateMovieForm/UpdateMovieForm";
 import { AddNewMovieForm } from "./addNewMovieForm/AddNewMovieForm";
+import { Data } from "./styledComponents/Data";
 
 const TableBody = ({ tableData, columns, handleUpdateTable }) => {
   const [include, setInclude] = useState("");
@@ -26,11 +27,11 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
           </td>
         </tr>
         <tr>
-          <td />
+          <Data />
           <td>
             <input onChange={(e) => setInclude(e.target.value)} />
           </td>
-          <td colSpan={4} />
+          <Data colSpan={4} />
         </tr>
         {tableData?.map((data) =>
           checkTitle(data.title) ? (
@@ -38,18 +39,18 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
               {columns.map(({ accessor }) => {
                 const tData = data[accessor] ? data[accessor] : "——";
                 return accessor !== "description" ? (
-                  <td onClick={() => handleModal(data)} key={accessor}>
+                  <Data onClick={() => handleModal(data)} key={accessor}>
                     {tData}
-                  </td>
+                  </Data>
                 ) : (
-                  <td key={accessor} style={{ display: "flex", padding: 0 }}>
+                  <Data key={accessor}>
                     <Accordion defaultActiveKey='0'>
                       <Accordion.Header style={{ width: 500 }}>
                         {data[accessor].substring(0, 50)}...
                       </Accordion.Header>
                       <Accordion.Body>{data[accessor]}</Accordion.Body>
                     </Accordion>
-                  </td>
+                  </Data>
                 );
               })}
             </tr>

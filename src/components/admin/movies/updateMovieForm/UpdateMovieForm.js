@@ -1,12 +1,13 @@
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { map } from "lodash";
+import { keys, map } from "lodash";
 import axios from "axios";
 import { errorHandling } from "../../../signInForm/errors/errorHandling";
 import { handleError } from "../../../../model/actions";
 import { selectors, useProvider } from "../../../../model";
 import { genres } from "../data/genres";
+import { useEffect } from "react";
 
 const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
   const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
@@ -22,9 +23,8 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
     onSubmit: (values) => {
       axios
         .put(
-          "http://localhost:4000/movies/update",
+          `http://localhost:4000/admin/update/movie/${data.id}`,
           {
-            id: data.id,
             username: userInfo.username,
             values,
           },
@@ -64,6 +64,9 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
       release_year: Yup.number().min(1890).max(2002),
     }),
   });
+  useEffect(() => {
+    if (show) keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
+  }, [data, show]);
 
   return (
     <Modal show={show} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
@@ -82,7 +85,7 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
             <Form.Control
               onChange={formik.handleChange}
               name='title'
-              value={formik.values.title || data.title}
+              value={formik.values.title || ""}
               type='text'
             />
           </Form.Group>
@@ -94,7 +97,7 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
               onChange={formik.handleChange}
               as='textarea'
               rows={3}
-              value={formik.values.description || data.description}
+              value={formik.values.description || ""}
             />
           </Form.Group>
           <Row className='mb-3'>
@@ -103,7 +106,7 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
               <Form.Control
                 onChange={formik.handleChange}
                 name='duration'
-                value={formik.values.duration || data.duration}
+                value={formik.values.duration || ""}
                 type='text'
               />
             </Form.Group>
@@ -113,7 +116,7 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
               <Form.Select
                 onChange={formik.handleChange}
                 name='genre'
-                value={formik.values.genre ? formik.values.genre : data.genre}
+                value={formik.values.genre ? formik.values.genre : ""}
                 type='text'
               >
                 <option>Choose...</option>
@@ -130,7 +133,7 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
               <Form.Control
                 onChange={formik.handleChange}
                 name='release_year'
-                value={formik.values.release_year || data.release_year}
+                value={formik.values.release_year || ""}
                 type='text'
               />
             </Form.Group>

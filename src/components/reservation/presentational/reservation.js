@@ -45,6 +45,8 @@ export const Reservation = ({
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   handleContinueButton,
 }) => {
+  const STUDENT_DAY = 3;
+
   return (
     <>
       <MoviePoster image={image} />
@@ -59,6 +61,45 @@ export const Reservation = ({
         />
         <Container>
           <TicketOptions>
+            {isMember && STUDENT_DAY === new Date(screening.split(",")[1]).getDay() && (
+              <TicketBar>
+                <div>
+                  <TypeOfTicket>Student</TypeOfTicket>
+                  <Price>{PRICING.student.toFixed(2)} €</Price>
+                </div>
+                <TicketBarRight>
+                  <TicketButton
+                    left={true}
+                    disabled={
+                      !screening ||
+                      disabledDecrement({
+                        seats: requests.seats[auditorium[0]],
+                        reservedSeats: requests.reservedSeats[screening[0]],
+                      })
+                    }
+                    type='student'
+                    subtract={true}
+                  >
+                    -
+                  </TicketButton>
+                  <NumberOfTickets>{numOfTickets.student}</NumberOfTickets>
+                  <TicketButton
+                    disabled={
+                      !screening ||
+                      disabledIncrement(numOfTickets, {
+                        seats: requests.seats[auditorium[0]],
+                        reservedSeats: requests.reservedSeats[screening[0]],
+                      })
+                    }
+                    type='student'
+                    add={true}
+                  >
+                    +
+                  </TicketButton>
+                </TicketBarRight>
+              </TicketBar>
+            )}
+
             {!isMember || (
               <TicketBar>
                 <div>
@@ -133,6 +174,7 @@ export const Reservation = ({
                 </TicketButton>
               </TicketBarRight>
             </TicketBar>
+
             <TicketBar>
               <div>
                 <TypeOfTicket>Child</TypeOfTicket>

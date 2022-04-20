@@ -19,13 +19,4 @@ export const theme = {
     white: "#e7eeff",
     light: "#e7e7ff",
   },
-  admin: {
-    bgMain: "#162e52",
-    logo: "#a24223",
-    primary: "#7a67a0",
-    secondary2: "#ffda8a",
-    secondary: "#bfc4d2",
-    white: "#e7eeff",
-    light: "#e7e7ff",
-  },
 };

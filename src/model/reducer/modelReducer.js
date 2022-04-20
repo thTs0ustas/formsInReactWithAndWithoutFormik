@@ -19,6 +19,7 @@ export const modelReducer = (state, action) => {
         draft.userInfo.token = payload.token;
         draft.userInfo.isMember = payload.isMember;
         draft.userInfo.isAdmin = payload.isAdmin;
+        draft.userInfo.id = payload.id;
 
         draft.userInfo.reviews = {};
         draft.userInfo.tickets = [];
@@ -57,10 +58,11 @@ export const modelReducer = (state, action) => {
 
     case actionTypes.addSeat:
       return produce(state, (draft) => {
-        let { adult, child, member } = state.reservation.inputValues.numOfTickets;
+        let { adult, child, member, student } = state.reservation.inputValues.numOfTickets;
         let adultSeat = filter({ discount_type: "adult" })(state.reservation.inputValues.seat);
         let childSeat = filter({ discount_type: "child" })(state.reservation.inputValues.seat);
         let memberSeat = filter({ discount_type: "member" })(state.reservation.inputValues.seat);
+        let studentSeat = filter({ discount_type: "student" })(state.reservation.inputValues.seat);
 
         if (adultSeat.length < adult)
           draft.reservation.inputValues.seat[payload.value.id] = {
@@ -76,6 +78,11 @@ export const modelReducer = (state, action) => {
           draft.reservation.inputValues.seat[payload.value.id] = {
             ...payload.value,
             discount_type: "member",
+          };
+        else if (studentSeat.length < student)
+          draft.reservation.inputValues.seat[payload.value.id] = {
+            ...payload.value,
+            discount_type: "student",
           };
       });
 
@@ -135,9 +142,17 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.admin.movies = payload;
       });
+    case actionTypes.adminMoviesNotPlaying:
+      return produce(state, (draft) => {
+        draft.admin.moviesNotPlaying = payload;
+      });
     case actionTypes.adminUsers:
       return produce(state, (draft) => {
         draft.admin.users = payload;
+      });
+    case actionTypes.adminMoviesOfTheMonth:
+      return produce(state, (draft) => {
+        draft.admin.moviesOfTheMonth = payload;
       });
 
     default:

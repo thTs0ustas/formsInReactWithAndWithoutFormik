@@ -51,7 +51,9 @@ const ShowMovies = ({ eventK }) => {
           value={itemsPerPage}
         >
           {keys(dividers).map((item) => (
-            <option value={dividers[item]}>{dividers[item]}</option>
+            <option key={item} value={dividers[item]}>
+              {dividers[item]}
+            </option>
           ))}
         </select>
       </div>

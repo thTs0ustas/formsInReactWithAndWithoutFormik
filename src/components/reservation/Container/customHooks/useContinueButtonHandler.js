@@ -21,7 +21,7 @@ const useContinueButtonHandler = (url, tickets) => {
           data: dataForPayment(tickets),
           username,
         },
-        { url, seat: inputValues.seat, screening: inputValues.screening },
+        { url, seat: inputValues.seat, screening: inputValues.screening[0] },
         dispatch,
         token
       );

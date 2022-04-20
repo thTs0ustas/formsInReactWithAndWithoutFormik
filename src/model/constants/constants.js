@@ -7,6 +7,7 @@ const INITIAL_STATE = {
       movie: "",
       screening: "",
       numOfTickets: {
+        student: 0,
         adult: 0,
         child: 0,
         member: 0,

@@ -10,7 +10,7 @@ import { genres } from "../data/genres";
 import React from "react";
 
 const AddNewMovieForm = ({ onHide, show, handleUpdateTable } = {}) => {
-  const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
+  const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
 
   const formik = useFormik({
     initialValues: {
@@ -23,7 +23,7 @@ const AddNewMovieForm = ({ onHide, show, handleUpdateTable } = {}) => {
     onSubmit: (values) => {
       axios
         .post(
-          "http://localhost:4000/movies/create",
+          `${BASE_URL}/admin/${userInfo.username}/movie/create`,
           {
             username: userInfo.username,
             values,

@@ -7,6 +7,11 @@ const TableHeader = styled.th`
   cursor: ${({ sortable }) => sortable && "pointer"};
   background-repeat: no-repeat;
   background-position: center right;
+  & td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   background-image: ${({ sort, sortable }) =>
     sortable
@@ -39,6 +44,9 @@ const TableHeader = styled.th`
     width: 10% !important;
   }
   &:nth-child(8) {
+    width: 10% !important;
+  }
+  &:nth-child(9) {
     width: 10% !important;
   }
 `;
