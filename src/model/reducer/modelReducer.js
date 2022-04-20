@@ -19,6 +19,7 @@ export const modelReducer = (state, action) => {
         draft.userInfo.token = payload.token;
         draft.userInfo.isMember = payload.isMember;
         draft.userInfo.isAdmin = payload.isAdmin;
+        draft.userInfo.id = payload.id;
 
         draft.userInfo.reviews = {};
         draft.userInfo.tickets = [];

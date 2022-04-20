@@ -23,9 +23,8 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
     onSubmit: (values) => {
       axios
         .put(
-          "http://localhost:4000/movies/update",
+          `http://localhost:4000/admin/update/movie/${data.id}`,
           {
-            id: data.id,
             username: userInfo.username,
             values,
           },

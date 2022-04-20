@@ -56,7 +56,7 @@
         1,
         "never"
       ],
-      "react/jsx-curly-newline": true,
+      "react/jsx-curly-newline": 1,
       "react/no-array-index-key": 1,
       "react/jsx-key": 1,
       "react/jsx-no-constructed-context-values": 1

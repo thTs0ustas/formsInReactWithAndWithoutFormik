@@ -28,6 +28,7 @@ export const useLoginForm = (isInModal = false) => {
           token: state.accessToken,
           isMember: state.isMember,
           isAdmin: state.isAdmin,
+          id: state.id,
         })
       );
       isInModal || navigate("/");
