@@ -9,6 +9,10 @@ const adminMoviesAction = (payload) => ({
   type: actionTypes.adminMovies,
   payload,
 });
+const adminMoviesNotPlayingAction = (payload) => ({
+  type: actionTypes.adminMoviesNotPlaying,
+  payload,
+});
 const adminMoviesOfTheMonthAction = (payload) => ({
   type: actionTypes.adminMoviesOfTheMonth,
   payload,
@@ -77,6 +81,7 @@ const handleError = (payload) => ({
 });
 
 export {
+  adminMoviesNotPlayingAction,
   adminMoviesOfTheMonthAction,
   adminUsersAction,
   adminMoviesAction,

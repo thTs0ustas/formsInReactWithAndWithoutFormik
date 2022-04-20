@@ -19,6 +19,7 @@ export {
   resetReservation,
   changeTheme,
   adminMoviesOfTheMonthAction,
+  adminMoviesNotPlayingAction,
 } from "./actions";
 
 export { Provider, useProvider } from "./store/state";

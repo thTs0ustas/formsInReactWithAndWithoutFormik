@@ -18,4 +18,5 @@ export {
   removeTicketAction,
   resetReservation,
   adminMoviesOfTheMonthAction,
+  adminMoviesNotPlayingAction,
 } from "./action";

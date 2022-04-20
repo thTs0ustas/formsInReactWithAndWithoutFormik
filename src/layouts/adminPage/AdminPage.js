@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { handleError } from "../../model/actions";
 import { TabStyled } from "./styledComponents/Tabs";
 import { ShowScreenings } from "../../components/admin/screenings/ShowScreenings";
+import { ShowMoviesOfTheMonth } from "../../components/admin/moviesOfTheMonth/ShowMoviesOfTheMonth";
 
 const AdminPage = () => {
   const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
@@ -57,7 +58,9 @@ const AdminPage = () => {
           <TabStyled eventKey='screenings' title='Screenings'>
             <ShowScreenings eventK={key} />
           </TabStyled>
-          <TabStyled eventKey='moviesOfTheMonth' title='Movies Of The Month'></TabStyled>
+          <TabStyled eventKey='moviesOfTheMonth' title='Movies Of The Month'>
+            <ShowMoviesOfTheMonth />
+          </TabStyled>
         </Tabs>
       </TabsContainer>
     </>

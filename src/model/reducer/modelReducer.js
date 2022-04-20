@@ -142,6 +142,10 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.admin.movies = payload;
       });
+    case actionTypes.adminMoviesNotPlaying:
+      return produce(state, (draft) => {
+        draft.admin.moviesNotPlaying = payload;
+      });
     case actionTypes.adminUsers:
       return produce(state, (draft) => {
         draft.admin.users = payload;

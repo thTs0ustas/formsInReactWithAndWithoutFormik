@@ -17,19 +17,20 @@ const AddNewScreeningForm = ({ onHide, show, handleUpdateTable } = {}) => {
     selectors.url,
   ]);
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}/admin/${userInfo.username}/getMoviesOfTheMonth`, {
-        headers: {
-          authorization: `Bearer ${userInfo.token}`,
-        },
-      })
-      .then(({ data }) => {
-        dispatch(adminMoviesOfTheMonthAction(data));
-      })
-      .catch((error) =>
-        dispatch(handleError({ message: error.message, time: new Date().getTime() }))
-      );
-  }, []);
+    if (show)
+      axios
+        .get(`${BASE_URL}/admin/${userInfo.username}/getMoviesOfTheMonth`, {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        })
+        .then(({ data }) => {
+          dispatch(adminMoviesOfTheMonthAction(data));
+        })
+        .catch((error) =>
+          dispatch(handleError({ message: error.message, time: new Date().getTime() }))
+        );
+  }, [show]);
 
   const formik = useFormik({
     initialValues: {
@@ -106,7 +107,7 @@ const AddNewScreeningForm = ({ onHide, show, handleUpdateTable } = {}) => {
               <option></option>
               {admin?.moviesOfTheMonth?.map((movie) => (
                 <option value={movie.id} key={movie.id}>
-                  {movie.Movie.title}
+                  {movie.Movie?.title}
                 </option>
               ))}
             </Form.Select>

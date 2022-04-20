@@ -1,6 +1,7 @@
 const actionTypes = {
   inputChange: "INPUT_CHANGE",
   adminMovies: "ADMIN_MOVIES",
+  adminMoviesNotPlaying: "ADMIN_MOVIES_NOT_PLAYING",
   adminUsers: "ADMIN_USERS",
   request: "REQUEST",
   addSeat: "SEAT_ADD",
