@@ -128,6 +128,16 @@ export const modelReducer = (state, action) => {
         draft.userInfo.tickets.push(payload);
       });
 
+    case actionTypes.getMoviesForHome:
+      return produce(state, (draft) => {
+        draft.homepage.movies.push(payload);
+      });
+
+    case actionTypes.getMoviesForNowShowing:
+      return produce(state, (draft) => {
+        draft.homepage.movies.push(payload);
+      });
+
     case actionTypes.changeTheme:
       return produce(state, (draft) => {
         draft.theme = !draft.theme;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavDropdown } from "react-bootstrap";
 
 const HomeDiv = styled.div`
-  background-color: blueviolet;
+  background-color: ${({ theme }) => theme.bgMain};
 `;
 
 const VideoWallDiv = styled.div`
@@ -75,15 +75,48 @@ const VideoWallInfo = styled.div`
 `;
 
 const Features = styled.div`
-  background-color: cadetblue;
+  background-color: ${({ theme }) => theme.bgMain};
   margin: 0 auto;
   max-width: 1400px;
   overflow: hidden;
 `;
 
 const ComingUp = styled.div`
-  background-color: fuchsia;
+  background-color: ${({ theme }) => theme.bgMain};
   padding: 10px 0;
+  overflow: auto;
+
+  & p {
+    margin-left: 25px;
+    font-weigth: 200;
+    color: ${({ theme }) => theme.secondary};
+  }
+
+  & h2 {
+    margin-left: 25px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: ${({ theme }) => theme.white};
+  }
+
+  & a {
+    text-decoration: none;
+    cursor: pointer;
+    color: ${({ theme }) => theme.white};
+  }
+
+  & a:hover {
+    color: ${({ theme }) => theme.primary};
+    -webkit-transition: color 0.3s ease-out 0s;
+    -moz-transition: color 0.3s ease-out 0s;
+    -ms-transition: color 0.3s ease-out 0s;
+    -o-transition: color 0.3s ease-out 0s;
+    transition: color 0.3s ease-out 0s;
+  }
+
+  & img:hover {
+    opacity: 1;
+  }
 `;
 
 const Archive = styled.div`

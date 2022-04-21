@@ -17,6 +17,8 @@ import { selectors, useProvider } from "./model";
 import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
 import { ShowMovies } from "./components/admin/movies/ShowMovies";
+import { useProvider } from "./model";
+import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 
 function App() {
   const [{ error, username, theme: theming }] = useProvider([
@@ -32,6 +34,7 @@ function App() {
         <Routes>
           <Route path='/'>
             <Route index element={<HomePageLayout username={username} />} />
+            <Route path='nowPlaying' element={<NowShowingLayout />} />
             <Route path='login' element={<SignInLayout username={username} />} />
             <Route path='contactUs' element={<ThankYouForYourThoughts />} />
             <Route path='payments'>

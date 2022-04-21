@@ -4,8 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
   Archive,
-  Card,
-  ComingUp,
   Features,
   HomeDiv,
   PromoCard,
@@ -21,6 +19,7 @@ import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
 import { PromoMember, PromoStudents, Switch } from "../../components";
+import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
 
 const HomePageLayout = ({ username }) => {
   return (
@@ -39,23 +38,7 @@ const HomePageLayout = ({ username }) => {
       </Header>
       <div>
         <Features>
-          <Typography>
-            <h2>Title</h2>
-            <p>Under Title</p>
-          </Typography>
-          <ComingUp>
-            <Row className='flex-nowrap'>
-              <Col md={4} sm={6} xs={12}>
-                <Card />
-              </Col>
-              <Col md={4} sm={6} xs={12}>
-                <Card />
-              </Col>
-              <Col md={4} sm={6} xs={12}>
-                <Card />
-              </Col>
-            </Row>
-          </ComingUp>
+          <MoviesOfTheMonth />
           <Promos>
             <Row>
               <Col md={6}>

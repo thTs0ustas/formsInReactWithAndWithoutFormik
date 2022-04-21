@@ -80,6 +80,16 @@ const handleError = (payload) => ({
   payload,
 });
 
+const moviesToHomeLayout = (payload) => ({
+  type: actionTypes.getMoviesForHome,
+  payload,
+});
+
+const moviesToNowShowing = (payload) => ({
+  type: actionTypes.getMoviesForNowShowing,
+  payload,
+})
+
 export {
   adminMoviesNotPlayingAction,
   adminMoviesOfTheMonthAction,
@@ -99,5 +109,7 @@ export {
   userLogoutAction,
   inputChangeAction,
   addTicketAction,
+  moviesToHomeLayout,
+  moviesToNowShowing,
   removeTicketAction,
 };
