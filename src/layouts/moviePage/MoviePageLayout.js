@@ -6,7 +6,7 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 import MoviePageContainer from "../../components/moviePage/MoviePageContainer";
 
-const MoviePageLayout = () => {
+const MoviePageLayout = ({ id }) => {
   return (
     <>
       <Header>
@@ -22,7 +22,7 @@ const MoviePageLayout = () => {
           </Nav>
         </NavDiv>
       </Header>
-      <MoviePageContainer />
+      <MoviePageContainer id={id} />
       <Footer />
     </>
   );

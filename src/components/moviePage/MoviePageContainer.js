@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MainPhoto from "./MainPhoto";
 import MainText from "./MainText";
 
-const MoviePageContainer = ({ id }) => {
+const MoviePageContainer = ({ id = 1 }) => {
   const [movie, setMovie] = useState([]);
   const getMovie = () => {
-    axios.get("http://localhost:4000/moviesOfTheMonth/1").then((res) => {
-      const myMovie = res.data;
-      console.log(myMovie);
-      setMovie(myMovie);
-    });
+    axios
+      .get(`http://localhost:4000/moviesOfTheMonth/${id}`)
+      .then(({ data }) => {
+        setMovie(data);
+      });
   };
   useEffect(() => {
     getMovie();

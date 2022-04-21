@@ -4,10 +4,10 @@ import { Ticket } from "./components";
 import { Payment } from "./components/payment/Payment";
 import {
   HomePageLayout,
+  MoviePageLayout,
   ReservationLayout,
   SignInLayout,
   TicketLayout,
-  MoviePageLayout,
 } from "./layouts";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
@@ -43,7 +43,7 @@ function App() {
             path='/reservation'
             element={<ReservationLayout username={username} />}
           />
-          <Route path='/movie' element={<MoviePageLayout />} />
+          <Route path='/movie/:id' element={<MoviePageLayout />} />
         </Routes>
       </div>
       <ToastContainer

@@ -10,11 +10,11 @@ import {
 import { useProvider } from "../../model";
 
 const MainPhoto = ({ image, title }) => {
-  console.log(image);
-  const [{ BASE_URL }] = useProvider(["BASE_URL"]);
+  const [state] = useProvider(["BASE_URL"]);
+  console.log(state);
   return (
     <Container className='container'>
-      <MoviePhoto src={`${BASE_URL}${image}`} alt={title} />
+      <MoviePhoto src={`${state.BASE_URL}${image}`} alt={title} />
       <Content>
         <MovieTitle>{title}</MovieTitle>
         <TrailerButton
