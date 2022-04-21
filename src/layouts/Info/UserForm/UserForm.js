@@ -2,6 +2,7 @@
 import React, {useState, useEffect}  from 'react';
 import {Input, Label, Div, Submit, Edit , ButtonDiv } from './UserFormElements'
 import axios from 'axios';
+import { getDefaultNormalizer } from '@testing-library/react';
 
 
 
@@ -21,6 +22,7 @@ export const Form = (props) => {
 
     const [data, setData] = useState({id:'', username: '', password: '', first_name:'', last_name: '', email:'', address:'', postal:'', birth_date:''});
     const [edit, setEdit] = useState(true)
+    console.log(data.first_name)
     
     localStorage.setItem('first_name', data.first_name)
     const getData = (token) => {
@@ -72,7 +74,6 @@ export const Form = (props) => {
               });
             }}
             value={data.username}
-            placeholder={data.username}
             disabled={edit ? true : false}
           />
         </Div>
@@ -89,7 +90,6 @@ export const Form = (props) => {
               });
             }}
             value={data.first_name}
-            placeholder={data.first_name}
             disabled={edit ? true : false}
           />
         </Div>
@@ -106,7 +106,6 @@ export const Form = (props) => {
               });
             }}
             value={data.last_name}
-            placeholder={data.last_name}
             disabled={edit ? true : false}
           />
         </Div>
@@ -123,7 +122,6 @@ export const Form = (props) => {
               });
             }}
             value={data.email}
-            placeholder={data.email}
             disabled={edit ? true : false}
           />
         </Div>
@@ -140,7 +138,6 @@ export const Form = (props) => {
               });
             }}
             value={data.address}
-            placeholder={data.address}
             disabled={edit ? true : false}
           />
         </Div>
@@ -157,7 +154,6 @@ export const Form = (props) => {
               });
             }}
             value={data.postal}
-            placeholder={data.postal}
             disabled={edit ? true : false}
           />
         </Div>
@@ -173,8 +169,7 @@ export const Form = (props) => {
                 birth_date: event.target.value,
               });
             }}
-            value={data.birth_date}
-            placeholder={data.birth_date.split('T')[0]}
+            value={data.birth_date.split('T')[0]}
             disabled={edit ? true : false}
           />
         </Div>
