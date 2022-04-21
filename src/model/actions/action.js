@@ -61,6 +61,10 @@ const userLoginAction = (payload) => ({
   type: actionTypes.userLogin,
   payload,
 });
+const userUpdateAction = (payload) => ({
+  type: actionTypes.userUpdate,
+  payload,
+});
 const userLogoutAction = (payload) => ({
   type: actionTypes.userLogout,
   payload,
@@ -90,9 +94,10 @@ const moviesToHomeLayout = (payload) => ({
 const moviesToNowShowing = (payload) => ({
   type: actionTypes.getMoviesForNowShowing,
   payload,
-})
+});
 
 export {
+  userUpdateAction,
   clearAdminAction,
   adminMoviesNotPlayingAction,
   adminMoviesOfTheMonthAction,

@@ -43,7 +43,9 @@ export const SignupBarPart = () => {
     <NavDropdownDiv title={username} id='nav-dropdown'>
       {isMember && (
         <>
-          <NavDropdown.Item eventKey='4.1'>Info</NavDropdown.Item>
+          <NavDropdown.Item eventKey='4.1'>
+            <Link to={"/info"}>Info</Link>
+          </NavDropdown.Item>
 
           {isAdmin && (
             <NavDropdown.Item eventKey='4.1'>
@@ -58,11 +60,7 @@ export const SignupBarPart = () => {
         onClick={() => {
           dispatch(userLogoutAction());
           loginOut();
-          sessionStorage.removeItem("username");
-          sessionStorage.removeItem("token");
-          localStorage.clear();
           navigate("/");
-          window.location.reload();
         }}
       >
         Sign Out

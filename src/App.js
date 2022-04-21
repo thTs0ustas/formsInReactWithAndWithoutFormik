@@ -23,10 +23,6 @@ import { ShowMovies } from "./components/admin/movies/ShowMovies";
 import { Subscription } from "./components/subscription/Subscription";
 import { InfoPage } from "./layouts/Info";
 
-
-
-import { theme } from "./theme";
-
 import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 
 function App() {

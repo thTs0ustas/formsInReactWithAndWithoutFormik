@@ -1,66 +1,63 @@
 //
-import React, {useState, useEffect}  from 'react';
-import {Input, Label, Div, Submit, Edit , ButtonDiv } from './UserFormElements'
-import axios from 'axios';
-import { getDefaultNormalizer } from '@testing-library/react';
+import React, { useEffect, useState } from "react";
+import { ButtonDiv, Div, Edit, Input, Label, Submit } from "./UserFormElements";
+import axios from "axios";
+import { useProvider, userUpdateAction } from "../../../model";
 
+export const Form = () => {
+  const [{ token, id }, dispatch] = useProvider([
+    "userInfo.username",
+    "userInfo.token",
+    "userInfo.id",
+  ]);
 
+  const [data, setData] = useState({
+    id: "",
+    username: "",
+    password: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    address: "",
+    postal: "",
+    birth_date: "",
+  });
+  const [edit, setEdit] = useState(true);
 
-
-export const Form = (props) => {  
-    // const [{username, token, id}] = useProvider(["userInfo.username", "userInfo.token", "userInfo.id"])
-    
-    // const [state] = useProvider()
-    // console.log(state.userInfo)
-
-    let username = window.sessionStorage.getItem("username")
-    const token = window.sessionStorage.getItem("token")
-    const id = window.sessionStorage.getItem("id")
-    console.log(id)
-    
-
-
-    const [data, setData] = useState({id:'', username: '', password: '', first_name:'', last_name: '', email:'', address:'', postal:'', birth_date:''});
-    const [edit, setEdit] = useState(true)
-    console.log(data.first_name)
-    
-    localStorage.setItem('first_name', data.first_name)
-    const getData = (token) => {
-    
-    axios.get(`http://localhost:4000/users/${+id}`, {
-      headers: {
-        'authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      } 
-    }).then((res) => {
-      const myUser = res.data;
-      console.log('myUser', myUser)
-      setData((prev) => ({
-        ...prev, ...myUser
-      }))
-    });
+  const getData = (token) => {
+    axios
+      .get(`http://localhost:4000/users/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then(({ data }) => {
+        setData(data);
+      });
   };
 
   useEffect(() => {
     getData(token);
   }, []);
 
-  const onSubmit= (values) => {
-    
-    axios.put(`http://localhost:4000/users/update/${id}`, data).then((res) => {
-           
-           const newData = res.data;
-           username = data.username;
-           setData(newData);
-           
-         })
-    }
-    
-    
-    return (
-      <>
-        
-        <form>
+  const onSubmit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    axios
+      .put(`http://localhost:4000/users/update/${id}`, data)
+      .then((res) => {
+        const newData = res.data;
+        setData(newData);
+        setEdit(!edit);
+        return res.data;
+      })
+      .then((data) => dispatch(userUpdateAction(data)));
+  };
+
+  return (
+    <>
+      <form>
         <Div>
           <Label htmlFor='username'> Username:</Label>
           <Input
@@ -74,7 +71,7 @@ export const Form = (props) => {
               });
             }}
             value={data.username}
-            disabled={edit ? true : false}
+            disabled={edit}
           />
         </Div>
         <Div>
@@ -90,7 +87,7 @@ export const Form = (props) => {
               });
             }}
             value={data.first_name}
-            disabled={edit ? true : false}
+            disabled={edit}
           />
         </Div>
         <Div>
@@ -106,7 +103,7 @@ export const Form = (props) => {
               });
             }}
             value={data.last_name}
-            disabled={edit ? true : false}
+            disabled={edit}
           />
         </Div>
         <Div>
@@ -122,7 +119,7 @@ export const Form = (props) => {
               });
             }}
             value={data.email}
-            disabled={edit ? true : false}
+            disabled={edit}
           />
         </Div>
         <Div>
@@ -138,7 +135,7 @@ export const Form = (props) => {
               });
             }}
             value={data.address}
-            disabled={edit ? true : false}
+            disabled={edit}
           />
         </Div>
         <Div>
@@ -154,7 +151,7 @@ export const Form = (props) => {
               });
             }}
             value={data.postal}
-            disabled={edit ? true : false}
+            disabled={edit}
           />
         </Div>
         <Div>
@@ -169,8 +166,8 @@ export const Form = (props) => {
                 birth_date: event.target.value,
               });
             }}
-            value={data.birth_date.split('T')[0]}
-            disabled={edit ? true : false}
+            value={data.birth_date?.split("T")[0]}
+            disabled={edit}
           />
         </Div>
         <ButtonDiv>
@@ -180,23 +177,17 @@ export const Form = (props) => {
               e.preventDefault();
               setEdit(!edit);
             }}
-            alternate={edit ? true : false}
+            alternate={edit}
           >
             {edit ? "edit" : "cancel"}
           </Edit>
-          <Submit
-            type='submit'
-            onClick={onSubmit}
-            disabled={edit ? true : false}
-            alternate={edit ? true : false}
-          >
+          <Submit type='submit' onClick={onSubmit} disabled={edit} alternate={edit}>
             Submit
           </Submit>
         </ButtonDiv>
       </form>
-      </>
-      
-    );
-}
+    </>
+  );
+};
 
 export default Form;
