@@ -12,7 +12,7 @@ import { useProvider } from "../../model";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { chunk, map } from "lodash";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { NowShowingStackHome } from "../nowShowingMovies/styledComponents/styles";
 
@@ -28,7 +28,7 @@ export const MoviesOfTheMonth = () => {
   useMoviesOfTheMonth();
   const [state] = useProvider();
   let slices = chunk(state.homepage.movies[0], 3);
-
+  const navigate = useNavigate();
   return (
     <>
       <TitleHeader>
@@ -46,10 +46,17 @@ export const MoviesOfTheMonth = () => {
             return (
               <ColStyled key={id}>
                 <NowShowingStackHome>
-                  <MoviesMonthImg src={`${state.BASE_URL}${image}`} />
+                  <MoviesMonthImg
+                    src={`${state.BASE_URL}${image}`}
+                    onClick={() =>
+                      navigate(`/reservation/${mOmId}`, {
+                        state: `${state.BASE_URL}${image}`,
+                      })
+                    }
+                  />
                   <p>{genre.replace(/^\w/, (c) => c?.toUpperCase())}</p>
                   <h2>
-                    <Link to={`/reservation/${mOmId}`} state={`http://localhost:4000${image}`}>
+                    <Link to={`/reservation/${mOmId}`} state={`${state.BASE_URL}${image}`}>
                       {title}
                     </Link>
                   </h2>

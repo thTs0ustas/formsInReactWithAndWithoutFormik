@@ -145,7 +145,7 @@ const ShowingToday = styled.div`
 const MoviesMonthImg = styled.img`
   object-fit: cover;
   image-rendering: optimizeQuality;
-
+  cursor: pointer;
   width: 90%;
   border-bottom: ${({ theme, mainPage = true }) =>
     mainPage ? `4px solid ${theme.secondary}` : "none"};
