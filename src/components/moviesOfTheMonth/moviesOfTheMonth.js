@@ -10,10 +10,10 @@ import {
 import { useMoviesOfTheMonth } from "./hooks/useMoviesOfTheMonth";
 import { useProvider } from "../../model";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import { ButtonIcon, CarouselButton } from "./";
+
 import { chunk, map } from "lodash";
 import { Link } from "react-router-dom";
-import "./moviesOfTheMonth.css";
+
 import { NowShowingStackHome } from "../nowShowingMovies/styledComponents/styles";
 
 export const MoviesOfTheMonth = () => {
@@ -34,7 +34,7 @@ export const MoviesOfTheMonth = () => {
     <>
       <TitleHeader>
         <h2>FILMS SHOWING TODAY</h2>
-        <Link to={`/nowshowing`}>
+        <Link to={`/nowPlaying`}>
           <p>See all films & session times</p>
         </Link>
       </TitleHeader>

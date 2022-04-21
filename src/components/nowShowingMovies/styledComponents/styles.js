@@ -15,15 +15,17 @@ const NowShowingStacker = styled.div`
 const NowShowingStack = styled.div`
   display: flex;
   flex-direction: column;
+
   min-width: 20vw;
-  max-width: 420px;
-  width: 25vw;
-  margin: 0 0 25px 0;
+  width: 30vw;
+  max-width: 440px;
+  margin: 0 auto;
+
   @media (max-width: 1000px) {
     width: 40vw;
   }
   @media (max-width: 700px) {
-    width: 95vw;
+    width: 100vw;
   }
   & h2 {
     width: 90%;
@@ -35,6 +37,11 @@ const NowShowingStack = styled.div`
   & p {
     text-align: left;
     font-size: 1rem;
+    margin: 0 0 10px 0;
+  }
+  & img {
+    width: 100%;
+    height: auto;
     margin: 0 0 10px 0;
   }
   @media (max-width: 576px) {
@@ -51,9 +58,10 @@ const NowShowingStackHome = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 20vw;
-  width: 20vw;
+  width: 30vw;
+  max-width: 420px;
+  margin: 0 auto 25px auto;
 
-  margin: 0 0 25px 0;
   @media (max-width: 1000px) {
     width: 40vw;
   }
@@ -62,13 +70,12 @@ const NowShowingStackHome = styled.div`
   }
   & h2 {
     width: 90%;
-    text-align: left;
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0 0 10px 0;
   }
   & p {
-    text-align: left;
+    text-align: left !important;
     font-size: 1rem;
     margin: 0 0 10px 0;
   }
