@@ -6,7 +6,6 @@ const HomeDiv = styled.div`
 `;
 
 const VideoWallDiv = styled.div`
-  min-height: 400px;
   background-color: ${({ theme }) => theme.bgMain};
 `;
 
@@ -14,7 +13,7 @@ const NavDropdownDiv = styled(NavDropdown)`
   padding: 0 5px;
   height: 32px;
   & > a {
-    padding: 5px 5px;
+    padding: 4px 5px;
     display: inline-block;
     text-align: center;
     min-width: 120px;

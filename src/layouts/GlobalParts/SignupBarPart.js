@@ -29,8 +29,6 @@ export const SignupBarPart = () => {
         }
       )
       .then(() => {
-        sessionStorage.removeItem("username");
-        sessionStorage.removeItem("token");
         navigate("/");
       })
       .catch((e) => alert(e.message));

@@ -24,7 +24,7 @@ export const Nav = styled.nav`
     //In smaller screens add different styling to the nav container
     z-index: 2;
     position: static;
-    margin-top: 6px;
+
     background: linear-gradient(#94002e, #94002e);
     border-bottom: 2px solid #b09661;
     //when Burger is clicked turn it to full pageview
