@@ -1,24 +1,25 @@
-import { useProvider } from "../../../../model";
-import { keys } from "lodash";
+import { selectors, useProvider } from "../../../../model";
+import { keys, some } from "lodash";
+import { handleSeatAdd, handleSeatRemove } from "../../../reservation/helpers";
 
-export const useSeat = (seatInfo, handleSeatRemove, handleSeatAdd) => {
-  const [state] = useProvider([
-    "reservation.inputValues.numOfTickets.sum",
-    "reservation.inputValues.seat",
-    "reservation.requests.reservedSeats",
+export const useSeat = (id, seatInfo) => {
+  const [{ seat, sum, reservedSeats, screening }, dispatch] = useProvider([
+    selectors.resReserved,
+    selectors.inputScreenings,
+    selectors.inputSum,
+    selectors.inputSeats,
   ]);
-  const { seat, sum, reservedSeats } = state;
-  const exists = !!seat[seatInfo.id];
-  const isAlreadyTaken = reservedSeats?.find(
-    (item) => item["seats_id"] === seatInfo.id
-  );
+
+  const exists = !!seat[id];
+
+  const isAlreadyTaken = some(reservedSeats?.[screening[0]], (item) => item["seats_id"] === id);
 
   const handleClick = (event) => {
     event.stopPropagation();
     event.preventDefault();
     exists
-      ? handleSeatRemove(seatInfo.id)
-      : keys(seat).length < sum && handleSeatAdd(seatInfo);
+      ? handleSeatRemove(dispatch)(id)
+      : keys(seat).length < sum && handleSeatAdd(dispatch)(seatInfo);
   };
   return { isAlreadyTaken, handleClick, seat, exists };
 };

@@ -5,11 +5,15 @@ import { useProvider, userLoginAction } from "../../../model";
 
 export const useLoginForm = (isInModal = false) => {
   const [state, setState] = useState(null);
-  const [, dispatch] = useProvider();
-  const navigate = useNavigate();
+  console.log(state);
+  const [
+    {
+      userInfo: { username, token },
+    },
+    dispatch,
+  ] = useProvider(["userInfo"]);
 
-  const token = window.sessionStorage.getItem("token");
-  const username = window.sessionStorage.getItem("username");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -18,13 +22,12 @@ export const useLoginForm = (isInModal = false) => {
     }
 
     if (state?.accessToken && state?.username) {
-      window.sessionStorage.setItem("token", state.accessToken);
-      window.sessionStorage.setItem("username", state.username);
-      window.sessionStorage.setItem("id", state.id);
       dispatch(
         userLoginAction({
           username: state.username,
           token: state.accessToken,
+          isMember: state.isMember,
+          isAdmin: state.isAdmin,
           id: state.id,
         })
       );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { get, isEmpty, reduce } from "lodash";
 import { createContext, useContextSelector } from "use-context-selector";
 
@@ -8,10 +8,42 @@ import { INITIAL_STATE } from "../constants/constants";
 const Model = createContext({});
 
 const Provider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(modelReducer, INITIAL_STATE, (path) => path);
-  const value = [state, dispatch];
+  const items = JSON.parse(sessionStorage.getItem("persistedState"));
+
+  const [state, dispatch] = React.useReducer(
+    modelReducer,
+    items ? { ...INITIAL_STATE, ...items } : INITIAL_STATE
+  );
+
+  useEffect(() => {
+    if (isEmpty(items)) {
+      sessionStorage.setItem(
+        "persistedState",
+        JSON.stringify({
+          userInfo: INITIAL_STATE.userInfo,
+          theme: INITIAL_STATE.theme,
+          reservation: INITIAL_STATE.reservation,
+        })
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isEmpty(items)) {
+      sessionStorage.setItem(
+        "persistedState",
+        JSON.stringify({
+          userInfo: state.userInfo,
+          theme: state.theme,
+          reservation: state.reservation,
+        })
+      );
+    }
+  }, [state, items]);
+  const value = useMemo(() => [state, dispatch], [state, dispatch]);
   return <Model.Provider value={value}>{children}</Model.Provider>;
 };
+
 Provider.displayName = "Model";
 
 const useProvider = (selectors = []) => {
@@ -27,6 +59,7 @@ const useProvider = (selectors = []) => {
           {}
         )
   );
+
   const dispatch = useContextSelector(Model, (v) => v[1]);
   if (!state || !dispatch) {
     throw new Error("useProvider must be used within a Provider");

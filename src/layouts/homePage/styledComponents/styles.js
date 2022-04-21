@@ -2,25 +2,24 @@ import styled from "styled-components";
 import { NavDropdown } from "react-bootstrap";
 
 const HomeDiv = styled.div`
-  background-color: blueviolet;
+  background-color: ${({ theme }) => theme.bgMain};
 `;
 
 const VideoWallDiv = styled.div`
-  min-height: 400px;
-  background-color: #a5f1d2;
+  background-color: ${({ theme }) => theme.bgMain};
 `;
 
 const NavDropdownDiv = styled(NavDropdown)`
   padding: 0 5px;
   height: 32px;
   & > a {
-    padding: 5px 5px;
+    padding: 4px 5px;
     display: inline-block;
     text-align: center;
-    width: 120px;
+    min-width: 120px;
     background-color: ${({ theme }) => theme.primary};
     transition: background-color 0.3s ease-in-out;
-    color: black;
+    color: #000;
 
     &:hover,
     &:active,
@@ -30,17 +29,19 @@ const NavDropdownDiv = styled(NavDropdown)`
     }
   }
   & div {
-    z-index: -1;
+    &:not([class*="show"]) {
+      display: none;
+    }
     &[class*="show"] {
       width: fit-content;
       z-index: 10000;
-
+      display: block;
       background-color: ${({ theme }) => theme.secondary};
       border-radius: 0;
 
       & a {
         text-decoration: none;
-        color: black;
+        color: #000;
       }
     }
   }
@@ -73,19 +74,52 @@ const VideoWallInfo = styled.div`
 `;
 
 const Features = styled.div`
-  background-color: cadetblue;
+  background-color: ${({ theme }) => theme.bgMain};
   margin: 0 auto;
   max-width: 1400px;
   overflow: hidden;
 `;
 
 const ComingUp = styled.div`
-  background-color: fuchsia;
+  background-color: ${({ theme }) => theme.bgMain};
   padding: 10px 0;
+  overflow: auto;
+
+  & p {
+    margin-left: 25px;
+    font-weight: 200;
+    color: ${({ theme }) => theme.secondary};
+  }
+
+  & h2 {
+    margin-left: 25px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: ${({ theme }) => theme.white};
+  }
+
+  & a {
+    text-decoration: none;
+    cursor: pointer;
+    color: ${({ theme }) => theme.white};
+  }
+
+  & a:hover {
+    color: ${({ theme }) => theme.primary};
+    -webkit-transition: color 0.3s ease-out 0s;
+    -moz-transition: color 0.3s ease-out 0s;
+    -ms-transition: color 0.3s ease-out 0s;
+    -o-transition: color 0.3s ease-out 0s;
+    transition: color 0.3s ease-out 0s;
+  }
+
+  & img:hover {
+    opacity: 1;
+  }
 `;
 
 const Archive = styled.div`
-  background-color: greenyellow;
+  background-color: ${({ theme }) => theme.bgMain};
   padding: 10px 0;
 `;
 
@@ -116,7 +150,6 @@ const Card = styled.div`
 `;
 
 const Promos = styled.div`
-  background-color: royalblue;
   padding: 10px 0;
 `;
 
@@ -131,7 +164,7 @@ const PromoCard = styled.div`
   width: 42vw;
   min-width: 250px;
   max-width: 650px;
-  
+
   @media (max-width: 576px) {
     width: 90vw;
     height: 85vw;

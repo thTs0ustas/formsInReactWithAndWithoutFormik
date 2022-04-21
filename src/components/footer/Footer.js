@@ -7,7 +7,7 @@ import Description from "./Description";
 export default function Footer() {
   return (
     <StyledFooter>
-      <h2>Get Cameo Cinemas Weekly</h2>
+      <h2>Contact Us</h2>
       <Form />
       <Menu />
       <Description />

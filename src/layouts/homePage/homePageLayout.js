@@ -1,11 +1,8 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
   Archive,
-  Card,
-  ComingUp,
   Features,
   HomeDiv,
   PromoCard,
@@ -20,14 +17,15 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
-import { PromoMember, PromoStudents } from "../../components";
+import { PromoMember, PromoStudents, Switch } from "../../components";
+import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
 
-const HomePageLayout = () => {
-  const username = sessionStorage.getItem("username");
+const HomePageLayout = ({ username }) => {
   return (
     <HomeDiv>
       <Header mainPage={false}>
         <SignUpBar>
+          <Switch />
           <div>
             <SignupBarPart username={username} />
           </div>
@@ -39,23 +37,7 @@ const HomePageLayout = () => {
       </Header>
       <div>
         <Features>
-          <Typography>
-            <h2>Title</h2>
-            <p>Under Title</p>
-          </Typography>
-          <ComingUp>
-            <Row className='flex-nowrap'>
-              <Col md={4} sm={6} xs={12}>
-                <Card />
-              </Col>
-              <Col md={4} sm={6} xs={12}>
-                <Card />
-              </Col>
-              <Col md={4} sm={6} xs={12}>
-                <Card />
-              </Col>
-            </Row>
-          </ComingUp>
+          <MoviesOfTheMonth />
           <Promos>
             <Row>
               <Col md={6}>
