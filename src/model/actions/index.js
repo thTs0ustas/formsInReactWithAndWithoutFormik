@@ -20,4 +20,5 @@ export {
   adminMoviesOfTheMonthAction,
   adminMoviesNotPlayingAction,
   clearAdminAction,
+  userUpdateAction,
 } from "./action";

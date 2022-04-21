@@ -21,6 +21,7 @@ import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
 import { ShowMovies } from "./components/admin/movies/ShowMovies";
 import { Subscription } from "./components/subscription/Subscription";
+import { InfoPage } from "./layouts/Info";
 
 import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 
@@ -38,6 +39,7 @@ function App() {
         <Routes>
           <Route path='/'>
             <Route index element={<HomePageLayout username={username} />} />
+            <Route path='info' element={<InfoPage />} />
             <Route path='nowPlaying' element={<NowShowingLayout />} />
             <Route path='moviePage/:id' element={<MoviePageLayout />} />
             <Route path='login' element={<SignInLayout username={username} />} />

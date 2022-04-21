@@ -44,13 +44,20 @@ const UserDetails = styled.div`
 `;
 
 const InputBox = styled(Field)`
+<<<<<<< HEAD
+=======
   outline: 0;
   border: 1px solid ${({ theme }) => theme.primary} !important;
+>>>>>>> development
   max-width: 418px;
   width: 300px;
   background-color: #340505;
   color: ${({ theme }) => theme.white};
+<<<<<<< HEAD
+  border: 0;
+=======
 
+>>>>>>> development
   margin-bottom: 15px;
   height: 45px;
   border-radius: 1px;
@@ -59,9 +66,14 @@ const InputBox = styled(Field)`
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
+<<<<<<< HEAD
+    box-shadow: 0 0 0 30px ${({ theme }) => theme.bgMain} inset !important;
+    -webkit-text-fill-color: #fcfcfc !important;
+=======
     -webkit-text-fill-color: ${({ theme }) => theme.white};
     -webkit-box-shadow: 0 0 0 1000px #340505 inset;
     box-shadow: 0 0 0 1000px #340505 inset;
+>>>>>>> development
     caret-color: aliceblue;
   }
 
@@ -78,7 +90,11 @@ const InputBox = styled(Field)`
   }
 
   &:focus {
+<<<<<<< HEAD
+    background-color: ${({ theme }) => theme.bgMain};
+=======
     background-color: ${({ theme }) => theme.dark};
+>>>>>>> development
     color: ${({ theme }) => theme.white};
     border: 2px solid ${({ theme }) => theme.primary};
 
@@ -103,6 +119,14 @@ const InputBox = styled(Field)`
   transition: all 0.3s;
 
   &:focus,
+<<<<<<< HEAD
+  &:valid {
+    color: #fff;
+    outline: 0;
+    border: 1px solid #f7dabb;
+  } */
+=======
+>>>>>>> development
 
   /* & span {
     color: #f7dabb;

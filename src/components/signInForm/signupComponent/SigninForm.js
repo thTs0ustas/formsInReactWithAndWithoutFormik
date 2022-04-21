@@ -17,15 +17,22 @@ export const SignInForm = ({ isInModal }) => {
   const [, dispatch] = useProvider();
   let [error] = useState("");
   const { setState } = useLoginForm(isInModal);
+  const token = window.sessionStorage.getItem("token")
   return (
     <Formik
       initialValues={{ username: "", password: "", error: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         axios
-          .post("http://localhost:4000/users/login", {
-            username: values.username,
-            password: values.password,
-          })
+          .post(
+            "http://localhost:4000/users/login",
+            {
+              username: values.username,
+              password: values.password,
+            },
+            {
+              headers: { authorization: `Bearer ${token}` },
+            }
+          )
           .then((res) => {
             if (errorHandling(res.data)) {
               dispatch(

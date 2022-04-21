@@ -13,6 +13,7 @@ const actionTypes = {
   getMoviesForNowShowing: "GET_MOVIES_FOR_NOW_SHOWING",
   userLogin: "USER_LOGIN",
   userLogout: "USER_LOGOUT",
+  userUpdate: "USER_UPDATE",
   newTicket: "NEW_TICKET",
   addTicket: "ADD_TICKET",
   removeTicket: "REMOVE_TICKET",

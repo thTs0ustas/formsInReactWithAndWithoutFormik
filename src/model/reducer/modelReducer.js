@@ -23,11 +23,13 @@ export const modelReducer = (state, action) => {
         draft.userInfo.isMember = payload.isMember;
         draft.userInfo.isAdmin = payload.isAdmin;
         draft.userInfo.id = payload.id;
-
         draft.userInfo.reviews = {};
         draft.userInfo.tickets = [];
       });
-
+    case actionTypes.userUpdate:
+      return produce(state, (draft) => {
+        draft.userInfo.username = payload.username;
+      });
     case actionTypes.userLogout:
       return produce(state, (draft) => {
         draft.userInfo = {};
