@@ -18,7 +18,7 @@ const NowShowingStack = styled.div`
 
   min-width: 20vw;
   width: 30vw;
-  max-width: 440px;
+  max-width: 400px;
   margin: 0 auto;
 
   @media (max-width: 1000px) {
@@ -89,9 +89,4 @@ const NowShowingStackHome = styled.div`
   }
 `;
 
-export {
-  NowShowingStacker,
-  NowShowingStack,
-  NowShowingContainer,
-  NowShowingStackHome,
-};
+export { NowShowingStacker, NowShowingStack, NowShowingContainer, NowShowingStackHome };

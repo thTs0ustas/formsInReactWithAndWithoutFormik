@@ -36,7 +36,7 @@ const NavDropdownDiv = styled(NavDropdown)`
     &[class*="show"] {
       width: fit-content;
       z-index: 10000;
-
+      display: block;
       background-color: ${({ theme }) => theme.secondary};
       border-radius: 0;
 
@@ -88,7 +88,7 @@ const ComingUp = styled.div`
 
   & p {
     margin-left: 25px;
-    font-weigth: 200;
+    font-weight: 200;
     color: ${({ theme }) => theme.secondary};
   }
 
@@ -151,7 +151,6 @@ const Card = styled.div`
 `;
 
 const Promos = styled.div`
-  background-color: royalblue;
   padding: 10px 0;
 `;
 
