@@ -49,7 +49,7 @@ export default function Menu() {
         <Title>Contact us</Title>
         <ul>
           <li>
-            <a href='#'>(03) 9754 7844</a>
+            <a href='#'>(+18) 6969 696969</a>
           </li>
           <li>
             <a href='#'>Email Us</a>
