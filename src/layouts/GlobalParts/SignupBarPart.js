@@ -38,7 +38,7 @@ export const SignupBarPart = () => {
 
   return !username ? (
     <>
-      <SignUpButton>Sign Up</SignUpButton>
+      <SignUpButton onClick={() => navigate("/signup")}>Sign Up</SignUpButton>
       <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
     </>
   ) : (
@@ -46,8 +46,7 @@ export const SignupBarPart = () => {
       {isMember && (
         <>
           <NavDropdown.Item eventKey='4.1'>Info</NavDropdown.Item>
-          <NavDropdown.Item eventKey='4.1'>Reservations</NavDropdown.Item>
-          <NavDropdown.Item eventKey='4.1'>Reviews</NavDropdown.Item>
+
           {isAdmin && (
             <NavDropdown.Item eventKey='4.1'>
               <Link to={"/admin"}>Admin</Link>

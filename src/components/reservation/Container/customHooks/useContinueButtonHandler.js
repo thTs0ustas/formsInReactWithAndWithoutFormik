@@ -24,7 +24,7 @@ const useContinueButtonHandler = (url, tickets) => {
         { url, seat: inputValues.seat, screening: inputValues.screening[0] },
         dispatch,
         token
-      );
+      ).then((r) => r);
   };
 
   return { spinner, setSpinner, handleContinueButton };

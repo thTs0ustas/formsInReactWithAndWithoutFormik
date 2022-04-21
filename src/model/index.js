@@ -20,6 +20,7 @@ export {
   changeTheme,
   adminMoviesOfTheMonthAction,
   adminMoviesNotPlayingAction,
+  clearAdminAction,
 } from "./actions";
 
 export { Provider, useProvider } from "./store/state";

@@ -11,12 +11,15 @@ import {
   ThankYouForYourThoughts,
   TicketLayout,
 } from "./layouts";
+import SignUpLayout from "./layouts/signUpPage/SignUpLayout";
+
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
 import { selectors, useProvider } from "./model";
 import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
 import { ShowMovies } from "./components/admin/movies/ShowMovies";
+import { Subscription } from "./components/subscription/Subscription";
 
 import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 
@@ -37,11 +40,13 @@ function App() {
             <Route path='nowPlaying' element={<NowShowingLayout />} />
             <Route path='login' element={<SignInLayout username={username} />} />
             <Route path='contactUs' element={<ThankYouForYourThoughts />} />
+            <Route path='signup' element={<SignUpLayout username={username} />} />
             <Route path='payments'>
               <Route index element={<Payment username={username} />} />
               <Route path='payment_cancel' element={<CancelPaymentLayout />} />
               <Route path='payment_applied' element={<ThanksForYourPaymentLayout />} />
             </Route>
+            <Route path='payments/subscription' element={<Subscription />} />
             <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
             <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
 

@@ -12,7 +12,10 @@ export const modelReducer = (state, action) => {
       return produce(state, () => {
         return payload;
       });
-
+    case actionTypes.clearAdmin:
+      return produce(state, (draft) => {
+        draft.admin = INITIAL_STATE.admin;
+      });
     case actionTypes.userLogin:
       return produce(state, (draft) => {
         draft.userInfo.username = payload.username;

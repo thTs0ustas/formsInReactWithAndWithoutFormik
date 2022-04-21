@@ -31,9 +31,7 @@ const INITIAL_STATE = {
   },
   theme: "true",
   error: { message: "", time: "" },
-  admin: {
-    movies: [],
-  },
+  admin: {},
 };
 
 export { INITIAL_STATE };

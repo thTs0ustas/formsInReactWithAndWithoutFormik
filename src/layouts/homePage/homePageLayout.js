@@ -1,6 +1,5 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
   Archive,

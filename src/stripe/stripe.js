@@ -1,7 +1,7 @@
 import axios from "axios";
 import { handleError } from "../model/actions";
 
-export const paymentWithStripe = (url, data, request, dispatch, token) => {
+export const paymentWithStripe = async (url, data, request, dispatch, token) => {
   try {
     axios
       .post(`${url}/payments/create-checkout`, data, {
@@ -31,4 +31,5 @@ export const paymentWithStripe = (url, data, request, dispatch, token) => {
       })
     );
   }
+  return { message: true };
 };

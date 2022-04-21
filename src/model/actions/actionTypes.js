@@ -3,6 +3,7 @@ const actionTypes = {
   adminMovies: "ADMIN_MOVIES",
   adminMoviesNotPlaying: "ADMIN_MOVIES_NOT_PLAYING",
   adminUsers: "ADMIN_USERS",
+  clearAdmin: "CLEAR_ADMIN",
   request: "REQUEST",
   addSeat: "SEAT_ADD",
   removeSeat: "SEAT_REMOVE",
