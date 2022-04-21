@@ -8,7 +8,7 @@ import { get } from "lodash";
 
 export const useResContainer = ({ BASE_URL, dispatch }) => {
   const { id } = useParams();
-
+  console.log(id);
   useEffect(async () => {
     dispatch(resetReservation());
     await axios

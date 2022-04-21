@@ -2,52 +2,58 @@ import React from "react";
 import { map } from "lodash";
 
 import {
-  TextContainer,
-  MainTitle,
-  SectionTitle,
-  Paragraph,
-  DaysDiv,
   DaysButton,
-  SessionDiv,
+  DaysDiv,
+  MainTitle,
+  Paragraph,
+  SectionTitle,
   SessionButton,
+  SessionDiv,
+  TextContainer,
 } from "./styledComponents/MainTextStyles";
+import { useNavigate } from "react-router-dom";
 
-const MainText = ({ movie }) => {
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+const MainText = ({ movie, id }) => {
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   let movieDates = [
-    ...new Set(
-      map(movie.Screenings, (item) => days[new Date(item.movie_date).getDay()])
-    ),
+    ...new Set(map(movie?.Screenings, (item) => days[new Date(item.movie_date).getDay()])),
   ];
   let movieTime = [
-    ...new Set(
-      map(movie.Screenings, (item) =>
-        item.movie_starts.split("T")[1].slice(0, 5)
-      )
-    ),
+    ...new Set(map(movie?.Screenings, (item) => item.movie_starts.split("T")[1].slice(0, 5))),
   ];
-
+  const navigate = useNavigate();
+  console.log(movie);
   return (
     <TextContainer>
       <MainTitle>Book Tickets</MainTitle>
       <SectionTitle>Select Day</SectionTitle>
       <DaysDiv>
         {map(movieDates, (item) => (
-          <DaysButton href=''>{item}</DaysButton>
+          <DaysButton
+            key={item}
+            onClick={() =>
+              navigate(`/reservation/${id}`, {
+                state: `http://localhost:4000${movie.Movie.image}`,
+              })
+            }
+          >
+            {item}
+          </DaysButton>
         ))}
       </DaysDiv>
       <SectionTitle>Book a session</SectionTitle>
       <SessionDiv>
         {map(movieTime, (item) => (
-          <SessionButton href=''>{item}</SessionButton>
+          <SessionButton
+            key={item}
+            onClick={() =>
+              navigate(`/reservation/${id}`, {
+                state: `http://localhost:4000${movie.Movie.image}`,
+              })
+            }
+          >
+            {item}
+          </SessionButton>
         ))}
       </SessionDiv>
 

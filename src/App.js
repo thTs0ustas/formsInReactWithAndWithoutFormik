@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Ticket } from "./components";
 import { Payment } from "./components/payment/Payment";
 import {
   AdminPage,
@@ -40,6 +39,7 @@ function App() {
           <Route path='/'>
             <Route index element={<HomePageLayout username={username} />} />
             <Route path='nowPlaying' element={<NowShowingLayout />} />
+            <Route path='moviePage/:id' element={<MoviePageLayout />} />
             <Route path='login' element={<SignInLayout username={username} />} />
             <Route path='contactUs' element={<ThankYouForYourThoughts />} />
             <Route path='signup' element={<SignUpLayout username={username} />} />
@@ -51,7 +51,6 @@ function App() {
             <Route path='payments/subscription' element={<Subscription />} />
             <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
             <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
-            <Route path='/movie/:id' element={<MoviePageLayout />} />
             <Route path='admin'>
               <Route index element={<AdminPage />} />
               <Route path='movies' element={<ShowMovies />} />

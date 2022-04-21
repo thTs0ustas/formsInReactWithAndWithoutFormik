@@ -41,14 +41,17 @@ export const MoviesOfTheMonth = () => {
       </TitleHeader>
       <ShowingToday>
         {map(slices, (slice) => {
-          return map(slice, ({ Screenings, Movie: { id, title, genre, image } }) => {
+          return map(slice, ({ id: mOmId, Screenings, Movie: { id, title, genre, image } }) => {
+            console.log(slice);
             return (
               <ColStyled key={id}>
                 <NowShowingStackHome>
                   <MoviesMonthImg src={`${state.BASE_URL}${image}`} />
                   <p>{genre.replace(/^\w/, (c) => c?.toUpperCase())}</p>
                   <h2>
-                    <Link to={`/reservation/${id}`}>{title}</Link>
+                    <Link to={`/reservation/${mOmId}`} state={`http://localhost:4000${image}`}>
+                      {title}
+                    </Link>
                   </h2>
                   <MoviesMonthScreeningContainer>
                     {map(Screenings, ({ id, movie_starts }) => (

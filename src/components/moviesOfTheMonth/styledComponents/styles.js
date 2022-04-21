@@ -161,7 +161,7 @@ const MoviesMonthScreeningContainer = styled.div`
 
 const MoviesMonthScreeningItem = styled.div`
   background-color: ${({ theme }) => theme.primary};
-
+  margin-right: 5px;
   color: #000;
   height: 25px;
   line-height: 25px;
