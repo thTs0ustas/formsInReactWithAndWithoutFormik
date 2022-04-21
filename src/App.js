@@ -17,7 +17,7 @@ import { selectors, useProvider } from "./model";
 import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
 import { ShowMovies } from "./components/admin/movies/ShowMovies";
-import { useProvider } from "./model";
+
 import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 
 function App() {
