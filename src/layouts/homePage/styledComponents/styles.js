@@ -119,7 +119,7 @@ const ComingUp = styled.div`
 `;
 
 const Archive = styled.div`
-  background-color: greenyellow;
+  background-color: ${({ theme }) => theme.bgMain};
   padding: 10px 0;
 `;
 
