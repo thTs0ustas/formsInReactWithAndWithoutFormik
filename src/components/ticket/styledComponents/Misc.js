@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Cinema = styled.p`
-  color: #aaa;
+  color: ${({ theme }) => theme.black};
   font-size: 11px;
 `;
 

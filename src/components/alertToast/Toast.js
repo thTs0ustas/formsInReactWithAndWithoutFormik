@@ -1,37 +1,24 @@
-import { Toast } from "react-bootstrap";
+import { Toast, ToastHeader } from "react-bootstrap";
 
 import { useProvider } from "../../model";
 import { handleError } from "../../model/actions";
+import { ToastContainer } from "./StyledComponents/ToastContainer";
 
 const AlertToast = ({ error }) => {
   const [, dispatch] = useProvider();
 
   return (
-    <Toast
+    <ToastContainer
       show={!!error.message}
       onClose={() => dispatch(handleError({ message: "", time: "" }))}
-      style={{
-        marginTop: 150,
-        marginRight: 5,
-        backgroundColor: "#b09661",
-        borderRadius: 0,
-        transition: "100ms linear",
-      }}
       delay={10000}
       autohide
     >
-      <Toast.Header
-        closeButton={false}
-        style={{
-          backgroundColor: "#ffebc6",
-          borderRadius: 0,
-          fontWeight: "bolder",
-        }}
-      >
-        <strong className='me-auto'>Error</strong>
-      </Toast.Header>
+      <ToastHeader closeButton={false}>
+        <strong className='me-auto'>Message</strong>
+      </ToastHeader>
       <Toast.Body>{error.message}</Toast.Body>
-    </Toast>
+    </ToastContainer>
   );
 };
 

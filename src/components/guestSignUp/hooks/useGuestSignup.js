@@ -8,12 +8,11 @@ export const useGuestSignup = () => {
 
   useEffect(() => {
     if (state && state["accessToken"] && state.username) {
-      window.sessionStorage.setItem("token", state["accessToken"]);
-      window.sessionStorage.setItem("username", state.username);
       dispatch(
         userLoginAction({
           username: state.username,
           token: state["accessToken"],
+          isMember: state.isMember,
         })
       );
     }

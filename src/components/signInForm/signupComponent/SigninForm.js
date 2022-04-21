@@ -15,7 +15,7 @@ import { useProvider } from "../../../model";
 
 export const SignInForm = ({ isInModal }) => {
   const [, dispatch] = useProvider();
-  let [error, setError] = useState("");
+  let [error] = useState("");
   const { setState } = useLoginForm(isInModal);
   return (
     <Formik

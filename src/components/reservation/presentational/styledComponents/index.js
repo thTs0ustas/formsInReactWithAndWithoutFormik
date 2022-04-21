@@ -12,14 +12,7 @@ export {
 } from "./ticketsStyles";
 
 export { GuestModalContainer, GuestContainer } from "./guestModalStyles";
-export {
-  PleaseBeAMember,
-  PleaseBeAMemberHeader,
-  PleaseBeAMemberParagraph,
-} from "./memberStyles";
-export {
-  ReservationForm,
-  Price,
-  Container,
-  ReservationInfoBar,
-} from "./generalStyles";
+export { PleaseBeAMember, PleaseBeAMemberHeader, PleaseBeAMemberParagraph } from "./memberStyles";
+export { ReservationForm, Price, Container, ReservationInfoBar } from "./generalStyles";
+
+export { MoviePosterStyles } from "./MoviePosterStyles";

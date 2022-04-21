@@ -1,10 +1,16 @@
 const actionTypes = {
   inputChange: "INPUT_CHANGE",
+  adminMovies: "ADMIN_MOVIES",
+  adminMoviesNotPlaying: "ADMIN_MOVIES_NOT_PLAYING",
+  adminUsers: "ADMIN_USERS",
+  clearAdmin: "CLEAR_ADMIN",
   request: "REQUEST",
   addSeat: "SEAT_ADD",
   removeSeat: "SEAT_REMOVE",
   reservedSeats: "RESERVED_SEATS",
   response: "RESPONSE",
+  getMoviesForHome: "GET_MOVIES_FOR_HOME",
+  getMoviesForNowShowing: "GET_MOVIES_FOR_NOW_SHOWING",
   userLogin: "USER_LOGIN",
   userLogout: "USER_LOGOUT",
   newTicket: "NEW_TICKET",
@@ -15,5 +21,6 @@ const actionTypes = {
   changeTheme: "CHANGE_THEME",
   initStore: "INIT_STORE",
   newError: "NEW_ERROR",
+  adminMoviesOfTheMonth: "ADMIN_MOVIES_OF_THE_MONTH",
 };
 export { actionTypes };

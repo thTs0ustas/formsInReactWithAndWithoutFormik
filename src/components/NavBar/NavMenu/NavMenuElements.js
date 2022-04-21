@@ -9,6 +9,16 @@ export const NavMenuUL = styled.ul`
   display: flex;
   align-items: center;
   //Displays the NavMenuLinks in mobile: margin must be set equal to the height of Nav, now {100px}
+  @media screen and (max-width: 930px) {
+    & li a {
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 850px) {
+    & li a {
+      font-size: 12px;
+    }
+  }
   @media screen and (max-width: 800px) {
     display: none;
     animation-name: ${letterAnimation};

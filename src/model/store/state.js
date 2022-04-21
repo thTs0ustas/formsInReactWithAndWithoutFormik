@@ -8,23 +8,38 @@ import { INITIAL_STATE } from "../constants/constants";
 const Model = createContext({});
 
 const Provider = ({ children }) => {
-  const items = sessionStorage.getItem("state");
+  const items = JSON.parse(sessionStorage.getItem("persistedState"));
+
   const [state, dispatch] = React.useReducer(
     modelReducer,
-    items ? JSON.parse(items) : INITIAL_STATE
+    items ? { ...INITIAL_STATE, ...items } : INITIAL_STATE
   );
 
   useEffect(() => {
     if (isEmpty(items)) {
-      sessionStorage.setItem("state", JSON.stringify(INITIAL_STATE));
+      sessionStorage.setItem(
+        "persistedState",
+        JSON.stringify({
+          userInfo: INITIAL_STATE.userInfo,
+          theme: INITIAL_STATE.theme,
+          reservation: INITIAL_STATE.reservation,
+        })
+      );
     }
   }, []);
 
   useEffect(() => {
     if (!isEmpty(items)) {
-      sessionStorage.setItem("state", JSON.stringify(state));
+      sessionStorage.setItem(
+        "persistedState",
+        JSON.stringify({
+          userInfo: state.userInfo,
+          theme: state.theme,
+          reservation: state.reservation,
+        })
+      );
     }
-  }, [state]);
+  }, [state, items]);
   const value = useMemo(() => [state, dispatch], [state, dispatch]);
   return <Model.Provider value={value}>{children}</Model.Provider>;
 };
@@ -39,10 +54,7 @@ const useProvider = (selectors = []) => {
           selectors,
           (st, path) => ({
             ...st,
-            [path.split(".")[1] ? path.split(".").at(-1) : path]: get(
-              state[0],
-              path
-            ),
+            [path.split(".")[1] ? path.split(".").at(-1) : path]: get(state[0], path),
           }),
           {}
         )

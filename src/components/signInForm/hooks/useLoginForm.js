@@ -5,12 +5,14 @@ import { useProvider, userLoginAction } from "../../../model";
 
 export const useLoginForm = (isInModal = false) => {
   const [state, setState] = useState(null);
+  console.log(state);
   const [
     {
       userInfo: { username, token },
     },
     dispatch,
   ] = useProvider(["userInfo"]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +26,9 @@ export const useLoginForm = (isInModal = false) => {
         userLoginAction({
           username: state.username,
           token: state.accessToken,
+          isMember: state.isMember,
+          isAdmin: state.isAdmin,
+          id: state.id,
         })
       );
       isInModal || navigate("/");

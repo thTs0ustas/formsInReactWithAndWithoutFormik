@@ -18,15 +18,16 @@ export const Nav = styled.nav`
   position: absolute;
   top: 32px;
   z-index: 9999;
-  padding: 2%;
+  padding: 15px;
 
   @media screen and (max-width: 800px) {
     //In smaller screens add different styling to the nav container
+    z-index: 2;
     position: static;
-    margin-top: 6px;
-    background: linear-gradient(#94002e, #94002e);
+
+    background: linear-gradient(${({ theme }) => theme.dark}, ${({ theme }) => theme.bgMain});
     border-bottom: 2px solid #b09661;
-    //when Burger is clicked turn it to full pageview
+    //when Burger is clicked turn it to full page view
     ${({ isOpen }) =>
       isOpen &&
       `
