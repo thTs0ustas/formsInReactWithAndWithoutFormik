@@ -25,12 +25,12 @@ const NowShowingLayout = () => {
         </NavDiv>
       </Header>
       <TitleHeader>
-          <h2>
-              NOW SHOWING
-          </h2>
+        <h2>
+          <span>NOW PLAYING</span>
+        </h2>
       </TitleHeader>
 
-      <NowShowingMovies/>
+      <NowShowingMovies />
 
       <Footer />
     </>

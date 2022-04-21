@@ -5,13 +5,21 @@ const TitleHeader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 300px;
+  height: 200px;
   text-align: center;
   background-color: ${({ theme }) => theme.bgMain};
 
   & h2 {
-    margin-top: 10px;
+    width: 90%;
+    text-align: center;
+    border-bottom: 1px solid ${({ theme }) => theme.secondary};
+    line-height: 0.1em;
+    margin: 10px auto 10px;
     color: ${({ theme }) => theme.secondary};
+    & span {
+      background-color: ${({ theme }) => theme.bgMain};
+      padding: 0 10px;
+    }
   }
 
   & p {
@@ -35,11 +43,6 @@ const NowShowing = styled.div`
   justify-content: space-around;
 
   flex-wrap: wrap;
-  //& > div {
-  //  align-self: flex-start;
-  //  margin-right: 20px;
-  //}
-
   background-color: ${({ theme }) => theme.bgMain};
 
   & p {
@@ -84,24 +87,21 @@ const ShowingToday = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: nowrap;
-
+  margin: 0 10px;
   overflow-x: auto;
   -webkit-overflow-scrolling: auto;
   background-color: ${({ theme }) => theme.bgMain};
-
   & > div {
+    margin-left: 10px;
     margin-right: 10px;
   }
   &::-webkit-scrollbar {
     display: compact;
-    background-color: ${({ theme }) => theme.primary};
+    background: transparent;
   }
   &::-webkit-scrollbar-thumb {
     background-color: ${({ theme }) => theme.secondary};
     border-radius: 50px;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: ${({ theme }) => theme.primary};
   }
 
   & p {

@@ -25,7 +25,7 @@ export const Nav = styled.nav`
     z-index: 2;
     position: static;
 
-    background: linear-gradient(#94002e, #94002e);
+    background: linear-gradient(${({ theme }) => theme.dark}, ${({ theme }) => theme.bgMain});
     border-bottom: 2px solid #b09661;
     //when Burger is clicked turn it to full page view
     ${({ isOpen }) =>
