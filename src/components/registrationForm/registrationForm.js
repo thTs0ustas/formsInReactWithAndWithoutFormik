@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -8,8 +7,7 @@ import { ContinueButton } from "../form/styles/styles";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { selectors, useProvider } from "../../model";
-import { errorHandling } from "../signInForm/errors/errorHandling";
-import { handleError } from "../../model/actions";
+import { handleSubmit } from "./helper/handleSubmit";
 
 const INITIAL_STATE = {
   username: "",
@@ -24,7 +22,6 @@ const INITIAL_STATE = {
 
 export const RegistrationForm = () => {
   const [state, dispatch] = useProvider([selectors.url, selectors.token, selectors.username]);
-  const [, setResponse] = useState(null);
 
   return (
     <>
@@ -33,37 +30,9 @@ export const RegistrationForm = () => {
         <h3>Your Account Details</h3>
         <Formik
           initialValues={INITIAL_STATE}
-          onSubmit={async (values, { setSubmitting, resetForm }) => {
+          onSubmit={(values, { setSubmitting, resetForm }) => {
             window.sessionStorage.setItem("values", JSON.stringify(values));
-            await axios
-              .post(`${state.BASE_URL}/payments/create-subscription`, {
-                data: [
-                  {
-                    name: "Membership",
-                    price: 1500 * 12,
-                    quantity: 1,
-                  },
-                ],
-              })
-              .then(({ data }) => {
-                if (errorHandling(data)) {
-                  dispatch(
-                    handleError({
-                      message: data.message,
-                      time: new Date().getTime(),
-                    })
-                  );
-                  setSubmitting(false);
-                  resetForm();
-                } else {
-                  if (data.url) return window.location.replace(data["url"]);
-                  return Promise.reject(data);
-                }
-              })
-              .catch(() => {
-                setSubmitting(false);
-                resetForm();
-              });
+            handleSubmit(values, state, dispatch, setSubmitting, resetForm);
           }}
           validationSchema={Yup.object({
             username: Yup.string()

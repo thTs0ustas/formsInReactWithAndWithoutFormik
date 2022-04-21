@@ -27,7 +27,7 @@ export const Nav = styled.nav`
 
     background: linear-gradient(#94002e, #94002e);
     border-bottom: 2px solid #b09661;
-    //when Burger is clicked turn it to full pageview
+    //when Burger is clicked turn it to full page view
     ${({ isOpen }) =>
       isOpen &&
       `
