@@ -1,5 +1,27 @@
 import { actionTypes } from "./actionTypes";
 
+const initStore = (payload) => ({
+  type: actionTypes.initStore,
+  payload,
+});
+
+const adminMoviesAction = (payload) => ({
+  type: actionTypes.adminMovies,
+  payload,
+});
+const adminMoviesNotPlayingAction = (payload) => ({
+  type: actionTypes.adminMoviesNotPlaying,
+  payload,
+});
+const adminMoviesOfTheMonthAction = (payload) => ({
+  type: actionTypes.adminMoviesOfTheMonth,
+  payload,
+});
+const adminUsersAction = (payload) => ({
+  type: actionTypes.adminUsers,
+  payload,
+});
+
 const requestAction = (payload) => ({
   type: actionTypes.request,
   payload,
@@ -20,6 +42,7 @@ const addTicketAction = (payload) => ({
   type: actionTypes.addTicket,
   payload,
 });
+
 const removeTicketAction = (payload) => ({
   type: actionTypes.removeTicket,
   payload,
@@ -52,6 +75,10 @@ const resetReservation = () => ({
 const changeTheme = () => ({
   type: actionTypes.changeTheme,
 });
+const handleError = (payload) => ({
+  type: actionTypes.newError,
+  payload,
+});
 
 const moviesToHomeLayout = (payload) => ({
   type: actionTypes.getMoviesForHome,
@@ -64,6 +91,12 @@ const moviesToNowShowing = (payload) => ({
 })
 
 export {
+  adminMoviesNotPlayingAction,
+  adminMoviesOfTheMonthAction,
+  adminUsersAction,
+  adminMoviesAction,
+  handleError,
+  initStore,
   changeTheme,
   resetReservation,
   addSeatAction,

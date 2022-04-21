@@ -8,6 +8,7 @@ const INITIAL_STATE = {
       movie: "",
       screening: "",
       numOfTickets: {
+        student: 0,
         adult: 0,
         child: 0,
         member: 0,
@@ -28,7 +29,11 @@ const INITIAL_STATE = {
     tickets: [],
     reviews: {},
   },
-  theme: true,
+  theme: "true",
+  error: { message: "", time: "" },
+  admin: {
+    movies: [],
+  },
 };
 
 export { INITIAL_STATE };

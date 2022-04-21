@@ -4,7 +4,7 @@ const Screen = styled.div`
   border-radius: 50% / 100% 100% 0 0;
   text-align: center;
   background: #32557f;
-  width: 450px;
+  width: 700px;
   height: 30px;
   margin-bottom: 25px;
 `;
@@ -23,7 +23,7 @@ const IconDiv = styled.button`
   border: 0;
   //border-radius: 10px;
   padding: 2px 5px;
-  margin: 1px 1px;
+
   background-color: ${({ theme }) => theme.bgMain};
   transition: 0.05s linear;
   &:active {
@@ -33,19 +33,20 @@ const IconDiv = styled.button`
 
 const SeatDiv = styled.div`
   text-align: center;
+  width: 100%;
 `;
 
 const Col = styled.div`
   display: flex;
   flex-direction: column;
-  width: 33.3%;
+  width: 40%; !important;
 `;
 
 const SeatsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 550px;
+  width: 750px;
 `;
 
 export { SeatsContainer, Col, Container, IconDiv, SeatDiv, Screen };

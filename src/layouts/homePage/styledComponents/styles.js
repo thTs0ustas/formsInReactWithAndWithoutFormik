@@ -7,7 +7,7 @@ const HomeDiv = styled.div`
 
 const VideoWallDiv = styled.div`
   min-height: 400px;
-  background-color: #a5f1d2;
+  background-color: ${({ theme }) => theme.bgMain};
 `;
 
 const NavDropdownDiv = styled(NavDropdown)`
@@ -17,10 +17,10 @@ const NavDropdownDiv = styled(NavDropdown)`
     padding: 5px 5px;
     display: inline-block;
     text-align: center;
-    width: 120px;
+    min-width: 120px;
     background-color: ${({ theme }) => theme.primary};
     transition: background-color 0.3s ease-in-out;
-    color: black;
+    color: #000;
 
     &:hover,
     &:active,
@@ -30,7 +30,9 @@ const NavDropdownDiv = styled(NavDropdown)`
     }
   }
   & div {
-    z-index: -1;
+    &:not([class*="show"]) {
+      display: none;
+    }
     &[class*="show"] {
       width: fit-content;
       z-index: 10000;
@@ -40,7 +42,7 @@ const NavDropdownDiv = styled(NavDropdown)`
 
       & a {
         text-decoration: none;
-        color: black;
+        color: #000;
       }
     }
   }

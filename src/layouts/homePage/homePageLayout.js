@@ -21,8 +21,7 @@ import CarouselHero from "../../components/HeroSlider";
 import { PromoMember, PromoStudents, Switch } from "../../components";
 import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
 
-const HomePageLayout = () => {
-  const username = sessionStorage.getItem("username");
+const HomePageLayout = ({ username }) => {
   return (
     <HomeDiv>
       <Header mainPage={false}>

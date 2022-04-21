@@ -34,7 +34,7 @@ export const InputField = styled(Field)`
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-    box-shadow: 0 0 0 30px ${({ theme }) => theme.bgMain} inset !important;
+    box-shadow: 0 0 0 30px ${({ theme }) => theme.dark} inset !important;
     -webkit-text-fill-color: #fcfcfc !important;
     caret-color: aliceblue;
   }

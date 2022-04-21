@@ -1,5 +1,10 @@
+export { selectors } from "./selectors/selectors";
+
 export {
   actionTypes,
+  adminMoviesAction,
+  adminUsersAction,
+  initStore,
   addSeatAction,
   newTicketAction,
   removeSeatAction,
@@ -13,5 +18,8 @@ export {
   removeTicketAction,
   resetReservation,
   changeTheme,
+  adminMoviesOfTheMonthAction,
+  adminMoviesNotPlayingAction,
 } from "./actions";
+
 export { Provider, useProvider } from "./store/state";
