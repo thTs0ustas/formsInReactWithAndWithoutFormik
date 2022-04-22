@@ -1,3 +1,4 @@
+export { UpcomingMovies } from "./upcomingMovies/UpcomingMovies";
 export { Ticket } from "./ticket";
 export { SeatMatrix } from "./seatsGrid";
 export { ReservationContainer as Reservation } from "./reservation";

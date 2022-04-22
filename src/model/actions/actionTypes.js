@@ -11,6 +11,7 @@ const actionTypes = {
   response: "RESPONSE",
   getMoviesForHome: "GET_MOVIES_FOR_HOME",
   getMoviesForNowShowing: "GET_MOVIES_FOR_NOW_SHOWING",
+  getUpcoming: "GET_UPCOMING",
   userLogin: "USER_LOGIN",
   userLogout: "USER_LOGOUT",
   userUpdate: "USER_UPDATE",

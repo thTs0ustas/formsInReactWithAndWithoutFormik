@@ -16,7 +16,7 @@ export const MenuItems = [
   },
   {
     title: "UPCOMING",
-    url: "#",
+    url: "upcoming",
   },
   {
     title: "CINEMAS",

@@ -30,8 +30,9 @@ const TicketLayout = ({ username }) => {
           <h3>Tickets</h3>
           <ContinueButton>Print to pdf</ContinueButton>
         </div>
-
-        <Ticket />
+        <div>
+          <Ticket />
+        </div>
       </TicketContainer>
       <Footer />
     </SignInDiv>

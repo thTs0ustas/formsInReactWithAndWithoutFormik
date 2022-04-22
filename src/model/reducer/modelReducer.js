@@ -142,6 +142,10 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.homepage.movies.push(payload);
       });
+    case actionTypes.getUpcoming:
+      return produce(state, (draft) => {
+        draft.upcoming.push(payload);
+      });
 
     case actionTypes.changeTheme:
       return produce(state, (draft) => {

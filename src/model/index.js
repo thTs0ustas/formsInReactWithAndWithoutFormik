@@ -22,6 +22,7 @@ export {
   adminMoviesNotPlayingAction,
   clearAdminAction,
   userUpdateAction,
+  upcomingMoviesAction,
 } from "./actions";
 
 export { Provider, useProvider } from "./store/state";

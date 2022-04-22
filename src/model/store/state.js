@@ -23,6 +23,7 @@ const Provider = ({ children }) => {
           userInfo: INITIAL_STATE.userInfo,
           theme: INITIAL_STATE.theme,
           reservation: INITIAL_STATE.reservation,
+          upcoming: INITIAL_STATE.upcoming,
         })
       );
     }
@@ -36,6 +37,7 @@ const Provider = ({ children }) => {
           userInfo: state.userInfo,
           theme: state.theme,
           reservation: state.reservation,
+          upcoming: state.upcoming,
         })
       );
     }

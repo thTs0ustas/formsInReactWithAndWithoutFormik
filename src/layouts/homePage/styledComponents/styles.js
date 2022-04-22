@@ -132,7 +132,7 @@ const Typography = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: chocolate;
+  background-color: ${({ theme }) => theme.logo};
   margin: 0 auto;
   height: 25vw;
   min-height: 120px;

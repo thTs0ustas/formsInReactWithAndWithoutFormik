@@ -21,4 +21,5 @@ export {
   adminMoviesNotPlayingAction,
   clearAdminAction,
   userUpdateAction,
+  upcomingMoviesAction,
 } from "./action";

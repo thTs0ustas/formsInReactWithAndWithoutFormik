@@ -95,8 +95,13 @@ const moviesToNowShowing = (payload) => ({
   type: actionTypes.getMoviesForNowShowing,
   payload,
 });
+const upcomingMoviesAction = (payload) => ({
+  type: actionTypes.getUpcoming,
+  payload,
+});
 
 export {
+  upcomingMoviesAction,
   userUpdateAction,
   clearAdminAction,
   adminMoviesNotPlayingAction,

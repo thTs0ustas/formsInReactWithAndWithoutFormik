@@ -14,6 +14,12 @@ const TicketContainer = styled.div`
     justify-content: space-between;
     width: 300px;
   }
+  & > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   & h3 {
     padding-left: 4%;
     color: ${({ theme }) => theme.primary};
