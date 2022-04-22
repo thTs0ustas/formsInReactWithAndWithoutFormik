@@ -19,7 +19,7 @@ export const MenuItems = [
     url: "/upcoming",
   },
   {
-    title: "CINEMAS",
-    url: "#",
+    title: "ABOUT US",
+    url: "/aboutUs",
   },
 ];

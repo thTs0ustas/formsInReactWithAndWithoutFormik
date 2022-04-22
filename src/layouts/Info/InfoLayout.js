@@ -20,7 +20,7 @@ import { Switch } from "../../components";
 
 let username = window.sessionStorage.getItem("username");
 
-export const InfoPage = () => {
+export const InfoPage = ({ username }) => {
   const [selected, setSelected] = useState("");
 
   const showSelectedOption = () => {
@@ -41,7 +41,7 @@ export const InfoPage = () => {
         <SignUpBar>
           <Switch />
           <div>
-            <SignupBarPart />
+            <SignupBarPart username={username} />
           </div>
         </SignUpBar>
         <NavDiv>

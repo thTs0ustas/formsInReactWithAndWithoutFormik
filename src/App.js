@@ -2,13 +2,13 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Payment } from "./components/payment/Payment";
 import {
+  AboutUsLayout,
   AdminPage,
   CancelPaymentLayout,
   HomePageLayout,
   MoviePageLayout,
   ReservationLayout,
   SignInLayout,
-  AboutUsLayout,
   ThanksForYourPaymentLayout,
   ThankYouForYourThoughts,
   TicketLayout,
@@ -44,7 +44,7 @@ function App() {
             <Route index element={<HomePageLayout username={username} />} />
             <Route path='info' element={<InfoPage username={username} />} />
             <Route path='nowPlaying' element={<NowShowingLayout username={username} />} />
-            <Route path='aboutus' element={<AboutUsLayout />} />
+            <Route path='aboutUs' element={<AboutUsLayout username={username} />} />
             <Route path='movieByGenre'>
               <Route path=':genre' element={<MoviesByGenreLayout username={username} />} />
             </Route>

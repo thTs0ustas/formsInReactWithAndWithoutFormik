@@ -18,7 +18,6 @@ import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
 import { CardComponent, PromoMember, PromoStudents, Switch } from "../../components";
 import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
-import { Link } from "react-router-dom";
 import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
 
 const HomePageLayout = ({ username }) => {
@@ -69,9 +68,8 @@ const HomePageLayout = ({ username }) => {
               <h2>
                 <span>MOVIE LIBRARY</span>
               </h2>
-              <Link to={`/movieByGenre`}>
-                <p>Arranged By Genre</p>
-              </Link>
+
+              <p>Arranged By Genre</p>
             </TitleHeader>
           </Typography>
           <Archive>

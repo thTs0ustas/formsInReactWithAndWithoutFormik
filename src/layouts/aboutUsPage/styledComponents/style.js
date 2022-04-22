@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const MainDiv = styled.div`
-  background-color: #94002e;
+  background-color: ${({ theme }) => theme.bgMain};
 `;
 
 const MainSection = styled.div`
