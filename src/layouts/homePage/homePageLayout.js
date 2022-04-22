@@ -5,7 +5,6 @@ import {
   Archive,
   Features,
   HomeDiv,
-  PromoCard,
   Promos,
   Typography,
   VideoWallDiv,
@@ -17,9 +16,10 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
-import { PromoMember, PromoStudents, Switch } from "../../components";
+import { CardComponent, PromoMember, PromoStudents, Switch } from "../../components";
 import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
-import { CardComponent } from "../../components";
+import { Link } from "react-router-dom";
+import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
 
 const HomePageLayout = ({ username }) => {
   const genres = [
@@ -63,9 +63,16 @@ const HomePageLayout = ({ username }) => {
               </Col>
             </Row>
           </Promos>
+          <br />
           <Typography>
-            <h2>Title</h2>
-            <p>Under Title</p>
+            <TitleHeader>
+              <h2>
+                <span>MOVIE LIBRARY</span>
+              </h2>
+              <Link to={`/movieByGenre`}>
+                <p>Arranged By Genre</p>
+              </Link>
+            </TitleHeader>
           </Typography>
           <Archive>
             <Row>

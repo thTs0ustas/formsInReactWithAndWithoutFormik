@@ -25,6 +25,7 @@ import { InfoPage } from "./layouts/Info";
 
 import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 import { UpcomingLayout } from "./layouts/upcomingPage/UpcomingLayout";
+import { MoviesByGenreLayout } from "./layouts/moniesByGernePage/MoviesByGenreLayout";
 
 function App() {
   const [{ error, username, theme: theming }] = useProvider([
@@ -40,24 +41,30 @@ function App() {
         <Routes>
           <Route path='/'>
             <Route index element={<HomePageLayout username={username} />} />
-            <Route path='info' element={<InfoPage />} />
-            <Route path='nowPlaying' element={<NowShowingLayout />} />
-            <Route path='upcoming' element={<UpcomingLayout />} />
-            <Route path='moviePage/:id' element={<MoviePageLayout />} />
+            <Route path='info' element={<InfoPage username={username} />} />
+            <Route path='nowPlaying' element={<NowShowingLayout username={username} />} />
+            <Route path='movieByGenre'>
+              <Route path=':genre' element={<MoviesByGenreLayout username={username} />} />
+            </Route>
+            <Route path='upcoming' element={<UpcomingLayout username={username} />} />
+            <Route path='moviePage/:id' element={<MoviePageLayout username={username} />} />
             <Route path='login' element={<SignInLayout username={username} />} />
             <Route path='signup' element={<SignUpLayout username={username} />} />
-            <Route path='contactUs' element={<ThankYouForYourThoughts />} />
+            <Route path='contactUs' element={<ThankYouForYourThoughts username={username} />} />
             <Route path='payments'>
               <Route index element={<Payment username={username} />} />
-              <Route path='payment_cancel' element={<CancelPaymentLayout />} />
-              <Route path='payment_applied' element={<ThanksForYourPaymentLayout />} />
+              <Route path='payment_cancel' element={<CancelPaymentLayout username={username} />} />
+              <Route
+                path='payment_applied'
+                element={<ThanksForYourPaymentLayout username={username} />}
+              />
             </Route>
-            <Route path='payments/subscription' element={<Subscription />} />
+            <Route path='payments/subscription' element={<Subscription username={username} />} />
             <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
             <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
             <Route path='admin'>
-              <Route index element={<AdminPage />} />
-              <Route path='movies' element={<ShowMovies />} />
+              <Route index element={<AdminPage username={username} />} />
+              <Route path='movies' element={<ShowMovies username={username} />} />
             </Route>
           </Route>
           {/*<Route path='/payments' element={<Payment username={username} />} />*/}

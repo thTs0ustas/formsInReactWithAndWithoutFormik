@@ -99,8 +99,13 @@ const upcomingMoviesAction = (payload) => ({
   type: actionTypes.getUpcoming,
   payload,
 });
+const moviesGenreAction = (payload) => ({
+  type: actionTypes.moviesByGenre,
+  payload,
+});
 
 export {
+  moviesGenreAction,
   upcomingMoviesAction,
   userUpdateAction,
   clearAdminAction,

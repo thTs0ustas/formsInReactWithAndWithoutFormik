@@ -173,7 +173,10 @@ export const modelReducer = (state, action) => {
       return produce(state, (draft) => {
         draft.admin.moviesOfTheMonth = payload;
       });
-
+    case actionTypes.moviesByGenre:
+      return produce(state, (draft) => {
+        draft.moviesByGenre = payload;
+      });
     default:
       return state;
   }

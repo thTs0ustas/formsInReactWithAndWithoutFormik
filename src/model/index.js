@@ -23,6 +23,7 @@ export {
   clearAdminAction,
   userUpdateAction,
   upcomingMoviesAction,
+  moviesGenreAction,
 } from "./actions";
 
 export { Provider, useProvider } from "./store/state";

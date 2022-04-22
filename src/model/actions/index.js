@@ -22,4 +22,5 @@ export {
   clearAdminAction,
   userUpdateAction,
   upcomingMoviesAction,
+  moviesGenreAction,
 } from "./action";

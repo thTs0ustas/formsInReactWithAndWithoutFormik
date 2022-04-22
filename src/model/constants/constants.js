@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   BASE_URL: "http://localhost:4000",
   upcoming: [],
+  moviesByGenre: [],
   homepage: { movies: [] },
   reservation: {
     inputValues: {

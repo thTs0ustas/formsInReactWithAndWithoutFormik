@@ -11,19 +11,15 @@ const MenuIcon = styled(BiMoviePlay)`
 export const MenuItems = [
   {
     title: "NOW PLAYING",
-    url: "nowPlaying",
+    url: "/nowPlaying",
     icon: <MenuIcon />,
   },
   {
     title: "UPCOMING",
-    url: "upcoming",
+    url: "/upcoming",
   },
   {
     title: "CINEMAS",
-    url: "#",
-  },
-  {
-    title: "CONTACT US",
     url: "#",
   },
 ];
