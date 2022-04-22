@@ -1,5 +1,7 @@
 const INITIAL_STATE = {
   BASE_URL: "http://localhost:4000",
+  upcoming: [],
+  homepage: { movies: [] },
   reservation: {
     inputValues: {
       cinema: "",
@@ -7,6 +9,7 @@ const INITIAL_STATE = {
       movie: "",
       screening: "",
       numOfTickets: {
+        student: 0,
         adult: 0,
         child: 0,
         member: 0,
@@ -29,6 +32,7 @@ const INITIAL_STATE = {
   },
   theme: "true",
   error: { message: "", time: "" },
+  admin: {},
 };
 
 export { INITIAL_STATE };

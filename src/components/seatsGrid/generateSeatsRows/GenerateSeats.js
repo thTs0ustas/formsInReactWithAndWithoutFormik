@@ -2,14 +2,13 @@ import React from "react";
 import { Seat } from "../seat/Seat";
 import { SeatDiv } from "../styledComponents";
 
-const GenerateSeats = (seatNumbers, handleSeatRemove, handleSeatAdd) => {
+const GenerateSeats = (seatNumbers) => {
   return (
     <SeatDiv>
       {seatNumbers.map((seatNumber) => (
         <Seat
-          key={seatNumber.id}
-          handleSeatRemove={handleSeatRemove}
-          handleSeatAdd={handleSeatAdd}
+          key={`${seatNumber.row_letter}_${seatNumber.seat_num}`}
+          id={seatNumber.id}
           seatInfo={seatNumber}
         />
       ))}

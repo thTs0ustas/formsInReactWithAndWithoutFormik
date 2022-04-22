@@ -4,6 +4,26 @@ const initStore = (payload) => ({
   type: actionTypes.initStore,
   payload,
 });
+
+const adminMoviesAction = (payload) => ({
+  type: actionTypes.adminMovies,
+  payload,
+});
+const adminMoviesNotPlayingAction = (payload) => ({
+  type: actionTypes.adminMoviesNotPlaying,
+  payload,
+});
+const adminMoviesOfTheMonthAction = (payload) => ({
+  type: actionTypes.adminMoviesOfTheMonth,
+  payload,
+});
+const adminUsersAction = (payload) => ({
+  type: actionTypes.adminUsers,
+  payload,
+});
+const clearAdminAction = () => ({
+  type: actionTypes.clearAdmin,
+});
 const requestAction = (payload) => ({
   type: actionTypes.request,
   payload,
@@ -41,6 +61,10 @@ const userLoginAction = (payload) => ({
   type: actionTypes.userLogin,
   payload,
 });
+const userUpdateAction = (payload) => ({
+  type: actionTypes.userUpdate,
+  payload,
+});
 const userLogoutAction = (payload) => ({
   type: actionTypes.userLogout,
   payload,
@@ -62,7 +86,28 @@ const handleError = (payload) => ({
   payload,
 });
 
+const moviesToHomeLayout = (payload) => ({
+  type: actionTypes.getMoviesForHome,
+  payload,
+});
+
+const moviesToNowShowing = (payload) => ({
+  type: actionTypes.getMoviesForNowShowing,
+  payload,
+});
+const upcomingMoviesAction = (payload) => ({
+  type: actionTypes.getUpcoming,
+  payload,
+});
+
 export {
+  upcomingMoviesAction,
+  userUpdateAction,
+  clearAdminAction,
+  adminMoviesNotPlayingAction,
+  adminMoviesOfTheMonthAction,
+  adminUsersAction,
+  adminMoviesAction,
   handleError,
   initStore,
   changeTheme,
@@ -77,5 +122,7 @@ export {
   userLogoutAction,
   inputChangeAction,
   addTicketAction,
+  moviesToHomeLayout,
+  moviesToNowShowing,
   removeTicketAction,
 };

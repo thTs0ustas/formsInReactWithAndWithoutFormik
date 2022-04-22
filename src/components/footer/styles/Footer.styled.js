@@ -75,6 +75,33 @@ const Half = styled.div`
   }
 `;
 
+const Textarea = styled.textarea`
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.white};
+  outline: 0;
+  padding: 10px;
+
+  background: transparent;
+
+  color: ${({ theme }) => theme.white};
+  font-size: 17px;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: ${({ theme }) => theme.white};
+  }
+  &:focus::placeholder {
+    color: transparent;
+  }
+
+  @media (max-width: 630px) {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+  }
+`;
+
 const Input = styled.input`
   width: 48%;
   border: 1px solid ${({ theme }) => theme.white};
@@ -83,6 +110,7 @@ const Input = styled.input`
   height: 44px;
   background: transparent;
   font-size: 17px;
+
   &:focus {
     outline: none;
   }
@@ -102,13 +130,16 @@ const Input = styled.input`
 
 const Full = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   border: 1px solid ${({ theme }) => theme.white};
   padding: 2px;
   width: 100%;
   height: 44px;
+  margin-bottom: 24px;
+
   & input {
+    width: 100%;
     flex-grow: 2;
     border: none;
     padding: 5px;
@@ -209,6 +240,7 @@ const Title = styled.div`
 `;
 
 export {
+  Textarea,
   StyledFooter,
   Boundary,
   FormContainer,

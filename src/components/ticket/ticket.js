@@ -7,24 +7,30 @@ import { TicketContainer } from "./styledComponents/TicketContainer";
 import { Numbers } from "./styledComponents/Numbers";
 import { BiggerTd } from "./styledComponents/BiggerTd";
 import { Cinema, Info, MovieTitle, Title } from "./styledComponents/Misc";
-import { useProvider } from "../../model";
+import { selectors, useProvider } from "../../model";
 import { useTicket } from "./hooks/useTicket";
 import { isEmpty } from "lodash";
 
-const Ticket = ({ title = "batman" }) => {
+const Ticket = () => {
+  const [{ tickets, BASE_URL }] = useProvider([
+    selectors.tickets,
+    selectors.url,
+    selectors.inputMovies,
+  ]);
   useTicket();
-  const [{ tickets }] = useProvider(["userInfo.tickets"]);
+  const recentTicket = tickets?.at(-1);
+  console.log(recentTicket);
   return !isEmpty(tickets) ? (
     <>
-      {tickets.at(-1).seats.map(({ id, cost, row, number, barcode, numbers }) => (
+      {recentTicket.seats.map(({ id, cost, row, number, barcode, numbers }) => (
         <TicketContainer key={id}>
           <HolesTop />
           <Title>
             <Cinema>RETRO CINEMA PRESENTS</Cinema>
-            <MovieTitle>{title}</MovieTitle>
+            <MovieTitle>{recentTicket.title?.toUpperCase()}</MovieTitle>
           </Title>
           <div className='poster'>
-            <img src={require(`../../assets/imgs/${title}.jpg`)} alt={`Movie: ${title}`} />
+            <img src={`${BASE_URL}${recentTicket?.image}`} alt={`Movie: ${recentTicket?.title}`} />
           </div>
           <Info>
             <Table>
@@ -35,7 +41,7 @@ const Ticket = ({ title = "batman" }) => {
                   <th>SEAT</th>
                 </tr>
                 <tr>
-                  <BiggerTd>{tickets.at(-1).hall}</BiggerTd>
+                  <BiggerTd>{recentTicket?.hall}</BiggerTd>
                   <BiggerTd>{row}</BiggerTd>
                   <BiggerTd>{number}</BiggerTd>
                 </tr>
@@ -50,8 +56,8 @@ const Ticket = ({ title = "batman" }) => {
                 </tr>
                 <tr>
                   <td>{cost}.00 €</td>
-                  <td>{tickets.at(-1).date.split("-").reverse().join("/")}</td>
-                  <td>{tickets.at(-1).start}</td>
+                  <td>{recentTicket?.date.split("-").reverse().join("/")}</td>
+                  <td>{recentTicket?.start}</td>
                 </tr>
               </tbody>
             </Table>

@@ -1,17 +1,20 @@
 import React from "react";
 import { NavDropdown } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { NavDropdownDiv } from "../homePage/styledComponents/styles";
 import { SignInButton, SignUpButton } from "../../theme";
-import { useProvider, userLogoutAction } from "../../model";
+import { selectors, useProvider, userLogoutAction } from "../../model";
 import axios from "axios";
 
-export const SignupBarPart = ({ username = null }) => {
-  const [{ BASE_URL, token }, dispatch] = useProvider([
-    "BASE_URL",
-    "userInfo.token",
-  ]);
+export const SignupBarPart = () => {
+  const [
+    {
+      BASE_URL,
+      userInfo: { token, isMember, username, isAdmin },
+    },
+    dispatch,
+  ] = useProvider([selectors.url, selectors.userInfo]);
   const navigate = useNavigate();
 
   const loginOut = () => {
@@ -21,13 +24,11 @@ export const SignupBarPart = ({ username = null }) => {
         { username },
         {
           headers: {
-            authorization: "Bearer " + token,
+            Authorization: "Bearer " + token,
           },
         }
       )
       .then(() => {
-        sessionStorage.removeItem("username");
-        sessionStorage.removeItem("token");
         navigate("/");
       })
       .catch((e) => alert(e.message));
@@ -35,20 +36,31 @@ export const SignupBarPart = ({ username = null }) => {
 
   return !username ? (
     <>
-      <SignUpButton>Sign Up</SignUpButton>
+      <SignUpButton onClick={() => navigate("/signup")}>Sign Up</SignUpButton>
       <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
     </>
   ) : (
     <NavDropdownDiv title={username} id='nav-dropdown'>
-      <NavDropdown.Item eventKey='4.1'>Info</NavDropdown.Item>
-      <NavDropdown.Item eventKey='4.1'>Reservations</NavDropdown.Item>
-      <NavDropdown.Item eventKey='4.1'>Reviews</NavDropdown.Item>
-      <NavDropdown.Divider />
+      {isMember && (
+        <>
+          <NavDropdown.Item eventKey='4.1'>
+            <Link to={"/info"}>Info</Link>
+          </NavDropdown.Item>
+
+          {isAdmin && (
+            <NavDropdown.Item eventKey='4.1'>
+              <Link to={"/admin"}>Admin</Link>
+            </NavDropdown.Item>
+          )}
+          <NavDropdown.Divider />
+        </>
+      )}
       <NavDropdown.Item
         eventKey='4.2'
         onClick={() => {
           dispatch(userLogoutAction());
           loginOut();
+          navigate("/");
         }}
       >
         Sign Out

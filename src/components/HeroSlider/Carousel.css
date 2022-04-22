@@ -19,33 +19,15 @@
 }
 
 .carousel img {
-  min-height: 95vh;
+
+  height: 100%;
   width: 100%;
   opacity: 50%;
   object-fit: cover;
 }
 
-/*
-.carousel-control-prev-icon  {
-
-    border: 2px solid white;
-    border-radius: 50%;
-    width: 1.2rem;
-    height: 1.2rem;
-    background-size: 80% 80%;
-    transform: translateX(-50%);
-    text-align: center;
-
-} */
-
-@media screen and (max-width: 1100px) {
-  .carousel img {
-    height: 65vh;
-
-  }
-}
-@media screen and (max-width: 800px) {
-  .carousel img {
-    height: 55vh;
-  }
+  @media screen and (max-width: 550px) {
+    .carousel {
+      display: none;
+    }
 }

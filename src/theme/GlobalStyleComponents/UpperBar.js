@@ -5,6 +5,7 @@ const SignInDiv = styled.div`
 `;
 
 const SignUpBar = styled.div`
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   background-color: black;

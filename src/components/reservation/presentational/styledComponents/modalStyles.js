@@ -9,7 +9,7 @@ const ModalContainer = styled(Modal)`
   height: 100%;
   & .modal-dialog {
     @media (min-width: 576px) {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 1.75rem auto;
     }
     & .modal-content {
@@ -40,7 +40,7 @@ const ModalContainer = styled(Modal)`
       }
       @media (min-width: 576px) {
         border-radius: 0;
-        max-width: 900px;
+        max-width: 1000px;
       }
     }
   }
