@@ -1,34 +1,80 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-
-import { Ticket } from "./components";
 import { Payment } from "./components/payment/Payment";
 import {
+  AdminPage,
+  CancelPaymentLayout,
   HomePageLayout,
+  MoviePageLayout,
   ReservationLayout,
   SignInLayout,
   AboutUsLayout,
+  ThanksForYourPaymentLayout,
+  ThankYouForYourThoughts,
+  TicketLayout,
 } from "./layouts";
+import SignUpLayout from "./layouts/signUpPage/SignUpLayout";
 
 import { ThemeProvider } from "styled-components";
-import { theme } from "./theme";
+import { GlobalStyles, theme } from "./theme";
+import { selectors, useProvider } from "./model";
+import { ToastContainer } from "react-bootstrap";
+import { AlertToast } from "./components/alertToast/Toast";
+import { ShowMovies } from "./components/admin/movies/ShowMovies";
+import { Subscription } from "./components/subscription/Subscription";
+import { InfoPage } from "./layouts/Info";
+
+import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
+import { UpcomingLayout } from "./layouts/upcomingPage/UpcomingLayout";
+import { MoviesByGenreLayout } from "./layouts/moniesByGernePage/MoviesByGenreLayout";
 
 function App() {
-  const [theming, setTheming] = useState(true);
+  const [{ error, username, theme: theming }] = useProvider([
+    selectors.error,
+    selectors.username,
+    selectors.theme,
+  ]);
+
   return (
     <ThemeProvider theme={theming ? theme.light : theme.dark}>
-      <input type='checkbox' onChange={() => setTheming(!theming)}></input>
+      <GlobalStyles />
       <div className='App'>
         <Routes>
-          <Route path='/' element={<HomePageLayout />} />
-          <Route path='/login' element={<SignInLayout />} />
-          <Route path='/aboutus' element={<AboutUsLayout />} />
-          <Route path='/payments' element={<Payment />} />
-          <Route path='/payments/payment_success' element={<Ticket />} />
-          <Route path='/payments/payment_cancel' element={<div>Cancel</div>} />
-          <Route path='/reservation' element={<ReservationLayout />} />
+          <Route path='/'>
+            <Route index element={<HomePageLayout username={username} />} />
+            <Route path='info' element={<InfoPage username={username} />} />
+            <Route path='nowPlaying' element={<NowShowingLayout username={username} />} />
+            <Route path='aboutus' element={<AboutUsLayout />} />
+            <Route path='movieByGenre'>
+              <Route path=':genre' element={<MoviesByGenreLayout username={username} />} />
+            </Route>
+            <Route path='upcoming' element={<UpcomingLayout username={username} />} />
+            <Route path='moviePage/:id' element={<MoviePageLayout username={username} />} />
+            <Route path='login' element={<SignInLayout username={username} />} />
+            <Route path='signup' element={<SignUpLayout username={username} />} />
+            <Route path='contactUs' element={<ThankYouForYourThoughts username={username} />} />
+            <Route path='payments'>
+              <Route index element={<Payment username={username} />} />
+              <Route path='payment_cancel' element={<CancelPaymentLayout username={username} />} />
+              <Route
+                path='payment_applied'
+                element={<ThanksForYourPaymentLayout username={username} />}
+              />
+            </Route>
+            <Route path='payments/subscription' element={<Subscription username={username} />} />
+            <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
+            <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
+            <Route path='admin'>
+              <Route index element={<AdminPage username={username} />} />
+              <Route path='movies' element={<ShowMovies username={username} />} />
+            </Route>
+          </Route>
+          {/*<Route path='/payments' element={<Payment username={username} />} />*/}
         </Routes>
       </div>
+      <ToastContainer style={{ position: "sticky", zIndex: 10001 }} position={"top-end"}>
+        {error && <AlertToast error={error} />}
+      </ToastContainer>
     </ThemeProvider>
   );
 }

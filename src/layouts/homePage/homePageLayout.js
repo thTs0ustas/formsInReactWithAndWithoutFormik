@@ -1,104 +1,88 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import {
   Archive,
-  Card,
-  ComingUp,
   Features,
   HomeDiv,
-  PromoCard,
   Promos,
   Typography,
   VideoWallDiv,
-  VideoWallInfo,
 } from "./styledComponents/styles";
-import { Header, Nav, NavDiv, NavItem, SignUpBar } from "../../theme";
+
+import { Header, SignUpBar } from "../../theme";
+
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
+import NavBar from "../../components/NavBar";
+import CarouselHero from "../../components/HeroSlider";
+import { CardComponent, PromoMember, PromoStudents, Switch } from "../../components";
+import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
+import { Link } from "react-router-dom";
+import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
 
-const HomePageLayout = () => {
-  const username = sessionStorage.getItem("username");
+const HomePageLayout = ({ username }) => {
+  const genres = [
+    "action",
+    "adventure",
+    "animation",
+    "comedy",
+    "crime",
+    "drama",
+    "horror",
+    "mystery",
+    "sci-fi",
+    "thriller",
+    "war",
+    "western",
+  ];
   return (
     <HomeDiv>
       <Header mainPage={false}>
         <SignUpBar>
+          <Switch />
           <div>
             <SignupBarPart username={username} />
           </div>
         </SignUpBar>
         <VideoWallDiv>
-          <NavDiv>
-            <Nav>
-              <NavItem>1</NavItem>
-              <NavItem>2</NavItem>
-              <NavItem>3</NavItem>
-              <NavItem>4</NavItem>
-              <NavItem>5</NavItem>
-              <NavItem>6</NavItem>
-              <NavItem>7</NavItem>
-            </Nav>
-          </NavDiv>
-          <VideoWallInfo>
-            <p>Small Description</p>
-            <h2>Movie Title</h2>
-            <button>BOOK TICKETS</button>
-          </VideoWallInfo>
+          <NavBar />
+          <CarouselHero />
         </VideoWallDiv>
       </Header>
       <div>
         <Features>
-          <Typography>
-            <h2>Title</h2>
-            <p>Under Title</p>
-          </Typography>
-          <ComingUp>
-            <Row className='flex-nowrap'>
-              <Col md={4} sm={6} xs={12}>
-                <Card />
-              </Col>
-              <Col md={4} sm={6} xs={12}>
-                <Card />
-              </Col>
-              <Col md={4} sm={6} xs={12}>
-                <Card />
-              </Col>
-            </Row>
-          </ComingUp>
+          <MoviesOfTheMonth />
           <Promos>
             <Row>
-              <Col sm={6}>
-                <PromoCard />
+              <Col md={6}>
+                <PromoMember />
               </Col>
-              <Col sm={6}>
-                <PromoCard />
+              <Col md={6}>
+                <PromoStudents />
               </Col>
             </Row>
           </Promos>
+          <br />
           <Typography>
-            <h2>Title</h2>
-            <p>Under Title</p>
+            <TitleHeader>
+              <h2>
+                <span>MOVIE LIBRARY</span>
+              </h2>
+              <Link to={`/movieByGenre`}>
+                <p>Arranged By Genre</p>
+              </Link>
+            </TitleHeader>
           </Typography>
           <Archive>
             <Row>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
-              <Col sm={6}>
-                <PromoCard />
-              </Col>
+              {genres.map((genre) => {
+                return (
+                  <Col sm={6} key={genre}>
+                    <CardComponent genre={genre} />
+                  </Col>
+                );
+              })}
             </Row>
           </Archive>
         </Features>

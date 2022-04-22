@@ -1,73 +1,31 @@
-import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import axios from "axios";
-import {
-  addSeatAction,
-  inputChangeAction,
-  removeSeatAction,
-  requestAction,
-} from "../../../../model";
-import { differenceWith, isEqual, toPairs } from "lodash";
-import { fetchRequest, nextRequest } from "../../helpers";
 
-export const useResContainer = ({ BASE_URL, inputValues, dispatch }) => {
-  const historyState = useRef({});
-  const navigate = useNavigate();
+import { inputChangeAction, requestAction, resetReservation } from "../../../../model";
+import { handleError } from "../../../../model/actions";
+import { useParams } from "react-router-dom";
+import { get } from "lodash";
 
-  useEffect(() => {
-    if (!window.sessionStorage.getItem("token")) {
-      navigate("/login");
-    }
-
-    historyState.current = inputValues;
-    axios.get(`${BASE_URL}/movies`).then((response) => {
-      dispatch(
-        requestAction({
-          key: "movies",
-          value: response.data,
-        })
+export const useResContainer = ({ BASE_URL, dispatch }) => {
+  const { id } = useParams();
+  console.log(id);
+  useEffect(async () => {
+    dispatch(resetReservation());
+    await axios
+      .get(`${BASE_URL}/moviesOfTheMonth/reservation/${id}`)
+      .then(({ data }) => {
+        console.log(data);
+        dispatch(requestAction(data));
+        const { title } = get(data, "movie.Movie");
+        dispatch(
+          inputChangeAction({
+            name: "movie",
+            value: title,
+          })
+        );
+      })
+      .catch((error) =>
+        dispatch(handleError({ message: error.message, time: new Date().getTime() }))
       );
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    const diff = differenceWith(
-      toPairs(inputValues),
-      toPairs(historyState.current),
-      isEqual
-    )[0]?.[0];
-
-    fetchRequest({
-      types: nextRequest(inputValues.auditorium, inputValues.screening)[diff],
-      action: requestAction,
-    })({ dispatch, baseUrl: BASE_URL });
-  }, [inputValues]);
-
-  const handleSeatAdd = (seat) => {
-    historyState.current = inputValues;
-    dispatch(
-      addSeatAction({
-        name: "seat",
-        value: seat,
-      })
-    );
-  };
-
-  const handleSeatRemove = (id) => {
-    historyState.current = inputValues;
-    dispatch(removeSeatAction(id));
-  };
-
-  const handleChange = (event) => {
-    historyState.current = inputValues;
-    dispatch(
-      inputChangeAction({
-        name: event.target.name,
-        value: event.target.value,
-      })
-    );
-  };
-
-  return { handleSeatAdd, handleSeatRemove, handleChange };
 };
