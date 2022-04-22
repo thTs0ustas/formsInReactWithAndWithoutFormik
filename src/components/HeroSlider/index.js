@@ -29,10 +29,7 @@ const CarouselHero = () => {
         const { id, title, description, image } = item.Movie;
         return (
           <Carousel.Item key={id} interval={3000}>
-            <img
-              src={require(`../../assets/imgs/${title.toLowerCase().replace(" ", "")}.jpg`)}
-              alt='First slide'
-            />
+            <img src={require(`../../assets/imgs/psycho.jpg`)} alt='First slide' />
             <Carousel.Caption>
               <h1>{title}</h1>
               <p>{description}</p>
