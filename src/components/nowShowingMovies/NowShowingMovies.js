@@ -17,15 +17,15 @@ export const NowShowingMovies = () => {
   return (
     <>
       <NowShowing>
-        {map(state.homepage.movies[0], ({ id: mOm, Movie: { id, title, genre, image } }) => (
+        {map(state.homepage.movies[0], ({ Movie: { id, title, genre, image } }) => (
           <ColStyledNowPlaying key={id}>
             <NowShowingStack>
-              <Link to={`/moviePage/${mOm}`}>
+              <Link to={`/moviePage/${id}`}>
                 <MoviesMonthImg src={`${state.BASE_URL}${image}`} />
               </Link>
               <p>{genre.replace(/^\w/, (c) => c.toUpperCase())}</p>
               <h2>
-                <Link to={`/moviePage/${mOm}`}>{title}</Link>
+                <Link to={`/moviePage/${id}`}>{title}</Link>
               </h2>
             </NowShowingStack>
           </ColStyledNowPlaying>
