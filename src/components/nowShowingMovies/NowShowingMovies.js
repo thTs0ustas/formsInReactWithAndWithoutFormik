@@ -17,7 +17,7 @@ export const NowShowingMovies = () => {
   return (
     <>
       <NowShowing>
-        {map(state.homepage.movies[0], ({ Movie: { id, title, genre, image } }) => (
+        {map(state?.nowShowing, ({ Movie: { id, title, genre, image } }) => (
           <ColStyledNowPlaying key={id}>
             <NowShowingStack>
               <Link to={`/moviePage/${id}`}>
