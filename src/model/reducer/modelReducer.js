@@ -140,7 +140,7 @@ export const modelReducer = (state, action) => {
 
     case actionTypes.getMoviesForNowShowing:
       return produce(state, (draft) => {
-        draft.homepage.movies.push(payload);
+        draft.nowShowing.movies.push(payload);
       });
     case actionTypes.getUpcoming:
       return produce(state, (draft) => {
