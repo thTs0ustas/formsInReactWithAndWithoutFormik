@@ -23,7 +23,7 @@ export const GridWrapper = styled.div`
 `;
 
 export const InfoSidebar = styled.div`
-  background-color: #750f29;
+  background-color: ${(props) => props.theme.bgMain};
   grid-column: 1/2;
   grid-row: 1/2;
 
@@ -70,7 +70,6 @@ export const InfoMain = styled.div`
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background-color: #750f29;
     background-color: ${(props) => props.theme.primary};
     border-radius: 10px;
   }
