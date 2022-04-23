@@ -11,8 +11,6 @@ const TicketContainer = styled.div`
   flex-wrap: wrap;
   & > div:first-child {
     display: flex;
-    justify-content: space-between;
-    width: 300px;
   }
   & > div:last-child {
     display: flex;

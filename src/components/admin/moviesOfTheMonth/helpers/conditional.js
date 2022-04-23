@@ -1,8 +1,11 @@
 import { IconContainer } from "../styledComponents/IconContainer";
 
-const decideTdData = (data, accessor, Icon) => {
+const decideTdData = (data, accessor, Icon, index) => {
   let tdData;
   switch (accessor) {
+    case "#":
+      tdData = index + 1;
+      break;
     case "delete":
       tdData = (
         <IconContainer>

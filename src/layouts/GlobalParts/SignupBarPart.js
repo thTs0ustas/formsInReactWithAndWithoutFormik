@@ -1,6 +1,6 @@
 import React from "react";
 import { NavDropdown } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { NavDropdownDiv } from "../homePage/styledComponents/styles";
 import { SignInButton, SignUpButton } from "../../theme";
@@ -43,13 +43,13 @@ export const SignupBarPart = () => {
     <NavDropdownDiv title={username} id='nav-dropdown'>
       {isMember && (
         <>
-          <NavDropdown.Item eventKey='4.1'>
-            <Link to={"/info"}>Info</Link>
+          <NavDropdown.Item onClick={() => navigate("/info")} eventKey='4.1'>
+            Info
           </NavDropdown.Item>
 
           {isAdmin && (
-            <NavDropdown.Item eventKey='4.1'>
-              <Link to={"/admin"}>Admin</Link>
+            <NavDropdown.Item onClick={() => navigate("/admin")} eventKey='4.1'>
+              Admin
             </NavDropdown.Item>
           )}
           <NavDropdown.Divider />

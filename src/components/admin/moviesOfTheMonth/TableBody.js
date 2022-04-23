@@ -41,17 +41,17 @@ const TableBody = ({ tableData, columns, handleUpdateTable, setDeletePrompt }) =
           </td>
         </tr>
         <tr>
-          <td />
+          <td /> <td />
           <td>
             <input onChange={(e) => setInclude(e.target.value)} />
           </td>
         </tr>
         {tableData?.map(
-          (data) =>
+          (data, i) =>
             data.title?.includes(include) && (
               <tr key={data.id}>
                 {columns.map(({ accessor }) => {
-                  const tData = decideTdData(data, accessor, RiDeleteBin6Line);
+                  const tData = decideTdData(data, accessor, RiDeleteBin6Line, i);
                   return (
                     <Data
                       key={accessor}

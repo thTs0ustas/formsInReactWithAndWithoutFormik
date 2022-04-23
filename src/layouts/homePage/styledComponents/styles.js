@@ -33,6 +33,9 @@ const NavDropdownDiv = styled(NavDropdown)`
       display: none;
     }
     &[class*="show"] {
+      min-width: 120px;
+      text-align: center;
+      padding: 0;
       width: fit-content;
       z-index: 10000;
       display: block;
@@ -40,6 +43,7 @@ const NavDropdownDiv = styled(NavDropdown)`
       border-radius: 0;
 
       & a {
+        width: 100%;
         text-decoration: none;
         color: #000;
       }
@@ -50,7 +54,7 @@ const NavDropdownDiv = styled(NavDropdown)`
 const VideoWallInfo = styled.div`
   top: 40%;
   position: absolute;
-  background-color: crimson;
+  background-color: ${({ theme }) => theme.bgMain};
   height: fit-content;
   display: flex;
   flex-direction: column;

@@ -6,6 +6,7 @@ import Footer from "../../components/footer/Footer";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import NavBar from "../../components/NavBar";
 import { TicketContainer } from "./styledComponents/ticketContainer";
+import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
 
 const TicketLayout = ({ username }) => {
   return (
@@ -25,7 +26,12 @@ const TicketLayout = ({ username }) => {
         </NavDiv>
       </Header>
       <TicketContainer>
-        <h4>Thank you for your purchase!</h4>
+        <TitleHeader>
+          <h2>
+            <span>Thank you for your purchase!</span>
+          </h2>
+        </TitleHeader>
+
         <div>
           <h3>Tickets</h3>
           <ContinueButton>Print to pdf</ContinueButton>

@@ -66,7 +66,7 @@ const MainText = ({ movie, id }) => {
       <SectionTitle>Duration</SectionTitle>
       <Paragraph>{movie.movie?.duration}</Paragraph>
       <SectionTitle>Genre</SectionTitle>
-      <Paragraph>{movie.movie?.genre}</Paragraph>
+      <Paragraph>{movie.movie?.genre.replace(/^\w/, (w) => w.toUpperCase())}</Paragraph>
       <SectionTitle>Release Year</SectionTitle>
       <Paragraph>{movie.movie?.release_year}</Paragraph>
     </TextContainer>

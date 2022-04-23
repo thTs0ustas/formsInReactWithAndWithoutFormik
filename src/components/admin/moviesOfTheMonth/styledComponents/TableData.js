@@ -23,13 +23,18 @@ const TableHeader = styled.th`
       : ""};
 
   &:first-child {
-    width: 3% !important;
+    width: 4% !important;
+    text-align: center;
   }
   &:nth-child(2) {
-    width: 87% !important;
-    align-items: flex-start;
+    width: 6% !important;
+    text-align: center !important;
   }
   &:nth-child(3) {
+    width: 80% !important;
+    align-items: flex-start;
+  }
+  &:nth-child(4) {
     width: 10% !important;
 
 `;
