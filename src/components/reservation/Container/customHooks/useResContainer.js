@@ -8,10 +8,10 @@ import { get } from "lodash";
 
 export const useResContainer = ({ BASE_URL, dispatch }) => {
   const { id } = useParams();
-  console.log(id);
-  useEffect(async () => {
+
+  useEffect(() => {
     dispatch(resetReservation());
-    await axios
+    axios
       .get(`${BASE_URL}/moviesOfTheMonth/reservation/${id}`)
       .then(({ data }) => {
         console.log(data);
@@ -27,5 +27,5 @@ export const useResContainer = ({ BASE_URL, dispatch }) => {
       .catch((error) =>
         dispatch(handleError({ message: error.message, time: new Date().getTime() }))
       );
-  }, []);
+  }, [BASE_URL, id, dispatch]);
 };

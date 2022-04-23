@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ButtonIcon, CarouselButton } from "./CarouselButton";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { isEmpty } from "lodash";
+import { isEmpty, sampleSize } from "lodash";
 
 const CarouselHero = () => {
   //boostrap code
@@ -18,7 +18,7 @@ const CarouselHero = () => {
   const [movie, setMovie] = useState([]);
   const getMovie = () => {
     axios.get("http://localhost:4000/moviesOfTheMonth").then((res) => {
-      setMovie([...res.data]);
+      setMovie(sampleSize(res.data, 4));
     });
   };
 

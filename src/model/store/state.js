@@ -27,7 +27,7 @@ const Provider = ({ children }) => {
         })
       );
     }
-  }, []);
+  }, [items]);
 
   useEffect(() => {
     if (!isEmpty(items)) {

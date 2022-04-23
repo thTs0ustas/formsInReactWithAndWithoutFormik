@@ -46,7 +46,6 @@ export const Reservation = ({
   handleContinueButton,
 }) => {
   const STUDENT_DAY = 3;
-  console.log(image);
   return (
     <>
       <MoviePoster image={image} />

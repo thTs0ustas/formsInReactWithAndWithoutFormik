@@ -35,14 +35,13 @@ export const MoviesOfTheMonth = () => {
         <h2>
           <span>FILMS SHOWING TODAY</span>
         </h2>
-        <Link to={`/nowPlaying`}>
+        <Link to='/nowPlaying'>
           <p>See all films & session times</p>
         </Link>
       </TitleHeader>
       <ShowingToday>
         {map(slices, (slice) => {
           return map(slice, ({ id: mOmId, Screenings, Movie: { id, title, genre, image } }) => {
-            console.log(slice);
             return (
               <ColStyled key={id}>
                 <NowShowingStackHome>

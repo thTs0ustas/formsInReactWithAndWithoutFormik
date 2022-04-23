@@ -4,13 +4,12 @@ import { moviesGenreAction, useProvider } from "../../../model";
 import { handleError } from "../../../model/actions";
 
 export const useMoviesByGenre = (genre) => {
-  const [state, dispatch] = useProvider(["BASE_URL"]);
+  const [{ BASE_URL }, dispatch] = useProvider(["BASE_URL"]);
 
   useEffect(() => {
     axios
-      .get(`${state.BASE_URL}/movies/genre/${genre}`)
+      .get(`${BASE_URL}/movies/genre/${genre}`)
       .then((res) => {
-        console.log(res.data);
         dispatch(moviesGenreAction(res.data));
       })
       .catch((error) =>
@@ -21,5 +20,5 @@ export const useMoviesByGenre = (genre) => {
           })
         )
       );
-  }, []);
+  }, [BASE_URL, dispatch, genre]);
 };

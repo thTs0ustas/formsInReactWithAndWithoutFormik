@@ -13,7 +13,6 @@ import { NowShowingStack } from "./styledComponents/styles";
 export const UpcomingMovies = () => {
   useUpcomingMovies();
   const [{ upcoming, BASE_URL }] = useProvider();
-  console.log(upcoming);
   return (
     <>
       <NowShowing>
