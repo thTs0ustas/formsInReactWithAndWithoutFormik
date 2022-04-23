@@ -6,6 +6,7 @@ const TitleHeader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: 200px;
   text-align: center;
   background-color: ${({ theme }) => theme.bgMain};
@@ -31,6 +32,7 @@ const TitleHeader = styled.div`
   }
 
   & a {
+    width: fit-content;
     text-decoration: none;
   }
 `;
