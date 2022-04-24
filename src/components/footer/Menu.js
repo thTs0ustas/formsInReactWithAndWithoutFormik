@@ -1,6 +1,7 @@
 import React from "react";
 import SocialIcons from "./SocialIcon";
 import { Column, MenuContainer, Title } from "./styles/Footer.styled";
+import { Link } from "react-router-dom";
 
 export default function Menu() {
   return (
@@ -9,42 +10,20 @@ export default function Menu() {
         <Title>Films</Title>
         <ul>
           <li>
-            <a href='#'>Now Showing</a>
+            <Link to={"/nowPlaying"}>Now Showing</Link>
           </li>
           <li>
-            <a href='#'>Coming soon</a>
+            <Link to={"/upcoming"}>Coming soon</Link>
           </li>
           <li>
-            <a href='#'>Cameo at home</a>
+            <Link to={"/ticketPrices"}>Ticket Prices</Link>
+          </li>
+          <li>
+            <Link to={"/aboutUs"}>History</Link>
           </li>
         </ul>
       </Column>
-      <Column>
-        <Title>Cinema info</Title>
-        <ul>
-          <li>
-            <a href='#'>History</a>
-          </li>
-          <li>
-            <a href='#'>Food & Drink</a>
-          </li>
-          <li>
-            <a href='#'>Accessibility</a>
-          </li>
-          <li>
-            <a href='#'>Cinema Hire</a>
-          </li>
-          <li>
-            <a href='#'>Ticket Prices</a>
-          </li>
-          <li>
-            <a href='#'>Explore Belgrave</a>
-          </li>
-          <li>
-            <a href='#'>Moving Story Entertainment</a>
-          </li>
-        </ul>
-      </Column>
+
       <Column>
         <Title>Contact us</Title>
         <ul>

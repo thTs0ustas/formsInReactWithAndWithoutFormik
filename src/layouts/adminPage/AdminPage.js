@@ -1,4 +1,4 @@
-import { Header, SignUpBar } from "../../theme";
+import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 import { Switch } from "../../components";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import React, { useEffect, useState } from "react";
@@ -12,6 +12,7 @@ import { handleError } from "../../model/actions";
 import { TabStyled } from "./styledComponents/Tabs";
 import { ShowScreenings } from "../../components/admin/screenings/ShowScreenings";
 import { ShowMoviesOfTheMonth } from "../../components/admin/moviesOfTheMonth/ShowMoviesOfTheMonth";
+import NavBar from "../../components/NavBar";
 
 const AdminPage = () => {
   const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
@@ -42,6 +43,11 @@ const AdminPage = () => {
             <SignupBarPart />
           </div>
         </SignUpBar>
+        <NavDiv>
+          <Nav>
+            <NavBar />
+          </Nav>
+        </NavDiv>
       </Header>
       <TabsContainer>
         <Tabs
