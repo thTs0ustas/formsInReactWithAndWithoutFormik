@@ -1,5 +1,3 @@
-// import react, {useState ,useEffect} from  'react';
-
 import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 import NavBar from "../../components/NavBar";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
@@ -17,8 +15,6 @@ import { Switch } from "../../components";
 
 // const [state] = useProvider()
 // console.log(state.userInfo)
-
-let username = window.sessionStorage.getItem("username");
 
 export const InfoPage = ({ username }) => {
   const [selected, setSelected] = useState("");

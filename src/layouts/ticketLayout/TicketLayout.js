@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Ticket } from "../../components";
 
-import { ContinueButton, Header, Nav, NavDiv, SignInDiv, SignUpBar } from "../../theme";
+import { Header, Nav, NavDiv, SignInDiv, SignUpBar } from "../../theme";
 import Footer from "../../components/footer/Footer";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import NavBar from "../../components/NavBar";
@@ -34,9 +34,8 @@ const TicketLayout = ({ username }) => {
 
         <div>
           <h3>Tickets</h3>
-          <ContinueButton>Print to pdf</ContinueButton>
         </div>
-        <div>
+        <div style={{ display: "flex" }}>
           <Ticket />
         </div>
       </TicketContainer>

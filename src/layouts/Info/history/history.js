@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { selectors, useProvider } from "../../../model";
 import {
   BottomDiv,
@@ -27,20 +27,19 @@ const History = () => {
     },
   ]);
 
-  const getData = () => {
+  const getData = useCallback(() => {
     axios.get(`http://localhost:4000/reservations/history/${userInfo.id}`).then((res) => {
       const reservations = res.data;
-      // console.log("myReserv", reservations);
       setData((prev) => ({
         ...prev,
         ...reservations,
       }));
       // console.log("ApiCall- Reserv", reservations[0].Reservations[0].purchase_date);
     });
-  };
+  }, [userInfo.id]);
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   //Get Reservation Data
   //Drill Into Reservation and then map over the screenings

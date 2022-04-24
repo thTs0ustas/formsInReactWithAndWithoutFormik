@@ -22,6 +22,7 @@ const TicketOptions = styled.div`
 const TicketInfo = styled.div`
   width: 100%;
   text-align: left;
+    color: ${({ theme }) => theme.light};
 
   & p:first-child {
     text-transform: uppercase;

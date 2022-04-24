@@ -7,19 +7,15 @@ import {
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const BeAMember = ({ onClick }) => {
+const BeAMember = ({ link }) => {
   const navigate = useNavigate();
   return (
     <PleaseBeAMember>
       <div>
         <PleaseBeAMemberHeader>Pretty Please be a member</PleaseBeAMemberHeader>
-        <PleaseBeAMemberParagraph>
-          TERMS AND CONDITIONS APPLY{" "}
-        </PleaseBeAMemberParagraph>
+        <PleaseBeAMemberParagraph>TERMS AND CONDITIONS APPLY </PleaseBeAMemberParagraph>
       </div>
-      <ButtonForMembers onClick={onClick(navigate)}>
-        BE A MEMBER
-      </ButtonForMembers>
+      <ButtonForMembers onClick={() => navigate(link)}>BE A MEMBER</ButtonForMembers>
     </PleaseBeAMember>
   );
 };

@@ -11,23 +11,19 @@ import { useMoviesOfTheMonth } from "./hooks/useMoviesOfTheMonth";
 import { useProvider } from "../../model";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { chunk, map } from "lodash";
+import { map } from "lodash";
 import { Link, useNavigate } from "react-router-dom";
 
 import { NowShowingStackHome } from "../nowShowingMovies/styledComponents/styles";
 
 export const MoviesOfTheMonth = () => {
-  // const today = new Date().getDay();
-  // const movieDate = (movie_starts) => new Date(movie_starts).getDay();
-
-  // const [index, setIndex] = useState(0);
-  // const handleSelect = (selectedIndex, e) => {
-  //   setIndex(selectedIndex);
-  // };
-
   useMoviesOfTheMonth();
   const [state] = useProvider();
-  let slices = chunk(state.homepage.movies[0], 3);
+
+  let movieTime = (screenings) => [
+    ...new Set(map(screenings, (item) => item.movie_starts.split("T")[1].slice(0, 5))),
+  ];
+
   const navigate = useNavigate();
   return (
     <>
@@ -40,7 +36,7 @@ export const MoviesOfTheMonth = () => {
         </Link>
       </TitleHeader>
       <ShowingToday>
-        {map(slices, (slice) => {
+        {map(state.homepage?.movies, (slice) => {
           return map(slice, ({ id: mOmId, Screenings, Movie: { id, title, genre, image } }) => {
             return (
               <ColStyled key={id}>
@@ -60,10 +56,8 @@ export const MoviesOfTheMonth = () => {
                     </Link>
                   </h2>
                   <MoviesMonthScreeningContainer>
-                    {map(Screenings, ({ id, movie_starts }) => (
-                      <MoviesMonthScreeningItem key={id}>
-                        {movie_starts.split("T")[1].slice(0, 5)}
-                      </MoviesMonthScreeningItem>
+                    {map(movieTime(Screenings), (item, index) => (
+                      <MoviesMonthScreeningItem key={index}>{item}</MoviesMonthScreeningItem>
                     ))}
                   </MoviesMonthScreeningContainer>
                 </NowShowingStackHome>

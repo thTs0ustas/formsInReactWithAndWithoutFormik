@@ -4,7 +4,7 @@ import { FiArchive, FiSettings } from "react-icons/fi";
 import { BsPersonCircle } from "react-icons/bs";
 import { selectors, useProvider } from "../../../model";
 
-const SideDiv = (props) => {
+const SideDiv = ({ setSelected }) => {
   const [{ userInfo }] = useProvider([selectors.userInfo]);
 
   return (
@@ -16,10 +16,10 @@ const SideDiv = (props) => {
         </FirstNamePara>
       </InfoDiv>
 
-      <SideBarBtn onClick={() => props.setSelected("form")}>
+      <SideBarBtn onClick={() => setSelected("form")}>
         <FiSettings /> User Info
       </SideBarBtn>
-      <SideBarBtn onClick={() => props.setSelected("history")}>
+      <SideBarBtn onClick={() => setSelected("history")}>
         <FiArchive /> Purchase History
       </SideBarBtn>
     </>

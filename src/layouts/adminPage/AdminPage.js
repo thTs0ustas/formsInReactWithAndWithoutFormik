@@ -31,7 +31,7 @@ const AdminPage = () => {
     return () => {
       dispatch(clearAdminAction());
     };
-  }, []);
+  }, [dispatch, navigate, userInfo.isAdmin, userInfo.token, userInfo.username]);
 
   return (
     <>

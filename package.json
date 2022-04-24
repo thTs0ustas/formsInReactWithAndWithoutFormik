@@ -23,6 +23,7 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.2",
     "react-scripts": "^5.0.0",
+    "react-to-print": "^2.14.6",
     "scheduler": "^0.20.2",
     "styled-components": "^5.3.3",
     "time-number": "^1.1.0",
@@ -44,11 +45,7 @@
       "react/no-danger": 1,
       "react/jsx-no-target-blank": 1,
       "react/jsx-no-script-url": 1,
-      "react/jsx-props-no-spreading": 1,
-      "prefer-spread": [
-        1
-      ],
-
+      "prefer-spread": 1,
       "react/destructuring-assignment": 1,
       "react-hooks/exhaustive-deps": 1,
       "react/default-props-match-prop-types": 1,

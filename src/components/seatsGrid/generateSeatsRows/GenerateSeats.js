@@ -5,6 +5,7 @@ import { SeatDiv } from "../styledComponents";
 const GenerateSeats = (seatNumbers) => {
   return (
     <SeatDiv>
+      {/* eslint-disable-next-line react/destructuring-assignment */}
       {seatNumbers.map((seatNumber) => (
         <Seat
           key={`${seatNumber.row_letter}_${seatNumber.seat_num}`}
