@@ -43,7 +43,7 @@ export const SignupBarPart = () => {
     <NavDropdownDiv title={username} id='nav-dropdown'>
       {isMember && (
         <>
-          <NavDropdown.Item onClick={() => navigate("/info")} eventKey='4.1'>
+          <NavDropdown.Item onClick={() => navigate(`/info/${username}`)} eventKey='4.1'>
             Info
           </NavDropdown.Item>
 

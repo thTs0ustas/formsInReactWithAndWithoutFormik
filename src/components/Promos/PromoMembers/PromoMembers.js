@@ -1,11 +1,8 @@
-import {
-  Container,
-  PromoButton,
-  PromoPara,
-  Title,
-} from "../styleComponents/PromoElements";
+import { Container, PromoButton, PromoPara, Title } from "../styleComponents/PromoElements";
+import { useNavigate } from "react-router-dom";
 
 export const PromoMember = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <img
@@ -14,11 +11,13 @@ export const PromoMember = () => {
         alt='movie-theater'
       />
       <div className='bottom-div'>
-        <Title className='hide-content'>Join Our Club - 15$</Title>
+        <Title className='hide-content'>Join Our Club </Title>
         <PromoPara className='hide-content'>
-          Become a member and enjoy our exclusive benefits{" "}
+          Become a member with only 180 € a year (15 € per month) and enjoy our exclusive benefits{" "}
         </PromoPara>
-        <PromoButton className='hide-btn'> GET OFFER </PromoButton>
+        <PromoButton onClick={() => navigate("/signup")} className='hide-btn'>
+          Join Now
+        </PromoButton>
       </div>
     </Container>
   );

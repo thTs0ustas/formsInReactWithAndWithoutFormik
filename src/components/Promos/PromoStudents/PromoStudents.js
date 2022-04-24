@@ -1,11 +1,8 @@
-import {
-  Container,
-  PromoButton,
-  PromoPara,
-  Title,
-} from "../styleComponents/PromoElements";
+import { Container, PromoButton, PromoPara, Title } from "../styleComponents/PromoElements";
+import { useNavigate } from "react-router-dom";
 
 export const PromoStudents = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <img
@@ -14,13 +11,14 @@ export const PromoStudents = () => {
         alt='students-promo'
       />
       <div className='bottom-div'>
-        <Title className='hide-content'>Student Offer -8$</Title>
+        <Title className='hide-content'>Student Offer</Title>
         <PromoPara className='hide-content'>
           {" "}
-          Procrastinate smarter not harder. Every Wednesday you pay for 1 ticket
-          and you get 2{" "}
+          Procrastinate smarter not harder. Be a member and every Wednesday only 8 € per ticket{" "}
         </PromoPara>
-        <PromoButton className='hide-btn'> GET OFFER </PromoButton>
+        <PromoButton onClick={() => navigate("/signup")} className='hide-btn'>
+          Join Now
+        </PromoButton>
       </div>
     </Container>
   );
