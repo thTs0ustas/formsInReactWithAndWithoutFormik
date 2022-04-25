@@ -30,7 +30,7 @@ const SignUpBar = styled.div`
 `;
 const SignUpButton = styled.button`
   height: 32px;
-  width: 100px;
+  width: 120px;
   background-color: black;
 
   color: ${({ theme }) => theme.white};
@@ -39,7 +39,7 @@ const SignUpButton = styled.button`
   margin-right: 5px;
 
   &:hover {
-    color: #9d9d9d;
+    color: ${({ theme }) => theme.secondary};
   }
 `;
 const SignInButton = styled.button`
