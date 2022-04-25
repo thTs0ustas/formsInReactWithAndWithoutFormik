@@ -1,122 +1,31 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import {
-  addSeatAction,
-  inputChangeAction,
-  removeSeatAction,
-  requestAction,
-  reservedSeatsAction,
-  resetReservation,
-} from "../../../../model";
-import { useNavigate } from "react-router-dom";
 
-export const useResContainer = ({ BASE_URL, inputValues, dispatch, response, username }) => {
-  const historyState = useRef({});
-  const navigate = useNavigate();
+import { inputChangeAction, requestAction, resetReservation } from "../../../../model";
+import { handleError } from "../../../../model/actions";
+import { useParams } from "react-router-dom";
+import { get } from "lodash";
+
+export const useResContainer = ({ BASE_URL, dispatch }) => {
+  const { id } = useParams();
 
   useEffect(() => {
-    if (!window.sessionStorage.getItem("token")) {
-      navigate("/login");
-    }
-
-    historyState.current = inputValues;
-    axios.get(`${BASE_URL}/movies`).then((response) => {
-      dispatch(
-        requestAction({
-          key: "movies",
-          value: response.data,
-        })
-      );
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    console.log(inputValues);
-    if (inputValues.movie !== historyState.current.movie) {
-      axios.get(`${BASE_URL}/cinema`).then((response) => {
-        dispatch(requestAction({ key: "cinemas", value: response.data }));
-      });
-    }
-    if (inputValues.cinema !== historyState.current.cinema) {
-      axios.get(`${BASE_URL}/auditorium`).then((response) =>
-        dispatch(
-          requestAction({
-            key: "auditoriums",
-            value: response.data,
-          })
-        )
-      );
-    }
-    if (inputValues.auditorium !== historyState.current.auditorium) {
-      axios.get(`${BASE_URL}/screenings`).then((response) =>
-        dispatch(
-          requestAction({
-            key: "screenings",
-            value: response.data,
-          })
-        )
-      );
-    }
-    if (
-      inputValues.screening !== historyState.current.screening &&
-      inputValues.numOfTickets === historyState.current.numOfTickets
-    ) {
-      axios.get(`${BASE_URL}/seats/${inputValues.auditorium}`).then((response) => {
-        dispatch(
-          requestAction({
-            key: "seats",
-            value: response.data,
-          })
-        );
-      });
-      axios.get(`${BASE_URL}/reservedSeats/${inputValues.screening}`).then((response) => {
-        dispatch(
-          reservedSeatsAction({
-            key: "reservedSeats",
-            value: response.data,
-          })
-        );
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValues]);
-
-  useEffect(() => {
-    response &&
-      navigate(`/users/${username}/reservation/ticket`, {
-        state: {
-          reservationId: response["Reservations"].at(-1).id,
-        },
-      });
     dispatch(resetReservation());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [response]);
-
-  const handleSeatAdd = (seat) => {
-    historyState.current = inputValues;
-    dispatch(
-      addSeatAction({
-        name: "seat",
-        value: seat,
+    axios
+      .get(`${BASE_URL}/moviesOfTheMonth/reservation/${id}`)
+      .then(({ data }) => {
+        console.log(data);
+        dispatch(requestAction(data));
+        const { title } = get(data, "movie.Movie");
+        dispatch(
+          inputChangeAction({
+            name: "movie",
+            value: title,
+          })
+        );
       })
-    );
-  };
-
-  const handleSeatRemove = (id) => {
-    historyState.current = inputValues;
-    dispatch(removeSeatAction(id));
-  };
-
-  const handleChange = (event) => {
-    historyState.current = inputValues;
-    dispatch(
-      inputChangeAction({
-        name: event.target.name,
-        value: event.target.value,
-      })
-    );
-  };
-
-  return { handleSeatAdd, handleSeatRemove, handleChange };
+      .catch((error) =>
+        dispatch(handleError({ message: error.message, time: new Date().getTime() }))
+      );
+  }, [BASE_URL, id, dispatch]);
 };

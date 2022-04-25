@@ -1,25 +1,16 @@
-export { ContinueButton } from "./GlobalStyles/ContinueButton";
-export { Logo } from "./GlobalStyles/Logo";
-export { Input, InputField, SelectContainer } from "./GlobalStyles/Input";
-export { Footer } from "./GlobalStyles/Footer";
-export { Header } from "./GlobalStyles/Header";
-export { Nav, NavItem, NavDiv } from "./GlobalStyles/Navigation";
-export { SignUpButton, SignUpBar, SignInButton, SignInDiv } from "./GlobalStyles/UpperBar";
+export { GlobalStyles } from "./GlobalStyles/GlobalStyles";
+export { theme } from "./themeStyles/theme";
+export { InputSignup } from "./GlobalStyles/Input";
+export { ContinueButton } from "./GlobalStyleComponents/ContinueButton";
+export { Logo } from "./GlobalStyleComponents/Logo";
+export {
+  Input,
+  InputField,
+  SelectContainer,
+  InputFieldContainer,
+  InputError,
+} from "./GlobalStyleComponents/Input";
 
-export const theme = {
-  light: {
-    bgMain: "#6e0b24",
-    logo: "#FF9D69",
-    primary: "#b09661",
-    secondary: "#ffebc6",
-    white: "#ffffff",
-  },
-  dark: {
-    bgMain: `rgb(45, 3, 23)`,
-    logo: "#ff8e56",
-    primary: "#063d5e",
-    secondary: "#3a6ba2",
-    white: "#858282",
-    light: "#5b5b5b",
-  },
-};
+export { Header } from "./GlobalStyleComponents/Header";
+export { Nav, NavItem, NavDiv } from "./GlobalStyleComponents/Navigation";
+export { SignUpButton, SignUpBar, SignInButton, SignInDiv } from "./GlobalStyleComponents/UpperBar";

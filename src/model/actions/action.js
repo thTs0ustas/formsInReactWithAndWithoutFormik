@@ -1,5 +1,29 @@
 import { actionTypes } from "./actionTypes";
 
+const initStore = (payload) => ({
+  type: actionTypes.initStore,
+  payload,
+});
+
+const adminMoviesAction = (payload) => ({
+  type: actionTypes.adminMovies,
+  payload,
+});
+const adminMoviesNotPlayingAction = (payload) => ({
+  type: actionTypes.adminMoviesNotPlaying,
+  payload,
+});
+const adminMoviesOfTheMonthAction = (payload) => ({
+  type: actionTypes.adminMoviesOfTheMonth,
+  payload,
+});
+const adminUsersAction = (payload) => ({
+  type: actionTypes.adminUsers,
+  payload,
+});
+const clearAdminAction = () => ({
+  type: actionTypes.clearAdmin,
+});
 const requestAction = (payload) => ({
   type: actionTypes.request,
   payload,
@@ -20,6 +44,7 @@ const addTicketAction = (payload) => ({
   type: actionTypes.addTicket,
   payload,
 });
+
 const removeTicketAction = (payload) => ({
   type: actionTypes.removeTicket,
   payload,
@@ -36,6 +61,10 @@ const userLoginAction = (payload) => ({
   type: actionTypes.userLogin,
   payload,
 });
+const userUpdateAction = (payload) => ({
+  type: actionTypes.userUpdate,
+  payload,
+});
 const userLogoutAction = (payload) => ({
   type: actionTypes.userLogout,
   payload,
@@ -49,8 +78,44 @@ const newTicketAction = (payload) => ({
 const resetReservation = () => ({
   type: actionTypes.resetReservation,
 });
+const changeTheme = () => ({
+  type: actionTypes.changeTheme,
+});
+const handleError = (payload) => ({
+  type: actionTypes.newError,
+  payload,
+});
+
+const moviesToHomeLayout = (payload) => ({
+  type: actionTypes.getMoviesForHome,
+  payload,
+});
+
+const moviesToNowShowing = (payload) => ({
+  type: actionTypes.getMoviesForNowShowing,
+  payload,
+});
+const upcomingMoviesAction = (payload) => ({
+  type: actionTypes.getUpcoming,
+  payload,
+});
+const moviesGenreAction = (payload) => ({
+  type: actionTypes.moviesByGenre,
+  payload,
+});
 
 export {
+  moviesGenreAction,
+  upcomingMoviesAction,
+  userUpdateAction,
+  clearAdminAction,
+  adminMoviesNotPlayingAction,
+  adminMoviesOfTheMonthAction,
+  adminUsersAction,
+  adminMoviesAction,
+  handleError,
+  initStore,
+  changeTheme,
   resetReservation,
   addSeatAction,
   newTicketAction,
@@ -62,5 +127,7 @@ export {
   userLogoutAction,
   inputChangeAction,
   addTicketAction,
+  moviesToHomeLayout,
+  moviesToNowShowing,
   removeTicketAction,
 };

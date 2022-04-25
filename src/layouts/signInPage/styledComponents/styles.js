@@ -6,7 +6,7 @@ const SignInMain = styled.main`
 `;
 
 const Wrapper = styled.div`
-  background-color: black;
+  background-color: #000;
   height: 50px;
   width: 100%;
   max-width: 100%;

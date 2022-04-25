@@ -1,25 +1,60 @@
 import styled from "styled-components";
+import { NavDropdown } from "react-bootstrap";
 
 const HomeDiv = styled.div`
-  background-color: blueviolet;
+  background-color: ${({ theme }) => theme.bgMain};
 `;
 
 const VideoWallDiv = styled.div`
-  position: relative;
-  min-height: 400px;
-  max-height: 1000px;
-  height: 40vw;
-  background-color: #a5f1d2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  background-color: ${({ theme }) => theme.bgMain};
+`;
+
+const NavDropdownDiv = styled(NavDropdown)`
+  padding: 0 5px;
+  height: 32px;
+  & > a {
+    padding: 4px 5px;
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+    background-color: ${({ theme }) => theme.primary};
+    transition: background-color 0.3s ease-in-out;
+    color: #000;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: ${({ theme }) => theme.secondary2};
+      color: #000;
+    }
+  }
+  & div {
+    &:not([class*="show"]) {
+      display: none;
+    }
+    &[class*="show"] {
+      min-width: 120px;
+      text-align: center;
+      padding: 0;
+      width: fit-content;
+      z-index: 10000;
+      display: block;
+      background-color: ${({ theme }) => theme.secondary};
+      border-radius: 0;
+
+      & a {
+        width: 100%;
+        text-decoration: none;
+        color: #000;
+      }
+    }
+  }
 `;
 
 const VideoWallInfo = styled.div`
   top: 40%;
   position: absolute;
-  background-color: crimson;
+  background-color: ${({ theme }) => theme.bgMain};
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -43,19 +78,52 @@ const VideoWallInfo = styled.div`
 `;
 
 const Features = styled.div`
-  background-color: cadetblue;
+  background-color: ${({ theme }) => theme.bgMain};
   margin: 0 auto;
   max-width: 1400px;
   overflow: hidden;
 `;
 
 const ComingUp = styled.div`
-  background-color: fuchsia;
+  background-color: ${({ theme }) => theme.bgMain};
   padding: 10px 0;
+  overflow: auto;
+
+  & p {
+    margin-left: 25px;
+    font-weight: 200;
+    color: ${({ theme }) => theme.secondary};
+  }
+
+  & h2 {
+    margin-left: 25px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: ${({ theme }) => theme.white};
+  }
+
+  & a {
+    text-decoration: none;
+    cursor: pointer;
+    color: ${({ theme }) => theme.white};
+  }
+
+  & a:hover {
+    color: ${({ theme }) => theme.primary};
+    -webkit-transition: color 0.3s ease-out 0s;
+    -moz-transition: color 0.3s ease-out 0s;
+    -ms-transition: color 0.3s ease-out 0s;
+    -o-transition: color 0.3s ease-out 0s;
+    transition: color 0.3s ease-out 0s;
+  }
+
+  & img:hover {
+    opacity: 1;
+  }
 `;
 
 const Archive = styled.div`
-  background-color: greenyellow;
+  background-color: ${({ theme }) => theme.bgMain};
   padding: 10px 0;
 `;
 
@@ -68,7 +136,7 @@ const Typography = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: chocolate;
+  background-color: ${({ theme }) => theme.logo};
   margin: 0 auto;
   height: 25vw;
   min-height: 120px;
@@ -86,7 +154,6 @@ const Card = styled.div`
 `;
 
 const Promos = styled.div`
-  background-color: royalblue;
   padding: 10px 0;
 `;
 
@@ -95,7 +162,7 @@ const PromoCard = styled.div`
   margin: 10px auto 10px auto;
 
   height: 35vw;
-  min-height: 120px;
+  min-height: 300px;
   max-height: 500px;
   border: 1px solid #000;
   width: 42vw;
@@ -110,6 +177,7 @@ const PromoCard = styled.div`
 
 export {
   HomeDiv,
+  NavDropdownDiv,
   VideoWallDiv,
   VideoWallInfo,
   Features,

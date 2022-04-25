@@ -1,41 +1,25 @@
 import React from "react";
-import { LoginForm } from "../../components";
+import { LoginForm, Switch } from "../../components";
 import { Login, SignInMain, Wrapper } from "./styledComponents/styles";
-import { useNavigate } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import {
-  Footer,
-  Header,
-  Nav,
-  NavDiv,
-  NavItem,
-  SignInButton,
-  SignInDiv,
-  SignUpBar,
-  SignUpButton,
-} from "../../theme";
+import { Header, Nav, NavDiv, SignInDiv, SignUpBar } from "../../theme";
+import Footer from "../../components/footer/Footer";
+import { SignupBarPart } from "../GlobalParts/SignupBarPart";
+import NavBar from "../../components/NavBar";
 
-const SignInLayout = () => {
-  const navigate = useNavigate();
+const SignInLayout = ({ username }) => {
   return (
     <SignInDiv>
       <Header>
         <SignUpBar>
-          <Container fluid className='d-flex p-0 justify-content-end'>
-            <SignUpButton>Sign Up</SignUpButton>
-            <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
-          </Container>
+          <Switch />
+          <div>
+            <SignupBarPart username={username} />
+          </div>
         </SignUpBar>
 
         <NavDiv>
           <Nav>
-            <NavItem>1</NavItem>
-            <NavItem>2</NavItem>
-            <NavItem>3</NavItem>
-            <NavItem>4</NavItem>
-            <NavItem>5</NavItem>
-            <NavItem>6</NavItem>
-            <NavItem>7</NavItem>
+            <NavBar />
           </Nav>
         </NavDiv>
       </Header>

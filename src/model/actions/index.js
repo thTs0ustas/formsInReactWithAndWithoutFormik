@@ -1,5 +1,10 @@
 export { actionTypes } from "./actionTypes";
 export {
+  adminMoviesAction,
+  adminUsersAction,
+  initStore,
+  handleError,
+  changeTheme,
   addSeatAction,
   newTicketAction,
   removeSeatAction,
@@ -12,4 +17,10 @@ export {
   addTicketAction,
   removeTicketAction,
   resetReservation,
+  adminMoviesOfTheMonthAction,
+  adminMoviesNotPlayingAction,
+  clearAdminAction,
+  userUpdateAction,
+  upcomingMoviesAction,
+  moviesGenreAction,
 } from "./action";
