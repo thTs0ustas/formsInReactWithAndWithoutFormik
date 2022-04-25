@@ -7,6 +7,8 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import NavBar from "../../components/NavBar";
 import { TicketContainer } from "./styledComponents/ticketContainer";
 import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
+import { Link } from "react-router-dom";
+import { LinkToHome } from "../../components/simpleMessage/styledComponents/LinkToHome";
 
 const TicketLayout = ({ username }) => {
   return (
@@ -31,12 +33,16 @@ const TicketLayout = ({ username }) => {
             <span>Thank you for your purchase!</span>
           </h2>
         </TitleHeader>
-
-        <div>
+        <div style={{ marginBottom: 30 }}>
           <h3>Tickets</h3>
         </div>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <Ticket />
+        </div>
+        <div style={{ width: "100%" }}>
+          <LinkToHome>
+            <Link to='/'>Homepage</Link>
+          </LinkToHome>
         </div>
       </TicketContainer>
       <Footer />

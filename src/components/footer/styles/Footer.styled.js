@@ -163,9 +163,9 @@ const Full = styled.div`
   }
 `;
 const SubscribeButton = styled.input`
-  flex-grow: 2;
   border: none;
   padding: 5px;
+  width: 150px;
 
   background: ${({ theme }) => theme.primary};
   color: black;
@@ -207,6 +207,7 @@ const MenuContainer = styled.div`
 
 const Column = styled.div`
   /* flex: 0 0 15%; */
+  text-align: center;
   & ul {
     list-style: none;
     padding-left: 0;
