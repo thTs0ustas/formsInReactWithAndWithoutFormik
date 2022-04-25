@@ -10,7 +10,7 @@ export default function CardContent({ genre }) {
           <img
             src={require(`../../assets/imgs/${genre}.jpg`)}
             width='100%'
-            height='400px'
+            height='350px'
             alt='First slide'
           />
           <div className='card-body bg-dark text-light'>
