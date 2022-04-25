@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #f29500;
+  color: #b09661;
 }
 .horizontal-line::before,
 .horizontal-line::after {
@@ -12,9 +12,14 @@
   border-top: 2px solid;
   margin: 0 20px 0 20px;
   flex: 1 0 20px;
-  color: #f29500;
+  color: #b09661;
 }
 .subtitle {
-  color: #f29500;
+  color: #b09661;
   letter-spacing: 5px;
+}
+.btn-warning {
+  color: #000 !important;
+  background-color: #b09661 !important;
+  border-color: #b09661 !important;
 }

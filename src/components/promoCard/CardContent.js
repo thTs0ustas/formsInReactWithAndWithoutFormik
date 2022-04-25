@@ -5,11 +5,12 @@ export default function CardContent({ genre }) {
   const navigate = useNavigate();
   return (
     <div className='card-container mb-4'>
-      <div className='card'>
+      <div className='card border-0'>
         <div className='card-item'>
           <img
-            src={require("../../assets/imgs/movie-theater.jpg")}
+            src={require(`../../assets/imgs/${genre}.jpg`)}
             width='100%'
+            height='400px'
             alt='First slide'
           />
           <div className='card-body bg-dark text-light'>
