@@ -1,5 +1,5 @@
 import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
-import { Switch } from "../../components";
+import { Home, Switch } from "../../components";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import React, { useEffect, useState } from "react";
 import { Tabs } from "react-bootstrap";
@@ -56,7 +56,9 @@ const AdminPage = () => {
           onSelect={(k) => setKey(k)}
           className='mb-3'
         >
-          <TabStyled eventKey='home' title='Home'></TabStyled>
+          <TabStyled eventKey='home' title='Home'>
+            <Home />
+          </TabStyled>
           <TabStyled eventKey='movies' title='Movies'>
             <ShowMovies eventK={key} />
           </TabStyled>
