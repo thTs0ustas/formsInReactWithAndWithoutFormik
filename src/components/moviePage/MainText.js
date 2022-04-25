@@ -1,5 +1,5 @@
 import React from "react";
-import { isEmpty, map } from "lodash";
+import { isEmpty, map, sortBy } from "lodash";
 
 import {
   DaysButton,
@@ -19,7 +19,9 @@ const MainText = ({ movie, id }) => {
     ...new Set(map(movie?.screenings, (item) => days[new Date(item.movie_date).getDay()])),
   ];
   let movieTime = [
-    ...new Set(map(movie?.screenings, (item) => item.movie_starts.split("T")[1].slice(0, 5))),
+    ...new Set(
+      sortBy(map(movie?.screenings, (item) => item.movie_starts.split("T")[1].slice(0, 5)))
+    ),
   ];
   const navigate = useNavigate();
   return (

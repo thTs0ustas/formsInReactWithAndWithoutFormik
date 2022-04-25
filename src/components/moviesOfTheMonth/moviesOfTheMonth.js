@@ -11,7 +11,7 @@ import { useMoviesOfTheMonth } from "./hooks/useMoviesOfTheMonth";
 import { useProvider } from "../../model";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { map } from "lodash";
+import { map, sortBy } from "lodash";
 import { Link, useNavigate } from "react-router-dom";
 
 import { NowShowingStackHome } from "../nowShowingMovies/styledComponents/styles";
@@ -21,7 +21,7 @@ export const MoviesOfTheMonth = () => {
   const [state] = useProvider();
 
   let movieTime = (screenings) => [
-    ...new Set(map(screenings, (item) => item.movie_starts.split("T")[1].slice(0, 5))),
+    ...new Set(sortBy(map(screenings, (item) => item.movie_starts.split("T")[1].slice(0, 5)))),
   ];
 
   const navigate = useNavigate();

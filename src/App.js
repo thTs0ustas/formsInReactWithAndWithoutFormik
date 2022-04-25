@@ -12,6 +12,7 @@ import {
   ThanksForYourPaymentLayout,
   ThankYouForYourThoughts,
   TicketLayout,
+  TicketPricesLayout,
 } from "./layouts";
 import SignUpLayout from "./layouts/signUpPage/SignUpLayout";
 
@@ -44,6 +45,7 @@ function App() {
             <Route index element={<HomePageLayout username={username} />} />
             <Route path='info/:username' element={<InfoPage username={username} />} />
             <Route path='nowPlaying' element={<NowShowingLayout username={username} />} />
+            <Route path='ticketPrices' element={<TicketPricesLayout username={username} />} />
             <Route path='aboutUs' element={<AboutUsLayout username={username} />} />
             <Route path='movieByGenre'>
               <Route path=':genre' element={<MoviesByGenreLayout username={username} />} />

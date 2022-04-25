@@ -12,3 +12,4 @@ export { MainPhoto } from "./moviePage";
 export { MainText } from "./moviePage";
 export { SimpleMessage } from "./simpleMessage/SimpleMessage";
 export { Home } from "./admin/home/Home";
+export { TicketPrices } from "./ticketPrices/TicketPrices";
