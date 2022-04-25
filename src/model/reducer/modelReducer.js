@@ -135,7 +135,7 @@ export const modelReducer = (state, action) => {
 
     case actionTypes.getMoviesForHome:
       return produce(state, (draft) => {
-        draft.homepage.movies.push(payload);
+        draft.homepage = payload;
       });
 
     case actionTypes.getMoviesForNowShowing:
