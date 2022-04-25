@@ -44,20 +44,14 @@ const UserDetails = styled.div`
 `;
 
 const InputBox = styled(Field)`
-<<<<<<< HEAD
-=======
   outline: 0;
   border: 1px solid ${({ theme }) => theme.primary} !important;
->>>>>>> development
+
   max-width: 418px;
   width: 300px;
-  background-color: #340505;
+  background-color: ${({ theme }) => theme.dark};
   color: ${({ theme }) => theme.white};
-<<<<<<< HEAD
-  border: 0;
-=======
 
->>>>>>> development
   margin-bottom: 15px;
   height: 45px;
   border-radius: 1px;
@@ -66,14 +60,10 @@ const InputBox = styled(Field)`
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-<<<<<<< HEAD
-    box-shadow: 0 0 0 30px ${({ theme }) => theme.bgMain} inset !important;
-    -webkit-text-fill-color: #fcfcfc !important;
-=======
     -webkit-text-fill-color: ${({ theme }) => theme.white};
-    -webkit-box-shadow: 0 0 0 1000px #340505 inset;
-    box-shadow: 0 0 0 1000px #340505 inset;
->>>>>>> development
+    -webkit-box-shadow: 0 0 0 1000px ${({ theme }) => theme.dark} inset;
+    box-shadow: 0 0 0 1000px ${({ theme }) => theme.dark} inset;
+
     caret-color: aliceblue;
   }
 
@@ -90,11 +80,8 @@ const InputBox = styled(Field)`
   }
 
   &:focus {
-<<<<<<< HEAD
-    background-color: ${({ theme }) => theme.bgMain};
-=======
     background-color: ${({ theme }) => theme.dark};
->>>>>>> development
+
     color: ${({ theme }) => theme.white};
     border: 2px solid ${({ theme }) => theme.primary};
 
@@ -106,44 +93,6 @@ const InputBox = styled(Field)`
       color: rgba(0, 0, 0, 0);
     }
   }
-  /* margin-bottom: 20px;
-  width: calc(100% / 2 - 15px);
-  height: 45px; */
-  /* width: 100%; */
-  /* outline: none;
-  font-size: 1rem;
-  border: none;
-  padding-left: 15px;
-  background: #480016;
-  color: #fff;
-  transition: all 0.3s;
-
-  &:focus,
-<<<<<<< HEAD
-  &:valid {
-    color: #fff;
-    outline: 0;
-    border: 1px solid #f7dabb;
-  } */
-=======
->>>>>>> development
-
-  /* & span {
-    color: #f7dabb;
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 400;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-  }
-
-  & input {
-  } */
-
-  /* @media (max-width: 700px) {
-    margin-bottom: 15px;
-    width: 100%;
-  } */
 `;
 
 const Button = styled.button`
@@ -152,7 +101,7 @@ const Button = styled.button`
   padding: 5px 10px;
   border: none;
   color: #000;
-  background-color: #b09661;
+  background-color: ${({ theme }) => theme.primary};
   text-transform: uppercase;
   font-size: 18px;
   font-weight: 500;
@@ -161,7 +110,7 @@ const Button = styled.button`
   box-shadow: 0 0.2px 5px black;
 
   &:hover {
-    background-color: #c1ad83;
+    background-color: ${({ theme }) => theme.primary};
   }
 
   &:active {

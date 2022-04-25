@@ -11,6 +11,7 @@ export const theme = {
     border: "#000",
   },
   dark: {
+    dark: "#0c1c33",
     bgMain: "#162e52",
     logo: "#a24223",
     primary: "#7a67a0",
