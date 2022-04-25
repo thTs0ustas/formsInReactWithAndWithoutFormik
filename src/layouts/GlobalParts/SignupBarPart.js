@@ -36,7 +36,7 @@ export const SignupBarPart = () => {
 
   return !username ? (
     <>
-      <SignUpButton onClick={() => navigate("/signup")}>Sign Up</SignUpButton>
+      <SignUpButton onClick={() => navigate("/signup")}>Be a Member</SignUpButton>
       <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
     </>
   ) : (
