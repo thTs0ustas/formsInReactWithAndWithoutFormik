@@ -9,20 +9,16 @@ export const NavMenuUL = styled.ul`
   display: flex;
   align-items: center;
   //Displays the NavMenuLinks in mobile: margin must be set equal to the height of Nav, now {100px}
-  @media screen and (max-width: 930px) {
+  /* @media screen and (max-width: 930px) {
     & li a {
       font-size: 14px;
     }
-  }
-  @media screen and (max-width: 850px) {
-    & li a {
-      font-size: 12px;
-    }
-  }
+  } */
+ 
   @media screen and (max-width: 800px) {
     display: none;
     animation-name: ${letterAnimation};
-    animation-duration: 3s;
+    animation-duration: 2s;
     ${({ isOpen }) =>
       isOpen &&
       `
@@ -41,7 +37,7 @@ export const NavLink = styled.li`
   /* display: inline; */
   padding: 0 20px;
   @media screen and (max-width: 800px) {
-    z-index: 10;
+    z-index: 9999;
     margin-bottom: 2%;
     text-align: center;
   }
@@ -75,6 +71,6 @@ export const NavItem = styled.a`
   }
 
   @media screen and (max-width: 800px) {
-    font-size: calc(15px + 0.5rem);
+    font-size: calc(16px + 0.3rem);
   }
 `;

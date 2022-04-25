@@ -22,7 +22,7 @@ export const Nav = styled.nav`
 
   @media screen and (max-width: 800px) {
     //In smaller screens add different styling to the nav container
-    z-index: 2;
+    z-index: 9999;
     position: static;
 
     background: linear-gradient(${({ theme }) => theme.dark}, ${({ theme }) => theme.bgMain});
