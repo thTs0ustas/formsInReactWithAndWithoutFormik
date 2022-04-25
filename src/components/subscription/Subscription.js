@@ -4,15 +4,15 @@ import axios from "axios";
 import { errorHandling } from "../signInForm/errors/errorHandling";
 import { useNavigate } from "react-router-dom";
 import { handleError } from "../../model/actions";
-import { useProvider } from "../../model";
+import { selectors, useProvider } from "../../model";
 
 const Subscription = () => {
   const navigate = useNavigate();
-  const [, dispatch] = useProvider();
+  const [{ BASE_URL }, dispatch] = useProvider([selectors.url]);
   useEffect(() => {
     const values = JSON.parse(window.sessionStorage.getItem("values"));
     axios
-      .post("http://localhost:4000/users/create", {
+      .post(`${BASE_URL}/users/create`, {
         username: values.username,
         password: values.password,
         first_name: values.first_name,
@@ -35,7 +35,7 @@ const Subscription = () => {
       .catch((error) => {
         errorHandling(error);
       });
-  }, [dispatch, navigate]);
+  }, [BASE_URL, dispatch, navigate]);
 
   return (
     <Spinner animation='border' role='status'>

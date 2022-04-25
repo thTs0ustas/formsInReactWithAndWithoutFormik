@@ -28,21 +28,18 @@ const History = () => {
   ]);
 
   const getData = useCallback(() => {
-    axios.get(`http://localhost:4000/reservations/history/${userInfo.id}`).then((res) => {
+    axios.get(`${BASE_URL}/reservations/history/${userInfo.id}`).then((res) => {
       const reservations = res.data;
       setData((prev) => ({
         ...prev,
         ...reservations,
       }));
-      // console.log("ApiCall- Reserv", reservations[0].Reservations[0].purchase_date);
     });
   }, [userInfo.id]);
   useEffect(() => {
     getData();
   }, [getData]);
 
-  //Get Reservation Data
-  //Drill Into Reservation and then map over the screenings
   const data2 = data[0]["Reservations"];
   let reservation = map(data2, (item) => item);
 

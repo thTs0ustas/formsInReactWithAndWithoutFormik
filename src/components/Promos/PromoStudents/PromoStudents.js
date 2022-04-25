@@ -13,7 +13,6 @@ export const PromoStudents = () => {
       <div className='bottom-div'>
         <Title className='hide-content'>Student Offer</Title>
         <PromoPara className='hide-content'>
-          {" "}
           Procrastinate smarter not harder. Be a member and every Wednesday only 8 € per ticket{" "}
         </PromoPara>
         <PromoButton onClick={() => navigate("/signup")} className='hide-btn'>

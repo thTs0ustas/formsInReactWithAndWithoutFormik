@@ -6,8 +6,10 @@ import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { ContinueButton } from "../../signInForm";
 import { useGuestSignup } from "../hooks/useGuestSignup";
 import { errorHandling } from "../errors/errorHandling";
+import { selectors, useProvider } from "../../../model";
 
 const SignupComponent = () => {
+  const [{ BASE_URL }] = useProvider([selectors.url]);
   let [error, setError] = useState("");
   const { setState } = useGuestSignup();
   return (
@@ -15,7 +17,7 @@ const SignupComponent = () => {
       initialValues={{ first_name: "", last_name: "", email: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         axios
-          .post("http://localhost:4000/users/guest", {
+          .post(`${BASE_URL}/users/guest`, {
             first_name: values.first_name,
             last_name: values.last_name,
             email: values.email,
@@ -49,11 +51,7 @@ const SignupComponent = () => {
               name='first_name'
               placeholder='First name'
               type='text'
-              className={
-                formik.touched.first_name &&
-                formik.errors.first_name &&
-                "is-invalid"
-              }
+              className={formik.touched.first_name && formik.errors.first_name && "is-invalid"}
             />
             {formik.touched.first_name && formik.errors.first_name ? (
               <InputError>{formik.errors.first_name}</InputError>
@@ -68,11 +66,7 @@ const SignupComponent = () => {
               name='last_name'
               placeholder='Last name'
               type='text'
-              className={
-                formik.touched.first_name &&
-                formik.errors.first_name &&
-                "is-invalid"
-              }
+              className={formik.touched.first_name && formik.errors.first_name && "is-invalid"}
             />
             {formik.touched.last_name && formik.errors.last_name ? (
               <InputError>{formik.errors.last_name}</InputError>
@@ -87,11 +81,7 @@ const SignupComponent = () => {
               name='email'
               placeholder='Email'
               type='text'
-              className={
-                formik.touched.first_name &&
-                formik.errors.first_name &&
-                "is-invalid"
-              }
+              className={formik.touched.first_name && formik.errors.first_name && "is-invalid"}
             />
             {formik.touched.email && formik.errors.email ? (
               <InputError>{formik.errors.email}</InputError>

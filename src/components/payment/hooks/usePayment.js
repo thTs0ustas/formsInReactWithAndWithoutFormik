@@ -20,7 +20,7 @@ const usePayment = () => {
 
   React.useEffect(() => {
     axios
-      .post(`${String(BASE_URL)}/reservations/users/${username}/new`, {
+      .post(`${BASE_URL}/reservations/users/${username}/new`, {
         data: {
           screening_id: +screening.split(",")[0],
           price: price(numOfTickets),

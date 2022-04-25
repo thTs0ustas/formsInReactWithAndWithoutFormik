@@ -3,15 +3,17 @@ import axios from "axios";
 import MainPhoto from "./MainPhoto";
 import MainText from "./MainText";
 import { useParams } from "react-router-dom";
+import { selectors, useProvider } from "../../model";
 
 const MoviePageContainer = () => {
+  const [{ BASE_URL }] = useProvider([selectors.url]);
   const [movie, setMovie] = useState([]);
   const { id } = useParams();
   const getMovie = useCallback(() => {
-    axios.get(`http://localhost:4000/movies/moviepage/${id}`).then(({ data }) => {
+    axios.get(`${BASE_URL}/movies/moviepage/${id}`).then(({ data }) => {
       setMovie(data);
     });
-  }, [id]);
+  }, [BASE_URL, id]);
   useEffect(() => {
     getMovie();
   }, [getMovie]);

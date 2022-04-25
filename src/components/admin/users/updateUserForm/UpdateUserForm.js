@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { keys } from "lodash";
 
 const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
-  const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
+  const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
 
   const formik = useFormik({
     initialValues: {
@@ -25,7 +25,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
     onSubmit: (values) => {
       axios
         .put(
-          `http://localhost:4000/admin/update/user/${data.id}`,
+          `${BASE_URL}/admin/update/user/${data.id}`,
           {
             username: userInfo.username,
             values,

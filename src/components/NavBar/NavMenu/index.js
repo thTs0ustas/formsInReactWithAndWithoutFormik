@@ -1,12 +1,10 @@
 import React from "react";
 import { NavItem, NavLink, NavMenuUL } from "./NavMenuElements";
 import { MenuItems } from "./MenuItems";
-import { useNavigate } from "react-router-dom";
 
-const NavMenu = (props) => {
-  const navigate = useNavigate();
+const NavMenu = ({ isOpen }) => {
   return (
-    <NavMenuUL isOpen={props.isOpen}>
+    <NavMenuUL isOpen={isOpen}>
       {MenuItems.map((item, index) => {
         return (
           <NavLink key={index}>

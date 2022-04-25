@@ -12,8 +12,10 @@ import {
   TextContainer,
 } from "./styledComponents/MainTextStyles";
 import { useNavigate } from "react-router-dom";
+import { selectors, useProvider } from "../../model";
 
 const MainText = ({ movie, id }) => {
+  const [{ BASE_URL }] = useProvider([selectors.url]);
   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   let movieDates = [
     ...new Set(map(movie?.screenings, (item) => days[new Date(item.movie_date).getDay()])),
@@ -36,7 +38,7 @@ const MainText = ({ movie, id }) => {
                 key={item}
                 onClick={() =>
                   navigate(`/reservation/${id}`, {
-                    state: `http://localhost:4000${movie.movie.image}`,
+                    state: `${BASE_URL}${movie.movie.image}`,
                   })
                 }
               >
@@ -51,7 +53,7 @@ const MainText = ({ movie, id }) => {
                 key={item}
                 onClick={() =>
                   navigate(`/reservation/${id}`, {
-                    state: `http://localhost:4000${movie.movie.image}`,
+                    state: `${BASE_URL}${movie.movie.image}`,
                   })
                 }
               >
