@@ -158,7 +158,7 @@ const AddNewScreeningForm = ({ onHide, show, handleUpdateTable } = {}) => {
             </Form.Group>
           </Row>
           <Button variant='outline-success' type='submit'>
-            Update
+            Add New
           </Button>
         </Form>
       </Modal.Body>

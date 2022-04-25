@@ -110,6 +110,7 @@ const Input = styled.input`
   height: 44px;
   background: transparent;
   font-size: 17px;
+  color: ${({ theme }) => theme.white};
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,

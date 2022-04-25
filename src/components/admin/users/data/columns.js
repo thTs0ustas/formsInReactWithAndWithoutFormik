@@ -7,5 +7,5 @@ export const columns = [
   { label: "Email", accessor: "email", sortable: true },
   { label: "Postal", accessor: "postal", sortable: false },
   { label: "Birth Date", accessor: "birth_date", sortable: true },
-  { label: "Edit", accessor: "delete", sortable: false },
+  { label: "Delete", accessor: "delete", sortable: false },
 ];

@@ -15,7 +15,7 @@ export const InputError = styled.div`
 `;
 export const InputField = styled(Field)`
   max-width: 418px;
-  background-color: #340505;
+  background-color: ${({ theme }) => theme.dark};
   color: ${({ theme }) => theme.white};
   border: 0;
   width: 100%;

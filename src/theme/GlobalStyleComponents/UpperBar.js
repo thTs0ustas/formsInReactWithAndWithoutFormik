@@ -33,13 +33,13 @@ const SignUpButton = styled.button`
   width: 120px;
   background-color: black;
 
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.secondary};
   border: 0;
   transition: 0.1s linear;
   margin-right: 5px;
 
   &:hover {
-    color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.white};
   }
 `;
 const SignInButton = styled.button`

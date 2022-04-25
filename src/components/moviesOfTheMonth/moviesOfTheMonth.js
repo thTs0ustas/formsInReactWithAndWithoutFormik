@@ -38,7 +38,7 @@ export const MoviesOfTheMonth = () => {
       <ShowingToday>
         {map(state?.homepage, ({ id: mOmId, Screenings, Movie }) => {
           return (
-            <ColStyled key={Movie?.id}>
+            <ColStyled key={mOmId}>
               <NowShowingStackHome>
                 <MoviesMonthImg
                   src={`${state.BASE_URL}${Movie?.image}`}
