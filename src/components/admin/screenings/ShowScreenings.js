@@ -13,7 +13,6 @@ const ShowScreenings = ({ eventK }) => {
   const dividers = {
     fifty: 50,
     twenty: 20,
-    ten: 10,
   };
   const { tableData, setUpdateTable, setTableData, updateTable, setDeletePrompt } =
     useAdminTable(eventK);
@@ -22,7 +21,7 @@ const ShowScreenings = ({ eventK }) => {
   const [page, setPage] = useState(0);
 
   const PER_PAGES = Math.floor(tableData.length / (tableData.length / itemsPerPage));
-  const slices = tableData.length > PER_PAGES ? [tableData] : chunk(tableData, PER_PAGES);
+  const slices = tableData.length < PER_PAGES ? [tableData] : chunk(tableData, PER_PAGES);
   const numberOfPages = slices.length;
 
   return (

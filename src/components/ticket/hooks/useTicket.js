@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { newTicketAction, resetReservation, selectors, useProvider } from "../../../model";
 import { map, random } from "lodash";
 
@@ -41,7 +41,7 @@ export const useTicket = () => {
       dispatch(newTicketAction(payload));
     }
     dispatch(resetReservation());
-  }, []);
+  }, [dispatch, movies, response]);
 
   return {
     response,

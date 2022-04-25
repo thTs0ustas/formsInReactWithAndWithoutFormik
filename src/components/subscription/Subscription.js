@@ -35,7 +35,7 @@ const Subscription = () => {
       .catch((error) => {
         errorHandling(error);
       });
-  }, []);
+  }, [dispatch, navigate]);
 
   return (
     <Spinner animation='border' role='status'>

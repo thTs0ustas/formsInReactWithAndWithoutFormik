@@ -42,7 +42,7 @@ function App() {
         <Routes>
           <Route path='/'>
             <Route index element={<HomePageLayout username={username} />} />
-            <Route path='info' element={<InfoPage username={username} />} />
+            <Route path='info/:username' element={<InfoPage username={username} />} />
             <Route path='nowPlaying' element={<NowShowingLayout username={username} />} />
             <Route path='aboutUs' element={<AboutUsLayout username={username} />} />
             <Route path='movieByGenre'>
@@ -69,7 +69,6 @@ function App() {
               <Route path='movies' element={<ShowMovies username={username} />} />
             </Route>
           </Route>
-          {/*<Route path='/payments' element={<Payment username={username} />} />*/}
         </Routes>
       </div>
       <ToastContainer style={{ position: "sticky", zIndex: 10001 }} position={"top-end"}>

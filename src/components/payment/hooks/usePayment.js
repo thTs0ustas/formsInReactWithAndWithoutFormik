@@ -22,13 +22,13 @@ const usePayment = () => {
     axios
       .post(`${String(BASE_URL)}/reservations/users/${username}/new`, {
         data: {
-          screening_id: +screening[0],
+          screening_id: +screening.split(",")[0],
           price: price(numOfTickets),
           seats: map(seat, (seat) => ({
             id: seat.id,
             discount_type: seat.discount_type,
             cost: PRICING[seat.discount_type],
-            screening_id: +screening[0],
+            screening_id: +screening.split(",")[0],
           })),
         },
       })
@@ -39,7 +39,7 @@ const usePayment = () => {
       .catch((error) =>
         dispatch(handleError({ message: error.message, time: new Date().getTime() }))
       );
-  }, []);
+  }, [BASE_URL, dispatch, navigate, numOfTickets, screening, seat, username]);
 };
 
 export { usePayment };

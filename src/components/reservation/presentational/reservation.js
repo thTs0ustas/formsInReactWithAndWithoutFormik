@@ -210,11 +210,11 @@ export const Reservation = ({
                 </TicketButton>
               </TicketBarRight>
             </TicketBar>
-            <BeAMember onClick={() => (fn) => fn("/login")} />
+            <BeAMember link='/signup' />
 
             <TicketInfo>
               <p>
-                You choose <strong>{numOfTickets.sum}</strong> ticket(s)
+                You chose <strong>{numOfTickets.sum}</strong> ticket(s)
               </p>
 
               <p>

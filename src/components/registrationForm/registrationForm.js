@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -8,6 +8,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { selectors, useProvider } from "../../model";
 import { handleSubmit } from "./helper/handleSubmit";
+import { useNavigate } from "react-router-dom";
 
 const INITIAL_STATE = {
   username: "",
@@ -22,7 +23,13 @@ const INITIAL_STATE = {
 
 export const RegistrationForm = () => {
   const [state, dispatch] = useProvider([selectors.url, selectors.token, selectors.username]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (state.username) {
+      navigate(`/info/${state.username}`);
+    }
+  }, [state.username]);
   return (
     <>
       <Container>
