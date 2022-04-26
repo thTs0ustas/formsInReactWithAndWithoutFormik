@@ -44,7 +44,7 @@ export const data = {
     {
       label: "Reservations",
       data: labels.map(() => faker.datatype.number({ min: 0, max: 500 })),
-      backgroundColor: "#162e52",
+      backgroundColor: "#7235eb",
     },
   ],
   labels,

@@ -27,7 +27,7 @@ export default function Form() {
           <Input required type='email' placeholder='Enter your email' />
         </Full>
 
-        <Textarea required rows='14' placeholder='Your thoughts go here!' />
+        <Textarea required rows='6' placeholder='Your thoughts go here!' />
 
         <SubscribeButton onClick={handleClick} type='submit' value='send' />
       </FormContainer>

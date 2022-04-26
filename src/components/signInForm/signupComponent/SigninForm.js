@@ -11,20 +11,20 @@ import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { useLoginForm } from "../hooks";
 import { errorHandling } from "../errors/errorHandling";
 import { handleError } from "../../../model/actions";
-import { useProvider } from "../../../model";
+import { selectors, useProvider } from "../../../model";
 
 export const SignInForm = ({ isInModal }) => {
-  const [, dispatch] = useProvider();
+  const [{ BASE_URL }, dispatch] = useProvider([selectors.url]);
   let [error] = useState("");
   const { setState } = useLoginForm(isInModal);
-  const token = window.sessionStorage.getItem("token")
+  const token = window.sessionStorage.getItem("token");
   return (
     <Formik
       initialValues={{ username: "", password: "", error: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         axios
           .post(
-            "http://localhost:4000/users/login",
+            `${BASE_URL}/users/login`,
             {
               username: values.username,
               password: values.password,
@@ -71,11 +71,7 @@ export const SignInForm = ({ isInModal }) => {
               id='username'
               name='username'
               placeholder='Username'
-              className={
-                formik.touched.username &&
-                formik.errors.username &&
-                "is-invalid"
-              }
+              className={formik.touched.username && formik.errors.username && "is-invalid"}
               type='text'
             />
             {formik.touched.username && formik.errors.username ? (
@@ -90,11 +86,7 @@ export const SignInForm = ({ isInModal }) => {
               id='password'
               name='password'
               placeholder='Password'
-              className={
-                formik.touched.password &&
-                formik.errors.password &&
-                "is-invalid"
-              }
+              className={formik.touched.password && formik.errors.password && "is-invalid"}
               type='password'
             />
             {formik.touched.password && formik.errors.password ? (

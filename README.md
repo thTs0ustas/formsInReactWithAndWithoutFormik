@@ -1,6 +1,29 @@
-# Getting Started with Create React App
+# Getting Started with Retro Cinema
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Clone the project (client side) from [GitHub](https://github.com/thTs0ustas/groupProjectTeam2s-client.git).\
+Start with `npm install`.
+Then run `npm start`.\
+And prepare to be amazed by the awesomeness of the project.
+
+## Modules and Packages
+
+1. [react](https://reactjs.org/)
+2. [react-dom](https://reactjs.org/docs/hello-world.html)
+3. [react-router-dom](https://reacttraining.com/react-router/web/api/BrowserRouter)
+4. [axios](http://www.axios-js.com/)
+5. [bootstrap](https://getbootstrap.com/)
+6. [react-icons](https://react-icons.netlify.com/)
+7. [react-to-print](https://www.npmjs.com/package/react-to-print)
+8. [styled-components](https://www.styled-components.com/)
+9. [react-bootstrap](https://react-bootstrap.github.io/react-bootstrap/getting-started/introduction)
+10. [react-bootstrap-table](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/getting-started.html)
+11. [chart.js](https://www.chartjs.org/docs/latest/)
+12. [react-chartjs-2](https://www.npmjs.com/package/react-chartjs-2)
+13. [lodash](https://lodash.com/)
+14. [formik](https://jaredpalmer.com/formik/)
+15. [yup](https://yup.js/)
+16. [moment](https://momentjs.com/)
+
 
 ## Available Scripts
 
@@ -14,11 +37,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
@@ -29,42 +47,25 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Available Routes
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Homepage: [http://localhost:3000](http://localhost:3000)
+2. Info: [http://localhost:3000/info/:username](http://localhost:3000/info/:username)
+3. Signup: [http://localhost:3000/signup](http://localhost:3000/signup)
+4. Login: [http://localhost:3000/login](http://localhost:3000/login)
+5. Logout: [http://localhost:3000/logout](http://localhost:3000/logout)
+6. About us: [http://localhost:3000/aboutUs](http://localhost:3000/aboutUs)
+7. Contact us: [http://localhost:3000/contactUs](http://localhost:3000/contactUs)
+8. Movie Page: [http://localhost:3000/moviePage/:movieId](http://localhost:3000/moviePage/:movieId)
+9. Ticket Prices: [http://localhost:3000/ticketPrices](http://localhost:3000/ticketPrices)
+10. Movie by Genre: [http://localhost:3000/movieByGenre/:genre](http://localhost:3000/movieByGenre/:genre)
+11. Upcoming Movies: [http://localhost:3000/upcoming](http://localhost:3000/upcoming)
+12. Now Playing Movies: [http://localhost:3000/nowPlaying](http://localhost:3000/nowPlaying)
+13. Payment: [http://localhost:3000/payment](http://localhost:3000/payment)
+14. Cancel Payment: [http://localhost:3000/payment_cancel](http://localhost:3000/payment_cancel)
+15. Success Payment: [http://localhost:3000/payment_applied](http://localhost:3000/payment_applied)
+16. Subscription: [http://localhost:3000/payments/subscription](http://localhost:3000/payments/subscription)
+17. Reservation: [http://localhost:3000/reservation/:id](http://localhost:3000/reservation/:id)
+18. Ticket : [http://localhost:3000/:username/tickets/new](http://localhost:3000/:username/tickets/new)
+19. Admin: [http://localhost:3000/admin](http://localhost:3000/admin)

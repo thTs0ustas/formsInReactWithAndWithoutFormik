@@ -16,13 +16,13 @@ const NowShowingStack = styled.div`
   display: flex;
   flex-direction: column;
 
-  min-width: 20vw;
+  min-width: 16vw;
   width: 30vw;
   max-width: 400px;
   margin: 0 auto;
 
   @media (max-width: 1000px) {
-    width: 40vw;
+    width: 35vw;
   }
   @media (max-width: 700px) {
     width: 100vw;

@@ -30,7 +30,6 @@ const INITIAL_STATE = {
   },
   userInfo: {
     tickets: [],
-    reviews: {},
   },
   theme: "true",
   error: { message: "", time: "" },

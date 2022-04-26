@@ -5,8 +5,8 @@ import axios from "axios";
 import { useProvider, userUpdateAction } from "../../../model";
 
 export const Form = () => {
-  const [{ token, id }, dispatch] = useProvider([
-    "userInfo.username",
+  const [{ token, id, BASE_URL }, dispatch] = useProvider([
+    "BASE_URL",
     "userInfo.token",
     "userInfo.id",
   ]);
@@ -24,9 +24,9 @@ export const Form = () => {
   });
   const [edit, setEdit] = useState(true);
 
-  const getData = (token) => {
+  useEffect(() => {
     axios
-      .get(`http://localhost:4000/users/${id}`, {
+      .get(`${BASE_URL}/users/${id}`, {
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${token}`,
@@ -35,17 +35,13 @@ export const Form = () => {
       .then(({ data }) => {
         setData(data);
       });
-  };
-
-  useEffect(() => {
-    getData(token);
   }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
     axios
-      .put(`http://localhost:4000/users/update/${id}`, data)
+      .put(`${BASE_URL}/users/update/${id}`, data)
       .then((res) => {
         const newData = res.data;
         setData(newData);

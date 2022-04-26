@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 const Login = styled.div`
   margin: 0 auto;
   text-align: left;
-  padding: 0 1vw;
+  padding: 0 0.5vw;
   display: flex;
   flex-direction: column;
   justify-content: center;

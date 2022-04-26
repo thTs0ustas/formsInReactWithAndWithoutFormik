@@ -11,7 +11,7 @@ import { handleError } from "../../../../model/actions";
 import { timeFromInt } from "time-number/lib";
 
 const UpdateScreeningsForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
-  const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
+  const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
 
   const formik = useFormik({
     initialValues: {
@@ -24,7 +24,7 @@ const UpdateScreeningsForm = ({ data, onHide, show, handleUpdateTable } = {}) =>
     onSubmit: (values) => {
       axios
         .put(
-          `http://localhost:4000/admin/update/screening/${data.id}`,
+          `${BASE_URL}/admin/update/screening/${data.id}`,
           {
             username: userInfo.username,
             values,
@@ -69,7 +69,7 @@ const UpdateScreeningsForm = ({ data, onHide, show, handleUpdateTable } = {}) =>
 
   useEffect(() => {
     if (show) keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
-  }, [data, show]);
+  }, [show]);
 
   return (
     <Modal show={show} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>

@@ -7,13 +7,8 @@ export default function CardContent({ genre }) {
     <div className='card-container mb-4'>
       <div className='card border-0'>
         <div className='card-item'>
-          <img
-            src={require(`../../assets/imgs/${genre}.jpg`)}
-            width='100%'
-            height='400px'
-            alt='First slide'
-          />
-          <div className='card-body bg-dark text-light'>
+          <img src={require(`../../assets/imgs/${genre}.jpg`)} width='100%' alt='First slide' />
+          <div className='card-body bg-black text-light'>
             <h1 className='horizontal-line'>{genre.toUpperCase()}</h1>
 
             <div className='d-grid gap-2 col-6 mx-auto mt-5'>

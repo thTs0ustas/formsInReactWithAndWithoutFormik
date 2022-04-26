@@ -10,7 +10,7 @@ import { genres } from "../data/genres";
 import { useEffect } from "react";
 
 const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
-  const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
+  const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
 
   const formik = useFormik({
     initialValues: {
@@ -23,7 +23,7 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
     onSubmit: (values) => {
       axios
         .put(
-          `http://localhost:4000/admin/update/movie/${data.id}`,
+          `${BASE_URL}/admin/update/movie/${data.id}`,
           {
             username: userInfo.username,
             values,
@@ -66,7 +66,7 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
   });
   useEffect(() => {
     if (show) keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
-  }, [data, show]);
+  }, [show]);
 
   return (
     <Modal show={show} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>

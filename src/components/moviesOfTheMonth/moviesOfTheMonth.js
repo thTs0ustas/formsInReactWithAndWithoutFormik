@@ -36,34 +36,32 @@ export const MoviesOfTheMonth = () => {
         </Link>
       </TitleHeader>
       <ShowingToday>
-        {map(state.homepage?.movies, (slice) => {
-          return map(slice, ({ id: mOmId, Screenings, Movie: { id, title, genre, image } }) => {
-            return (
-              <ColStyled key={id}>
-                <NowShowingStackHome>
-                  <MoviesMonthImg
-                    src={`${state.BASE_URL}${image}`}
-                    onClick={() =>
-                      navigate(`/reservation/${mOmId}`, {
-                        state: `${state.BASE_URL}${image}`,
-                      })
-                    }
-                  />
-                  <p>{genre.replace(/^\w/, (c) => c?.toUpperCase())}</p>
-                  <h2>
-                    <Link to={`/reservation/${mOmId}`} state={`${state.BASE_URL}${image}`}>
-                      {title}
-                    </Link>
-                  </h2>
-                  <MoviesMonthScreeningContainer>
-                    {map(movieTime(Screenings), (item, index) => (
-                      <MoviesMonthScreeningItem key={index}>{item}</MoviesMonthScreeningItem>
-                    ))}
-                  </MoviesMonthScreeningContainer>
-                </NowShowingStackHome>
-              </ColStyled>
-            );
-          });
+        {map(state?.homepage, ({ id, Screenings, Movie }) => {
+          return (
+            <ColStyled key={id}>
+              <NowShowingStackHome>
+                <MoviesMonthImg
+                  src={`${state.BASE_URL}${Movie?.image}`}
+                  onClick={() =>
+                    navigate(`/reservation/${id}`, {
+                      state: `${state.BASE_URL}${Movie?.image}`,
+                    })
+                  }
+                />
+                <p>{Movie?.genre.replace(/^\w/, (c) => c?.toUpperCase())}</p>
+                <h2>
+                  <Link to={`/reservation/${id}`} state={`${state.BASE_URL}${Movie?.image}`}>
+                    {Movie?.title}
+                  </Link>
+                </h2>
+                <MoviesMonthScreeningContainer>
+                  {map(movieTime(Screenings), (item, index) => (
+                    <MoviesMonthScreeningItem key={index}>{item}</MoviesMonthScreeningItem>
+                  ))}
+                </MoviesMonthScreeningContainer>
+              </NowShowingStackHome>
+            </ColStyled>
+          );
         })}
       </ShowingToday>
     </>

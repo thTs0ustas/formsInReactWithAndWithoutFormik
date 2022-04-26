@@ -59,7 +59,7 @@ const FormContainer = styled.form`
   padding: 30px 90px;
 
   @media (max-width: 630px) {
-    max-width: 100%;
+    width: 100%;
   }
 `;
 
@@ -69,6 +69,7 @@ const Half = styled.div`
   margin-bottom: 24px;
 
   @media (max-width: 630px) {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -96,9 +97,10 @@ const Textarea = styled.textarea`
   }
 
   @media (max-width: 630px) {
+    padding: 0 10px;
+    -webkit-text-fill-color: #7e7d7d !important;
+    text-align: start;
     width: 100%;
-    text-align: center;
-    padding: 0;
   }
 `;
 
@@ -110,21 +112,34 @@ const Input = styled.input`
   height: 44px;
   background: transparent;
   font-size: 17px;
+  color: ${({ theme }) => theme.white};
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px black inset !important;
+    -webkit-text-fill-color: #fcfcfc !important;
+    caret-color: ${({ theme }) => theme.white};
+  }
 
   &:focus {
     outline: none;
   }
+
   &::placeholder {
     color: ${({ theme }) => theme.white};
   }
+
   &:focus::placeholder {
     color: transparent;
   }
 
   @media (max-width: 630px) {
     width: 100%;
-    text-align: center;
-    padding: 0;
+    padding: 0 10px;
+    -webkit-text-fill-color: #7e7d7d !important;
+    text-align: start;
   }
 `;
 
@@ -163,9 +178,9 @@ const Full = styled.div`
   }
 `;
 const SubscribeButton = styled.input`
-  flex-grow: 2;
   border: none;
   padding: 5px;
+  width: 150px;
 
   background: ${({ theme }) => theme.primary};
   color: black;
@@ -207,6 +222,7 @@ const MenuContainer = styled.div`
 
 const Column = styled.div`
   /* flex: 0 0 15%; */
+  text-align: center;
   & ul {
     list-style: none;
     padding-left: 0;

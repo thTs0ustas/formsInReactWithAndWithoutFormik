@@ -5,5 +5,5 @@ export const columns = [
   { label: "Movie Starts", accessor: "movie_starts", sortable: true },
   { label: "Movie Ends", accessor: "movie_ends", sortable: true },
   { label: "Movie Date", accessor: "movie_date", sortable: true },
-  { label: "Edit", accessor: "delete", sortable: false },
+  { label: "Delete", accessor: "delete", sortable: false },
 ];
