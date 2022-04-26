@@ -79,13 +79,14 @@ const Paragraph = styled.p`
 const DaysDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
-
+  cursor: pointer;
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
 `;
 
 const DaysButton = styled.a`
+  cursor: pointer;
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
@@ -126,6 +127,7 @@ const SessionDiv = styled.div`
 `;
 
 const SessionButton = styled.a`
+  cursor: pointer;
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 50px;
