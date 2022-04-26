@@ -1,5 +1,5 @@
 import React from "react";
-import { isEmpty, map, sortBy } from "lodash";
+import { isEmpty, map } from "lodash";
 
 import {
   DaysButton,
@@ -12,33 +12,24 @@ import {
   TextContainer,
 } from "./styledComponents/MainTextStyles";
 import { useNavigate } from "react-router-dom";
-import { selectors, useProvider } from "../../model";
+import { BASE_URL } from "../../constants";
+import { movieDates, movieTime } from "./helpers/dateAndTimes";
 
-const MainText = ({ movie, id }) => {
-  const [{ BASE_URL }] = useProvider([selectors.url]);
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let movieDates = [
-    ...new Set(map(movie?.screenings, (item) => days[new Date(item.movie_date).getDay()])),
-  ];
-  let movieTime = [
-    ...new Set(
-      sortBy(map(movie?.screenings, (item) => item.movie_starts.split("T")[1].slice(0, 5)))
-    ),
-  ];
+const MainText = ({ movie, screenings, id }) => {
   const navigate = useNavigate();
   return (
     <TextContainer>
-      {isEmpty(movieDates) || (
+      {isEmpty(movieDates(screenings)) || (
         <>
           <MainTitle> Book Tickets</MainTitle>
           <SectionTitle>Select Day</SectionTitle>
           <DaysDiv>
-            {map(movieDates, (item) => (
+            {map(movieDates(screenings), (item) => (
               <DaysButton
                 key={item}
                 onClick={() =>
                   navigate(`/reservation/${id}`, {
-                    state: `${BASE_URL}${movie.movie.image}`,
+                    state: `${BASE_URL}${movie.image}`,
                   })
                 }
               >
@@ -48,12 +39,12 @@ const MainText = ({ movie, id }) => {
           </DaysDiv>
           <SectionTitle>Book a session</SectionTitle>
           <SessionDiv>
-            {map(movieTime, (item) => (
+            {map(movieTime(screenings), (item) => (
               <SessionButton
                 key={item}
                 onClick={() =>
                   navigate(`/reservation/${id}`, {
-                    state: `${BASE_URL}${movie.movie.image}`,
+                    state: `${BASE_URL}${movie.image}`,
                   })
                 }
               >
@@ -66,13 +57,13 @@ const MainText = ({ movie, id }) => {
       <br />
       <br />
       <SectionTitle>The Story</SectionTitle>
-      <Paragraph>{movie?.movie?.description}</Paragraph>
+      <Paragraph>{movie?.description}</Paragraph>
       <SectionTitle>Duration</SectionTitle>
-      <Paragraph>{movie.movie?.duration}</Paragraph>
+      <Paragraph>{movie?.duration}</Paragraph>
       <SectionTitle>Genre</SectionTitle>
-      <Paragraph>{movie.movie?.genre.replace(/^\w/, (w) => w.toUpperCase())}</Paragraph>
+      <Paragraph>{movie?.genre}</Paragraph>
       <SectionTitle>Release Year</SectionTitle>
-      <Paragraph>{movie.movie?.release_year}</Paragraph>
+      <Paragraph>{movie?.release_year}</Paragraph>
     </TextContainer>
   );
 };

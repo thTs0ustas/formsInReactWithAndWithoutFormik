@@ -7,14 +7,13 @@ import {
   MovieTitle,
   TrailerButton,
 } from "./styledComponents/MainPhotoStyles";
-import { useProvider } from "../../model";
+
+import { BASE_URL } from "../../constants";
 
 const MainPhoto = ({ image, title }) => {
-  const [state] = useProvider(["BASE_URL"]);
-
   return (
     <Container className='container'>
-      <MoviePhoto src={`${state.BASE_URL}${image}`} alt={title} />
+      <MoviePhoto src={`${BASE_URL}${image}`} alt={title} />
       <Content>
         <MovieTitle>{title}</MovieTitle>
         <TrailerButton href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' target='_blank'>

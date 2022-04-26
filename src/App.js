@@ -28,14 +28,12 @@ import { InfoPage } from "./layouts/Info";
 import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 import { UpcomingLayout } from "./layouts/upcomingPage/UpcomingLayout";
 import { MoviesByGenreLayout } from "./layouts/moniesByGernePage/MoviesByGenreLayout";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [{ error, username, theme: theming }] = useProvider([
-    selectors.error,
-    selectors.username,
-    selectors.theme,
-  ]);
-
+  const [{ username, theme: theming }] = useProvider([selectors.username, selectors.theme]);
+  const { error } = useSelector((state) => state);
+  console.log(error);
   return (
     <ThemeProvider theme={theming ? theme.light : theme.dark}>
       <GlobalStyles />

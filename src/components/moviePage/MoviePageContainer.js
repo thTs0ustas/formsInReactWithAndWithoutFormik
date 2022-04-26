@@ -1,27 +1,24 @@
-import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import MainPhoto from "./MainPhoto";
 import MainText from "./MainText";
 import { useParams } from "react-router-dom";
-import { selectors, useProvider } from "../../model";
+import getMovieAction from "./actions/getMovieAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const MoviePageContainer = () => {
-  const [{ BASE_URL }] = useProvider([selectors.url]);
-  const [movie, setMovie] = useState([]);
+  const dispatch = useDispatch();
+  const { movieInfo = {} } = useSelector((state) => state.movieInfo);
+  const { movie = {}, screenings = {} } = movieInfo;
   const { id } = useParams();
-  const getMovie = useCallback(() => {
-    axios.get(`${BASE_URL}/movies/moviepage/${id}`).then(({ data }) => {
-      setMovie(data);
-    });
-  }, [BASE_URL, id]);
+
   useEffect(() => {
-    getMovie();
-  }, [getMovie]);
+    dispatch(getMovieAction(id));
+  }, []);
 
   return (
     <div>
-      <MainPhoto image={movie?.movie?.image} title={movie?.movie?.title} />
-      <MainText movie={movie} id={id} />
+      <MainPhoto image={movie?.image} title={movie?.title} />
+      <MainText movie={movie} screenings={screenings} id={id} />
     </div>
   );
 };

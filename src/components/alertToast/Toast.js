@@ -16,6 +16,7 @@ const AlertToast = ({ error }) => {
     >
       <ToastHeader closeButton={false}>
         <strong className='me-auto'>Message</strong>
+        <span className='me-auto'>{error.time}</span>
       </ToastHeader>
       <Toast.Body>{error.message}</Toast.Body>
     </ToastContainer>
