@@ -18,7 +18,7 @@ export const GridWrapper = styled.div`
   grid-template-columns: 350px 1fr 1fr;
   grid-template-rows: 300px 600px;
   @media screen and (max-width: 1600px) {
-    width: 80vh;
+    width: 80vw;
   }
 `;
 
