@@ -16,7 +16,7 @@ const NowShowingStack = styled.div`
   display: flex;
   flex-direction: column;
 
-  min-width: 20vw;
+  min-width: 16vw;
   width: 30vw;
   max-width: 400px;
   margin: 0 auto;

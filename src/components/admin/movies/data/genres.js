@@ -1,16 +1,16 @@
 const genres = [
-  "action",
-  "adventure",
-  "animation",
-  "comedy",
-  "crime",
-  "drama",
-  "horror",
-  "mystery",
-  "sci-fi",
-  "thriller",
-  "war",
-  "western",
+  "Action",
+  "Adventure",
+  "Animation",
+  "Comedy",
+  "Crime",
+  "Drama",
+  "Horror",
+  "Mystery",
+  "Sci-fi",
+  "Thriller",
+  "War",
+  "Western",
 ];
 
 export { genres };

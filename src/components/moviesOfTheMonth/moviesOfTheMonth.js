@@ -36,21 +36,21 @@ export const MoviesOfTheMonth = () => {
         </Link>
       </TitleHeader>
       <ShowingToday>
-        {map(state?.homepage, ({ id: mOmId, Screenings, Movie }) => {
+        {map(state?.homepage, ({ id, Screenings, Movie }) => {
           return (
-            <ColStyled key={mOmId}>
+            <ColStyled key={id}>
               <NowShowingStackHome>
                 <MoviesMonthImg
                   src={`${state.BASE_URL}${Movie?.image}`}
                   onClick={() =>
-                    navigate(`/reservation/${mOmId}`, {
+                    navigate(`/reservation/${id}`, {
                       state: `${state.BASE_URL}${Movie?.image}`,
                     })
                   }
                 />
                 <p>{Movie?.genre.replace(/^\w/, (c) => c?.toUpperCase())}</p>
                 <h2>
-                  <Link to={`/reservation/${mOmId}`} state={`${state.BASE_URL}${Movie?.image}`}>
+                  <Link to={`/reservation/${id}`} state={`${state.BASE_URL}${Movie?.image}`}>
                     {Movie?.title}
                   </Link>
                 </h2>

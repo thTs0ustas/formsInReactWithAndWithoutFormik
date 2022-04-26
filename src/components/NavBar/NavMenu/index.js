@@ -7,8 +7,8 @@ const NavMenu = ({ isOpen }) => {
     <NavMenuUL isOpen={isOpen}>
       {MenuItems.map((item, index) => {
         return (
-          <NavLink key={index}>
-            <NavItem href={item.url}>
+          <NavLink key={item.title}>
+            <NavItem to={item.url}>
               {item.icon} {item.title}
             </NavItem>
           </NavLink>

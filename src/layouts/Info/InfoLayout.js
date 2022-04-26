@@ -11,11 +11,6 @@ import Footer from "../../components/footer/Footer";
 import { GridWrapper, InfoMain, InfoSidebar, Section } from "./styles/infoElements";
 import { Switch } from "../../components";
 
-// const [{username, token, id}] = useProvider(["userInfo.username", "userInfo.token", "userInfo.id"])
-
-// const [state] = useProvider()
-// console.log(state.userInfo)
-
 export const InfoPage = ({ username }) => {
   const [selected, setSelected] = useState("");
 

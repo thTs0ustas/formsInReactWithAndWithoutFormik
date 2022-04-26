@@ -20,8 +20,8 @@ const ShowMovies = ({ eventK }) => {
 
   const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
   const [page, setPage] = useState(0);
-  const PER_PAGES = Math.floor(tableData.length / (tableData.length / itemsPerPage));
-  const slices = chunk(tableData, PER_PAGES);
+  // const PER_PAGES = Math.floor(tableData.length / (tableData.length / itemsPerPage));
+  const slices = chunk(tableData, itemsPerPage);
   const numberOfPages = slices.length;
 
   return (
