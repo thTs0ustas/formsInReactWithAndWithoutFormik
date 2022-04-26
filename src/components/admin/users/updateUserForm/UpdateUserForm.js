@@ -71,7 +71,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
 
   useEffect(() => {
     if (show) keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
-  }, [data, formik, show]);
+  }, [show]);
 
   return (
     <Modal show={show} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>

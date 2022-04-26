@@ -24,7 +24,7 @@ export const Form = () => {
   });
   const [edit, setEdit] = useState(true);
 
-  const getData = (token) => {
+  useEffect(() => {
     axios
       .get(`${BASE_URL}/users/${id}`, {
         headers: {
@@ -35,10 +35,6 @@ export const Form = () => {
       .then(({ data }) => {
         setData(data);
       });
-  };
-
-  useEffect(() => {
-    getData(token);
   }, []);
 
   const onSubmit = (e) => {

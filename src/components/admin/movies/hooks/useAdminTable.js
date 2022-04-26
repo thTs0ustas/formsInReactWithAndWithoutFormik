@@ -26,7 +26,7 @@ const useAdminTable = (eventK) => {
     }
   }, [eventK, updateTable]);
 
-  return { tableData, setUpdateTable, setTableData, updateTable };
+  return { tableData, setTableData, setUpdateTable, updateTable };
 };
 
 export { useAdminTable };

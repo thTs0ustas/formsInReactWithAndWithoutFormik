@@ -41,10 +41,14 @@ const TableBody = ({ tableData, columns, handleUpdateTable, setDeletePrompt }) =
           </td>
         </tr>
         <tr>
-          <td /> <td />
+          <td />
+          <td />
           <td>
             <input onChange={(e) => setInclude(e.target.value)} />
           </td>
+          <td />
+          <td />
+          <td />
         </tr>
         {tableData?.map(
           (data, i) =>
