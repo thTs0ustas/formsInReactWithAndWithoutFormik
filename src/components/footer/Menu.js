@@ -31,7 +31,7 @@ export default function Menu() {
             <a href='#'>(+18) 6969 696969</a>
           </li>
           <li>
-            <a href='#'>Email Us</a>
+            <a href='mailto:retrocinemas@hotmail.com'>Email Us</a>
           </li>
         </ul>
         <SocialIcons />
