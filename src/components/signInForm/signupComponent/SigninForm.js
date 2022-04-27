@@ -2,64 +2,31 @@ import React, { useState } from "react";
 import { Form, Formik } from "formik";
 
 import * as Yup from "yup";
-import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { ContinueButton } from "../styledComponents";
 import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { useLoginForm } from "../hooks";
-import { errorHandling } from "../errors/errorHandling";
-import { handleError } from "../../../model/actions";
-import { selectors, useProvider } from "../../../model";
+import { useDispatch } from "react-redux";
+import requestLogin from "../actions/requestLoginAction";
 
 export const SignInForm = ({ isInModal }) => {
-  const [{ BASE_URL }, dispatch] = useProvider([selectors.url]);
+  const dispatch = useDispatch();
   let [error] = useState("");
-  const { setState } = useLoginForm(isInModal);
-  const token = window.sessionStorage.getItem("token");
+  useLoginForm(isInModal);
+
   return (
     <Formik
-      initialValues={{ username: "", password: "", error: "" }}
+      initialValues={{ usernameEmail: "", password: "", error: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        axios
-          .post(
-            `${BASE_URL}/users/login`,
-            {
-              username: values.username,
-              password: values.password,
-            },
-            {
-              headers: { authorization: `Bearer ${token}` },
-            }
-          )
-          .then((res) => {
-            if (errorHandling(res.data)) {
-              dispatch(
-                handleError({
-                  message: res.data.message,
-                  time: new Date().getTime(),
-                })
-              );
-              resetForm();
-            } else {
-              resetForm();
-              setState(res.data);
-            }
-          })
-          .then(() => setSubmitting(false))
-          .catch((error) =>
-            dispatch(
-              handleError({
-                message: error.message,
-                time: new Date().getTime(),
-              })
-            )
-          );
+        dispatch(requestLogin({ usernameEmail: values.usernameEmail, password: values.password }));
+        resetForm();
+        setSubmitting(false);
       }}
       validationSchema={Yup.object({
-        username: Yup.string()
-          .max(20, "Must be 20 characters or less.")
+        usernameEmail: Yup.string()
+          .max(50, "Must be 20 characters or less.")
           .required("Name is required."),
         password: Yup.string().required("Password is required."),
       })}
@@ -68,14 +35,16 @@ export const SignInForm = ({ isInModal }) => {
         <Form className='w-100'>
           <InputFieldContainer>
             <InputField
-              id='username'
-              name='username'
-              placeholder='Username'
-              className={formik.touched.username && formik.errors.username && "is-invalid"}
+              id='usernameEmail'
+              name='usernameEmail'
+              placeholder='Username or Email'
+              className={
+                formik.touched.usernameEmail && formik.errors.usernameEmail && "is-invalid"
+              }
               type='text'
             />
-            {formik.touched.username && formik.errors.username ? (
-              <InputError>{formik.errors.username}</InputError>
+            {formik.touched.usernameEmail && formik.errors.usernameEmail ? (
+              <InputError>{formik.errors.usernameEmail}</InputError>
             ) : error ? (
               <InputError>{error}</InputError>
             ) : null}

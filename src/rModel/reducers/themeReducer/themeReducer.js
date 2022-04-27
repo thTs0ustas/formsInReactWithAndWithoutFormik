@@ -3,7 +3,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "root",
+  key: "theme",
   storage,
 };
 
@@ -13,7 +13,7 @@ const themeReducer = createSlice({
     theme: "light",
   },
   reducers: {
-    setTheme: (state, action) => {
+    setTheme: (state) => {
       state.theme = state.theme === "light" ? "dark" : "light";
     },
   },

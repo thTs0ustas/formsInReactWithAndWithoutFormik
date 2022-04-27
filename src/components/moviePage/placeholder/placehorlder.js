@@ -16,12 +16,13 @@ const PlaceholderComp = () => (
     <MainTitle> Book Tickets</MainTitle>
     <SectionTitle>Select Day</SectionTitle>
     <DaysDiv>
-      <DaysButton>
+      <Placeholder as={DaysButton} xs={2} bg='warning' size={"lg"}>
         <Placeholder animation='glow' />
-      </DaysButton>
-      <DaysButton>
+      </Placeholder>
+
+      <Placeholder as={DaysButton} xs={2} bg='warning' size={"lg"}>
         <Placeholder animation='glow' />
-      </DaysButton>
+      </Placeholder>
     </DaysDiv>
     <SectionTitle>Book a session</SectionTitle>
     <SessionDiv>

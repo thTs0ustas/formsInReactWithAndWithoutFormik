@@ -26,7 +26,7 @@ import { InfoPage } from "./layouts/Info";
 
 import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 import { UpcomingLayout } from "./layouts/upcomingPage/UpcomingLayout";
-import { MoviesByGenreLayout } from "./layouts/moniesByGernePage/MoviesByGenreLayout";
+import { MoviesByGenreLayout } from "./layouts/moviesByGernePage/MoviesByGenreLayout";
 import { useSelector } from "react-redux";
 import { selectors, useProvider } from "./model";
 

@@ -4,37 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 import { NavDropdownDiv } from "../homePage/styledComponents/styles";
 import { SignInButton, SignUpButton } from "../../theme";
-import { selectors, useProvider, userLogoutAction } from "../../model";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import logoutAction from "./actions/logoutAction";
 
 export const SignupBarPart = () => {
-  const [
-    {
-      BASE_URL,
-      userInfo: { token, isMember, username, isAdmin },
-    },
-    dispatch,
-  ] = useProvider([selectors.url, selectors.userInfo]);
   const navigate = useNavigate();
+  const { id, username, token, isMember, isAdmin } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  const loginOut = () => {
-    axios
-      .post(
-        `${BASE_URL}/users/logout`,
-        { username },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      )
-      .then(() => {
-        navigate("/");
-      })
-      .catch((e) => alert(e.message));
-  };
-
-  return !username ? (
+  return !username || !id ? (
     <>
       <SignUpButton onClick={() => navigate("/signup")}>Be a Member</SignUpButton>
       <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
@@ -58,8 +36,8 @@ export const SignupBarPart = () => {
       <NavDropdown.Item
         eventKey='4.2'
         onClick={() => {
-          dispatch(userLogoutAction());
-          loginOut();
+          dispatch(logoutAction({ id, token }));
+
           navigate("/");
         }}
       >
