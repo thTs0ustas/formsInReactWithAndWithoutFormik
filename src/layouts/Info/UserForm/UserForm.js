@@ -1,41 +1,26 @@
 //
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ButtonDiv, Div, Edit, Input, Label, Submit } from "./UserFormElements";
 import axios from "axios";
-import { useProvider, userUpdateAction } from "../../../model";
+import { userUpdateAction } from "../../../model";
+import { BASE_URL } from "../../../constants";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Form = () => {
-  const [{ token, id, BASE_URL }, dispatch] = useProvider([
-    "BASE_URL",
-    "userInfo.token",
-    "userInfo.id",
-  ]);
-
+  const { id, username, first_name, last_name, email, address, postal, birth_date } = useSelector(
+    (state) => state.user
+  );
+  const dispatch = useDispatch();
   const [data, setData] = useState({
-    id: "",
-    username: "",
-    password: "",
-    first_name: "",
-    last_name: "",
-    email: "",
-    address: "",
-    postal: "",
-    birth_date: "",
+    username,
+    first_name,
+    last_name,
+    email,
+    address,
+    postal,
+    birth_date,
   });
   const [edit, setEdit] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get(`${BASE_URL}/users/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-      })
-      .then(({ data }) => {
-        setData(data);
-      });
-  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();

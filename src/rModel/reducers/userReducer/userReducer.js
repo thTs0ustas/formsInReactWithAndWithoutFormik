@@ -15,6 +15,9 @@ const userReducer = createSlice({
     first_name: null,
     last_name: null,
     email: null,
+    address: null,
+    postal: null,
+    birth_date: null,
     isAdmin: false,
     isLoggedIn: false,
     error: null,
@@ -29,6 +32,9 @@ const userReducer = createSlice({
       state.first_name = action.payload.first_name;
       state.last_name = action.payload.last_name;
       state.email = action.payload.email;
+      state.address = action.payload.address;
+      state.postal = action.payload.postal;
+      state.birth_date = action.payload.birth_date;
       state.isLoggedIn = false;
       state.isAdmin = false;
       state.isMember = true;
@@ -39,6 +45,9 @@ const userReducer = createSlice({
       state.first_name = action.payload.first_name;
       state.last_name = action.payload.last_name;
       state.email = action.payload.email;
+      state.address = action.payload.address;
+      state.postal = action.payload.postal;
+      state.birth_date = action.payload.birth_date;
       state.isMember = action.payload.isMember;
       state.token = action.payload.token;
       state.isAdmin = action.payload.isAdmin;

@@ -26,4 +26,4 @@ const ThanksForYourPaymentLayout = ({ username }) => (
   </>
 );
 
-export default ThanksForYourPaymentLayout;
+export { ThanksForYourPaymentLayout };

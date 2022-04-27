@@ -48,5 +48,5 @@ const CarouselHero = () => {
     </Carousel>
   );
 };
-// onClick={getMovie}
+
 export default CarouselHero;

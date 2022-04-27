@@ -23,7 +23,7 @@ export const UpcomingMovies = () => {
               <Link to={`/moviePage/${id}`}>
                 <MoviesMonthImg src={`${BASE_URL}${image}`} />
               </Link>
-              <p>{genre?.replace(/^\w/, (c) => c.toUpperCase())}</p>
+              <p>{genre}</p>
               <h2>
                 <Link to={`/moviePage/${id}`}>{title}</Link>
               </h2>

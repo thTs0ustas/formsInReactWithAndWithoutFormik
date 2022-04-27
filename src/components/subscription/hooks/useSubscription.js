@@ -12,11 +12,3 @@ const useSubscription = () => {
   }, [dispatch, navigate]);
 };
 export { useSubscription };
-// username: values.username,
-// password: values.password,
-// first_name: values.first_name,
-// last_name: values.last_name,
-// email: values.email,
-// address: values.address,
-// postal: values.postal,
-// birth_date: values.birth_date,
