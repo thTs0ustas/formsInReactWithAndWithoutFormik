@@ -13,7 +13,10 @@ import { BASE_URL } from "../../constants";
 const MainPhoto = ({ image, title }) => {
   return (
     <Container className='container'>
-      <MoviePhoto src={`${BASE_URL}${image}`} alt={title} />
+      <MoviePhoto
+        src={image ? `${BASE_URL}${image}` : require("../../assets/imgs/movie-theater.jpg")}
+        alt={title}
+      />
       <Content>
         <MovieTitle>{title}</MovieTitle>
         <TrailerButton href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' target='_blank'>

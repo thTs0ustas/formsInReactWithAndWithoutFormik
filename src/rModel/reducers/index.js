@@ -3,7 +3,7 @@ import userReducer from "./userReducer/userReducer";
 import adminReducer from "./adminReducer/adminReducer";
 import reservationReducer from "./reservationReducer/reservationReducer";
 import seatReducer from "./seatsReducer/seatsReducer";
-import movieInfoReducer from "./miscReducer/miscReducer";
+import movieInfoReducer from "./moviePageReducer/moviePageReducer";
 import errorReducer from "./errorReducer/errorReducer";
 
 export default combineReducers({
@@ -11,6 +11,6 @@ export default combineReducers({
   admin: adminReducer,
   reservation: reservationReducer,
   seat: seatReducer,
-  movieInfo: movieInfoReducer,
+  nowPlaying: movieInfoReducer,
   error: errorReducer,
 });

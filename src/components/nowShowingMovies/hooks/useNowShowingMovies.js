@@ -1,14 +1,10 @@
 import { useEffect } from "react";
-import axios from "axios";
-import { useProvider } from "../../../model";
-import { moviesToNowShowing } from "../../../model/actions/action";
+import { useDispatch } from "react-redux";
+import getNowShowingMovies from "../actions/getNowShowingMoviesAction";
 
 export const useNowShowingMovies = () => {
-  const [{ BASE_URL }, dispatch] = useProvider(["BASE_URL"]);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}/moviesOfTheMonth/showingNow`)
-      .then(({ data }) => dispatch(moviesToNowShowing(data)));
-  }, []);
+    dispatch(getNowShowingMovies());
+  }, [dispatch]);
 };
