@@ -4,15 +4,19 @@ import MainText from "./MainText";
 import { useParams } from "react-router-dom";
 import getMovieAction from "./actions/getMovieAction";
 import { useDispatch, useSelector } from "react-redux";
+import { clearMovieInfo } from "../../rModel/reducers/miscReducer/miscReducer";
 
 const MoviePageContainer = () => {
   const dispatch = useDispatch();
   const { movieInfo = {} } = useSelector((state) => state.movieInfo);
-  const { movie = {}, screenings = {} } = movieInfo;
+  const { movie, screenings } = movieInfo;
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getMovieAction(id));
+    return () => {
+      dispatch(clearMovieInfo());
+    };
   }, []);
 
   return (

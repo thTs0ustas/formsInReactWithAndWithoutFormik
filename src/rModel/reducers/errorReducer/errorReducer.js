@@ -13,7 +13,7 @@ const errorReducer = createSlice({
     },
     clearError: (state) => {
       state.message = "";
-      state.time = 0;
+      state.time = "";
     },
   },
 });

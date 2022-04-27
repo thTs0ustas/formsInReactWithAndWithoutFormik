@@ -33,7 +33,7 @@ import { useSelector } from "react-redux";
 function App() {
   const [{ username, theme: theming }] = useProvider([selectors.username, selectors.theme]);
   const { error } = useSelector((state) => state);
-  console.log(error);
+
   return (
     <ThemeProvider theme={theming ? theme.light : theme.dark}>
       <GlobalStyles />
@@ -72,7 +72,7 @@ function App() {
         </Routes>
       </div>
       <ToastContainer style={{ position: "sticky", zIndex: 10001 }} position={"top-end"}>
-        {error && <AlertToast error={error} />}
+        {error.message && <AlertToast error={error} />}
       </ToastContainer>
     </ThemeProvider>
   );

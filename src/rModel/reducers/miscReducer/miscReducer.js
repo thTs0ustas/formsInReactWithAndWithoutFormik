@@ -7,8 +7,11 @@ const miscReducer = createSlice({
     setMovieInfo: (state, action) => {
       state.movieInfo = action.payload;
     },
+    clearMovieInfo: (state, action) => {
+      state.movieInfo = {};
+    },
   },
 });
 
-export const { setMovieInfo } = miscReducer.actions;
+export const { setMovieInfo, clearMovieInfo } = miscReducer.actions;
 export default miscReducer.reducer;

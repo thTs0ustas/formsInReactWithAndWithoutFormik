@@ -1,17 +1,16 @@
 import { Toast, ToastHeader } from "react-bootstrap";
-
-import { useProvider } from "../../model";
-import { handleError } from "../../model/actions";
 import { ToastContainer } from "./StyledComponents/ToastContainer";
+import { useDispatch } from "react-redux";
+import { clearError } from "../../rModel/reducers/errorReducer/errorReducer";
 
 const AlertToast = ({ error }) => {
-  const [, dispatch] = useProvider();
+  const dispatch = useDispatch();
 
   return (
     <ToastContainer
+      delay={3000}
       show={!!error.message}
-      onClose={() => dispatch(handleError({ message: "", time: "" }))}
-      delay={10000}
+      onClose={() => dispatch(clearError())}
       autohide
     >
       <ToastHeader closeButton={false}>
