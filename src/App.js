@@ -18,7 +18,6 @@ import SignUpLayout from "./layouts/signUpPage/SignUpLayout";
 
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
-import { selectors, useProvider } from "./model";
 import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
 import { ShowMovies } from "./components/admin/movies/ShowMovies";
@@ -29,13 +28,17 @@ import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 import { UpcomingLayout } from "./layouts/upcomingPage/UpcomingLayout";
 import { MoviesByGenreLayout } from "./layouts/moniesByGernePage/MoviesByGenreLayout";
 import { useSelector } from "react-redux";
+import { selectors, useProvider } from "./model";
 
 function App() {
-  const [{ username, theme: theming }] = useProvider([selectors.username, selectors.theme]);
-  const { error } = useSelector((state) => state);
+  const [{ username }] = useProvider([selectors.username]);
+  const {
+    error,
+    theme: { theme: themeStyle },
+  } = useSelector((state) => state);
 
   return (
-    <ThemeProvider theme={theming ? theme.light : theme.dark}>
+    <ThemeProvider theme={theme[themeStyle]}>
       <GlobalStyles />
       <div className='App'>
         <Routes>

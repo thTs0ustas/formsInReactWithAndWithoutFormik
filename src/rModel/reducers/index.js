@@ -5,6 +5,7 @@ import reservationReducer from "./reservationReducer/reservationReducer";
 import seatReducer from "./seatsReducer/seatsReducer";
 import movieInfoReducer from "./moviePageReducer/moviePageReducer";
 import errorReducer from "./errorReducer/errorReducer";
+import themeReducer from "./themeReducer/themeReducer";
 
 export default combineReducers({
   user: userReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   seat: seatReducer,
   nowPlaying: movieInfoReducer,
   error: errorReducer,
+  theme: themeReducer,
 });

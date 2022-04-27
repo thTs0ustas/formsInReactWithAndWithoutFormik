@@ -7,8 +7,7 @@ import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/
 import { NowShowingMovies } from "../../components/nowShowingMovies/NowShowingMovies";
 import { Switch } from "../../components";
 
-const NowShowingLayout = () => {
-  const username = sessionStorage.getItem("username");
+const NowShowingLayout = ({ username }) => {
   return (
     <>
       <Header>
