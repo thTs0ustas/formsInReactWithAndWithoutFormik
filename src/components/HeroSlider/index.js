@@ -1,37 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Carousel.css";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ButtonIcon, CarouselButton } from "./CarouselButton";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { isEmpty, sampleSize } from "lodash";
-import { selectors, useProvider } from "../../model";
+import { useSelector } from "react-redux";
+import { BASE_URL } from "../../constants";
 
 const CarouselHero = () => {
-  const [{ BASE_URL }] = useProvider([selectors.url]);
+  const nowShowing = sampleSize(
+    useSelector((state) => state.nowPlaying.nowShowing),
+    4
+  );
+
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
 
-  //Get Movies of the month
-  const [movie, setMovie] = useState([]);
-  const getMovie = () => {
-    axios.get(`${BASE_URL}/moviesOfTheMonth`).then((res) => {
-      setMovie(sampleSize(res.data, 4));
-    });
-  };
-
-  useEffect(() => {
-    getMovie();
-  }, []);
   return (
     <Carousel activeIndex={index} onSelect={handleSelect} fade>
-      {isEmpty(movie) ? (
+      {isEmpty(nowShowing) ? (
         <img src={require("../../assets/imgs/movie-theater.jpg")} alt='First slide' />
       ) : (
-        movie.map((item) => {
+        nowShowing.map((item) => {
           const { id, title, description, image } = item.Movie;
 
           return (

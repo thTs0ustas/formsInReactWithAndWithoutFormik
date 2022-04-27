@@ -6,17 +6,14 @@ import { from, of } from "rxjs";
 import axios from "axios";
 import moment from "moment";
 import { setError } from "../../../rModel/reducers/errorReducer/errorReducer";
-import { setUser } from "../../../rModel/reducers/userReducer/userReducer";
+import { getMovies } from "../../../rModel/reducers/moviePageReducer/moviePageReducer";
 
-export const requestLoginEpic = (action$) =>
+export const getNowShowingEpic = (action$) =>
   action$.pipe(
-    ofType(actionTypes.REQUEST_LOGIN),
+    ofType(actionTypes.GET_NOW_PLAYING),
     switchMap(({ payload }) =>
-      from(axios.post(`${BASE_URL}/users/login`, payload)).pipe(
-        map(({ data }) => {
-          let time = moment().format("HH:mm:ss");
-          return data.message ? setError({ message: data.message, time }) : setUser(data);
-        }),
+      from(axios.get(`${BASE_URL}/moviesOfTheMonth/showingNow`)).pipe(
+        map(({ data }) => getMovies(data)),
         catchError((error) => {
           let time = moment().format("HH:mm:ss");
           return of(setError({ message: error.message, time }));

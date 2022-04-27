@@ -4,7 +4,6 @@ import {
   MoviesMonthImg,
   NowShowing,
 } from "../moviesOfTheMonth/styledComponents/styles";
-import { useNowShowingMovies } from "./hooks/useNowShowingMovies";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
 import { NowShowingStack } from "./styledComponents/styles";
@@ -15,8 +14,6 @@ import { BASE_URL } from "../../constants";
 export const NowShowingMovies = () => {
   const { nowShowing } = useSelector((state) => state.nowPlaying);
   const dispatch = useDispatch();
-
-  useNowShowingMovies();
 
   return (
     <>

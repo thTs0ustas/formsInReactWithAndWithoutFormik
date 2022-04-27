@@ -8,23 +8,20 @@ import {
   TitleHeader,
 } from "./styledComponents/styles";
 import { useMoviesOfTheMonth } from "./hooks/useMoviesOfTheMonth";
-import { useProvider } from "../../model";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import { map, sortBy } from "lodash";
+import { map } from "lodash";
 import { Link, useNavigate } from "react-router-dom";
-
 import { NowShowingStackHome } from "../nowShowingMovies/styledComponents/styles";
+import { useSelector } from "react-redux";
+import { BASE_URL } from "../../constants";
+import { movieTime } from "./helpers/movieTime";
 
 export const MoviesOfTheMonth = () => {
   useMoviesOfTheMonth();
-  const [state] = useProvider();
-
-  let movieTime = (screenings) => [
-    ...new Set(sortBy(map(screenings, (item) => item.movie_starts.split("T")[1].slice(0, 5)))),
-  ];
 
   const navigate = useNavigate();
+  const { todayMovies } = useSelector((state) => state.nowPlaying);
+
   return (
     <>
       <TitleHeader>
@@ -36,21 +33,21 @@ export const MoviesOfTheMonth = () => {
         </Link>
       </TitleHeader>
       <ShowingToday>
-        {map(state?.homepage, ({ id, Screenings, Movie }) => {
+        {map(todayMovies, ({ id, Screenings, Movie }) => {
           return (
             <ColStyled key={id}>
               <NowShowingStackHome>
                 <MoviesMonthImg
-                  src={`${state.BASE_URL}${Movie?.image}`}
+                  src={`${BASE_URL}${Movie?.image}`}
                   onClick={() =>
                     navigate(`/reservation/${id}`, {
-                      state: `${state.BASE_URL}${Movie?.image}`,
+                      state: `${BASE_URL}${Movie?.image}`,
                     })
                   }
                 />
-                <p>{Movie?.genre.replace(/^\w/, (c) => c?.toUpperCase())}</p>
+                <p>{Movie?.genre}</p>
                 <h2>
-                  <Link to={`/reservation/${id}`} state={`${state.BASE_URL}${Movie?.image}`}>
+                  <Link to={`/reservation/${id}`} state={`${BASE_URL}${Movie?.image}`}>
                     {Movie?.title}
                   </Link>
                 </h2>

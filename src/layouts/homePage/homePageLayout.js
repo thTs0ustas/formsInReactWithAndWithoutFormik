@@ -19,6 +19,7 @@ import CarouselHero from "../../components/HeroSlider";
 import { CardComponent, PromoMember, PromoStudents, Switch } from "../../components";
 import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
 import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
+import { useNowShowingMovies } from "./hooks/useNowShowingMovies";
 
 const HomePageLayout = ({ username }) => {
   const genres = [
@@ -35,6 +36,7 @@ const HomePageLayout = ({ username }) => {
     "war",
     "western",
   ];
+  useNowShowingMovies();
   return (
     <HomeDiv>
       <Header mainPage={false}>

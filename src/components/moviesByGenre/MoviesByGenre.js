@@ -5,13 +5,14 @@ import {
   NowShowing,
 } from "../moviesOfTheMonth/styledComponents/styles";
 import { useMoviesByGenre } from "./hooks/useMoviesByGenre";
-import { useProvider } from "../../model";
 import { map } from "lodash";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { NowShowingStack } from "./styledComponents/styles";
+import { useSelector } from "react-redux";
+import { BASE_URL } from "../../constants";
 
 export const MoviesByGenre = ({ genre }) => {
-  const [{ moviesByGenre, BASE_URL }] = useProvider();
+  const { moviesByGenre } = useSelector((state) => state.nowPlaying);
   useMoviesByGenre(genre);
 
   return (
@@ -31,7 +32,6 @@ export const MoviesByGenre = ({ genre }) => {
           </ColStyledNowPlaying>
         ))}
       </NowShowing>
-      <Outlet />
     </>
   );
 };
