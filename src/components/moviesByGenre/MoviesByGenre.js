@@ -14,7 +14,6 @@ import { BASE_URL } from "../../constants";
 export const MoviesByGenre = ({ genre }) => {
   const { moviesByGenre } = useSelector((state) => state.nowPlaying);
   useMoviesByGenre(genre);
-
   return (
     <>
       <NowShowing>

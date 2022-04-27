@@ -10,11 +10,12 @@ import { NowShowingStack } from "./styledComponents/styles";
 import { useDispatch, useSelector } from "react-redux";
 import getMovieAction from "./actions/getMovieAction";
 import { BASE_URL } from "../../constants";
+import { useNowPlaying } from "./hooks/useNowPlaying";
 
 export const NowShowingMovies = () => {
   const { nowShowing } = useSelector((state) => state.nowPlaying);
   const dispatch = useDispatch();
-
+  useNowPlaying();
   return (
     <>
       <NowShowing>

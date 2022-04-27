@@ -5,6 +5,7 @@ import { logOutEpic } from "../../layouts/GlobalParts/epics/logoutEpic";
 import { getNowShowingEpic } from "../../layouts/homePage/epics/getNowShowingEpic";
 import { todayMoviesEpic } from "../../components/moviesOfTheMonth/epics/todayMoviesEpic";
 import { moviesByGenreEpic } from "../../components/moviesByGenre/epics/moviesByGenreEpic";
+import { getUpcomingEpic } from "../../layouts/homePage/epics/getUpcomingEpic";
 
 const rootEpic = combineEpics(
   getMovieEpic,
@@ -12,7 +13,8 @@ const rootEpic = combineEpics(
   requestLoginEpic,
   logOutEpic,
   todayMoviesEpic,
-  moviesByGenreEpic
+  moviesByGenreEpic,
+  getUpcomingEpic
 );
 
 export default rootEpic;

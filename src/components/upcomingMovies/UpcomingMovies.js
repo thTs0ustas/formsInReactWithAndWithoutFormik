@@ -5,18 +5,19 @@ import {
   NowShowing,
 } from "../moviesOfTheMonth/styledComponents/styles";
 import { useUpcomingMovies } from "./hooks/useUpcomingMovies";
-import { useProvider } from "../../model";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
 import { NowShowingStack } from "./styledComponents/styles";
+import { useSelector } from "react-redux";
+import { BASE_URL } from "../../constants";
 
 export const UpcomingMovies = () => {
   useUpcomingMovies();
-  const [{ upcoming, BASE_URL }] = useProvider();
+  const { upcomingMovies } = useSelector((state) => state.nowPlaying);
   return (
     <>
       <NowShowing>
-        {map(upcoming[0], ({ id, title, genre, image }) => (
+        {map(upcomingMovies, ({ id, title, genre, image }) => (
           <ColStyledNowPlaying key={id}>
             <NowShowingStack key={id}>
               <Link to={`/moviePage/${id}`}>

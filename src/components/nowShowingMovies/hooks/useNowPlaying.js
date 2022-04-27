@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getNowShowingMovies from "../actions/getNowShowingMoviesAction";
-import { isEmpty } from "lodash";
 
-export const useNowShowingMovies = () => {
-  const dispatch = useDispatch();
+import { isEmpty } from "lodash";
+import getNowShowingMovies from "../../../layouts/homePage/actions/getNowShowingMoviesAction";
+
+export const useNowPlaying = () => {
   const { nowShowing } = useSelector((state) => state.nowPlaying);
+
+  const dispatch = useDispatch();
   useEffect(() => {
     isEmpty(nowShowing) && dispatch(getNowShowingMovies());
-  }, [dispatch]);
+  }, []);
 };

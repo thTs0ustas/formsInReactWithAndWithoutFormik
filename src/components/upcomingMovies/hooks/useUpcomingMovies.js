@@ -1,16 +1,14 @@
 import { useEffect } from "react";
-import axios from "axios";
-import { upcomingMoviesAction, useProvider } from "../../../model";
+import { useDispatch, useSelector } from "react-redux";
+import getUpcomingAction from "../../../layouts/homePage/actions/getUpcomingAction";
 import { isEmpty } from "lodash";
 
 export const useUpcomingMovies = () => {
-  const [state, dispatch] = useProvider(["BASE_URL", "upcoming"]);
+  const dispatch = useDispatch();
+
+  const { upcomingMovies } = useSelector((state) => state.nowPlaying);
 
   useEffect(() => {
-    if (isEmpty(state.upcoming)) {
-      axios
-        .get(`${state.BASE_URL}/moviesOfTheMonth/upcoming`)
-        .then(({ data }) => dispatch(upcomingMoviesAction(data)));
-    }
-  }, []);
+    isEmpty(upcomingMovies) && dispatch(getUpcomingAction());
+  }, [dispatch]);
 };

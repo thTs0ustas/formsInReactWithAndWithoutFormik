@@ -7,6 +7,7 @@ const moviePageReducer = createSlice({
     nowShowing: [],
     todayMovies: [],
     moviesByGenre: [],
+    upcomingMovies: [],
   },
   reducers: {
     setMovieInfo: (state, action) => {
@@ -27,6 +28,9 @@ const moviePageReducer = createSlice({
     clearMoviesByGenre: (state) => {
       state.moviesByGenre = [];
     },
+    getUpcomingMovies: (state, action) => {
+      state.upcomingMovies = action.payload;
+    },
   },
 });
 
@@ -37,5 +41,6 @@ export const {
   getTodayMovies,
   getMoviesByGenre,
   clearMoviesByGenre,
+  getUpcomingMovies,
 } = moviePageReducer.actions;
 export default moviePageReducer.reducer;
