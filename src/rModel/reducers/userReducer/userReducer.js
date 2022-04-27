@@ -11,6 +11,7 @@ const userReducer = createSlice({
   name: "user",
   initialState: {
     id: null,
+    username: null,
     first_name: null,
     last_name: null,
     email: null,
@@ -22,6 +23,16 @@ const userReducer = createSlice({
     tickets: [],
   },
   reducers: {
+    createUser: (state, action) => {
+      state.id = action.payload.id;
+      state.username = action.payload.username;
+      state.first_name = action.payload.first_name;
+      state.last_name = action.payload.last_name;
+      state.email = action.payload.email;
+      state.isLoggedIn = false;
+      state.isAdmin = false;
+      state.isMember = true;
+    },
     setUser: (state, action) => {
       state.id = action.payload.id;
       state.username = action.payload.username;
@@ -66,5 +77,6 @@ const userReducer = createSlice({
 });
 
 const persistedReducer = persistReducer(persistConfig, userReducer.reducer);
-export const { setUser, setUserError, setUserLogout } = userReducer.actions;
+export const { setUser, setUserError, setUserLogout, createUser, setTickets, updateUser } =
+  userReducer.actions;
 export default persistedReducer;

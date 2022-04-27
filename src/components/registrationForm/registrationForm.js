@@ -6,9 +6,9 @@ import { Container, InputBox, UserDetails } from "./styledComponents";
 import { ContinueButton } from "../form/styles/styles";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { selectors, useProvider } from "../../model";
-import { handleSubmit } from "./helper/handleSubmit";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import registerUserAction from "./actions/registerUserAction";
 
 const INITIAL_STATE = {
   username: "",
@@ -22,14 +22,15 @@ const INITIAL_STATE = {
 };
 
 export const RegistrationForm = () => {
-  const [state, dispatch] = useProvider([selectors.url, selectors.token, selectors.username]);
+  const { username } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (state.username) {
-      navigate(`/info/${state.username}`);
+    if (username) {
+      navigate(`/info/${username}`);
     }
-  }, [state.username]);
+  }, []);
   return (
     <>
       <Container>
@@ -39,7 +40,9 @@ export const RegistrationForm = () => {
           initialValues={INITIAL_STATE}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             window.sessionStorage.setItem("values", JSON.stringify(values));
-            handleSubmit(values, state, dispatch, setSubmitting, resetForm);
+            dispatch(registerUserAction(values));
+            setSubmitting(false);
+            resetForm();
           }}
           validationSchema={Yup.object({
             username: Yup.string()
