@@ -11,7 +11,7 @@ function GuestSignup() {
         <>
           <h1>SIGN UP AS A GUEST</h1>
           <p>
-            If your are already a member sign in{" "}
+            If your are already a member sign in
             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
             <strong onClick={() => setTypeOfLogin(!typeOfLogin)}>here</strong>
           </p>

@@ -9,7 +9,7 @@ export const useLoginForm = (isInModal = false) => {
 
   useEffect(() => {
     if (id && token) {
-      if (!isInModal) navigate("/");
+      if (isInModal) navigate("/");
     }
-  }, [id, token, isInModal, navigate]);
+  }, [id, token, navigate]);
 };

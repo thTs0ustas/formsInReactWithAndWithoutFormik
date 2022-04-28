@@ -1,6 +1,6 @@
 import { ofType } from "redux-observable";
 import { map } from "rxjs/operators";
-import { actionTypes } from "../../../rModel/actions/actionTypes";
+import { actionTypes } from "../actions/actionTypes";
 
 export const checkoutEpic = (action$) =>
   action$.pipe(
