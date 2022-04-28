@@ -42,7 +42,7 @@ function App() {
         <Routes>
           <Route path='/'>
             <Route index element={<HomePageLayout />} />
-            <Route path='info/:username' element={<InfoPage />} />
+            <Route path='user/:id/info/' element={<InfoPage />} />
             <Route path='nowPlaying' element={<NowShowingLayout />} />
             <Route path='ticketPrices' element={<TicketPricesLayout />} />
             <Route path='aboutUs' element={<AboutUsLayout />} />

@@ -20,7 +20,6 @@ export function InfoPage() {
         return <History />;
       case "form":
         return <Form />;
-
       default:
         return <Form />;
     }

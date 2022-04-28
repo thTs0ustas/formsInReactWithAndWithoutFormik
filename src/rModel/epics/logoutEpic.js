@@ -3,10 +3,10 @@ import { from, mergeMap, of } from "rxjs";
 import axios from "axios";
 import { catchError, map } from "rxjs/operators";
 import moment from "moment";
-import { BASE_URL } from "../../../constants";
-import { setUserLogout } from "../../../rModel/reducers/userReducer/userReducer";
-import { actionTypes } from "../../../rModel/actions/actionTypes";
-import { setError } from "../../../rModel/reducers/errorReducer/errorReducer";
+import { BASE_URL } from "../../constants";
+import { setUserLogout } from "../reducers/userReducer/userReducer";
+import { actionTypes } from "../actions/actionTypes";
+import { setError } from "../reducers/errorReducer/errorReducer";
 
 const logOutEpic = (action$) =>
   action$.pipe(

@@ -1,13 +1,10 @@
 //
 import React, { useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonDiv, Div, Edit, Input, Label, Submit } from "./UserFormElements";
-import { userUpdateAction } from "../../../model";
-import { BASE_URL } from "../../../constants";
+import updateUserAction from "../actions/updateUserAction";
 
 function Form() {
-  // eslint-disable-next-line camelcase
   const { id, username, first_name, last_name, email, address, postal, birth_date } = useSelector(
     (state) => state.user
   );
@@ -15,11 +12,8 @@ function Form() {
 
   const [data, setData] = useState({
     username,
-    // eslint-disable-next-line camelcase
     first_name,
-    // eslint-disable-next-line camelcase
     last_name,
-    // eslint-disable-next-line camelcase
     birth_date,
     email,
     address,
@@ -30,15 +24,8 @@ function Form() {
   const onSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    axios
-      .put(`${BASE_URL}/users/update/${id}`, data)
-      .then((res) => {
-        const newData = res.data;
-        setData(newData);
-        setEdit(!edit);
-        return res.data;
-      })
-      .then((res) => dispatch(userUpdateAction(res)));
+    dispatch(updateUserAction({ id, data }));
+    setEdit(!edit);
   };
 
   return (

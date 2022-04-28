@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { isEmpty, map } from "lodash";
-import { selectors, useProvider } from "../../../model";
+import React, { useEffect } from "react";
+import { map } from "lodash";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BottomDiv,
   CardNum,
@@ -12,24 +11,18 @@ import {
   Span,
   TopDiv,
 } from "./historyElements";
+import { BASE_URL } from "../../../constants";
+import getHistoryAction from "../actions/getHistoryAction";
 
 function History() {
-  const [{ userInfo, BASE_URL }] = useProvider([selectors.userInfo, selectors.url]);
-
-  const [data, setData] = useState({});
+  const { id, history } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isEmpty(data))
-      axios.get(`${BASE_URL}/reservations/history/${userInfo.id}`).then((res) => {
-        const reservations = res.data;
-        setData((prev) => ({
-          ...prev,
-          ...reservations,
-        }));
-      });
-  }, [BASE_URL, userInfo.id]);
+    dispatch(getHistoryAction(id));
+  }, []);
 
-  const data2 = data?.[0]?.Reservations;
+  const data2 = history?.[0]?.Reservations;
   const reservation = map(data2, (item) => item);
 
   return (

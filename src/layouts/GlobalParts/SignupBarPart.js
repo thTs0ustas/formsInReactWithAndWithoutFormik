@@ -12,7 +12,7 @@ export function SignupBarPart() {
   const { id, username, token, isMember, isAdmin } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  return !username || !id ? (
+  return !id ? (
     <>
       <SignUpButton onClick={() => navigate("/signup")}>Be a Member</SignUpButton>
       <SignInButton onClick={() => navigate("/login")}>Sign In</SignInButton>
@@ -21,7 +21,7 @@ export function SignupBarPart() {
     <NavDropdownDiv title={username} id='nav-dropdown'>
       {isMember && (
         <>
-          <NavDropdown.Item onClick={() => navigate(`/info/${username}`)} eventKey='4.1'>
+          <NavDropdown.Item onClick={() => navigate(`user/${id}/info`)} eventKey='4.1'>
             Info
           </NavDropdown.Item>
 
