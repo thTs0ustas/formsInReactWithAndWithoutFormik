@@ -23,6 +23,7 @@ export {
   setAdminMoviesOfTheMonth,
   setAdminUsers,
   clearAdmin,
+  deleteMovie,
 } from "./adminReducer/adminReducer";
 
 export { setError, clearError } from "./errorReducer/errorReducer";

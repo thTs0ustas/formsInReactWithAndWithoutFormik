@@ -2,6 +2,7 @@ export {
   setAdminMovies,
   setAdminNotPlayingMovies,
   setAdminMoviesOfTheMonth,
+  deleteMovie,
   setAdminUsers,
   clearAdmin,
   setError,

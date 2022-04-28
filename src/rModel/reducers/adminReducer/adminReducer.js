@@ -22,6 +22,9 @@ const adminReducer = createSlice({
         return movie;
       });
     },
+    deleteMovie: (state, action) => {
+      state.movies = state.movies.filter((movie) => movie.id !== action.payload);
+    },
     setAdminNotPlayingMovies: (state, action) => {
       state.notPlayingMovies = action.payload;
     },
@@ -43,11 +46,12 @@ const adminReducer = createSlice({
 export const {
   setAdminMovies,
   updateAdminMovies,
+  updateAdminIndividualMovie,
+  deleteMovie,
   setAdminNotPlayingMovies,
   setAdminMoviesOfTheMonth,
   setAdminUsers,
   clearAdmin,
-  updateAdminIndividualMovie,
 } = adminReducer.actions;
 
 export default adminReducer.reducer;

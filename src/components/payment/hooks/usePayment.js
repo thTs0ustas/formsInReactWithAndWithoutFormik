@@ -2,15 +2,18 @@ import React from "react";
 import axios from "axios";
 import { map } from "lodash";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { responseAction, useProvider } from "../../../model";
 import { price, PRICING } from "../../reservation/helpers";
 import { handleError } from "../../../model/actions";
+import { BASE_URL } from "../../../constants";
 
 const usePayment = () => {
-  const [, dispatch] = useProvider();
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  const [{ BASE_URL, numOfTickets, seat, screening, username }] = useProvider([
+  const [{ numOfTickets, seat, screening, username }] = useProvider([
     "userInfo.username",
     "BASE_URL",
     "reservation.inputValues.numOfTickets",

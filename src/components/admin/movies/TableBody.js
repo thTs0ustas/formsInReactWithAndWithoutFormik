@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { Accordion, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { UpdateMovieForm } from "./updateMovieForm/UpdateMovieForm";
 import { AddNewMovieForm } from "./addNewMovieForm/AddNewMovieForm";
 import { Data } from "./styledComponents/Data";
+import { decideTdData } from "../moviesOfTheMonth/helpers/conditional";
+import deleteMovieAction from "../actions/deleteMovieAction";
 
 function TableBody({ columns }) {
   const { movies } = useSelector((state) => state.admin);
+  const { id, token } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [include, setInclude] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const [addNewModalShow, setAddNewModalShow] = useState(false);
@@ -40,9 +45,16 @@ function TableBody({ columns }) {
           checkTitle(data.title) ? (
             <tr key={data.id}>
               {columns.map(({ accessor }) => {
-                const tData = data[accessor] ? data[accessor] : "——";
+                const tData = decideTdData(data, accessor, RiDeleteBin6Line);
                 return accessor !== "description" ? (
-                  <Data onClick={() => handleModal(data)} key={accessor}>
+                  <Data
+                    onClick={() =>
+                      accessor === "delete"
+                        ? dispatch(deleteMovieAction({ id, token, movieId: data.id }))
+                        : handleModal(data)
+                    }
+                    key={accessor}
+                  >
                     {tData}
                   </Data>
                 ) : (
