@@ -1,7 +1,8 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { TableHeader } from "./styledComponents/TableData";
 
-const TableHead = ({ columns, handleSorting }) => {
+function TableHead({ columns, handleSorting }) {
   const [sortField, setSortField] = useState("");
   const [order, setOrder] = useState("asc");
 
@@ -37,6 +38,15 @@ const TableHead = ({ columns, handleSorting }) => {
       </tr>
     </thead>
   );
+}
+TableHead.propTypes = {
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      accessor: PropTypes.string.isRequired,
+      sortable: PropTypes.bool,
+    })
+  ).isRequired,
+  handleSorting: PropTypes.func.isRequired,
 };
-
 export default TableHead;

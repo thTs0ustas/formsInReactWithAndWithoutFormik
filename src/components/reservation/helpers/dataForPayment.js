@@ -13,8 +13,9 @@ const dataForPayment = (tickets) =>
           quantity: tickets[ticket],
         };
       }
+      return null;
     }),
-    filter(undefined)
+    filter(null)
   )(tickets);
 
 export { dataForPayment };

@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "./Carousel.css";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ButtonIcon, CarouselButton } from "./CarouselButton";
 import { Link } from "react-router-dom";
 import { isEmpty, sampleSize } from "lodash";
 import { useSelector } from "react-redux";
+import { ButtonIcon, CarouselButton } from "./CarouselButton";
 import { BASE_URL } from "../../constants";
+import image1 from "../../assets/imgs/movie-theater.jpg";
 
-const CarouselHero = () => {
+function CarouselHero() {
   const nowShowing = sampleSize(
     useSelector((state) => state.nowPlaying.nowShowing),
     4
@@ -22,7 +23,7 @@ const CarouselHero = () => {
   return (
     <Carousel activeIndex={index} onSelect={handleSelect} fade>
       {isEmpty(nowShowing) ? (
-        <img src={require("../../assets/imgs/movie-theater.jpg")} alt='First slide' />
+        <img src={image1} alt='First slide' />
       ) : (
         nowShowing.map((item) => {
           const { id, title, description, image } = item.Movie;
@@ -47,6 +48,6 @@ const CarouselHero = () => {
       )}
     </Carousel>
   );
-};
+}
 
 export default CarouselHero;

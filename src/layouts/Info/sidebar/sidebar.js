@@ -1,10 +1,11 @@
 import React from "react";
-import { FirstNamePara, InfoDiv, SideBarBtn } from "./sidebarElements";
 import { FiArchive, FiSettings } from "react-icons/fi";
 import { BsPersonCircle } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { FirstNamePara, InfoDiv, SideBarBtn } from "./sidebarElements";
 
-const SideDiv = ({ setSelected }) => {
+function SideDiv({ setSelected }) {
   const { username } = useSelector((state) => state.user);
 
   return (
@@ -24,6 +25,9 @@ const SideDiv = ({ setSelected }) => {
       </SideBarBtn>
     </>
   );
+}
+SideDiv.propTypes = {
+  setSelected: PropTypes.func.isRequired,
 };
 
 export default SideDiv;

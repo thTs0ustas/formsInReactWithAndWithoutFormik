@@ -5,12 +5,13 @@ import { useFormik } from "formik";
 import { keys } from "lodash";
 import TimePicker from "react-bootstrap-time-picker";
 
+import { timeFromInt } from "time-number/lib";
+import PropTypes from "prop-types";
 import { selectors, useProvider } from "../../../../model";
 import { errorHandling } from "../../../signInForm/errors/errorHandling";
 import { handleError } from "../../../../model/actions";
-import { timeFromInt } from "time-number/lib";
 
-const UpdateScreeningsForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
+function UpdateScreeningsForm({ data, onHide, show, handleUpdateTable } = {}) {
   const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
 
   const formik = useFormik({
@@ -155,6 +156,12 @@ const UpdateScreeningsForm = ({ data, onHide, show, handleUpdateTable } = {}) =>
       </Modal.Footer>
     </Modal>
   );
+}
+UpdateScreeningsForm.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  handleUpdateTable: PropTypes.func.isRequired,
 };
 
 export { UpdateScreeningsForm };

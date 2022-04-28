@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getUpcomingAction from "../../../layouts/homePage/actions/getUpcomingAction";
 import { isEmpty } from "lodash";
+import getUpcomingAction from "../../../layouts/homePage/actions/getUpcomingAction";
 
 export const useUpcomingMovies = () => {
   const dispatch = useDispatch();
@@ -9,6 +9,6 @@ export const useUpcomingMovies = () => {
   const { upcomingMovies } = useSelector((state) => state.nowPlaying);
 
   useEffect(() => {
-    isEmpty(upcomingMovies) && dispatch(getUpcomingAction());
+    if (isEmpty(upcomingMovies)) dispatch(getUpcomingAction());
   }, [dispatch]);
 };

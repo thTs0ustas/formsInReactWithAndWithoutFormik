@@ -23,12 +23,12 @@ const seatsReducer = createSlice({
       delete state.seats[id];
     },
     addTicket: (state, action) => {
-      state.tickets[action.payload]++;
-      state.tickets.total++;
+      state.tickets[action.payload] += 1;
+      state.tickets.total += 1;
     },
     removeTicket: (state, action) => {
-      state.tickets[action.payload]--;
-      state.tickets.total--;
+      state.tickets[action.payload] -= 1;
+      state.tickets.total -= 1;
     },
     addReserved: (state, action) => {
       state.reserved = action.payload;

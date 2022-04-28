@@ -1,9 +1,10 @@
 import { Toast, ToastHeader } from "react-bootstrap";
-import { ToastContainer } from "./StyledComponents/ToastContainer";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import { ToastContainer } from "./StyledComponents/ToastContainer";
 import { clearError } from "../../rModel/reducers/errorReducer/errorReducer";
 
-const AlertToast = ({ error }) => {
+function AlertToast({ error }) {
   const dispatch = useDispatch();
 
   return (
@@ -20,6 +21,15 @@ const AlertToast = ({ error }) => {
       <Toast.Body>{error.message}</Toast.Body>
     </ToastContainer>
   );
+}
+
+AlertToast.propTypes = {
+  error: PropTypes.objectOf(
+    PropTypes.shape({
+      message: PropTypes.string,
+      time: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export { AlertToast };

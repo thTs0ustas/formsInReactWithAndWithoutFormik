@@ -1,13 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { MoviePosterStyles } from "../../styledComponents";
 
-const MoviePoster = ({ image }) => (
-  <MoviePosterStyles>
-    <img
-      src={image ? image : require(`../../../../../assets/imgs/movie-theater.jpg`)}
-      alt='poster'
-    />
-  </MoviePosterStyles>
-);
+function MoviePoster({ image }) {
+  return (
+    <MoviePosterStyles>
+      <img src={image || require(`../../../../../assets/imgs/movie-theater.jpg`)} alt='poster' />
+    </MoviePosterStyles>
+  );
+}
+
+MoviePoster.propTypes = {
+  image: PropTypes.string.isRequired,
+};
 
 export { MoviePoster };

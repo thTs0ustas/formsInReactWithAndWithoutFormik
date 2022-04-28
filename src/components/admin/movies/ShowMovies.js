@@ -1,16 +1,17 @@
 import { Table } from "react-bootstrap";
+import { chunk, keys } from "lodash";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
 import { handleUpdateTable } from "./helpers/handleUpdateTable";
 import { useAdminTable } from "./hooks/useAdminTable";
-import { chunk, keys } from "lodash";
-import { useState } from "react";
 import { PaginationBasic } from "./pagination/Pagination";
 import { TableContainer } from "./styledComponents/TableContainer";
 
-const ShowMovies = ({ eventK }) => {
+function ShowMovies({ eventK = "home" }) {
   const dividers = {
     fifty: 50,
     twenty: 20,
@@ -59,6 +60,8 @@ const ShowMovies = ({ eventK }) => {
       </div>
     </TableContainer>
   );
+}
+ShowMovies.propTypes = {
+  eventK: PropTypes.string.isRequired,
 };
-
 export { ShowMovies };

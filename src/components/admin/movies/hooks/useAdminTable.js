@@ -1,6 +1,6 @@
-import { adminMoviesAction, selectors, useProvider } from "../../../../model";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { adminMoviesAction, selectors, useProvider } from "../../../../model";
 import { handleError } from "../../../../model/actions";
 
 const useAdminTable = (eventK) => {

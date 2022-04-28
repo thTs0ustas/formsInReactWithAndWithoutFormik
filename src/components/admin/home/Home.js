@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BarElement,
   CategoryScale,
@@ -12,12 +13,12 @@ import { data, options } from "./graphData";
 import { ChartContainer } from "./styledComponents/ChartContainer";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-const Home = () => {
+function Home() {
   return (
     <ChartContainer>
       <Bar options={options} data={data} />
     </ChartContainer>
   );
-};
+}
 
 export { Home };

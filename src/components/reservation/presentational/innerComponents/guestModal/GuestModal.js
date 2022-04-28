@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader } from "react-bootstrap";
+import PropTypes from "prop-types";
 import { ContinueButton } from "../../../../../theme";
 import { GuestModalContainer } from "../../styledComponents";
 
-const GuestModal = ({ children, disabled }) => {
+function GuestModal({ children, disabled }) {
   const [showGuest, setShowGuest] = useState(false);
 
   const handleClose = () => setShowGuest(false);
@@ -18,12 +19,7 @@ const GuestModal = ({ children, disabled }) => {
         Next
       </ContinueButton>
 
-      <GuestModalContainer
-        show={showGuest}
-        onHide={handleClose}
-        backdrop='static'
-        keyboard={false}
-      >
+      <GuestModalContainer show={showGuest} onHide={handleClose} backdrop='static' keyboard={false}>
         <ModalHeader closeButton>
           <Modal.Title>FILL YOUR INFO</Modal.Title>
         </ModalHeader>
@@ -31,6 +27,11 @@ const GuestModal = ({ children, disabled }) => {
       </GuestModalContainer>
     </>
   );
+}
+
+GuestModal.propTypes = {
+  children: PropTypes.node.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export { GuestModal };

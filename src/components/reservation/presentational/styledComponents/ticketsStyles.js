@@ -19,6 +19,7 @@ const TicketOptions = styled.div`
     }
   }
 `;
+
 const TicketInfo = styled.div`
   width: 100%;
   text-align: left;

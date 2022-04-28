@@ -8,7 +8,7 @@ import { useResContainer } from "./customHooks/useResContainer";
 import { handleChange, handleSeatAdd, handleSeatRemove } from "../helpers";
 import { useContinueButtonHandler } from "./customHooks/useContinueButtonHandler";
 
-const ReservationContainer = () => {
+function ReservationContainer() {
   const [state, dispatch] = useProvider([
     "userInfo.username",
     "userInfo.isMember",
@@ -61,6 +61,6 @@ const ReservationContainer = () => {
   };
 
   return <Reservation {...props} />;
-};
+}
 
 export { ReservationContainer };

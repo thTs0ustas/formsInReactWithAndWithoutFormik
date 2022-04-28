@@ -24,10 +24,10 @@ const usePayment = () => {
         data: {
           screening_id: +screening.split(",")[0],
           price: price(numOfTickets),
-          seats: map(seat, (seat) => ({
-            id: seat.id,
-            discount_type: seat.discount_type,
-            cost: PRICING[seat.discount_type],
+          seats: map(seat, (currentSeat) => ({
+            id: currentSeat.id,
+            discount_type: currentSeat.discount_type,
+            cost: PRICING[currentSeat.discount_type],
             screening_id: +screening.split(",")[0],
           })),
         },

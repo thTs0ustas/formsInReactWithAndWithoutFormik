@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import axios from "axios";
 
-import { inputChangeAction, requestAction, resetReservation } from "../../../../model";
-import { handleError } from "../../../../model/actions";
 import { useParams } from "react-router-dom";
 import { get } from "lodash";
+import { inputChangeAction, requestAction, resetReservation } from "../../../../model";
+import { handleError } from "../../../../model/actions";
 
 export const useResContainer = ({ BASE_URL, dispatch }) => {
   const { id } = useParams();
@@ -14,7 +14,6 @@ export const useResContainer = ({ BASE_URL, dispatch }) => {
     axios
       .get(`${BASE_URL}/moviesOfTheMonth/reservation/${id}`)
       .then(({ data }) => {
-        console.log(data);
         dispatch(requestAction(data));
         const { title } = get(data, "movie.Movie");
         dispatch(

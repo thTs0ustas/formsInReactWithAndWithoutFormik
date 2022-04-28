@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { letterAnimation } from "../NavbarElements";
 import { Link } from "react-router-dom";
+import { letterAnimation } from "../NavbarElements";
 
 export const NavMenuUL = styled.ul`
   margin: 0;
@@ -44,7 +44,7 @@ export const NavLink = styled.li`
   }
 `;
 
-//Change color to THEME COLOR
+// Change color to THEME COLOR
 export const NavItem = styled(Link)`
   font-size: calc(16px + 0.2vw);
   text-decoration: none;

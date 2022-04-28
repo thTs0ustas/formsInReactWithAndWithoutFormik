@@ -11,6 +11,7 @@ const TableContainer = styled.div`
     margin-top: 50px;
     margin-bottom: 50px;
   }
+
   & h2 {
     color: ${(props) => props.theme.primary};
     font-size: 1.5rem;

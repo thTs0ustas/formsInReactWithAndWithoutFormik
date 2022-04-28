@@ -2,12 +2,12 @@ import React from "react";
 import { NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
 import { NavDropdownDiv } from "../homePage/styledComponents/styles";
 import { SignInButton, SignUpButton } from "../../theme";
-import { useDispatch, useSelector } from "react-redux";
 import logoutAction from "./actions/logoutAction";
 
-export const SignupBarPart = () => {
+export function SignupBarPart() {
   const navigate = useNavigate();
   const { id, username, token, isMember, isAdmin } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -45,4 +45,4 @@ export const SignupBarPart = () => {
       </NavDropdown.Item>
     </NavDropdownDiv>
   );
-};
+}

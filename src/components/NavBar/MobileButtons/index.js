@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Description, MobileDiv, SignIn, SignUp } from "./MobileButtonsEl";
 import SocialMobile from "./SocialMedia";
 
-const ButtonsDiv = ({ isOpen }) => {
+function ButtonsDiv({ isOpen }) {
   return (
     <MobileDiv isOpen={isOpen}>
       <SocialMobile />
@@ -12,6 +13,8 @@ const ButtonsDiv = ({ isOpen }) => {
       <SignUp>Join Us</SignUp>
     </MobileDiv>
   );
+}
+ButtonsDiv.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
 };
-
 export default ButtonsDiv;

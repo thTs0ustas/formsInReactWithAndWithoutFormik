@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Boundary,
   FormContainer,
@@ -8,7 +9,6 @@ import {
   SubscribeButton,
   Textarea,
 } from "./styles/Footer.styled";
-import { useNavigate } from "react-router-dom";
 
 export default function Form() {
   const navigate = useNavigate();

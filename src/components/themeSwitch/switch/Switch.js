@@ -1,10 +1,10 @@
-import { CheckBox, CheckBoxLabel, CheckBoxWrapper } from "../styledComponents/switchStyles";
 import { IoMoon } from "react-icons/io5";
 import { BsFillSunFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
+import { CheckBox, CheckBoxLabel, CheckBoxWrapper } from "../styledComponents/switchStyles";
 import { setTheme } from "../../../rModel/reducers/themeReducer/themeReducer";
 
-export const Switch = () => {
+export function Switch() {
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
@@ -39,4 +39,4 @@ export const Switch = () => {
       />
     </CheckBoxWrapper>
   );
-};
+}

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Accordion, Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 import { UpdateMovieForm } from "./updateMovieForm/UpdateMovieForm";
 import { AddNewMovieForm } from "./addNewMovieForm/AddNewMovieForm";
 import { Data } from "./styledComponents/Data";
 
-const TableBody = ({ tableData, columns, handleUpdateTable }) => {
+function TableBody({ tableData, columns, handleUpdateTable }) {
   const [include, setInclude] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const [addNewModalShow, setAddNewModalShow] = useState(false);
@@ -72,6 +73,10 @@ const TableBody = ({ tableData, columns, handleUpdateTable }) => {
       />
     </>
   );
+}
+TableBody.propTypes = {
+  tableData: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired,
+  handleUpdateTable: PropTypes.func.isRequired,
 };
-
 export default TableBody;

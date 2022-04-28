@@ -7,6 +7,7 @@ const NavDiv = styled.div`
   max-width: 1400px;
   margin: 0 auto;
 `;
+
 const Nav = styled.nav`
   height: 100%;
   display: flex;

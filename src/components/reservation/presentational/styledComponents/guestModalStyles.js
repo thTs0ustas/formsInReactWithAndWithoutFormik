@@ -8,6 +8,7 @@ const GuestContainer = styled.div`
   width: 100%;
   height: 100%;
 `;
+
 const GuestModalContainer = styled(Modal)`
   display: flex;
   align-items: center;

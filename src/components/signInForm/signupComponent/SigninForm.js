@@ -5,15 +5,16 @@ import * as Yup from "yup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import { ContinueButton } from "../styledComponents";
 import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { useLoginForm } from "../hooks";
-import { useDispatch } from "react-redux";
 import requestLogin from "../actions/requestLoginAction";
 
-export const SignInForm = ({ isInModal }) => {
+export function SignInForm({ isInModal }) {
   const dispatch = useDispatch();
-  let [error] = useState("");
+  const [error] = useState("");
   useLoginForm(isInModal);
 
   return (
@@ -72,4 +73,7 @@ export const SignInForm = ({ isInModal }) => {
       )}
     </Formik>
   );
+}
+SignInForm.propTypes = {
+  isInModal: PropTypes.bool.isRequired,
 };

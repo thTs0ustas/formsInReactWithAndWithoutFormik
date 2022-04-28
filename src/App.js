@@ -1,5 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { ToastContainer } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Payment } from "./components/payment/Payment";
 import {
   AboutUsLayout,
@@ -14,24 +17,19 @@ import {
   TicketLayout,
   TicketPricesLayout,
 } from "./layouts";
+
 import SignUpLayout from "./layouts/signUpPage/SignUpLayout";
 
-import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./theme";
-import { ToastContainer } from "react-bootstrap";
 import { AlertToast } from "./components/alertToast/Toast";
-import { ShowMovies } from "./components/admin/movies/ShowMovies";
 import { Subscription } from "./components/subscription/Subscription";
 import { InfoPage } from "./layouts/Info";
 
 import { NowShowingLayout } from "./layouts/nowShowingPage/NowShowingLayout";
 import { UpcomingLayout } from "./layouts/upcomingPage/UpcomingLayout";
 import { MoviesByGenreLayout } from "./layouts/moviesByGernePage/MoviesByGenreLayout";
-import { useSelector } from "react-redux";
-import { selectors, useProvider } from "./model";
 
 function App() {
-  const [{ username }] = useProvider([selectors.username]);
   const {
     error,
     theme: { theme: themeStyle },
@@ -43,38 +41,34 @@ function App() {
       <div className='App'>
         <Routes>
           <Route path='/'>
-            <Route index element={<HomePageLayout username={username} />} />
-            <Route path='info/:username' element={<InfoPage username={username} />} />
-            <Route path='nowPlaying' element={<NowShowingLayout username={username} />} />
-            <Route path='ticketPrices' element={<TicketPricesLayout username={username} />} />
-            <Route path='aboutUs' element={<AboutUsLayout username={username} />} />
+            <Route index element={<HomePageLayout />} />
+            <Route path='info/:username' element={<InfoPage />} />
+            <Route path='nowPlaying' element={<NowShowingLayout />} />
+            <Route path='ticketPrices' element={<TicketPricesLayout />} />
+            <Route path='aboutUs' element={<AboutUsLayout />} />
             <Route path='movieByGenre'>
-              <Route path=':genre' element={<MoviesByGenreLayout username={username} />} />
+              <Route path=':genre' element={<MoviesByGenreLayout />} />
             </Route>
-            <Route path='upcoming' element={<UpcomingLayout username={username} />} />
-            <Route path='moviePage/:id' element={<MoviePageLayout username={username} />} />
-            <Route path='login' element={<SignInLayout username={username} />} />
-            <Route path='signup' element={<SignUpLayout username={username} />} />
-            <Route path='contactUs' element={<ThankYouForYourThoughts username={username} />} />
+            <Route path='upcoming' element={<UpcomingLayout />} />
+            <Route path='moviePage/:id' element={<MoviePageLayout />} />
+            <Route path='login' element={<SignInLayout />} />
+            <Route path='signup' element={<SignUpLayout />} />
+            <Route path='contactUs' element={<ThankYouForYourThoughts />} />
             <Route path='payments'>
-              <Route index element={<Payment username={username} />} />
-              <Route path='payment_cancel' element={<CancelPaymentLayout username={username} />} />
-              <Route
-                path='payment_applied'
-                element={<ThanksForYourPaymentLayout username={username} />}
-              />
+              <Route index element={<Payment />} />
+              <Route path='payment_cancel' element={<CancelPaymentLayout />} />
+              <Route path='payment_applied' element={<ThanksForYourPaymentLayout />} />
             </Route>
-            <Route path='payments/subscription' element={<Subscription username={username} />} />
-            <Route path='/:username/tickets/new' element={<TicketLayout username={username} />} />
-            <Route path='/reservation/:id' element={<ReservationLayout username={username} />} />
+            <Route path='payments/subscription' element={<Subscription />} />
+            <Route path='/:username/tickets/new' element={<TicketLayout />} />
+            <Route path='/reservation/:id' element={<ReservationLayout />} />
             <Route path='admin'>
-              <Route index element={<AdminPage username={username} />} />
-              <Route path='movies' element={<ShowMovies username={username} />} />
+              <Route index element={<AdminPage />} />
             </Route>
           </Route>
         </Routes>
       </div>
-      <ToastContainer style={{ position: "sticky", zIndex: 10001 }} position={"top-end"}>
+      <ToastContainer style={{ position: "sticky", zIndex: 10001 }} position='top-end'>
         {error.message && <AlertToast error={error} />}
       </ToastContainer>
     </ThemeProvider>

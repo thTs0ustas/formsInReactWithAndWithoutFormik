@@ -1,6 +1,7 @@
 import React from "react";
 import { isEmpty, map } from "lodash";
-
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import {
   DaysButton,
   DaysDiv,
@@ -11,11 +12,10 @@ import {
   SessionDiv,
   TextContainer,
 } from "./styledComponents/MainTextStyles";
-import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../constants";
 import { movieDates, movieTime } from "./helpers/dateAndTimes";
 
-const MainText = ({ movie, screenings, id }) => {
+function MainText({ movie, screenings, id }) {
   const navigate = useNavigate();
   return (
     <TextContainer>
@@ -66,6 +66,12 @@ const MainText = ({ movie, screenings, id }) => {
       <Paragraph>{movie?.release_year}</Paragraph>
     </TextContainer>
   );
+}
+
+MainText.propTypes = {
+  movie: PropTypes.object.isRequired,
+  screenings: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default MainText;

@@ -8,6 +8,7 @@ const adminReducer = createSlice({
     moviesOfTheMonth: [],
     users: [],
   },
+
   reducers: {
     setAdminMovies: (state, action) => {
       state.movies = action.payload;

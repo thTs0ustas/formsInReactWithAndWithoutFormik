@@ -7,16 +7,15 @@ export const useGuestSignup = () => {
   const [, dispatch] = useProvider();
 
   useEffect(() => {
-    if (state && state["accessToken"] && state.username) {
+    if (state && state.accessToken && state.username) {
       dispatch(
         userLoginAction({
           username: state.username,
-          token: state["accessToken"],
+          token: state.accessToken,
           isMember: state.isMember,
         })
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   return { state, setState };

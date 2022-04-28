@@ -1,15 +1,16 @@
+import React, { useEffect } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { keys, map } from "lodash";
 import axios from "axios";
+import PropTypes from "prop-types";
 import { errorHandling } from "../../../signInForm/errors/errorHandling";
 import { handleError } from "../../../../model/actions";
 import { selectors, useProvider } from "../../../../model";
 import { genres } from "../data/genres";
-import { useEffect } from "react";
 
-const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
+function UpdateMovieForm({ data, onHide, show, handleUpdateTable } = {}) {
   const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
 
   const formik = useFormik({
@@ -155,6 +156,11 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
       </Modal.Footer>
     </Modal>
   );
+}
+UpdateMovieForm.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  handleUpdateTable: PropTypes.array.isRequired,
 };
-
 export { UpdateMovieForm };

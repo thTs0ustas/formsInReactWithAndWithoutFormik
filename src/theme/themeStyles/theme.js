@@ -10,6 +10,7 @@ export const theme = {
     light: "#e7e7ff",
     border: "#000",
   },
+
   dark: {
     dark: "#0c1c33",
     bgMain: "#162e52",

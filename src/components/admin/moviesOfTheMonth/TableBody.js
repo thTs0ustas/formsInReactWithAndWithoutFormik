@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Button } from "react-bootstrap";
+import axios from "axios";
+import PropTypes from "prop-types";
 import { Data } from "./styledComponents/Data";
 import { decideTdData } from "./helpers/conditional";
-import { Button } from "react-bootstrap";
 import { AddNewMovieOfTheMonthForm } from "./AddNewMovieOfTheMonthForm/AddNewMovieOfTheMonthForm";
-import axios from "axios";
 import { handleError } from "../../../model/actions";
 import { selectors, useProvider } from "../../../model";
 
-const TableBody = ({ tableData, columns, handleUpdateTable, setDeletePrompt }) => {
+function TableBody({ tableData, columns, handleUpdateTable, setDeletePrompt }) {
   const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
 
   const [include, setInclude] = useState("");
@@ -77,6 +78,12 @@ const TableBody = ({ tableData, columns, handleUpdateTable, setDeletePrompt }) =
       />
     </>
   );
-};
+}
 
+TableBody.propTypes = {
+  tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleUpdateTable: PropTypes.func.isRequired,
+  setDeletePrompt: PropTypes.func.isRequired,
+};
 export default TableBody;

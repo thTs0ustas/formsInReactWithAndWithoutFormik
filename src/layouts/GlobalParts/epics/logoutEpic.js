@@ -1,11 +1,11 @@
 import { ofType } from "redux-observable";
-import { actionTypes } from "../../../rModel/actions/actionTypes";
 import { from, mergeMap, of } from "rxjs";
 import axios from "axios";
-import { BASE_URL } from "../../../constants";
 import { catchError, map } from "rxjs/operators";
-import { setUserLogout } from "../../../rModel/reducers/userReducer/userReducer";
 import moment from "moment";
+import { BASE_URL } from "../../../constants";
+import { setUserLogout } from "../../../rModel/reducers/userReducer/userReducer";
+import { actionTypes } from "../../../rModel/actions/actionTypes";
 import { setError } from "../../../rModel/reducers/errorReducer/errorReducer";
 
 const logOutEpic = (action$) =>
@@ -23,7 +23,7 @@ const logOutEpic = (action$) =>
       ).pipe(
         map(() => setUserLogout()),
         catchError((error) => {
-          let time = moment().format("HH:mm:ss");
+          const time = moment().format("HH:mm:ss");
           return of(setError({ message: error.message, time }));
         })
       )

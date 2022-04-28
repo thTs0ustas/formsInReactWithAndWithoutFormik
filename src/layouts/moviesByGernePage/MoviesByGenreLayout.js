@@ -1,14 +1,14 @@
-import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 import React from "react";
+import { useParams } from "react-router-dom";
+import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
 import { Switch } from "../../components";
 import { MoviesByGenre } from "../../components/moviesByGenre/MoviesByGenre";
-import { useParams } from "react-router-dom";
 
-const MoviesByGenreLayout = ({ username }) => {
+function MoviesByGenreLayout() {
   const { genre } = useParams();
   return (
     <>
@@ -16,7 +16,7 @@ const MoviesByGenreLayout = ({ username }) => {
         <SignUpBar>
           <Switch />
           <div>
-            <SignupBarPart username={username} />
+            <SignupBarPart />
           </div>
         </SignUpBar>
         <NavDiv>
@@ -36,5 +36,5 @@ const MoviesByGenreLayout = ({ username }) => {
       <Footer />
     </>
   );
-};
+}
 export { MoviesByGenreLayout };

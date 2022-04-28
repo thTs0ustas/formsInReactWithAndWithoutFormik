@@ -15,7 +15,7 @@ export const MobileDiv = styled.div`
   }
 `;
 
-//Change colors to THEME COLORS
+// Change colors to THEME COLORS
 export const Description = styled.span`
   color: #b17615;
   display: block;
@@ -33,7 +33,7 @@ export const SignIn = styled.button`
   color: #b17615;
 `;
 
-//Change colors to THEME COLORS
+// Change colors to THEME COLORS
 export const SignUp = styled.button`
   font-size: calc(15px + 0.5rem);
   width: 100%;

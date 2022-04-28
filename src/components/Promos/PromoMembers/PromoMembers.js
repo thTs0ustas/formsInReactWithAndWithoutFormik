@@ -1,7 +1,7 @@
-import { Container, PromoButton, PromoPara, Title } from "../styleComponents/PromoElements";
 import { useNavigate } from "react-router-dom";
+import { Container, PromoButton, PromoPara, Title } from "../styleComponents/PromoElements";
 
-export const PromoMember = () => {
+export function PromoMember() {
   const navigate = useNavigate();
   return (
     <Container>
@@ -21,4 +21,4 @@ export const PromoMember = () => {
       </div>
     </Container>
   );
-};
+}

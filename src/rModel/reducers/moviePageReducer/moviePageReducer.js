@@ -9,6 +9,7 @@ const moviePageReducer = createSlice({
     moviesByGenre: [],
     upcomingMovies: [],
   },
+
   reducers: {
     setMovieInfo: (state, action) => {
       state.movieInfo = action.payload;

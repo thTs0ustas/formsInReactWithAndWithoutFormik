@@ -1,6 +1,6 @@
-import { adminUsersAction, selectors, useProvider } from "../../../../model";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { adminUsersAction, selectors, useProvider } from "../../../../model";
 import { handleError } from "../../../../model/actions";
 
 const useAdminTable = (eventK) => {

@@ -2,13 +2,14 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useEffect } from "react";
+import { keys } from "lodash";
+import PropTypes from "prop-types";
 import { errorHandling } from "../../../signInForm/errors/errorHandling";
 import { handleError } from "../../../../model/actions";
 import { selectors, useProvider } from "../../../../model";
-import { useEffect } from "react";
-import { keys } from "lodash";
 
-const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
+function UpdateUserForm({ data, onHide, show, handleUpdateTable } = {}) {
   const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
 
   const formik = useFormik({
@@ -139,7 +140,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
                 name='postal'
                 value={formik.values.postal}
                 type='text'
-              ></Form.Control>
+              />
             </Form.Group>
 
             <Form.Group as={Col} controlId='formGridNumber'>
@@ -169,6 +170,12 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
       </Modal.Footer>
     </Modal>
   );
-};
+}
 
+UpdateUserForm.propTypes = {
+  onHide: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+  data: PropTypes.object.isRequired,
+  handleUpdateTable: PropTypes.func.isRequired,
+};
 export { UpdateUserForm };

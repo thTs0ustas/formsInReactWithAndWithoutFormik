@@ -18,6 +18,7 @@ const PleaseBeAMemberHeader = styled.p`
     font-size: 1rem;
   }
 `;
+
 const PleaseBeAMemberParagraph = styled.p`
   font-size: 0.8rem;
   font-weight: bold;

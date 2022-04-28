@@ -3,13 +3,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { map } from "lodash";
 import axios from "axios";
+import React from "react";
+import PropTypes from "prop-types";
 import { errorHandling } from "../../../signInForm/errors/errorHandling";
 import { handleError } from "../../../../model/actions";
 import { selectors, useProvider } from "../../../../model";
 import { genres } from "../data/genres";
-import React from "react";
 
-const AddNewMovieForm = ({ onHide, show, handleUpdateTable } = {}) => {
+function AddNewMovieForm({ onHide, show, handleUpdateTable } = {}) {
   const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
 
   const formik = useFormik({
@@ -162,6 +163,12 @@ const AddNewMovieForm = ({ onHide, show, handleUpdateTable } = {}) => {
       </Modal.Footer>
     </Modal>
   );
+}
+
+AddNewMovieForm.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+  handleUpdateTable: PropTypes.func.isRequired,
 };
 
 export { AddNewMovieForm };

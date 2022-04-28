@@ -2,12 +2,13 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { adminMoviesNotPlayingAction, handleError } from "../../../../model/actions";
 import { selectors, useProvider } from "../../../../model";
-import React, { useEffect } from "react";
 import { errorHandling } from "../../../signInForm/errors/errorHandling";
 
-const AddNewMovieOfTheMonthForm = ({ onHide, show, handleUpdateTable } = {}) => {
+function AddNewMovieOfTheMonthForm({ onHide, show, handleUpdateTable } = {}) {
   const [{ userInfo, admin, BASE_URL }, dispatch] = useProvider([
     selectors.userInfo,
     selectors.admin,
@@ -33,7 +34,6 @@ const AddNewMovieOfTheMonthForm = ({ onHide, show, handleUpdateTable } = {}) => 
       movie_id: 0,
     },
     onSubmit: (values) => {
-      console.log(values);
       axios
         .post(
           `${BASE_URL}/admin/${userInfo.username}/movieOfTheMonth/create`,
@@ -94,7 +94,7 @@ const AddNewMovieOfTheMonthForm = ({ onHide, show, handleUpdateTable } = {}) => 
               value={formik.values.movie_id}
               type='text'
             >
-              <option></option>
+              <option aria-label='movies not playing' />
               {admin.moviesNotPlaying?.map((movie) => (
                 <option value={movie.id} key={movie.id}>
                   {movie.title}
@@ -120,6 +120,11 @@ const AddNewMovieOfTheMonthForm = ({ onHide, show, handleUpdateTable } = {}) => 
       </Modal.Footer>
     </Modal>
   );
+}
+AddNewMovieOfTheMonthForm.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+  handleUpdateTable: PropTypes.func.isRequired,
 };
 
 export { AddNewMovieOfTheMonthForm };

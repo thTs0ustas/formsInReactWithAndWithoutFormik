@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import { keys } from "lodash";
 import { MdEventSeat } from "react-icons/md";
 import { Spinner } from "react-bootstrap";
@@ -35,7 +35,7 @@ import {
 
 import { ContinueButton } from "../../../theme";
 
-export const Reservation = ({
+export function Reservation({
   isMember,
   image,
   handleChange,
@@ -44,7 +44,7 @@ export const Reservation = ({
   username,
   inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
   handleContinueButton,
-}) => {
+}) {
   const STUDENT_DAY = 3;
   return (
     <>
@@ -68,7 +68,7 @@ export const Reservation = ({
                 </div>
                 <TicketBarRight>
                   <TicketButton
-                    left={true}
+                    left
                     disabled={
                       !screening ||
                       disabledDecrement({
@@ -77,7 +77,7 @@ export const Reservation = ({
                       })
                     }
                     type='student'
-                    subtract={true}
+                    subtract
                   >
                     -
                   </TicketButton>
@@ -91,7 +91,7 @@ export const Reservation = ({
                       })
                     }
                     type='student'
-                    add={true}
+                    add
                   >
                     +
                   </TicketButton>
@@ -107,7 +107,7 @@ export const Reservation = ({
                 </div>
                 <TicketBarRight>
                   <TicketButton
-                    left={true}
+                    left
                     disabled={
                       !screening ||
                       disabledDecrement({
@@ -116,7 +116,7 @@ export const Reservation = ({
                       })
                     }
                     type='member'
-                    subtract={true}
+                    subtract
                   >
                     -
                   </TicketButton>
@@ -130,7 +130,7 @@ export const Reservation = ({
                       })
                     }
                     type='member'
-                    add={true}
+                    add
                   >
                     +
                   </TicketButton>
@@ -144,7 +144,7 @@ export const Reservation = ({
               </div>
               <TicketBarRight>
                 <TicketButton
-                  left={true}
+                  left
                   disabled={
                     !screening ||
                     disabledDecrement({
@@ -153,7 +153,7 @@ export const Reservation = ({
                     })
                   }
                   type='adult'
-                  subtract={true}
+                  subtract
                 >
                   -
                 </TicketButton>
@@ -167,7 +167,7 @@ export const Reservation = ({
                     })
                   }
                   type='adult'
-                  add={true}
+                  add
                 >
                   +
                 </TicketButton>
@@ -181,7 +181,7 @@ export const Reservation = ({
               </div>
               <TicketBarRight>
                 <TicketButton
-                  left={true}
+                  left
                   disabled={
                     !screening ||
                     disabledDecrement({
@@ -190,7 +190,7 @@ export const Reservation = ({
                     })
                   }
                   type='child'
-                  subtract={true}
+                  subtract
                 >
                   -
                 </TicketButton>
@@ -204,7 +204,7 @@ export const Reservation = ({
                     })
                   }
                   type='child'
-                  add={true}
+                  add
                 >
                   +
                 </TicketButton>
@@ -269,4 +269,21 @@ export const Reservation = ({
       </ReservationForm>
     </>
   );
+}
+
+Reservation.propTypes = {
+  requests: PropTypes.object.isRequired,
+  username: PropTypes.string.isRequired,
+  screening: PropTypes.object.isRequired,
+  seat: PropTypes.object.isRequired,
+  numOfTickets: PropTypes.object.isRequired,
+  handleContinueButton: PropTypes.func.isRequired,
+  cinema: PropTypes.string.isRequired,
+  movie: PropTypes.string.isRequired,
+  auditorium: PropTypes.array.isRequired,
+  inputValues: PropTypes.object.isRequired,
+  image: PropTypes.string.isRequired,
+  spinner: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  isMember: PropTypes.bool.isRequired,
 };

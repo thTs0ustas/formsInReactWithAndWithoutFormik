@@ -9,6 +9,6 @@ export const useNowPlaying = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    isEmpty(nowShowing) && dispatch(getNowShowingMovies());
+    if (isEmpty(nowShowing)) dispatch(getNowShowingMovies());
   }, []);
 };

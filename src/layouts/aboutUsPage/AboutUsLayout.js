@@ -9,14 +9,14 @@ import { Switch } from "../../components";
 import NavBar from "../../components/NavBar";
 import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
 
-const AboutUsLayout = ({ username }) => {
+function AboutUsLayout() {
   return (
     <MainDiv>
       <Header>
         <SignUpBar>
           <Switch />
           <div>
-            <SignupBarPart username={username} />
+            <SignupBarPart />
           </div>
         </SignUpBar>
         <NavDiv>
@@ -44,6 +44,6 @@ const AboutUsLayout = ({ username }) => {
       </footer>
     </MainDiv>
   );
-};
+}
 
 export { AboutUsLayout };
