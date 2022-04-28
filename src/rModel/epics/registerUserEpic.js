@@ -5,7 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import { BASE_URL } from "../../constants";
 import { actionTypes } from "../actions/actionTypes";
-import { setError } from "../reducers/errorReducer/errorReducer";
+import { setError } from "../reducers";
 import checkoutAction from "../../components/registrationForm/actions/checkoutAction";
 
 export const registerUserEpic = (action$) =>

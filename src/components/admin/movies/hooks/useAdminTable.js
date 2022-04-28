@@ -1,32 +1,22 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { adminMoviesAction, selectors, useProvider } from "../../../../model";
-import { handleError } from "../../../../model/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { isEmpty } from "lodash";
+import getAdminMovieAction from "../../actions/getAdminMovieAction";
 
 const useAdminTable = (eventK) => {
-  const [state, dispatch] = useProvider([selectors.token, selectors.username, selectors.url]);
-  const [tableData, setTableData] = useState([]);
+  const { id, token } = useSelector((state) => state.user);
+  const { movies } = useSelector((state) => state.admin);
+
+  const dispatch = useDispatch();
   const [updateTable, setUpdateTable] = useState(true);
 
   useEffect(() => {
-    if (eventK === "movies") {
-      axios
-        .get(`${state.BASE_URL}/admin/${state.username}/getMovies`, {
-          headers: {
-            authorization: `Bearer ${state.token}`,
-          },
-        })
-        .then(({ data }) => {
-          setTableData(() => [...data]);
-          dispatch(adminMoviesAction(data));
-        })
-        .catch((error) =>
-          dispatch(handleError({ message: error.message, time: new Date().getTime() }))
-        );
+    if (eventK === "movies" && isEmpty(movies)) {
+      dispatch(getAdminMovieAction({ id, token }));
     }
-  }, [eventK, updateTable]);
+  }, [eventK]);
 
-  return { tableData, setTableData, setUpdateTable, updateTable };
+  return { setUpdateTable, updateTable };
 };
 
 export { useAdminTable };

@@ -1,3 +1,5 @@
+import { setAdminMovies } from "../../../../rModel";
+
 const handleSorting = (data, setter) => (sortField, sortOrder) => {
   if (sortField) {
     const sorted = [...data].sort((a, b) => {
@@ -10,7 +12,7 @@ const handleSorting = (data, setter) => (sortField, sortOrder) => {
         }) * (sortOrder === "asc" ? 1 : -1)
       );
     });
-    setter(sorted);
+    setter(setAdminMovies(sorted));
   }
 };
 

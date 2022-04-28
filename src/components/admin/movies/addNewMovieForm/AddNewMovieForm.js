@@ -2,17 +2,15 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { map } from "lodash";
-import axios from "axios";
 import React from "react";
 import PropTypes from "prop-types";
-import { errorHandling } from "../../../signInForm/errors/errorHandling";
-import { handleError } from "../../../../model/actions";
-import { selectors, useProvider } from "../../../../model";
+import { useDispatch, useSelector } from "react-redux";
 import { genres } from "../data/genres";
+import addNewMovieAction from "../../actions/addNewMovieAction";
 
-function AddNewMovieForm({ onHide, show, handleUpdateTable } = {}) {
-  const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
-
+function AddNewMovieForm({ onHide, show } = {}) {
+  const { id, token } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -22,40 +20,9 @@ function AddNewMovieForm({ onHide, show, handleUpdateTable } = {}) {
       release_year: "",
     },
     onSubmit: (values) => {
-      axios
-        .post(
-          `${BASE_URL}/admin/${userInfo.username}/movie/create`,
-          {
-            username: userInfo.username,
-            values,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
-            },
-          }
-        )
-        .then((res) => {
-          if (errorHandling(res.data)) {
-            dispatch(
-              handleError({
-                message: res.data.message,
-                time: new Date().getTime(),
-              })
-            );
-          }
-        })
-        .then(handleUpdateTable)
-        .then(onHide)
-        .then(() => formik.resetForm())
-        .catch((error) =>
-          dispatch(
-            handleError({
-              message: error.message,
-              time: new Date().getTime(),
-            })
-          )
-        );
+      dispatch(addNewMovieAction({ id, values, token }));
+      formik.resetForm();
+      onHide();
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Title required"),
@@ -168,7 +135,6 @@ function AddNewMovieForm({ onHide, show, handleUpdateTable } = {}) {
 AddNewMovieForm.propTypes = {
   show: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
-  handleUpdateTable: PropTypes.func.isRequired,
 };
 
 export { AddNewMovieForm };

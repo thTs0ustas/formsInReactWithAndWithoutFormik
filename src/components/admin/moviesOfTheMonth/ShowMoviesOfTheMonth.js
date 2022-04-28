@@ -10,7 +10,7 @@ import { handleUpdateTable } from "./helpers/handleUpdateTable";
 import { useAdminTable } from "./hooks/useAdminTable";
 import { PaginationBasic } from "./pagination/Pagination";
 
-function ShowMoviesOfTheMonth({ eventK = "home" }) {
+function ShowMoviesOfTheMonth({ eventK }) {
   const dividers = {
     fifty: 50,
     twenty: 20,

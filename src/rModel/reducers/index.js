@@ -16,3 +16,46 @@ export default combineReducers({
   error: errorReducer,
   theme: themeReducer,
 });
+
+export {
+  setAdminMovies,
+  setAdminNotPlayingMovies,
+  setAdminMoviesOfTheMonth,
+  setAdminUsers,
+  clearAdmin,
+} from "./adminReducer/adminReducer";
+
+export { setError, clearError } from "./errorReducer/errorReducer";
+export {
+  setMovieInfo,
+  clearMovieInfo,
+  getMovies,
+  getTodayMovies,
+  getMoviesByGenre,
+  clearMoviesByGenre,
+  getUpcomingMovies,
+} from "./moviePageReducer/moviePageReducer";
+
+export {
+  setRequests,
+  setInputValues,
+  setResponse,
+  clearReservation,
+} from "./reservationReducer/reservationReducer";
+export {
+  addSeats,
+  removeSeat,
+  addTicket,
+  removeTicket,
+  addReserved,
+} from "./seatsReducer/seatsReducer";
+export {
+  setUser,
+  setUserError,
+  setUserLogout,
+  createUser,
+  setTickets,
+  updateUser,
+  setHistory,
+} from "./userReducer/userReducer";
+export { setTheme } from "./themeReducer/themeReducer";

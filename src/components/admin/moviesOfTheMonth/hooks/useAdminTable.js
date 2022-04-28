@@ -18,7 +18,7 @@ const useAdminTable = (eventK) => {
 
   useEffect(() => {
     axios
-      .get(`${state.BASE_URL}/admin/${state.username}/getMoviesOfTheMonth`, {
+      .get(`${state.BASE_URL}/admin/${state.id}/getMoviesOfTheMonth`, {
         headers: {
           authorization: `Bearer ${state.token}`,
         },
@@ -31,7 +31,7 @@ const useAdminTable = (eventK) => {
       .catch((error) =>
         dispatch(handleError({ message: error.message, time: new Date().getTime() }))
       );
-  }, [eventK, updateTable, deletePrompt]);
+  }, [eventK, deletePrompt]);
 
   return { tableData, setUpdateTable, setTableData, updateTable, setDeletePrompt };
 };

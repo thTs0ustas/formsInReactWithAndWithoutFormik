@@ -1,38 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Tabs } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 import { Home, Switch } from "../../components";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import { ShowMovies } from "../../components/admin/movies/ShowMovies";
 import { ShowUsers } from "../../components/admin/users/ShowUser";
 import { TabsContainer } from "./styledComponents/TabsContainer";
-import { clearAdminAction, selectors, useProvider } from "../../model";
-import { handleError } from "../../model/actions";
 import { TabStyled } from "./styledComponents/Tabs";
 import { ShowScreenings } from "../../components/admin/screenings/ShowScreenings";
 import { ShowMoviesOfTheMonth } from "../../components/admin/moviesOfTheMonth/ShowMoviesOfTheMonth";
 import NavBar from "../../components/NavBar";
+import { clearAdmin, setError } from "../../rModel";
 
 function AdminPage() {
-  const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
+  const dispatch = useDispatch();
+  const { id, token, isAdmin } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const [key, setKey] = useState("home");
 
   useEffect(() => {
-    if (!userInfo.username && !userInfo.token && !userInfo.isAdmin) {
-      dispatch(
-        handleError({
-          message: "Unauthorised Access",
-          time: new Date().getTime(),
-        })
-      );
+    if (!id && !token && !isAdmin) {
+      const time = moment().format("HH:mm:ss");
+      dispatch(setError({ message: `You are not logged in as admin.`, time }));
       navigate("/");
     }
     return () => {
-      dispatch(clearAdminAction());
+      dispatch(clearAdmin());
     };
-  }, [dispatch, navigate, userInfo.isAdmin, userInfo.token, userInfo.username]);
+  }, [dispatch, navigate, isAdmin, token, id]);
 
   return (
     <>
@@ -59,7 +58,7 @@ function AdminPage() {
           <TabStyled eventKey='home' title='Home'>
             <Home />
           </TabStyled>
-          <TabStyled eventKey='movies' title='Movies'>
+          <TabStyled eventKey='movies' title='movies'>
             <ShowMovies eventK={key} />
           </TabStyled>
           <TabStyled eventKey='users' title='Users'>

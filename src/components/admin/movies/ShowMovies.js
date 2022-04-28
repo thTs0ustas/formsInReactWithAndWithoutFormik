@@ -2,38 +2,38 @@ import { Table } from "react-bootstrap";
 import { chunk, keys } from "lodash";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
-import { handleUpdateTable } from "./helpers/handleUpdateTable";
 import { useAdminTable } from "./hooks/useAdminTable";
 import { PaginationBasic } from "./pagination/Pagination";
 import { TableContainer } from "./styledComponents/TableContainer";
 
-function ShowMovies({ eventK = "home" }) {
+function ShowMovies({ eventK }) {
   const dividers = {
     fifty: 50,
     twenty: 20,
     ten: 10,
   };
-  const { tableData, setUpdateTable, setTableData, updateTable } = useAdminTable(eventK);
-
+  const { movies } = useSelector((state) => state.admin);
+  const dispatch = useDispatch();
   const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
   const [page, setPage] = useState(0);
-  // const PER_PAGES = Math.floor(tableData.length / (tableData.length / itemsPerPage));
-  const slices = chunk(tableData, itemsPerPage);
+
+  const slices = chunk(movies, itemsPerPage);
   const numberOfPages = slices.length;
+  useAdminTable(eventK);
 
   return (
     <TableContainer>
       <Table bordered hover style={{ backgroundColor: "white" }}>
-        <TableHead {...{ columns, handleSorting: handleSorting(tableData, setTableData) }} />
+        <TableHead {...{ columns, handleSorting: handleSorting(movies, dispatch) }} />
         <TableBody
           {...{
             columns,
             tableData: slices[page],
-            handleUpdateTable: handleUpdateTable(updateTable, setUpdateTable),
           }}
         />
       </Table>

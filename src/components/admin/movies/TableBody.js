@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Accordion, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import { UpdateMovieForm } from "./updateMovieForm/UpdateMovieForm";
 import { AddNewMovieForm } from "./addNewMovieForm/AddNewMovieForm";
 import { Data } from "./styledComponents/Data";
 
-function TableBody({ tableData, columns, handleUpdateTable }) {
+function TableBody({ columns }) {
+  const { movies } = useSelector((state) => state.admin);
   const [include, setInclude] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const [addNewModalShow, setAddNewModalShow] = useState(false);
@@ -34,7 +36,7 @@ function TableBody({ tableData, columns, handleUpdateTable }) {
           </td>
           <Data colSpan={4} />
         </tr>
-        {tableData?.map((data) =>
+        {movies?.map((data) =>
           checkTitle(data.title) ? (
             <tr key={data.id}>
               {columns.map(({ accessor }) => {
@@ -59,24 +61,13 @@ function TableBody({ tableData, columns, handleUpdateTable }) {
         )}
       </tbody>
       {movieData && (
-        <UpdateMovieForm
-          handleUpdateTable={handleUpdateTable}
-          show={modalShow}
-          data={movieData}
-          onHide={() => setModalShow(false)}
-        />
+        <UpdateMovieForm show={modalShow} data={movieData} onHide={() => setModalShow(false)} />
       )}
-      <AddNewMovieForm
-        handleUpdateTable={handleUpdateTable}
-        show={addNewModalShow}
-        onHide={() => setAddNewModalShow(false)}
-      />
+      <AddNewMovieForm show={addNewModalShow} onHide={() => setAddNewModalShow(false)} />
     </>
   );
 }
 TableBody.propTypes = {
-  tableData: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
-  handleUpdateTable: PropTypes.func.isRequired,
 };
 export default TableBody;
