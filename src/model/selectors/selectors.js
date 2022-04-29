@@ -17,6 +17,7 @@ export const selectors = {
   inputTickets: "reservation.inputValues.numOfTickets",
   inputSum: "reservation.inputValues.numOfTickets.sum",
   error: "error",
+
   theme: "theme",
   userInfo: "userInfo",
   tickets: "userInfo.tickets",

@@ -33,9 +33,9 @@ export const modelReducer = (state, action) => {
       });
 
     case actionTypes.request:
-      const seats = {};
-      const reservedSeats = {};
       return produce(state, (draft) => {
+        const seats = {};
+        const reservedSeats = {};
         const {
           movie: { Movie },
           screenings,

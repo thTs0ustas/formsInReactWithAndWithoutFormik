@@ -8,7 +8,7 @@ import { BASE_URL } from "../../constants";
 import { setMovieInfo } from "../reducers/moviePageReducer/moviePageReducer";
 import { setError } from "../reducers/errorReducer/errorReducer";
 
-export const getMovieEpic = (action$, state$) =>
+export const getMovieEpic = (action$) =>
   action$.pipe(
     ofType(actionTypes.GET_MOVIE),
     switchMap(({ payload }) =>
