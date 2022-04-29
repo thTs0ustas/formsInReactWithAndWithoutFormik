@@ -1,5 +1,5 @@
 import { Table } from "react-bootstrap";
-import { chunk, isEmpty, keys } from "lodash";
+import { chunk, keys } from "lodash";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,9 +18,10 @@ function ShowMoviesOfTheMonth({ eventK }) {
   };
 
   const { moviesOfTheMonth } = useSelector((state) => state.admin);
+  useMoviesOfTheMonthTable(eventK);
+
   const dispatch = useDispatch();
 
-  useMoviesOfTheMonthTable({ eventK, empty: isEmpty(moviesOfTheMonth) });
   const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
   const [page, setPage] = useState(0);
 

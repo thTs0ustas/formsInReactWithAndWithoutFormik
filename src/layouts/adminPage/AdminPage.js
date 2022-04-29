@@ -56,7 +56,7 @@ function AdminPage() {
           className='mb-3'
         >
           <TabStyled eventKey='home' title='home'>
-            <Home eventK={key} />
+            <Home />
           </TabStyled>
           <TabStyled eventKey='movies' title='movies'>
             <ShowMovies eventK={key} />

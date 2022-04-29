@@ -9,7 +9,6 @@ import { AddNewMovieOfTheMonthForm } from "./AddNewMovieOfTheMonthForm/AddNewMov
 function TableBody({ tableData, columns }) {
   const [include, setInclude] = useState("");
   const [addNewModalShow, setAddNewModalShow] = useState(false);
-
   return (
     <>
       <tbody>

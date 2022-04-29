@@ -21,7 +21,7 @@ export function SignupBarPart() {
     <NavDropdownDiv title={username} id='nav-dropdown'>
       {isMember && (
         <>
-          <NavDropdown.Item onClick={() => navigate(`user/${id}/info`)} eventKey='4.1'>
+          <NavDropdown.Item onClick={() => navigate(`/user/${id}/info`)} eventKey='4.1'>
             Info
           </NavDropdown.Item>
 
