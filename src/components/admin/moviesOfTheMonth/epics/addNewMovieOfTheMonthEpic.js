@@ -7,16 +7,16 @@ import moment from "moment";
 import { BASE_URL } from "../../../../constants";
 import { setError } from "../../../../rModel";
 import { actionTypes } from "../../../../rModel/actions/actionTypes";
-import { updateAdminMovies } from "../../../../rModel/reducers/adminReducer/adminReducer";
+import getAdminMovieOfTheMonthAction from "../actions/getAdminMovieOfTheMonthAction";
 
 export const addNewMovieOfTheMonthEpic = (action$) =>
   action$.pipe(
-    ofType(actionTypes.ADD_NEW_MOVIE),
+    ofType(actionTypes.ADD_NEW_MOVIE_OF_THE_MONTH),
     switchMap(({ payload }) =>
       from(
         axios.post(
-          `${BASE_URL}/admin/${payload.id}/movie/create`,
-          { values: payload.values },
+          `${BASE_URL}/admin/${payload.id}/movieOfTheMonth/create`,
+          { values: payload.movie_id },
           {
             headers: {
               authorization: `Bearer ${payload.token}`,
@@ -26,7 +26,12 @@ export const addNewMovieOfTheMonthEpic = (action$) =>
       ).pipe(
         map(({ data }) => {
           const time = moment().format("HH:mm:ss");
-          return data.message ? setError({ message: data.message, time }) : updateAdminMovies(data);
+          return data.message
+            ? setError({ message: data.message, time })
+            : getAdminMovieOfTheMonthAction({
+                id: payload.id,
+                token: payload.token,
+              });
         }),
         catchError((error) => {
           const time = moment().format("HH:mm:ss");

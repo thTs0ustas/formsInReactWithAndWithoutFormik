@@ -5,15 +5,16 @@ import axios from "axios";
 import moment from "moment";
 
 import { BASE_URL } from "../../../../constants";
-import { deleteMovie, setError } from "../../../../rModel";
+import { setError } from "../../../../rModel";
 import { actionTypes } from "../../../../rModel/actions/actionTypes";
+import { deleteMovieOfTheMonth } from "../../../../rModel/reducers/adminReducer/adminReducer";
 
 export const deleteMovieOfTheMonthEpic = (action$) =>
   action$.pipe(
-    ofType(actionTypes.DELETE_MOVIE),
+    ofType(actionTypes.DELETE_MOVIE_OF_THE_MONTH),
     switchMap(({ payload }) =>
       from(
-        axios.delete(`${BASE_URL}/admin/${payload.id}/delete/movie/${payload.movieId}`, {
+        axios.delete(`${BASE_URL}/admin/${payload.id}/movieOfTheMonth/delete/${payload.movieId}`, {
           headers: {
             authorization: `Bearer ${payload.token}`,
           },
@@ -21,9 +22,8 @@ export const deleteMovieOfTheMonthEpic = (action$) =>
       ).pipe(
         map(({ data }) => {
           const time = moment().format("HH:mm:ss");
-          return data.message
-            ? setError({ message: data.message, time })
-            : deleteMovie(payload.movieId);
+          setError({ message: data.message, time });
+          return deleteMovieOfTheMonth(payload.movieId);
         }),
         catchError((error) => {
           const time = moment().format("HH:mm:ss");

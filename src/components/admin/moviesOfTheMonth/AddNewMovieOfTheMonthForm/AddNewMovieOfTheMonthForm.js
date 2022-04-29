@@ -1,12 +1,11 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../../../../constants";
 import getNotShowingMoviesAction from "../actions/getNotShowingMoviesAction";
+import addNewMovieOfTheMonthAction from "../actions/addNewMovieOfTheMonthAction";
 
 function AddNewMovieOfTheMonthForm({ onHide, show } = {}) {
   const { id, token } = useSelector((state) => state.user);
@@ -22,21 +21,9 @@ function AddNewMovieOfTheMonthForm({ onHide, show } = {}) {
       movie_id: 0,
     },
     onSubmit: (values) => {
-      axios
-        .post(
-          `${BASE_URL}/admin/${id}/movieOfTheMonth/create`,
-          {
-            values,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then(() => {
-          onHide();
-        });
+      dispatch(addNewMovieOfTheMonthAction({ id, token, movie_id: values.movie_id }));
+      onHide();
+      formik.resetForm();
     },
     validationSchema: Yup.object({
       movie_id: Yup.number().required("Title required"),

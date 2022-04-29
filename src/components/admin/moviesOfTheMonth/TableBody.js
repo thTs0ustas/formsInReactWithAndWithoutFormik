@@ -2,11 +2,15 @@ import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import { Data } from "./styledComponents/Data";
 import { decideTdData } from "./helpers/conditional";
 import { AddNewMovieOfTheMonthForm } from "./AddNewMovieOfTheMonthForm/AddNewMovieOfTheMonthForm";
+import deleteMovieOfTheMonthAction from "./actions/deleteMovieOfTheMonthAction";
 
 function TableBody({ tableData, columns }) {
+  const { token, id } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [include, setInclude] = useState("");
   const [addNewModalShow, setAddNewModalShow] = useState(false);
   return (
@@ -28,15 +32,19 @@ function TableBody({ tableData, columns }) {
           <td />
         </tr>
         {tableData?.map(
-          ({ Movie: data }, i) =>
+          ({ id: movieId, Movie: data }, i) =>
             data.title?.toLowerCase().includes(include.toLowerCase()) && (
               <tr key={data.id}>
                 {columns.map(({ accessor }) => {
                   const tData = decideTdData(data, accessor, RiDeleteBin6Line, i);
+
                   return (
                     <Data
                       key={accessor}
-                      // onClick={() => accessor !== "delete" || setDeleteId(data.id)}
+                      onClick={() =>
+                        accessor === "delete" &&
+                        dispatch(deleteMovieOfTheMonthAction({ id, token, movieId }))
+                      }
                     >
                       {tData}
                     </Data>
