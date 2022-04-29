@@ -11,10 +11,8 @@ import { checkoutEpic } from "./checkoutEpic";
 import { createUserEpic } from "./createUserEpic";
 import { updateUserEpic } from "./updateUserEpic";
 import { getHistoryEpic } from "./getHistoryEpic";
-import { getAdminMoviesEpic } from "../../components/admin/epics/getAdminMoviesEpic";
-import { addNewMovieEpic } from "../../components/admin/epics/addNewMovieEpic";
-import { updateAdminMoviesEpic } from "../../components/admin/epics/updateAdminMoviesEpic";
-import { deleteMovieEpic } from "../../components/admin/epics/deleteMovieEpic";
+import mOtMEpic from "../../components/admin/moviesOfTheMonth/epics";
+import adminMoviesEpics from "../../components/admin/movies/epics";
 
 const rootEpic = combineEpics(
   getMovieEpic,
@@ -29,10 +27,8 @@ const rootEpic = combineEpics(
   createUserEpic,
   updateUserEpic,
   getHistoryEpic,
-  addNewMovieEpic,
-  getAdminMoviesEpic,
-  updateAdminMoviesEpic,
-  deleteMovieEpic
+  adminMoviesEpics,
+  mOtMEpic
 );
 
 export default rootEpic;

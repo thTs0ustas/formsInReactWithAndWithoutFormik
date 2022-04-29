@@ -4,19 +4,19 @@ import { from, of } from "rxjs";
 import axios from "axios";
 import moment from "moment";
 
-import { BASE_URL } from "../../../constants";
-import { setError } from "../../../rModel";
-import { actionTypes } from "../../../rModel/actions/actionTypes";
-import { updateAdminMovies } from "../../../rModel/reducers/adminReducer/adminReducer";
+import { BASE_URL } from "../../../../constants";
+import { setError } from "../../../../rModel";
+import { actionTypes } from "../../../../rModel/actions/actionTypes";
+import { updateAdminIndividualMovie } from "../../../../rModel/reducers/adminReducer/adminReducer";
 
-export const addNewMovieEpic = (action$) =>
+export const updateAdminMoviesEpic = (action$) =>
   action$.pipe(
-    ofType(actionTypes.ADD_NEW_MOVIE),
+    ofType(actionTypes.UPDATE_MOVIE),
     switchMap(({ payload }) =>
       from(
-        axios.post(
-          `${BASE_URL}/admin/${payload.id}/movie/create`,
-          { values: payload.values },
+        axios.put(
+          `${BASE_URL}/admin/${payload.id}/update/movie/${payload.movieId}`,
+          payload.values,
           {
             headers: {
               authorization: `Bearer ${payload.token}`,
@@ -26,7 +26,10 @@ export const addNewMovieEpic = (action$) =>
       ).pipe(
         map(({ data }) => {
           const time = moment().format("HH:mm:ss");
-          return data.message ? setError({ message: data.message, time }) : updateAdminMovies(data);
+
+          return data.message
+            ? setError({ message: data.message, time })
+            : updateAdminIndividualMovie(data);
         }),
         catchError((error) => {
           const time = moment().format("HH:mm:ss");

@@ -6,7 +6,7 @@ import { keys, map } from "lodash";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { genres } from "../data/genres";
-import updateAdminMovieAction from "../../actions/updateAdminMovieAction";
+import updateAdminMovieAction from "../actions/updateAdminMovieAction";
 
 function UpdateMovieForm({ data, onHide, show }) {
   const dispatch = useDispatch();

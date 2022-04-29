@@ -7,7 +7,7 @@ import { UpdateMovieForm } from "./updateMovieForm/UpdateMovieForm";
 import { AddNewMovieForm } from "./addNewMovieForm/AddNewMovieForm";
 import { Data } from "./styledComponents/Data";
 import { decideTdData } from "../moviesOfTheMonth/helpers/conditional";
-import deleteMovieAction from "../actions/deleteMovieAction";
+import deleteMovieAction from "./actions/deleteMovieAction";
 
 function TableBody({ columns }) {
   const { movies } = useSelector((state) => state.admin);

@@ -55,8 +55,8 @@ function AdminPage() {
           onSelect={(k) => setKey(k)}
           className='mb-3'
         >
-          <TabStyled eventKey='home' title='Home'>
-            <Home />
+          <TabStyled eventKey='home' title='home'>
+            <Home eventK={key} />
           </TabStyled>
           <TabStyled eventKey='movies' title='movies'>
             <ShowMovies eventK={key} />
@@ -69,7 +69,7 @@ function AdminPage() {
             <ShowScreenings eventK={key} />
           </TabStyled>
           <TabStyled eventKey='moviesOfTheMonth' title='Movies Of The Month'>
-            <ShowMoviesOfTheMonth eventK='moviesOfTheMonth' />
+            <ShowMoviesOfTheMonth eventK={key} />
           </TabStyled>
         </Tabs>
       </TabsContainer>

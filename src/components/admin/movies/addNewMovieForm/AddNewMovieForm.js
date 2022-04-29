@@ -6,7 +6,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { genres } from "../data/genres";
-import addNewMovieAction from "../../actions/addNewMovieAction";
+import addNewMovieAction from "../actions/addNewMovieAction";
 
 function AddNewMovieForm({ onHide, show } = {}) {
   const { id, token } = useSelector((state) => state.user);

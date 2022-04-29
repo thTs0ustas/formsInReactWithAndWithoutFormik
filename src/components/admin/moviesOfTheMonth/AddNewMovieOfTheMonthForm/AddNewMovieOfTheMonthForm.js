@@ -8,7 +8,7 @@ import { adminMoviesNotPlayingAction, handleError } from "../../../../model/acti
 import { selectors, useProvider } from "../../../../model";
 import { errorHandling } from "../../../signInForm/errors/errorHandling";
 
-function AddNewMovieOfTheMonthForm({ onHide, show, handleUpdateTable } = {}) {
+function AddNewMovieOfTheMonthForm({ onHide, show } = {}) {
   const [{ userInfo, admin, BASE_URL }, dispatch] = useProvider([
     selectors.userInfo,
     selectors.admin,
@@ -57,7 +57,7 @@ function AddNewMovieOfTheMonthForm({ onHide, show, handleUpdateTable } = {}) {
             );
           }
         })
-        .then(handleUpdateTable)
+
         .then(onHide)
         .then(() => formik.resetForm())
         .catch((error) =>
@@ -124,7 +124,6 @@ function AddNewMovieOfTheMonthForm({ onHide, show, handleUpdateTable } = {}) {
 AddNewMovieOfTheMonthForm.propTypes = {
   show: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
-  handleUpdateTable: PropTypes.func.isRequired,
 };
 
 export { AddNewMovieOfTheMonthForm };

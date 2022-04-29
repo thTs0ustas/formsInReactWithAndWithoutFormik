@@ -7,7 +7,7 @@ import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
-import { useAdminTable } from "./hooks/useAdminTable";
+import { useMoviesTable } from "./hooks/useMoviesTable";
 import { PaginationBasic } from "./pagination/Pagination";
 import { TableContainer } from "./styledComponents/TableContainer";
 
@@ -24,7 +24,7 @@ function ShowMovies({ eventK }) {
 
   const slices = chunk(movies, itemsPerPage);
   const numberOfPages = slices.length;
-  useAdminTable(eventK);
+  useMoviesTable(eventK);
 
   return (
     <TableContainer>

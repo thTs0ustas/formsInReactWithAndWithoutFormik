@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "lodash";
-import getAdminMovieAction from "../../actions/getAdminMovieAction";
+import getAdminMovieAction from "../actions/getAdminMovieAction";
 
-const useAdminTable = (eventK) => {
+const useMoviesTable = (eventK) => {
   const { id, token } = useSelector((state) => state.user);
   const { movies } = useSelector((state) => state.admin);
 
@@ -19,4 +19,4 @@ const useAdminTable = (eventK) => {
   return { setUpdateTable, updateTable };
 };
 
-export { useAdminTable };
+export { useMoviesTable };

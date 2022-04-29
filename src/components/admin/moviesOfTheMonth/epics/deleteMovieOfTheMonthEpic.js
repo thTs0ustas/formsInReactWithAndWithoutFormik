@@ -4,11 +4,11 @@ import { from, of } from "rxjs";
 import axios from "axios";
 import moment from "moment";
 
-import { BASE_URL } from "../../../constants";
-import { deleteMovie, setError } from "../../../rModel";
-import { actionTypes } from "../../../rModel/actions/actionTypes";
+import { BASE_URL } from "../../../../constants";
+import { deleteMovie, setError } from "../../../../rModel";
+import { actionTypes } from "../../../../rModel/actions/actionTypes";
 
-export const deleteMovieEpic = (action$) =>
+export const deleteMovieOfTheMonthEpic = (action$) =>
   action$.pipe(
     ofType(actionTypes.DELETE_MOVIE),
     switchMap(({ payload }) =>
