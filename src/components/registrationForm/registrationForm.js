@@ -91,6 +91,7 @@ export function RegistrationForm() {
                   id='password'
                   name='password'
                   placeholder='Password'
+                  autoComplete='off'
                 />
                 {formik.touched.password && formik.errors.password ? (
                   <span className='text-warning'>{formik.errors.password}</span>

@@ -79,7 +79,7 @@ export function Reservation({
                     }
                     type='student'
                     subtract
-                    add='false'
+                    add={false}
                   >
                     -
                   </TicketButton>
@@ -94,6 +94,8 @@ export function Reservation({
                     }
                     type='student'
                     add
+                    left={false}
+                    subtract={false}
                   >
                     +
                   </TicketButton>
@@ -119,6 +121,7 @@ export function Reservation({
                     }
                     type='member'
                     subtract
+                    add={false}
                   >
                     -
                   </TicketButton>
@@ -133,6 +136,8 @@ export function Reservation({
                     }
                     type='member'
                     add
+                    left={false}
+                    subtract={false}
                   >
                     +
                   </TicketButton>
@@ -156,6 +161,7 @@ export function Reservation({
                   }
                   type='adult'
                   subtract
+                  add={false}
                 >
                   -
                 </TicketButton>
@@ -170,6 +176,8 @@ export function Reservation({
                   }
                   type='adult'
                   add
+                  left={false}
+                  subtract={false}
                 >
                   +
                 </TicketButton>
@@ -193,6 +201,7 @@ export function Reservation({
                   }
                   type='child'
                   subtract
+                  add={false}
                 >
                   -
                 </TicketButton>
@@ -207,6 +216,8 @@ export function Reservation({
                   }
                   type='child'
                   add
+                  left={false}
+                  subtract={false}
                 >
                   +
                 </TicketButton>

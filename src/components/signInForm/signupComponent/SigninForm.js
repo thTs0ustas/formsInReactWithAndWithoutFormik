@@ -58,6 +58,7 @@ export function SignInForm({ isInModal }) {
               placeholder='Password'
               className={formik.touched.password && formik.errors.password && "is-invalid"}
               type='password'
+              autoComplete='off'
             />
             {formik.touched.password && formik.errors.password ? (
               <InputError>{formik.errors.password}</InputError>
