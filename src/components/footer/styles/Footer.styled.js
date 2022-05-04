@@ -53,7 +53,7 @@ const Boundary = styled.div`
 `;
 
 const FormContainer = styled.form`
-  width: 640px;
+  width: 600px;
   margin: 50px auto;
   border-radius: 4px;
   padding: 30px 90px;

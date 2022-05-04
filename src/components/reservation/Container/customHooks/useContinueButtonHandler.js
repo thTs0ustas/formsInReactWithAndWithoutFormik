@@ -1,14 +1,13 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { paymentWithStripe } from "../../../../stripe/stripe";
 import { dataForPayment } from "../../helpers";
 import { useProvider } from "../../../../model";
 
 const useContinueButtonHandler = (url, tickets) => {
-  const [{ username, token, inputValues }, dispatch] = useProvider([
-    "userInfo.username",
-    "userInfo.token",
-    "reservation.inputValues",
-  ]);
+  const [{ inputValues }] = useProvider(["reservation.inputValues"]);
+  const { username, token } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [spinner, setSpinner] = useState(true);
 
   const handleContinueButton = (ev) => {

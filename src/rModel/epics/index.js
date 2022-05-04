@@ -13,8 +13,10 @@ import { updateUserEpic } from "./updateUserEpic";
 import { getHistoryEpic } from "./getHistoryEpic";
 import mOtMEpic from "../../components/admin/moviesOfTheMonth/epics";
 import adminMoviesEpics from "../../components/admin/movies/epics";
+import { getMovieForResEpic } from "../../components/reservation/epics/getMovieForResEpic";
 
 const rootEpic = combineEpics(
+  getMovieForResEpic,
   getMovieEpic,
   getNowShowingEpic,
   requestLoginEpic,

@@ -5,8 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import { BASE_URL } from "../../constants";
 import { actionTypes } from "../actions/actionTypes";
-import { setError } from "../reducers/errorReducer/errorReducer";
-import { setUser } from "../reducers/userReducer/userReducer";
+import { setError, setUser } from "../reducers";
 
 export const requestLoginEpic = (action$) =>
   action$.pipe(

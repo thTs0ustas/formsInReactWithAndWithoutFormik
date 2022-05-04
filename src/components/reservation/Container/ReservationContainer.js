@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
 import { Reservation } from "../presentational/reservation";
 import { useProvider } from "../../../model";
 import { useResContainer } from "./customHooks/useResContainer";
@@ -9,7 +10,9 @@ import { handleChange, handleSeatAdd, handleSeatRemove } from "../helpers";
 import { useContinueButtonHandler } from "./customHooks/useContinueButtonHandler";
 
 function ReservationContainer() {
-  const [state, dispatch] = useProvider([
+  const { username, isMember } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [state] = useProvider([
     "userInfo.username",
     "userInfo.isMember",
     "userInfo.token",
@@ -20,10 +23,8 @@ function ReservationContainer() {
   ]);
 
   const {
-    username,
     inputValues,
     requests,
-    isMember,
     inputValues: { numOfTickets },
     BASE_URL,
   } = state;
@@ -37,10 +38,7 @@ function ReservationContainer() {
     numOfTickets
   );
 
-  useResContainer({
-    BASE_URL,
-    dispatch,
-  });
+  useResContainer(dispatch);
 
   const props = {
     isMember,
