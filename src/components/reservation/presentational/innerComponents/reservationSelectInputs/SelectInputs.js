@@ -16,7 +16,7 @@ function SelectInputs({ handleChange, requests, movie, cinema, auditorium, scree
       <SelectContainer controlId='floatingInput' label='Theater'>
         <Input name='cinema' value={cinema} onChange={handleChange} disabled={!movie}>
           <option value='' aria-label='Choose theater' />
-          {requests.cinemas.map(({ id, address }) => (
+          {requests.cinemas?.map(({ id, address }) => (
             <option key={id} value={address}>
               {address}
             </option>
@@ -32,7 +32,7 @@ function SelectInputs({ handleChange, requests, movie, cinema, auditorium, scree
           disabled={!cinema}
         >
           <option value='' aria-label='Choose hall' />
-          {requests.auditoriums.map(({ id, hall_num, columns }) => (
+          {requests.auditoriums?.map(({ id, hall_num, columns }) => (
             <option key={id} value={[id, columns]}>
               {`Hall ${hall_num}`}
             </option>
@@ -48,7 +48,7 @@ function SelectInputs({ handleChange, requests, movie, cinema, auditorium, scree
           disabled={!auditorium}
         >
           <option value='' aria-label='Choose screening' />
-          {requests.screenings.map(({ id, movie_starts, movie_ends, movie_date }) => (
+          {requests.screenings?.map(({ id, movie_starts, movie_ends, movie_date }) => (
             <option key={id} value={[id, movie_date]}>
               {setScreeningString(movie_starts, movie_ends, movie_date)}
             </option>

@@ -8,25 +8,25 @@ import { useResContainer } from "./customHooks/useResContainer";
 
 import { handleChange, handleSeatAdd, handleSeatRemove } from "../helpers";
 import { useContinueButtonHandler } from "./customHooks/useContinueButtonHandler";
+import { BASE_URL } from "../../../constants";
 
 function ReservationContainer() {
-  const { username, isMember } = useSelector((state) => state.user);
+  const {
+    user: { username, isMember },
+    requests,
+    inputValues,
+    seat,
+  } = useSelector((state) => ({
+    user: state.user,
+    requests: state.reservation.requests,
+    inputValues: state.reservation.inputValues,
+    seat: state.seat,
+  }));
   const dispatch = useDispatch();
-  const [state] = useProvider([
-    "userInfo.username",
-    "userInfo.isMember",
-    "userInfo.token",
-    "reservation.inputValues",
-    "reservation.requests",
-    "reservation.response",
-    "BASE_URL",
-  ]);
+  const [state] = useProvider(["reservation.inputValues", "reservation.response"]);
 
   const {
-    inputValues,
-    requests,
     inputValues: { numOfTickets },
-    BASE_URL,
   } = state;
 
   const navigate = useNavigate();
@@ -41,6 +41,7 @@ function ReservationContainer() {
   useResContainer(dispatch);
 
   const props = {
+    seat,
     isMember,
     image: data.state,
     handleContinueButton,

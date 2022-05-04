@@ -36,13 +36,14 @@ import {
 import { ContinueButton } from "../../../theme";
 
 export function Reservation({
+  seat: { ticket, seats: seat },
   isMember,
   image,
   handleChange,
   requests,
   spinner,
   username,
-  inputValues: { cinema, movie, auditorium, seat, screening, numOfTickets },
+  inputValues: { cinema, movie, auditorium, screening },
   handleContinueButton,
 }) {
   const STUDENT_DAY = 3;
@@ -78,14 +79,15 @@ export function Reservation({
                     }
                     type='student'
                     subtract
+                    add='false'
                   >
                     -
                   </TicketButton>
-                  <NumberOfTickets>{numOfTickets.student}</NumberOfTickets>
+                  <NumberOfTickets>{ticket.student}</NumberOfTickets>
                   <TicketButton
                     disabled={
                       !screening ||
-                      disabledIncrement(numOfTickets, {
+                      disabledIncrement(ticket, {
                         seats: requests.seats[auditorium[0]],
                         reservedSeats: requests.reservedSeats[screening[0]],
                       })
@@ -120,11 +122,11 @@ export function Reservation({
                   >
                     -
                   </TicketButton>
-                  <NumberOfTickets>{numOfTickets.member}</NumberOfTickets>
+                  <NumberOfTickets>{ticket.member}</NumberOfTickets>
                   <TicketButton
                     disabled={
                       !screening ||
-                      disabledIncrement(numOfTickets, {
+                      disabledIncrement(ticket, {
                         seats: requests.seats[auditorium[0]],
                         reservedSeats: requests.reservedSeats[screening],
                       })
@@ -157,11 +159,11 @@ export function Reservation({
                 >
                   -
                 </TicketButton>
-                <NumberOfTickets>{numOfTickets.adult}</NumberOfTickets>
+                <NumberOfTickets>{ticket.adult}</NumberOfTickets>
                 <TicketButton
                   disabled={
                     !screening ||
-                    disabledIncrement(numOfTickets, {
+                    disabledIncrement(ticket, {
                       seats: requests.seats[auditorium[0]],
                       reservedSeats: requests.reservedSeats[screening],
                     })
@@ -194,11 +196,11 @@ export function Reservation({
                 >
                   -
                 </TicketButton>
-                <NumberOfTickets>{numOfTickets.child}</NumberOfTickets>
+                <NumberOfTickets>{ticket.child}</NumberOfTickets>
                 <TicketButton
                   disabled={
                     !screening ||
-                    disabledIncrement(numOfTickets, {
+                    disabledIncrement(ticket, {
                       seats: requests.seats[auditorium[0]],
                       reservedSeats: requests.reservedSeats[screening],
                     })
@@ -214,16 +216,16 @@ export function Reservation({
 
             <TicketInfo>
               <p>
-                You chose <strong>{numOfTickets.sum}</strong> ticket(s)
+                You chose <strong>{ticket.sum}</strong> ticket(s)
               </p>
 
               <p>
-                Price: <strong>{price(numOfTickets).toFixed(2)}</strong>€
+                Price: <strong>{price(ticket).toFixed(2)}</strong>€
               </p>
             </TicketInfo>
 
-            <SeatsModal disabled={numOfTickets.sum > 0} sum={numOfTickets?.sum} seat={seat}>
-              <SeatsContainer disable={screening && numOfTickets.sum > 0}>
+            <SeatsModal disabled={ticket.sum > 0} sum={ticket?.sum} seat={seat}>
+              <SeatsContainer disable={screening && ticket.sum > 0}>
                 <SeatsGrid>
                   <SeatMatrix />
                 </SeatsGrid>
@@ -242,14 +244,14 @@ export function Reservation({
                   </div>
                 </SeatLegend>
                 {!username ? (
-                  <GuestModal disabled={numOfTickets.sum - keys(seat).length !== 0}>
+                  <GuestModal disabled={ticket.sum - keys(seat).length !== 0}>
                     <GuestContainer>
                       <GuestSignup />
                     </GuestContainer>
                   </GuestModal>
                 ) : (
                   <ContinueButton
-                    disabled={numOfTickets.sum - keys(seat).length !== 0}
+                    disabled={ticket.sum - keys(seat).length !== 0}
                     onClick={handleContinueButton}
                     type='submit'
                   >
@@ -271,19 +273,30 @@ export function Reservation({
   );
 }
 
+Reservation.defaultProps = {
+  username: null,
+
+  auditorium: [],
+  seat: {},
+  requests: {},
+  spinner: false,
+  movie: "",
+  cinema: "",
+  screening: {},
+};
+
 Reservation.propTypes = {
-  requests: PropTypes.object.isRequired,
-  username: PropTypes.string.isRequired,
-  screening: PropTypes.object.isRequired,
-  seat: PropTypes.object.isRequired,
-  numOfTickets: PropTypes.object.isRequired,
+  requests: PropTypes.object,
+  username: PropTypes.string,
+  screening: PropTypes.object,
+  seat: PropTypes.object,
   handleContinueButton: PropTypes.func.isRequired,
-  cinema: PropTypes.string.isRequired,
-  movie: PropTypes.string.isRequired,
-  auditorium: PropTypes.array.isRequired,
+  cinema: PropTypes.string,
+  movie: PropTypes.string,
+  auditorium: PropTypes.array,
   inputValues: PropTypes.object.isRequired,
   image: PropTypes.string.isRequired,
-  spinner: PropTypes.bool.isRequired,
+  spinner: PropTypes.bool,
   handleChange: PropTypes.func.isRequired,
   isMember: PropTypes.bool.isRequired,
 };

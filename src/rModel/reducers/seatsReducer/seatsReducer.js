@@ -6,10 +6,10 @@ const seatsReducer = createSlice({
     seats: {},
     ticket: {
       member: 0,
-      nonMember: 0,
+      adult: 0,
       child: 0,
       student: 0,
-      total: 0,
+      sum: 0,
     },
     reserved: [],
     error: null,

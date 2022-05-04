@@ -4,7 +4,12 @@ const reservationReducer = createSlice({
   name: "reservation",
   initialState: {
     requests: {},
-    inputValues: {},
+    inputValues: {
+      movie: "",
+      cinema: "",
+      auditorium: "",
+      screening: "",
+    },
     response: {},
   },
   reducers: {
@@ -12,7 +17,7 @@ const reservationReducer = createSlice({
       state.requests = action.payload;
     },
     setInputValues: (state, action) => {
-      state.inputValues[action.payload.name] = action.payload;
+      state.inputValues[action.payload.name] = action.payload.value;
     },
     setResponse: (state, action) => {
       state.response = action.payload;
