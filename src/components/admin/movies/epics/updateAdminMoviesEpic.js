@@ -1,6 +1,6 @@
 import { ofType } from "redux-observable";
-import { catchError, map, switchMap } from "rxjs/operators";
-import { from, of } from "rxjs";
+import { catchError, switchMap } from "rxjs/operators";
+import { from, mergeMap, of } from "rxjs";
 import axios from "axios";
 import moment from "moment";
 
@@ -24,15 +24,15 @@ export const updateAdminMoviesEpic = (action$) =>
           }
         )
       ).pipe(
-        map(({ data }) => {
-          const time = moment().format("HH:mm:ss");
+        mergeMap(({ data }) => {
+          const time = moment().format("HH:mm");
 
           return data.message
             ? setError({ message: data.message, time })
-            : updateAdminIndividualMovie(data);
+            : [updateAdminIndividualMovie(data), setError({ message: "Movie updated", time })];
         }),
         catchError((error) => {
-          const time = moment().format("HH:mm:ss");
+          const time = moment().format("HH:mm");
           return of(setError({ message: error.message, time }));
         })
       )

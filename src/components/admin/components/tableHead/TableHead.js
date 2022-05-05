@@ -1,8 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { TableHeader } from "./styledComponents/TableData";
 
-function TableHead({ columns, handleSorting }) {
+function TableHead({ columns, handleSorting, TableHeader }) {
   const [sortField, setSortField] = useState("");
   const [order, setOrder] = useState("asc");
 
@@ -41,6 +40,7 @@ function TableHead({ columns, handleSorting }) {
 }
 
 TableHead.propTypes = {
+  TableHeader: PropTypes.elementType.isRequired,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,

@@ -11,7 +11,7 @@ function AlertToast({ error: { message, time } }) {
     <ToastContainer delay={3000} show={!!message} onClose={() => dispatch(clearError())} autohide>
       <ToastHeader closeButton={false}>
         <strong className='me-auto'>Message</strong>
-        <span className='me-auto'>{time}</span>
+        <span>{time}</span>
       </ToastHeader>
       <Toast.Body>{message}</Toast.Body>
     </ToastContainer>

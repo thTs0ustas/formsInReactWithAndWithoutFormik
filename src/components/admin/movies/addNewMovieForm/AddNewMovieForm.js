@@ -7,9 +7,10 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { genres } from "../data/genres";
 import addNewMovieAction from "../actions/addNewMovieAction";
+import { userSelector } from "../selectors/selectors";
 
 function AddNewMovieForm({ onHide, show } = {}) {
-  const { id, token } = useSelector((state) => state.user);
+  const { id, token } = useSelector(userSelector);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {

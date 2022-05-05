@@ -8,11 +8,13 @@ import { AddNewMovieForm } from "./addNewMovieForm/AddNewMovieForm";
 import { Data } from "./styledComponents/Data";
 import { decideTdData } from "../moviesOfTheMonth/helpers/conditional";
 import deleteMovieAction from "./actions/deleteMovieAction";
+import { userAdminSelector } from "./selectors/selectors";
 
 function TableBody({ columns }) {
-  const { movies } = useSelector((state) => state.admin);
-  const { id, token } = useSelector((state) => state.user);
+  const { id, token, movies } = useSelector((state) => userAdminSelector(state));
+
   const dispatch = useDispatch();
+
   const [include, setInclude] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const [addNewModalShow, setAddNewModalShow] = useState(false);

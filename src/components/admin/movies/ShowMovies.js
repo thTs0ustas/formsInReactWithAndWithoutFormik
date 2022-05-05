@@ -3,13 +3,15 @@ import { chunk, keys } from "lodash";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import TableHead from "./TableHead";
+// import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
 import { useMoviesTable } from "./hooks/useMoviesTable";
 import { PaginationBasic } from "./pagination/Pagination";
 import { TableContainer } from "./styledComponents/TableContainer";
+import { TableHead } from "../components";
+import { TableHeader } from "./styledComponents/TableData";
 
 function ShowMovies({ eventK }) {
   const dividers = {
@@ -29,7 +31,7 @@ function ShowMovies({ eventK }) {
   return (
     <TableContainer>
       <Table bordered hover style={{ backgroundColor: "white" }}>
-        <TableHead {...{ columns, handleSorting: handleSorting(movies, dispatch) }} />
+        <TableHead {...{ columns, handleSorting: handleSorting(movies, dispatch), TableHeader }} />
         <TableBody
           {...{
             columns,

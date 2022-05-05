@@ -6,10 +6,10 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import getNotShowingMoviesAction from "../actions/getNotShowingMoviesAction";
 import addNewMovieOfTheMonthAction from "../actions/addNewMovieOfTheMonthAction";
+import { userAdminSelector } from "../selectors/selectors";
 
 function AddNewMovieOfTheMonthForm({ onHide, show } = {}) {
-  const { id, token } = useSelector((state) => state.user);
-  const { notPlayingMovies } = useSelector((state) => state.admin);
+  const { id, token, notPlayingMovies } = useSelector((state) => userAdminSelector(state));
   const dispatch = useDispatch();
 
   useEffect(() => {

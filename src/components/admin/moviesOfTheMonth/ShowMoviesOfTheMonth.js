@@ -3,12 +3,14 @@ import { chunk, keys } from "lodash";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
 import { useMoviesOfTheMonthTable } from "./hooks/useMoviesOfTheMonthTable";
 import { PaginationBasic } from "./pagination/Pagination";
+import { TableHead } from "../components";
+import { TableHeader } from "./styledComponents/TableData";
+import { adminSelector } from "./selectors/selectors";
 
 function ShowMoviesOfTheMonth({ eventK }) {
   const dividers = {
@@ -17,7 +19,7 @@ function ShowMoviesOfTheMonth({ eventK }) {
     ten: 10,
   };
 
-  const { moviesOfTheMonth } = useSelector((state) => state.admin);
+  const { moviesOfTheMonth } = useSelector(adminSelector);
   useMoviesOfTheMonthTable(eventK);
 
   const dispatch = useDispatch();
@@ -32,7 +34,9 @@ function ShowMoviesOfTheMonth({ eventK }) {
   return (
     <div style={{ width: "80vw", margin: "0 auto" }}>
       <Table bordered hover style={{ backgroundColor: "white" }}>
-        <TableHead {...{ columns, handleSorting: handleSorting(moviesOfTheMonth, dispatch) }} />
+        <TableHead
+          {...{ columns, handleSorting: handleSorting(moviesOfTheMonth, dispatch), TableHeader }}
+        />
         <TableBody
           {...{
             columns,

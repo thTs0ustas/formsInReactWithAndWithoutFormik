@@ -7,10 +7,12 @@ import { Data } from "./styledComponents/Data";
 import { decideTdData } from "./helpers/conditional";
 import { AddNewMovieOfTheMonthForm } from "./AddNewMovieOfTheMonthForm/AddNewMovieOfTheMonthForm";
 import deleteMovieOfTheMonthAction from "./actions/deleteMovieOfTheMonthAction";
+import { userSelector } from "./selectors/selectors";
 
 function TableBody({ tableData, columns }) {
-  const { token, id } = useSelector((state) => state.user);
+  const { token, id } = useSelector(userSelector);
   const dispatch = useDispatch();
+
   const [include, setInclude] = useState("");
   const [addNewModalShow, setAddNewModalShow] = useState(false);
   return (
