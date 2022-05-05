@@ -31,8 +31,17 @@ function ShowUsers({ eventK }) {
   const numberOfPages = slices.length;
 
   return (
-    <div style={{ width: "80vw", margin: "0 auto" }}>
-      <Table bordered hover style={{ backgroundColor: "white" }}>
+    <div>
+      <Table
+        bordered
+        hover
+        style={{
+          backgroundColor: "aliceblue",
+          overflow: "auto",
+          display: "block",
+          tableLayout: "auto",
+        }}
+      >
         <TableHead {...{ columns, handleSorting: handleSorting(users, dispatch), TableHeader }} />
         <TableBody
           {...{

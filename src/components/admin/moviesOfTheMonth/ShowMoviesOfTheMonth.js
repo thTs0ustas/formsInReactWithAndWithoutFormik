@@ -32,7 +32,7 @@ function ShowMoviesOfTheMonth({ eventK }) {
   const numberOfPages = slices.length;
 
   return (
-    <div style={{ width: "80vw", margin: "0 auto" }}>
+    <div>
       <Table bordered hover style={{ backgroundColor: "white" }}>
         <TableHead
           {...{ columns, handleSorting: handleSorting(moviesOfTheMonth, dispatch), TableHeader }}

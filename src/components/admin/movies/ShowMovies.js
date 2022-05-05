@@ -9,7 +9,6 @@ import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
 import { useMoviesTable } from "./hooks/useMoviesTable";
 import { PaginationBasic } from "./pagination/Pagination";
-import { TableContainer } from "./styledComponents/TableContainer";
 import { TableHead } from "../components";
 import { TableHeader } from "./styledComponents/TableData";
 
@@ -29,8 +28,17 @@ function ShowMovies({ eventK }) {
   useMoviesTable(eventK);
 
   return (
-    <TableContainer>
-      <Table bordered hover style={{ backgroundColor: "white" }}>
+    <div>
+      <Table
+        bordered
+        hover
+        style={{
+          backgroundColor: "aliceblue",
+          overflow: "auto",
+          display: "block",
+          tableLayout: "auto",
+        }}
+      >
         <TableHead {...{ columns, handleSorting: handleSorting(movies, dispatch), TableHeader }} />
         <TableBody
           {...{
@@ -60,7 +68,7 @@ function ShowMovies({ eventK }) {
           ))}
         </select>
       </div>
-    </TableContainer>
+    </div>
   );
 }
 ShowMovies.propTypes = {
