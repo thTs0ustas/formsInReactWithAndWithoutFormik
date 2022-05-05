@@ -4,6 +4,7 @@ const adminReducer = createSlice({
   name: "admin",
   initialState: {
     movies: [],
+    screenings: [],
     notPlayingMovies: [],
     moviesOfTheMonth: [],
     users: [],
@@ -48,12 +49,24 @@ const adminReducer = createSlice({
     deleteUser: (state, action) => {
       state.users = state.users.filter((user) => user.id !== action.payload);
     },
-
+    setAdminScreenings: (state, action) => {
+      state.screenings = action.payload;
+    },
+    addAdminScreening: (state, action) => {
+      state.screenings.push(action.payload);
+    },
+    updateAdminScreenings: (state, action) => {
+      state.screenings = action.payload;
+    },
+    deleteScreening: (state, action) => {
+      state.screenings = state.screenings.filter((screening) => screening.id !== action.payload);
+    },
     clearAdmin: (state) => {
       state.movies = [];
       state.notPlayingMovies = [];
       state.moviesOfTheMonth = [];
       state.users = [];
+      state.screenings = [];
     },
   },
 });
@@ -70,6 +83,10 @@ export const {
   setAdminUsers,
   deleteUser,
   updateAdminUsers,
+  setAdminScreenings,
+  updateAdminScreenings,
+  addAdminScreening,
+  deleteScreening,
   clearAdmin,
 } = adminReducer.actions;
 

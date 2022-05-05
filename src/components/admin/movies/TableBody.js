@@ -10,7 +10,7 @@ import { decideTdData } from "../moviesOfTheMonth/helpers/conditional";
 import deleteMovieAction from "./actions/deleteMovieAction";
 import { userAdminSelector } from "./selectors/selectors";
 
-function TableBody({ tableData, columns }) {
+function TableBody({ tableData, columns } = {}) {
   const { id, token } = useSelector((state) => userAdminSelector(state));
 
   const dispatch = useDispatch();

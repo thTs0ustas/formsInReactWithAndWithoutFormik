@@ -26,6 +26,10 @@ export {
   deleteMovie,
   deleteUser,
   updateAdminUsers,
+  addAdminScreening,
+  setAdminScreenings,
+  updateAdminScreenings,
+  deleteScreening,
 } from "./adminReducer/adminReducer";
 
 export { setError, clearError } from "./errorReducer/errorReducer";

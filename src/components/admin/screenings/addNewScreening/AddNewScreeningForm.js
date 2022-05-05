@@ -1,36 +1,22 @@
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import React, { useEffect } from "react";
 import TimePicker from "react-bootstrap-time-picker";
 import { timeFromInt } from "time-number/lib";
 import moment from "moment";
 import PropTypes from "prop-types";
-import { selectors, useProvider } from "../../../../model";
-import { adminMoviesOfTheMonthAction, handleError } from "../../../../model/actions";
-import { errorHandling } from "../../../signInForm/errors/errorHandling";
+import { useDispatch, useSelector } from "react-redux";
+import { isEmpty } from "lodash";
+import { userAdminSelector } from "../selectors/selectors";
+import { addScreeningAction } from "../actions/addScreeningAction";
+import getAdminMovieOfTheMonthAction from "../../moviesOfTheMonth/actions/getAdminMovieOfTheMonthAction";
 
-function AddNewScreeningForm({ onHide, show, handleUpdateTable } = {}) {
-  const [{ userInfo, admin, BASE_URL }, dispatch] = useProvider([
-    selectors.userInfo,
-    selectors.admin,
-    selectors.url,
-  ]);
+function AddNewScreeningForm({ onHide, show } = {}) {
+  const { id, token, moviesOfTheMonth } = useSelector(userAdminSelector);
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (show)
-      axios
-        .get(`${BASE_URL}/admin/${userInfo.username}/getMoviesOfTheMonth`, {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        })
-        .then(({ data }) => {
-          dispatch(adminMoviesOfTheMonthAction(data));
-        })
-        .catch((error) =>
-          dispatch(handleError({ message: error.message, time: new Date().getTime() }))
-        );
+    if (show && isEmpty(moviesOfTheMonth)) dispatch(getAdminMovieOfTheMonthAction({ id, token }));
   }, [show]);
 
   const formik = useFormik({
@@ -42,44 +28,12 @@ function AddNewScreeningForm({ onHide, show, handleUpdateTable } = {}) {
       movie_date: "",
     },
     onSubmit: (values) => {
-      axios
-        .post(
-          `${BASE_URL}/admin/${userInfo.username}/screening/create`,
-          {
-            username: userInfo.username,
-            values,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
-            },
-          }
-        )
-        .then((res) => {
-          if (errorHandling(res.data)) {
-            dispatch(
-              handleError({
-                message: res.data.message,
-                time: new Date().getTime(),
-              })
-            );
-          }
-        })
-        .then(handleUpdateTable)
-        .then(onHide)
-        .then(() => formik.resetForm())
-        .catch((error) =>
-          dispatch(
-            handleError({
-              message: error.message,
-              time: new Date().getTime(),
-            })
-          )
-        );
+      dispatch(addScreeningAction({ id, token, values }));
+      formik.resetForm();
+      onHide();
     },
     validationSchema: Yup.object({
       movie_id: Yup.number().required("Title required"),
-
       movie_date: Yup.date().min(moment().format()).required("Must choose a release date"),
     }),
   });
@@ -105,7 +59,7 @@ function AddNewScreeningForm({ onHide, show, handleUpdateTable } = {}) {
               type='text'
             >
               <option aria-label='movies of the month' />
-              {admin?.moviesOfTheMonth?.map((movie) => (
+              {moviesOfTheMonth?.map((movie) => (
                 <option value={movie.id} key={movie.id}>
                   {movie.Movie?.title}
                 </option>
@@ -178,6 +132,5 @@ function AddNewScreeningForm({ onHide, show, handleUpdateTable } = {}) {
 AddNewScreeningForm.propTypes = {
   show: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
-  handleUpdateTable: PropTypes.func.isRequired,
 };
 export { AddNewScreeningForm };
