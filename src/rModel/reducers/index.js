@@ -24,6 +24,8 @@ export {
   setAdminUsers,
   clearAdmin,
   deleteMovie,
+  deleteUser,
+  updateAdminUsers,
 } from "./adminReducer/adminReducer";
 
 export { setError, clearError } from "./errorReducer/errorReducer";

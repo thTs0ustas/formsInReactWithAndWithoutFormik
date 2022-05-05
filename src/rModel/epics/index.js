@@ -14,6 +14,7 @@ import { getHistoryEpic } from "./getHistoryEpic";
 import mOtMEpic from "../../components/admin/moviesOfTheMonth/epics";
 import adminMoviesEpics from "../../components/admin/movies/epics";
 import { getMovieForResEpic } from "../../components/reservation/epics/getMovieForResEpic";
+import { adminUsersEpics } from "../../components/admin/users/epics";
 
 const rootEpic = combineEpics(
   getMovieForResEpic,
@@ -30,7 +31,8 @@ const rootEpic = combineEpics(
   updateUserEpic,
   getHistoryEpic,
   adminMoviesEpics,
-  mOtMEpic
+  mOtMEpic,
+  adminUsersEpics
 );
 
 export default rootEpic;

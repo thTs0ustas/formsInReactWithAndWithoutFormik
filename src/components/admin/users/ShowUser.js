@@ -2,13 +2,16 @@ import { Table } from "react-bootstrap";
 import { chunk, keys } from "lodash";
 import { useState } from "react";
 import PropTypes from "prop-types";
-import TableHead from "./TableHead";
+import { useDispatch, useSelector } from "react-redux";
+
 import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
-import { handleUpdateTable } from "./helpers/handleUpdateTable";
-import { useAdminTable } from "./hooks/useAdminTable";
+import { useAdminUsersTable } from "./hooks/useAdminUsersTable";
 import { PaginationBasic } from "./pagination/Pagination";
+import { adminSelector } from "./selectors/selectors";
+import { TableHead } from "../components";
+import { TableHeader } from "./styledComponents/TableData";
 
 function ShowUsers({ eventK }) {
   const dividers = {
@@ -16,26 +19,25 @@ function ShowUsers({ eventK }) {
     twenty: 20,
     ten: 10,
   };
-  const { tableData, setUpdateTable, setTableData, updateTable, setDeletePrompt } =
-    useAdminTable(eventK);
+  const { users } = useSelector(adminSelector);
+  const dispatch = useDispatch();
+
+  useAdminUsersTable(eventK);
 
   const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
   const [page, setPage] = useState(0);
 
-  const PER_PAGES = Math.floor(tableData.length / (tableData.length / itemsPerPage));
-  const slices = tableData.length < PER_PAGES ? [tableData] : chunk(tableData, PER_PAGES);
+  const slices = chunk(users, itemsPerPage);
   const numberOfPages = slices.length;
 
   return (
     <div style={{ width: "80vw", margin: "0 auto" }}>
       <Table bordered hover style={{ backgroundColor: "white" }}>
-        <TableHead {...{ columns, handleSorting: handleSorting(tableData, setTableData) }} />
+        <TableHead {...{ columns, handleSorting: handleSorting(users, dispatch), TableHeader }} />
         <TableBody
           {...{
             columns,
             tableData: slices[page],
-            handleUpdateTable: handleUpdateTable(updateTable, setUpdateTable),
-            setDeletePrompt,
           }}
         />
       </Table>

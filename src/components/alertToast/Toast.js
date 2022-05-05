@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { ToastContainer } from "./StyledComponents/ToastContainer";
 import { clearError } from "../../rModel";
 
-function AlertToast({ error: { message, time } }) {
+function AlertToast({ error: { message = "", time = "" } }) {
   const dispatch = useDispatch();
 
   return (

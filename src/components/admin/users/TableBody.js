@@ -1,36 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import axios from "axios";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import { UpdateUserForm } from "./updateUserForm/UpdateUserForm";
 import { Data } from "./styledComponents/Data";
 import { decideTdData } from "./helpers/conditional";
-import { selectors, useProvider } from "../../../model";
-import { handleError } from "../../../model/actions";
+import { userAdminSelector } from "./selectors/selectors";
+import { deleteAdminUserAction } from "./actions/deleteAdminUserAction";
 
-function TableBody({ tableData, columns, handleUpdateTable, setDeletePrompt }) {
-  const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
+function TableBody({ columns }) {
+  const { id, token, users } = useSelector(userAdminSelector);
+  const dispatch = useDispatch();
 
   const [include, setInclude] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const [userData, setUserData] = useState(null);
-  const [deleteId, setDeleteId] = useState(null);
-
-  useEffect(() => {
-    if (deleteId) {
-      axios
-        .delete(`${BASE_URL}/admin/${userInfo.username}/user/delete/${deleteId}`, {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        })
-        .then(() => setDeleteId(null))
-        .then(() => setDeletePrompt(true))
-        .catch((error) =>
-          dispatch(handleError({ message: error.message, time: new Date().getTime() }))
-        );
-    }
-  }, [deleteId]);
 
   const handleModal = (data) => {
     setUserData(data);
@@ -46,7 +30,7 @@ function TableBody({ tableData, columns, handleUpdateTable, setDeletePrompt }) {
             <input onChange={(e) => setInclude(e.target.value)} />
           </td>
         </tr>
-        {tableData?.map(
+        {users?.map(
           (data) =>
             data.username.includes(include) && (
               <tr key={data.id}>
@@ -55,7 +39,9 @@ function TableBody({ tableData, columns, handleUpdateTable, setDeletePrompt }) {
                   return (
                     <Data
                       onClick={() =>
-                        accessor !== "delete" ? handleModal(data) : setDeleteId(data.id)
+                        accessor !== "delete"
+                          ? handleModal(data)
+                          : dispatch(deleteAdminUserAction({ id, token, deleteId: data.id }))
                       }
                       key={accessor}
                     >
@@ -68,20 +54,12 @@ function TableBody({ tableData, columns, handleUpdateTable, setDeletePrompt }) {
         )}
       </tbody>
       {userData && (
-        <UpdateUserForm
-          handleUpdateTable={handleUpdateTable}
-          show={modalShow}
-          data={userData}
-          onHide={() => setModalShow(false)}
-        />
+        <UpdateUserForm show={modalShow} data={userData} onHide={() => setModalShow(false)} />
       )}
     </>
   );
 }
 TableBody.propTypes = {
-  tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
   columns: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleUpdateTable: PropTypes.func.isRequired,
-  setDeletePrompt: PropTypes.func.isRequired,
 };
 export default TableBody;
