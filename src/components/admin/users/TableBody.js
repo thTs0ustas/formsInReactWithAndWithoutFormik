@@ -59,8 +59,13 @@ function TableBody({ tableData, columns }) {
     </>
   );
 }
+TableBody.defaultProps = {
+  tableData: [],
+  columns: [],
+};
+
 TableBody.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
-  tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  columns: PropTypes.arrayOf(PropTypes.object),
+  tableData: PropTypes.arrayOf(PropTypes.object),
 };
 export default TableBody;

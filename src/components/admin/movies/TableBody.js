@@ -10,7 +10,7 @@ import { decideTdData } from "../moviesOfTheMonth/helpers/conditional";
 import deleteMovieAction from "./actions/deleteMovieAction";
 import { userAdminSelector } from "./selectors/selectors";
 
-function TableBody({ tableData, columns } = {}) {
+function TableBody({ tableData, columns }) {
   const { id, token } = useSelector((state) => userAdminSelector(state));
 
   const dispatch = useDispatch();
@@ -81,8 +81,14 @@ function TableBody({ tableData, columns } = {}) {
     </>
   );
 }
+
+TableBody.defaultProps = {
+  tableData: [],
+  columns: [],
+};
+
 TableBody.propTypes = {
-  columns: PropTypes.array.isRequired,
-  tableData: PropTypes.array.isRequired,
+  columns: PropTypes.array,
+  tableData: PropTypes.array,
 };
 export default TableBody;
