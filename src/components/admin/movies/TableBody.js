@@ -10,8 +10,8 @@ import { decideTdData } from "../moviesOfTheMonth/helpers/conditional";
 import deleteMovieAction from "./actions/deleteMovieAction";
 import { userAdminSelector } from "./selectors/selectors";
 
-function TableBody({ columns }) {
-  const { id, token, movies } = useSelector((state) => userAdminSelector(state));
+function TableBody({ tableData, columns }) {
+  const { id, token } = useSelector((state) => userAdminSelector(state));
 
   const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ function TableBody({ columns }) {
           </td>
           <Data colSpan={4} />
         </tr>
-        {movies?.map((data) =>
+        {tableData?.map((data) =>
           checkTitle(data.title) ? (
             <tr key={data.id}>
               {columns.map(({ accessor }) => {
@@ -83,5 +83,6 @@ function TableBody({ columns }) {
 }
 TableBody.propTypes = {
   columns: PropTypes.array.isRequired,
+  tableData: PropTypes.array.isRequired,
 };
 export default TableBody;

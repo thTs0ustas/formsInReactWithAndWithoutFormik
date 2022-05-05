@@ -8,8 +8,8 @@ import { decideTdData } from "./helpers/conditional";
 import { userAdminSelector } from "./selectors/selectors";
 import { deleteAdminUserAction } from "./actions/deleteAdminUserAction";
 
-function TableBody({ columns }) {
-  const { id, token, users } = useSelector(userAdminSelector);
+function TableBody({ tableData, columns }) {
+  const { id, token } = useSelector(userAdminSelector);
   const dispatch = useDispatch();
 
   const [include, setInclude] = useState("");
@@ -30,7 +30,7 @@ function TableBody({ columns }) {
             <input onChange={(e) => setInclude(e.target.value)} />
           </td>
         </tr>
-        {users?.map(
+        {tableData?.map(
           (data) =>
             data.username.includes(include) && (
               <tr key={data.id}>
@@ -61,5 +61,6 @@ function TableBody({ columns }) {
 }
 TableBody.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 export default TableBody;
