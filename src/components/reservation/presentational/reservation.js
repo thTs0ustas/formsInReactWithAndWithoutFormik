@@ -34,6 +34,15 @@ import {
 } from "./styledComponents";
 
 import { ContinueButton } from "../../../theme";
+import { STUDENT_DAY } from "../constants/STUDENT_DAY";
+
+const ticketPropGetter = (props = {}) => ({
+  type: "adult",
+  left: true,
+  subtract: true,
+  add: true,
+  ...props,
+});
 
 export function Reservation({
   seat: { ticket, seats: seat },
@@ -46,7 +55,6 @@ export function Reservation({
   inputValues: { cinema, movie, auditorium, screening },
   handleContinueButton,
 }) {
-  const STUDENT_DAY = 3;
   return (
     <>
       <MoviePoster image={image} />
@@ -69,7 +77,10 @@ export function Reservation({
                 </div>
                 <TicketBarRight>
                   <TicketButton
-                    left
+                    {...ticketPropGetter({
+                      type: "student",
+                      add: false,
+                    })}
                     disabled={
                       !screening ||
                       disabledDecrement({
@@ -77,14 +88,16 @@ export function Reservation({
                         reservedSeats: requests.reservedSeats[screening[0]],
                       })
                     }
-                    type='student'
-                    subtract
-                    add={false}
                   >
                     -
                   </TicketButton>
                   <NumberOfTickets>{ticket.student}</NumberOfTickets>
                   <TicketButton
+                    {...ticketPropGetter({
+                      type: "student",
+                      left: false,
+                      subtract: false,
+                    })}
                     disabled={
                       !screening ||
                       disabledIncrement(ticket, {
@@ -92,10 +105,6 @@ export function Reservation({
                         reservedSeats: requests.reservedSeats[screening[0]],
                       })
                     }
-                    type='student'
-                    add
-                    left={false}
-                    subtract={false}
                   >
                     +
                   </TicketButton>
@@ -111,7 +120,11 @@ export function Reservation({
                 </div>
                 <TicketBarRight>
                   <TicketButton
-                    left
+                    {...ticketPropGetter({
+                      type: "member",
+                      add: false,
+                      subtract: false,
+                    })}
                     disabled={
                       !screening ||
                       disabledDecrement({
@@ -119,14 +132,16 @@ export function Reservation({
                         reservedSeats: requests.reservedSeats[screening],
                       })
                     }
-                    type='member'
-                    subtract
-                    add={false}
                   >
                     -
                   </TicketButton>
                   <NumberOfTickets>{ticket.member}</NumberOfTickets>
                   <TicketButton
+                    {...ticketPropGetter({
+                      type: "member",
+                      left: false,
+                      subtract: false,
+                    })}
                     disabled={
                       !screening ||
                       disabledIncrement(ticket, {
@@ -134,10 +149,6 @@ export function Reservation({
                         reservedSeats: requests.reservedSeats[screening],
                       })
                     }
-                    type='member'
-                    add
-                    left={false}
-                    subtract={false}
                   >
                     +
                   </TicketButton>
@@ -151,7 +162,10 @@ export function Reservation({
               </div>
               <TicketBarRight>
                 <TicketButton
-                  left
+                  {...ticketPropGetter({
+                    type: "adult",
+                    add: false,
+                  })}
                   disabled={
                     !screening ||
                     disabledDecrement({
@@ -159,14 +173,16 @@ export function Reservation({
                       reservedSeats: requests.reservedSeats[screening],
                     })
                   }
-                  type='adult'
-                  subtract
-                  add={false}
                 >
                   -
                 </TicketButton>
                 <NumberOfTickets>{ticket.adult}</NumberOfTickets>
                 <TicketButton
+                  {...ticketPropGetter({
+                    type: "adult",
+                    left: false,
+                    subtract: false,
+                  })}
                   disabled={
                     !screening ||
                     disabledIncrement(ticket, {
@@ -174,10 +190,6 @@ export function Reservation({
                       reservedSeats: requests.reservedSeats[screening],
                     })
                   }
-                  type='adult'
-                  add
-                  left={false}
-                  subtract={false}
                 >
                   +
                 </TicketButton>
@@ -191,7 +203,10 @@ export function Reservation({
               </div>
               <TicketBarRight>
                 <TicketButton
-                  left
+                  {...ticketPropGetter({
+                    type: "child",
+                    add: false,
+                  })}
                   disabled={
                     !screening ||
                     disabledDecrement({
@@ -199,14 +214,16 @@ export function Reservation({
                       reservedSeats: requests.reservedSeats[screening],
                     })
                   }
-                  type='child'
-                  subtract
-                  add={false}
                 >
                   -
                 </TicketButton>
                 <NumberOfTickets>{ticket.child}</NumberOfTickets>
                 <TicketButton
+                  {...ticketPropGetter({
+                    type: "child",
+                    left: false,
+                    subtract: false,
+                  })}
                   disabled={
                     !screening ||
                     disabledIncrement(ticket, {
@@ -214,10 +231,6 @@ export function Reservation({
                       reservedSeats: requests.reservedSeats[screening],
                     })
                   }
-                  type='child'
-                  add
-                  left={false}
-                  subtract={false}
                 >
                   +
                 </TicketButton>
