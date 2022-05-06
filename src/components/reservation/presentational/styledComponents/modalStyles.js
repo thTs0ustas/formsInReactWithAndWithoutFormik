@@ -12,6 +12,7 @@ const ModalContainer = styled(Modal)`
       max-width: 1000px;
       margin: 1.75rem auto;
     }
+
     & .modal-content {
       background-color: ${({ theme }) => theme.bgMain};
       width: 100%;

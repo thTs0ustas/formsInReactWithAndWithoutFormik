@@ -1,36 +1,32 @@
 import React from "react";
-import {
-  ColStyledNowPlaying,
-  MoviesMonthImg,
-  NowShowing,
-} from "../moviesOfTheMonth/styledComponents/styles";
-import { useNowShowingMovies } from "./hooks/useNowShowingMovies";
-import { useProvider } from "../../model";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { NowShowingStack } from "./styledComponents/styles";
+import { MoviesMonthImg, NowShowing } from "../moviesOfTheMonth/styledComponents/styles";
+import getMovieAction from "./actions/getMovieAction";
+import { BASE_URL } from "../../constants";
+import { useNowPlaying } from "./hooks/useNowPlaying";
 
-export const NowShowingMovies = () => {
-  useNowShowingMovies();
-  const [state] = useProvider();
-
+export function NowShowingMovies() {
+  const { nowShowing } = useSelector((state) => state.nowPlaying);
+  const dispatch = useDispatch();
+  useNowPlaying();
   return (
-    <>
-      <NowShowing>
-        {map(state?.nowShowing, ({ Movie: { id, title, genre, image } }) => (
-          <ColStyledNowPlaying key={id}>
-            <NowShowingStack>
-              <Link to={`/moviePage/${id}`}>
-                <MoviesMonthImg src={`${state.BASE_URL}${image}`} />
-              </Link>
-              <p>{genre.replace(/^\w/, (c) => c.toUpperCase())}</p>
-              <h2>
-                <Link to={`/moviePage/${id}`}>{title}</Link>
-              </h2>
-            </NowShowingStack>
-          </ColStyledNowPlaying>
-        ))}
-      </NowShowing>
-    </>
+    <NowShowing>
+      {map(nowShowing, ({ Movie: { id, title, genre, image } }) => (
+        <NowShowingStack key={id}>
+          <Link onClick={() => dispatch(getMovieAction(id))} to={`/moviePage/${id}`}>
+            <MoviesMonthImg src={`${BASE_URL}${image}`} />
+          </Link>
+          <p>{genre}</p>
+          <h2>
+            <Link onClick={() => dispatch(getMovieAction(id))} to={`/moviePage/${id}`}>
+              {title}
+            </Link>
+          </h2>
+        </NowShowingStack>
+      ))}
+    </NowShowing>
   );
-};
+}

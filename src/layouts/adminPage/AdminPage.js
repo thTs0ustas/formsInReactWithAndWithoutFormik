@@ -1,38 +1,19 @@
+import React from "react";
+import { Tabs } from "react-bootstrap";
 import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 import { Home, Switch } from "../../components";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
-import React, { useEffect, useState } from "react";
-import { Tabs } from "react-bootstrap";
 import { ShowMovies } from "../../components/admin/movies/ShowMovies";
 import { ShowUsers } from "../../components/admin/users/ShowUser";
 import { TabsContainer } from "./styledComponents/TabsContainer";
-import { clearAdminAction, selectors, useProvider } from "../../model";
-import { useNavigate } from "react-router-dom";
-import { handleError } from "../../model/actions";
 import { TabStyled } from "./styledComponents/Tabs";
 import { ShowScreenings } from "../../components/admin/screenings/ShowScreenings";
 import { ShowMoviesOfTheMonth } from "../../components/admin/moviesOfTheMonth/ShowMoviesOfTheMonth";
 import NavBar from "../../components/NavBar";
+import { useAdminPage } from "./hooks/useAdminPage";
 
-const AdminPage = () => {
-  const [{ userInfo }, dispatch] = useProvider([selectors.userInfo]);
-  const navigate = useNavigate();
-  const [key, setKey] = useState("home");
-
-  useEffect(() => {
-    if (!userInfo.username && !userInfo.token && !userInfo.isAdmin) {
-      dispatch(
-        handleError({
-          message: "Unauthorised Access",
-          time: new Date().getTime(),
-        })
-      );
-      navigate("/");
-    }
-    return () => {
-      dispatch(clearAdminAction());
-    };
-  }, [dispatch, navigate, userInfo.isAdmin, userInfo.token, userInfo.username]);
+function AdminPage() {
+  const { key, setKey } = useAdminPage();
 
   return (
     <>
@@ -70,12 +51,12 @@ const AdminPage = () => {
             <ShowScreenings eventK={key} />
           </TabStyled>
           <TabStyled eventKey='moviesOfTheMonth' title='Movies Of The Month'>
-            <ShowMoviesOfTheMonth />
+            <ShowMoviesOfTheMonth eventK={key} />
           </TabStyled>
         </Tabs>
       </TabsContainer>
     </>
   );
-};
+}
 
 export { AdminPage };

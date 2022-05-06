@@ -6,14 +6,14 @@ import Footer from "../../components/footer/Footer";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import NavBar from "../../components/NavBar";
 
-const SignInLayout = ({ username }) => {
+function SignInLayout() {
   return (
     <SignInDiv>
       <Header>
         <SignUpBar>
           <Switch />
           <div>
-            <SignupBarPart username={username} />
+            <SignupBarPart />
           </div>
         </SignUpBar>
 
@@ -34,6 +34,6 @@ const SignInLayout = ({ username }) => {
       </footer>
     </SignInDiv>
   );
-};
+}
 
 export { SignInLayout };

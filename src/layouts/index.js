@@ -5,7 +5,7 @@ export { SignInLayout } from "./signInPage/SignInLayout";
 export { AboutUsLayout } from "./aboutUsPage/AboutUsLayout";
 export { MoviePageLayout } from "./moviePage/MoviePageLayout";
 export { CancelPaymentLayout } from "./cancelPaymentLayout/CancelPaymentLayout";
-export { default as ThanksForYourPaymentLayout } from "./thanksForYourPayment/ThanksForYouPayment";
+export { ThanksForYourPaymentLayout } from "./thanksForYourPayment/ThanksForYouPayment";
 export { ThankYouForYourThoughts } from "./thankYouForYourThought/ThankYouForYourThought";
 export { AdminPage } from "./adminPage/AdminPage";
 export { TicketPricesLayout } from "./ticketPricesPage/TicketPricesLayout";

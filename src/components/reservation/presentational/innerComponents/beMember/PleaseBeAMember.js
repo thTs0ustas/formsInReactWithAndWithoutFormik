@@ -1,13 +1,14 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   ButtonForMembers,
   PleaseBeAMember,
   PleaseBeAMemberHeader,
   PleaseBeAMemberParagraph,
 } from "../../styledComponents";
-import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const BeAMember = ({ link }) => {
+function BeAMember({ link }) {
   const navigate = useNavigate();
   return (
     <PleaseBeAMember>
@@ -18,6 +19,8 @@ const BeAMember = ({ link }) => {
       <ButtonForMembers onClick={() => navigate(link)}>BE A MEMBER</ButtonForMembers>
     </PleaseBeAMember>
   );
+}
+BeAMember.propTypes = {
+  link: PropTypes.string.isRequired,
 };
-
 export { BeAMember };

@@ -16,7 +16,7 @@ export const GridWrapper = styled.div`
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 350px 1fr 1fr;
-  grid-template-rows: 300px 600px;
+  grid-template-rows: 250px 250px;
   @media screen and (max-width: 1600px) {
     width: 80vw;
   }

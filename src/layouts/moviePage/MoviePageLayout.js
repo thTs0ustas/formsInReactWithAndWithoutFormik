@@ -6,7 +6,7 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 import MoviePageContainer from "../../components/moviePage/MoviePageContainer";
 
-const MoviePageLayout = () => {
+function MoviePageLayout() {
   return (
     <>
       <Header>
@@ -26,6 +26,6 @@ const MoviePageLayout = () => {
       <Footer />
     </>
   );
-};
+}
 
 export { MoviePageLayout };

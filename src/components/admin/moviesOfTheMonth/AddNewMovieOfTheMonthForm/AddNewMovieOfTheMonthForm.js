@@ -1,73 +1,29 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-import { adminMoviesNotPlayingAction, handleError } from "../../../../model/actions";
-import { selectors, useProvider } from "../../../../model";
 import React, { useEffect } from "react";
-import { errorHandling } from "../../../signInForm/errors/errorHandling";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import getNotShowingMoviesAction from "../actions/getNotShowingMoviesAction";
+import addNewMovieOfTheMonthAction from "../actions/addNewMovieOfTheMonthAction";
+import { userAdminSelector } from "../selectors/selectors";
 
-const AddNewMovieOfTheMonthForm = ({ onHide, show, handleUpdateTable } = {}) => {
-  const [{ userInfo, admin, BASE_URL }, dispatch] = useProvider([
-    selectors.userInfo,
-    selectors.admin,
-    selectors.url,
-  ]);
+function AddNewMovieOfTheMonthForm({ onHide, show } = {}) {
+  const { id, token, notPlayingMovies } = useSelector((state) => userAdminSelector(state));
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}/admin/${userInfo.username}/getMoviesNotPlaying`, {
-        headers: {
-          authorization: `Bearer ${userInfo.token}`,
-        },
-      })
-      .then(({ data }) => {
-        dispatch(adminMoviesNotPlayingAction(data));
-      })
-      .catch((error) =>
-        dispatch(handleError({ message: error.message, time: new Date().getTime() }))
-      );
-  }, []);
+    if (show) dispatch(getNotShowingMoviesAction({ id, token }));
+  }, [show]);
 
   const formik = useFormik({
     initialValues: {
       movie_id: 0,
     },
     onSubmit: (values) => {
-      console.log(values);
-      axios
-        .post(
-          `${BASE_URL}/admin/${userInfo.username}/movieOfTheMonth/create`,
-          {
-            username: userInfo.username,
-            values,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
-            },
-          }
-        )
-        .then((res) => {
-          if (errorHandling(res.data)) {
-            dispatch(
-              handleError({
-                message: res.data.message,
-                time: new Date().getTime(),
-              })
-            );
-          }
-        })
-        .then(handleUpdateTable)
-        .then(onHide)
-        .then(() => formik.resetForm())
-        .catch((error) =>
-          dispatch(
-            handleError({
-              message: error.message,
-              time: new Date().getTime(),
-            })
-          )
-        );
+      dispatch(addNewMovieOfTheMonthAction({ id, token, movie_id: values.movie_id }));
+      onHide();
+      formik.resetForm();
     },
     validationSchema: Yup.object({
       movie_id: Yup.number().required("Title required"),
@@ -94,8 +50,8 @@ const AddNewMovieOfTheMonthForm = ({ onHide, show, handleUpdateTable } = {}) => 
               value={formik.values.movie_id}
               type='text'
             >
-              <option></option>
-              {admin.moviesNotPlaying?.map((movie) => (
+              <option aria-label='movies not playing' />
+              {notPlayingMovies?.map((movie) => (
                 <option value={movie.id} key={movie.id}>
                   {movie.title}
                 </option>
@@ -120,6 +76,10 @@ const AddNewMovieOfTheMonthForm = ({ onHide, show, handleUpdateTable } = {}) => 
       </Modal.Footer>
     </Modal>
   );
+}
+AddNewMovieOfTheMonthForm.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
 };
 
 export { AddNewMovieOfTheMonthForm };

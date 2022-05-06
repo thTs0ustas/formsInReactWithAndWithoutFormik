@@ -8,9 +8,9 @@ import { useGuestSignup } from "../hooks/useGuestSignup";
 import { errorHandling } from "../errors/errorHandling";
 import { selectors, useProvider } from "../../../model";
 
-const SignupComponent = () => {
+function SignupComponent() {
   const [{ BASE_URL }] = useProvider([selectors.url]);
-  let [error, setError] = useState("");
+  const [error, setError] = useState("");
   const { setState } = useGuestSignup();
   return (
     <Formik
@@ -97,6 +97,6 @@ const SignupComponent = () => {
       )}
     </Formik>
   );
-};
+}
 
 export { SignupComponent };

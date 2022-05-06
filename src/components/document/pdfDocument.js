@@ -1,5 +1,6 @@
 import React from "react";
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import PropTypes from "prop-types";
 
 // Create styles
 const styles = StyleSheet.create({
@@ -15,15 +16,21 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const MyDocument = ({ children }) => (
-  <Document>
-    <Page size='A4' style={styles.page}>
-      <View style={styles.section}>
-        <Text>Section #1</Text>
-      </View>
-      <View style={styles.section}>{children}</View>
-    </Page>
-  </Document>
-);
+function MyDocument({ children }) {
+  return (
+    <Document>
+      <Page size='A4' style={styles.page}>
+        <View style={styles.section}>
+          <Text>Section #1</Text>
+        </View>
+        <View style={styles.section}>{children}</View>
+      </Page>
+    </Document>
+  );
+}
+
+MyDocument.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export { MyDocument };

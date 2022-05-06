@@ -2,7 +2,7 @@ import React from "react";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 import { SocialDiv } from "./MobileButtonsEl";
 
-const SocialMobile = () => {
+function SocialMobile() {
   return (
     <SocialDiv>
       <BsFacebook />
@@ -10,6 +10,6 @@ const SocialMobile = () => {
       <BsTwitter />
     </SocialDiv>
   );
-};
+}
 
 export default SocialMobile;

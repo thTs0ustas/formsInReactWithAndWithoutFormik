@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { TableContainer } from "./styledComponents/TableContainer";
 import { TableStyles } from "./styledComponents/TableStyles";
 
-const TicketPrices = () => {
+function TicketPrices() {
   return (
     <TableContainer>
       <h1>Ticket Prices</h1>
@@ -36,11 +36,11 @@ const TicketPrices = () => {
       </TableStyles>
       <div>
         <h2>
-          Not a member yet? Sign Up<Link to={"/signup"}> Here</Link> and start saving.
+          Not a member yet? Sign Up<Link to='/signup'> Here</Link> and start saving.
         </h2>
       </div>
     </TableContainer>
   );
-};
+}
 
 export { TicketPrices };

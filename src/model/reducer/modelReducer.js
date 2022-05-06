@@ -1,17 +1,15 @@
-import { actionTypes } from "../actions";
 import produce from "immer";
-import { INITIAL_STATE } from "../constants/constants";
 import { filter } from "lodash/fp";
 import { forEach, map, omit } from "lodash";
+import { INITIAL_STATE } from "../constants/constants";
+import { actionTypes } from "../actions";
 
 export const modelReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case actionTypes.initStore:
-      return produce(state, () => {
-        return payload;
-      });
+      return produce(state, () => payload);
     case actionTypes.clearAdmin:
       return produce(state, (draft) => {
         draft.admin = INITIAL_STATE.admin;
@@ -35,9 +33,9 @@ export const modelReducer = (state, action) => {
       });
 
     case actionTypes.request:
-      let seats = {};
-      let reservedSeats = {};
       return produce(state, (draft) => {
+        const seats = {};
+        const reservedSeats = {};
         const {
           movie: { Movie },
           screenings,
@@ -52,7 +50,7 @@ export const modelReducer = (state, action) => {
 
         draft.reservation.requests = {
           movies: Movie,
-          cinemas: map(auditoriums, (item) => item["Cinema"]),
+          cinemas: map(auditoriums, (item) => item.Cinema),
           auditoriums: map(auditoriums, (item) => omit(item, ["Cinema", "Seats"])),
           screenings: map(screenings, (item) => omit(item, ["ReservedSeats"])),
           seats,
@@ -62,11 +60,13 @@ export const modelReducer = (state, action) => {
 
     case actionTypes.addSeat:
       return produce(state, (draft) => {
-        let { adult, child, member, student } = state.reservation.inputValues.numOfTickets;
-        let adultSeat = filter({ discount_type: "adult" })(state.reservation.inputValues.seat);
-        let childSeat = filter({ discount_type: "child" })(state.reservation.inputValues.seat);
-        let memberSeat = filter({ discount_type: "member" })(state.reservation.inputValues.seat);
-        let studentSeat = filter({ discount_type: "student" })(state.reservation.inputValues.seat);
+        const { adult, child, member, student } = state.reservation.inputValues.numOfTickets;
+        const adultSeat = filter({ discount_type: "adult" })(state.reservation.inputValues.seat);
+        const childSeat = filter({ discount_type: "child" })(state.reservation.inputValues.seat);
+        const memberSeat = filter({ discount_type: "member" })(state.reservation.inputValues.seat);
+        const studentSeat = filter({ discount_type: "student" })(
+          state.reservation.inputValues.seat
+        );
 
         if (adultSeat.length < adult)
           draft.reservation.inputValues.seat[payload.value.id] = {

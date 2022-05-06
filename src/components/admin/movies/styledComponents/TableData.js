@@ -18,7 +18,10 @@ const TableHeader = styled.th`
       : ""};
 
   &:first-child {
-    width: 50px !important;
+    width: 5% !important;
+  }
+  &:nth-child(2) {
+    width: 20% !important;
   }
   &:nth-child(3) {
     width: 40% !important;

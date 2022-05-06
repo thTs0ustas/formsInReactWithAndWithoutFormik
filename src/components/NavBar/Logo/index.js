@@ -1,13 +1,14 @@
 import React from "react";
-import { LogoImg } from "./LogoElement";
 import { Link } from "react-router-dom";
+import { LogoImg } from "./LogoElement";
+import logo from "../../../assets/imgs/retro-cinema.png";
 
-const Logo = () => {
+function Logo() {
   return (
-    <Link to={"/"}>
-      <LogoImg src={require("../../../assets/imgs/retro-cinema.png")} />
+    <Link to='/'>
+      <LogoImg src={logo} />
     </Link>
   );
-};
+}
 
 export default Logo;

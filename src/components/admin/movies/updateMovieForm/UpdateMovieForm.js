@@ -1,60 +1,27 @@
+import React, { useEffect } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { keys, map } from "lodash";
-import axios from "axios";
-import { errorHandling } from "../../../signInForm/errors/errorHandling";
-import { handleError } from "../../../../model/actions";
-import { selectors, useProvider } from "../../../../model";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import { genres } from "../data/genres";
-import { useEffect } from "react";
+import updateAdminMovieAction from "../actions/updateAdminMovieAction";
 
-const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
-  const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
-
+function UpdateMovieForm({ data, onHide, show }) {
+  const dispatch = useDispatch();
+  const { token, id } = useSelector((state) => state.user);
   const formik = useFormik({
     initialValues: {
       title: "",
       description: "",
       genre: "",
       duration: "",
-      release_year: "",
+      release_year: 0,
     },
     onSubmit: (values) => {
-      axios
-        .put(
-          `${BASE_URL}/admin/update/movie/${data.id}`,
-          {
-            username: userInfo.username,
-            values,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
-            },
-          }
-        )
-        .then((res) => {
-          if (errorHandling(res.data)) {
-            dispatch(
-              handleError({
-                message: res.data.message,
-                time: new Date().getTime(),
-              })
-            );
-          }
-        })
-        .then(handleUpdateTable)
-        .then(onHide)
-        .then(() => formik.resetForm())
-        .catch((error) =>
-          dispatch(
-            handleError({
-              message: error.message,
-              time: new Date().getTime(),
-            })
-          )
-        );
+      dispatch(updateAdminMovieAction({ values, id, movieId: data.id, token }));
+      formik.resetForm();
     },
     validationSchema: Yup.object({
       title: Yup.string(),
@@ -64,6 +31,7 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
       release_year: Yup.number().min(1890).max(2002),
     }),
   });
+
   useEffect(() => {
     if (show) keys(formik.values).forEach((item) => formik.setFieldValue(item, data[item], false));
   }, [show]);
@@ -75,8 +43,8 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
       </Modal.Header>
       <Modal.Body>
         <Form
-          onSubmit={(event) => {
-            formik.handleSubmit(event);
+          onSubmit={(e) => {
+            formik.handleSubmit(e);
             onHide();
           }}
         >
@@ -107,7 +75,7 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
                 onChange={formik.handleChange}
                 name='duration'
                 value={formik.values.duration || ""}
-                type='text'
+                type='number'
               />
             </Form.Group>
 
@@ -133,8 +101,8 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
               <Form.Control
                 onChange={formik.handleChange}
                 name='release_year'
-                value={formik.values.release_year || ""}
-                type='text'
+                value={+formik.values.release_year || ""}
+                type='number'
               />
             </Form.Group>
           </Row>
@@ -155,6 +123,10 @@ const UpdateMovieForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
       </Modal.Footer>
     </Modal>
   );
+}
+UpdateMovieForm.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
 };
-
 export { UpdateMovieForm };

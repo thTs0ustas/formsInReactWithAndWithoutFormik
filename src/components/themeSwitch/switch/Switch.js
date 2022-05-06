@@ -1,14 +1,12 @@
-import {
-  CheckBox,
-  CheckBoxLabel,
-  CheckBoxWrapper,
-} from "../styledComponents/switchStyles";
-import { changeTheme, useProvider } from "../../../model";
 import { IoMoon } from "react-icons/io5";
 import { BsFillSunFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { CheckBox, CheckBoxLabel, CheckBoxWrapper } from "../styledComponents/switchStyles";
+import { setTheme } from "../../../rModel";
 
-export const Switch = () => {
-  const [{ theme }, dispatch] = useProvider(["theme"]);
+export function Switch() {
+  const { theme } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
 
   return (
     <CheckBoxWrapper>
@@ -19,14 +17,14 @@ export const Switch = () => {
           left: 4,
           top: 4,
           zIndex: 1,
-          visibility: theme ? "hidden" : "visible",
+          visibility: theme === "light" ? "hidden" : "visible",
         }}
       />
       <CheckBox
         id='checkbox'
         type='checkbox'
-        checked={!theme}
-        onChange={() => dispatch(changeTheme())}
+        checked={theme !== "light"}
+        onChange={() => dispatch(setTheme())}
       />
       <CheckBoxLabel htmlFor='checkbox' />
       <BsFillSunFill
@@ -36,9 +34,9 @@ export const Switch = () => {
           left: 28,
           top: 4,
           zIndex: 1,
-          visibility: !theme ? "hidden" : "visible",
+          visibility: theme !== "light" ? "hidden" : "visible",
         }}
       />
     </CheckBoxWrapper>
   );
-};
+}

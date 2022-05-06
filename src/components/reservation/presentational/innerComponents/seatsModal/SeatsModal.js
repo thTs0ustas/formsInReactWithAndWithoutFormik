@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader } from "react-bootstrap";
+import { keys } from "lodash";
+import PropTypes from "prop-types";
 import { ContinueButton } from "../../../../../theme";
 import { ModalContainer } from "../../styledComponents";
-import { keys } from "lodash";
 
-const SeatsModal = ({ children, disabled, sum, seat }) => {
+function SeatsModal({ children, disabled, sum, seat }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -19,12 +20,7 @@ const SeatsModal = ({ children, disabled, sum, seat }) => {
         Next
       </ContinueButton>
 
-      <ModalContainer
-        show={show}
-        onHide={handleClose}
-        backdrop='static'
-        keyboard={false}
-      >
+      <ModalContainer show={show} onHide={handleClose} backdrop='static' keyboard={false}>
         <ModalHeader closeButton>
           <Modal.Title>SELECT YOU SEATS</Modal.Title>
         </ModalHeader>
@@ -33,9 +29,7 @@ const SeatsModal = ({ children, disabled, sum, seat }) => {
           <p>
             can choose{" "}
             <strong>
-              {sum - keys(seat).length > -1
-                ? sum - keys(seat).length
-                : "Deselect some seats"}
+              {sum - keys(seat).length > -1 ? sum - keys(seat).length : "Deselect some seats"}
             </strong>{" "}
             more seat(s)
           </p>
@@ -43,6 +37,12 @@ const SeatsModal = ({ children, disabled, sum, seat }) => {
       </ModalContainer>
     </>
   );
-};
+}
 
+SeatsModal.propTypes = {
+  children: PropTypes.node.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  sum: PropTypes.number.isRequired,
+  seat: PropTypes.object.isRequired,
+};
 export { SeatsModal };

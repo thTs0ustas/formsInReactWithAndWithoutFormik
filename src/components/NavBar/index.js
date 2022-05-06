@@ -6,7 +6,7 @@ import ButtonsDiv from "./MobileButtons/index";
 import Logo from "./Logo";
 import { Burger } from "./Burger";
 
-const NavBar = () => {
+function NavBar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen);
@@ -21,6 +21,6 @@ const NavBar = () => {
       <ButtonsDiv isOpen={navbarOpen} />
     </Nav>
   );
-};
+}
 
 export default NavBar;

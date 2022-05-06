@@ -1,39 +1,42 @@
 import { Table } from "react-bootstrap";
-import TableHead from "./TableHead";
+import { chunk, keys } from "lodash";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
-import { handleUpdateTable } from "./helpers/handleUpdateTable";
-import { useAdminTable } from "./hooks/useAdminTable";
-import { chunk, keys } from "lodash";
-import { useState } from "react";
+import { useAdminScreeningsTable } from "./hooks/useAdminScreeningsTable";
 import { PaginationBasic } from "./pagination/Pagination";
+import { TableHead } from "../components";
+import { TableHeader } from "./styledComponents/TableData";
+import { adminSelector } from "./selectors/selectors";
 
-const ShowScreenings = ({ eventK }) => {
+function ShowScreenings({ eventK }) {
   const dividers = {
     fifty: 50,
     twenty: 20,
   };
-  const { tableData, setUpdateTable, setTableData, updateTable, setDeletePrompt } =
-    useAdminTable(eventK);
-
-  const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
+  useAdminScreeningsTable(eventK);
+  const { screenings } = useSelector(adminSelector);
+  const dispatch = useDispatch();
   const [page, setPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
 
-  const PER_PAGES = Math.floor(tableData.length / (tableData.length / itemsPerPage));
-  const slices = tableData.length < PER_PAGES ? [tableData] : chunk(tableData, PER_PAGES);
+  const slices = chunk(screenings, itemsPerPage);
+
   const numberOfPages = slices.length;
 
   return (
-    <div style={{ width: "80vw", margin: "0 auto" }}>
+    <div>
       <Table bordered hover style={{ backgroundColor: "white" }}>
-        <TableHead {...{ columns, handleSorting: handleSorting(tableData, setTableData) }} />
+        <TableHead
+          {...{ columns, handleSorting: handleSorting(screenings, dispatch), TableHeader }}
+        />
         <TableBody
           {...{
             columns,
             tableData: slices[page],
-            handleUpdateTable: handleUpdateTable(updateTable, setUpdateTable),
-            setDeletePrompt,
           }}
         />
       </Table>
@@ -60,6 +63,10 @@ const ShowScreenings = ({ eventK }) => {
       </div>
     </div>
   );
+}
+
+ShowScreenings.propTypes = {
+  eventK: PropTypes.string.isRequired,
 };
 
 export { ShowScreenings };

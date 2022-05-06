@@ -1,40 +1,46 @@
 import { Table } from "react-bootstrap";
-import TableHead from "./TableHead";
+import { chunk, keys } from "lodash";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
-import { handleUpdateTable } from "./helpers/handleUpdateTable";
-import { useAdminTable } from "./hooks/useAdminTable";
-import { chunk, keys } from "lodash";
-import { useState } from "react";
+import { useMoviesOfTheMonthTable } from "./hooks/useMoviesOfTheMonthTable";
 import { PaginationBasic } from "./pagination/Pagination";
+import { TableHead } from "../components";
+import { TableHeader } from "./styledComponents/TableData";
+import { adminSelector } from "./selectors/selectors";
 
-const ShowMoviesOfTheMonth = ({ eventK }) => {
+function ShowMoviesOfTheMonth({ eventK }) {
   const dividers = {
     fifty: 50,
     twenty: 20,
     ten: 10,
   };
-  const { tableData, setUpdateTable, setTableData, updateTable, setDeletePrompt } =
-    useAdminTable(eventK);
+
+  const { moviesOfTheMonth } = useSelector(adminSelector);
+  useMoviesOfTheMonthTable(eventK);
+
+  const dispatch = useDispatch();
 
   const [itemsPerPage, setItemsPerPage] = useState(dividers.twenty);
   const [page, setPage] = useState(0);
 
-  const PER_PAGES = Math.floor(tableData.length / (tableData.length / itemsPerPage));
-  const slices = tableData.length < PER_PAGES ? [tableData] : chunk(tableData, PER_PAGES);
+  const slices = chunk(moviesOfTheMonth, itemsPerPage);
+
   const numberOfPages = slices.length;
 
   return (
-    <div style={{ width: "80vw", margin: "0 auto" }}>
+    <div>
       <Table bordered hover style={{ backgroundColor: "white" }}>
-        <TableHead {...{ columns, handleSorting: handleSorting(tableData, setTableData) }} />
+        <TableHead
+          {...{ columns, handleSorting: handleSorting(moviesOfTheMonth, dispatch), TableHeader }}
+        />
         <TableBody
           {...{
             columns,
             tableData: slices[page],
-            handleUpdateTable: handleUpdateTable(updateTable, setUpdateTable),
-            setDeletePrompt,
           }}
         />
       </Table>
@@ -61,6 +67,8 @@ const ShowMoviesOfTheMonth = ({ eventK }) => {
       </div>
     </div>
   );
+}
+ShowMoviesOfTheMonth.propTypes = {
+  eventK: PropTypes.string.isRequired,
 };
-
 export { ShowMoviesOfTheMonth };

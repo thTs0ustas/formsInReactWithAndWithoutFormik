@@ -2,7 +2,7 @@ import React from "react";
 import { Spinner } from "react-bootstrap";
 import { usePayment } from "./hooks/usePayment";
 
-export const Payment = () => {
+export function Payment() {
   usePayment();
 
   return (
@@ -10,4 +10,4 @@ export const Payment = () => {
       <span className='visually-hidden' />
     </Spinner>
   );
-};
+}

@@ -25,6 +25,7 @@ const CheckBoxLabel = styled.label`
     transition: 0.2s;
   }
 `;
+
 const CheckBox = styled.input`
   opacity: 0;
   border-radius: 15px;

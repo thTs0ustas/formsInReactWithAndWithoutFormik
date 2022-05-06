@@ -1,16 +1,16 @@
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-import { errorHandling } from "../../../signInForm/errors/errorHandling";
-import { handleError } from "../../../../model/actions";
-import { selectors, useProvider } from "../../../../model";
 import { useEffect } from "react";
 import { keys } from "lodash";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserAction } from "../actions/updateUserAction";
+import { userSelector } from "../selectors/selectors";
 
-const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
-  const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
-
+function UpdateUserForm({ data, onHide, show } = {}) {
+  const dispatch = useDispatch();
+  const { id, token } = useSelector(userSelector);
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -23,40 +23,9 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
     },
 
     onSubmit: (values) => {
-      axios
-        .put(
-          `${BASE_URL}/admin/update/user/${data.id}`,
-          {
-            username: userInfo.username,
-            values,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
-            },
-          }
-        )
-        .then((res) => {
-          if (errorHandling(res.data)) {
-            dispatch(
-              handleError({
-                message: res.data.message,
-                time: new Date().getTime(),
-              })
-            );
-          }
-        })
-        .then(handleUpdateTable)
-        .then(() => formik.resetForm())
-        .then(onHide)
-        .catch((error) =>
-          dispatch(
-            handleError({
-              message: error.message,
-              time: new Date().getTime(),
-            })
-          )
-        );
+      dispatch(updateUserAction({ id, token, userId: data.id, values }));
+      formik.resetForm();
+      onHide();
     },
     validationSchema: Yup.object({
       username: Yup.string(),
@@ -139,7 +108,7 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
                 name='postal'
                 value={formik.values.postal}
                 type='text'
-              ></Form.Control>
+              />
             </Form.Group>
 
             <Form.Group as={Col} controlId='formGridNumber'>
@@ -169,6 +138,11 @@ const UpdateUserForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
       </Modal.Footer>
     </Modal>
   );
-};
+}
 
+UpdateUserForm.propTypes = {
+  onHide: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+  data: PropTypes.object.isRequired,
+};
 export { UpdateUserForm };

@@ -19,6 +19,7 @@ export const Container = styled.div`
     filter: grayscale(100%);
     border-bottom: 1px solid ${(props) => props.theme.secondary};
   }
+
   .bottom-div {
     padding: 10px;
     min-height: 250px;
@@ -62,7 +63,7 @@ export const Container = styled.div`
   }
 `;
 
-//Elements inside Bottom Div
+// Elements inside Bottom Div
 export const Title = styled.h1`
   position: relative;
   margin-bottom: 20px;

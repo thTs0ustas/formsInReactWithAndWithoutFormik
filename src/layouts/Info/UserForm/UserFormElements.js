@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-//input + label Div
+// input + label Div
 export const Div = styled.div`
   display: flex;
   height: 60px;
@@ -43,7 +43,7 @@ export const Label = styled.label`
   }
 `;
 
-//Submit and Edit Button generic styling
+// Submit and Edit Button generic styling
 const btn = styled.button`
   outline: none;
   border: none;
@@ -68,7 +68,7 @@ export const Edit = styled(btn)`
   }
 `;
 
-//Container for buttons
+// Container for buttons
 export const ButtonDiv = styled.div`
   display: flex;
   justify-content: flex-end;

@@ -1,29 +1,38 @@
-import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { isEmpty } from "lodash";
 import MainPhoto from "./MainPhoto";
 import MainText from "./MainText";
-import { useParams } from "react-router-dom";
-import { selectors, useProvider } from "../../model";
+import { clearMovieInfo } from "../../rModel";
+import { PlaceholderComp } from "./placeholder/placehorlder";
+import getMovieAction from "../nowShowingMovies/actions/getMovieAction";
 
-const MoviePageContainer = () => {
-  const [{ BASE_URL }] = useProvider([selectors.url]);
-  const [movie, setMovie] = useState([]);
+function MoviePageContainer() {
+  const dispatch = useDispatch();
+  const { movieInfo = {} } = useSelector((state) => state.nowPlaying);
+  const { movie, screenings } = movieInfo;
   const { id } = useParams();
-  const getMovie = useCallback(() => {
-    axios.get(`${BASE_URL}/movies/moviepage/${id}`).then(({ data }) => {
-      setMovie(data);
-    });
-  }, [BASE_URL, id]);
+
   useEffect(() => {
-    getMovie();
-  }, [getMovie]);
+    if (isEmpty(movieInfo)) {
+      dispatch(getMovieAction(id));
+    }
+    return () => {
+      dispatch(clearMovieInfo());
+    };
+  }, [dispatch]);
 
   return (
     <div>
-      <MainPhoto image={movie?.movie?.image} title={movie?.movie?.title} />
-      <MainText movie={movie} id={id} />
+      <MainPhoto image={movie?.image} title={movie?.title} />
+      {isEmpty(movieInfo) ? (
+        <PlaceholderComp />
+      ) : (
+        <MainText movie={movie} screenings={screenings} id={id} />
+      )}
     </div>
   );
-};
+}
 
 export default MoviePageContainer;

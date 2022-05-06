@@ -1,12 +1,12 @@
+import React from "react";
 import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 
-import React from "react";
 import { SimpleMessage, Switch } from "../../components";
 import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 
-const ThankYouForYourThoughts = ({ username }) => {
+function ThankYouForYourThoughts() {
   const message = "Thank you for your thoughts!!!\nWe might give you a call!!";
   return (
     <>
@@ -14,7 +14,7 @@ const ThankYouForYourThoughts = ({ username }) => {
         <SignUpBar>
           <Switch />
           <div>
-            <SignupBarPart username={username} />
+            <SignupBarPart />
           </div>
         </SignUpBar>
         <NavDiv>
@@ -27,5 +27,5 @@ const ThankYouForYourThoughts = ({ username }) => {
       <Footer />
     </>
   );
-};
+}
 export { ThankYouForYourThoughts };

@@ -61,6 +61,7 @@ const userLoginAction = (payload) => ({
   type: actionTypes.userLogin,
   payload,
 });
+
 const userUpdateAction = (payload) => ({
   type: actionTypes.userUpdate,
   payload,

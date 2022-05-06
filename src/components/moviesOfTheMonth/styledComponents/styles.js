@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Col } from "react-bootstrap";
 
 const TitleHeader = styled.div`
   width: 100%;
@@ -40,14 +39,22 @@ const TitleHeader = styled.div`
 const NowShowing = styled.div`
   margin: 0 auto;
   padding-bottom: 50px;
-  max-width: 1450px;
+
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "movieCards movieCards movieCards ";
+  text-align: center;
+  grid-gap: 0.25rem;
   background-color: ${({ theme }) => theme.bgMain};
-
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "movieCards movieCards";
+  }
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: "movieCards";
+  }
   & p {
     font-weight: bold;
     text-wrap: normal;
@@ -173,8 +180,9 @@ const MoviesMonthScreeningItem = styled.div`
   font-weight: bold;
 `;
 
-const ColStyledNowPlaying = styled(Col)`
+const ColStyledNowPlaying = styled.div`
   display: flex;
+  grid-area: movieCards;
 
   @media (max-width: 576px) {
     h2 {
@@ -186,7 +194,7 @@ const ColStyledNowPlaying = styled(Col)`
   }
 `;
 
-const ColStyled = styled(Col)`
+const ColStyled = styled.div`
   display: inline-block;
   max-width: 1450px;
 

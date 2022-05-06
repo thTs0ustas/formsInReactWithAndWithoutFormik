@@ -1,12 +1,12 @@
 import styled, { keyframes } from "styled-components";
 
-//Animations for When the User Clicks the Burger
+// Animations for When the User Clicks the Burger
 export const letterAnimation = keyframes`
  0% { opacity:0;}
  100% { opacity: 1;}
  `;
 
-//Nav main Container
+// Nav main Container
 export const Nav = styled.nav`
   background: linear-gradient(black, transparent);
   width: 100%;
@@ -48,12 +48,13 @@ export const Nav = styled.nav`
     ${({ isOpen }) =>
       isOpen &&
       `
+      position: fixed;
 		justify-content: center;
 		`}
   }
 `;
 
-//Container for the LOGO and the BURGER - styled for Mobile Screens
+// Container for the LOGO and the BURGER - styled for Mobile Screens
 export const MobileContainer = styled.div`
   @media screen and (max-width: 800px) {
     display: flex;

@@ -10,11 +10,11 @@ export const paymentWithStripe = async (url, data, request, dispatch, token) => 
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(({ data }) => {
-        if (data.url) return data;
-        return Promise.reject(data);
+      .then(({ data: response }) => {
+        if (response.url) return response;
+        return Promise.reject(response);
       })
-      .then((data) => window.location.replace(data["url"]))
+      .then((dataWithUrl) => window.location.replace(dataWithUrl.url))
       .catch((error) => {
         dispatch(
           handleError({

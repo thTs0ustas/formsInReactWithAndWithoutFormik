@@ -1,9 +1,9 @@
+import React, { useState } from "react";
+import { Form } from "./UserForm/UserForm";
 import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 import NavBar from "../../components/NavBar";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
-import React, { useState } from "react";
 import SideDiv from "./sidebar/sidebar";
-import Form from "./UserForm/UserForm";
 import History from "./history/history";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -11,7 +11,7 @@ import Footer from "../../components/footer/Footer";
 import { GridWrapper, InfoMain, InfoSidebar, Section } from "./styles/infoElements";
 import { Switch } from "../../components";
 
-export const InfoPage = ({ username }) => {
+export function InfoPage() {
   const [selected, setSelected] = useState("");
 
   const showSelectedOption = () => {
@@ -20,7 +20,6 @@ export const InfoPage = ({ username }) => {
         return <History />;
       case "form":
         return <Form />;
-
       default:
         return <Form />;
     }
@@ -32,7 +31,7 @@ export const InfoPage = ({ username }) => {
         <SignUpBar>
           <Switch />
           <div>
-            <SignupBarPart username={username} />
+            <SignupBarPart />
           </div>
         </SignUpBar>
         <NavDiv>
@@ -56,4 +55,4 @@ export const InfoPage = ({ username }) => {
       </footer>
     </>
   );
-};
+}

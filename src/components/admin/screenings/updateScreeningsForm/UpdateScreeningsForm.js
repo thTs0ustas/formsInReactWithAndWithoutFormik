@@ -1,18 +1,18 @@
 import { useEffect } from "react";
-import axios from "axios";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import { keys } from "lodash";
 import TimePicker from "react-bootstrap-time-picker";
 
-import { selectors, useProvider } from "../../../../model";
-import { errorHandling } from "../../../signInForm/errors/errorHandling";
-import { handleError } from "../../../../model/actions";
 import { timeFromInt } from "time-number/lib";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { updateScreeningsAction } from "../actions/updateScreeningsAction";
+import { userSelector } from "../selectors/selectors";
 
-const UpdateScreeningsForm = ({ data, onHide, show, handleUpdateTable } = {}) => {
-  const [{ userInfo, BASE_URL }, dispatch] = useProvider([selectors.userInfo, selectors.url]);
-
+function UpdateScreeningsForm({ data, onHide, show } = {}) {
+  const { id, token } = useSelector(userSelector);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -22,41 +22,9 @@ const UpdateScreeningsForm = ({ data, onHide, show, handleUpdateTable } = {}) =>
       movie_date: "",
     },
     onSubmit: (values) => {
-      axios
-        .put(
-          `${BASE_URL}/admin/update/screening/${data.id}`,
-          {
-            username: userInfo.username,
-            values,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
-            },
-          }
-        )
-        .then((res) => {
-          if (errorHandling(res.data)) {
-            dispatch(
-              handleError({
-                message: res.data.message,
-                time: new Date().getTime(),
-              })
-            );
-          }
-        })
-
-        .then(handleUpdateTable)
-        .then(() => formik.resetForm())
-        .then(onHide)
-        .catch((error) =>
-          dispatch(
-            handleError({
-              message: error.message,
-              time: new Date().getTime(),
-            })
-          )
-        );
+      dispatch(updateScreeningsAction({ id, token, values, screeningId: data.id }));
+      formik.resetForm();
+      onHide();
     },
     validator: () => ({}),
     // validationSchema: Yup.object({
@@ -155,6 +123,11 @@ const UpdateScreeningsForm = ({ data, onHide, show, handleUpdateTable } = {}) =>
       </Modal.Footer>
     </Modal>
   );
+}
+UpdateScreeningsForm.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export { UpdateScreeningsForm };

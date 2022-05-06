@@ -19,8 +19,9 @@ import CarouselHero from "../../components/HeroSlider";
 import { CardComponent, PromoMember, PromoStudents, Switch } from "../../components";
 import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
 import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
+import { useNowShowingMovies } from "./hooks/useNowShowingMovies";
 
-const HomePageLayout = ({ username }) => {
+function HomePageLayout() {
   const genres = [
     "action",
     "adventure",
@@ -35,13 +36,14 @@ const HomePageLayout = ({ username }) => {
     "war",
     "western",
   ];
+  useNowShowingMovies();
   return (
     <HomeDiv>
       <Header mainPage={false}>
         <SignUpBar>
           <Switch />
           <div>
-            <SignupBarPart username={username} />
+            <SignupBarPart />
           </div>
         </SignUpBar>
         <VideoWallDiv>
@@ -74,13 +76,11 @@ const HomePageLayout = ({ username }) => {
           </Typography>
           <Archive>
             <Row>
-              {genres.map((genre) => {
-                return (
-                  <Col sm={6} key={genre}>
-                    <CardComponent genre={genre} />
-                  </Col>
-                );
-              })}
+              {genres.map((genre) => (
+                <Col sm={6} key={genre}>
+                  <CardComponent genre={genre} />
+                </Col>
+              ))}
             </Row>
           </Archive>
         </Features>
@@ -88,6 +88,6 @@ const HomePageLayout = ({ username }) => {
       <Footer />
     </HomeDiv>
   );
-};
+}
 
 export { HomePageLayout };

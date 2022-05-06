@@ -1,31 +1,32 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
 import { Reservation } from "../presentational/reservation";
 import { useProvider } from "../../../model";
 import { useResContainer } from "./customHooks/useResContainer";
 
 import { handleChange, handleSeatAdd, handleSeatRemove } from "../helpers";
 import { useContinueButtonHandler } from "./customHooks/useContinueButtonHandler";
+import { BASE_URL } from "../../../constants";
 
-const ReservationContainer = () => {
-  const [state, dispatch] = useProvider([
-    "userInfo.username",
-    "userInfo.isMember",
-    "userInfo.token",
-    "reservation.inputValues",
-    "reservation.requests",
-    "reservation.response",
-    "BASE_URL",
-  ]);
+function ReservationContainer() {
+  const {
+    user: { username, isMember },
+    requests,
+    inputValues,
+    seat,
+  } = useSelector((state) => ({
+    user: state.user,
+    requests: state.reservation.requests,
+    inputValues: state.reservation.inputValues,
+    seat: state.seat,
+  }));
+  const dispatch = useDispatch();
+  const [state] = useProvider(["reservation.inputValues", "reservation.response"]);
 
   const {
-    username,
-    inputValues,
-    requests,
-    isMember,
     inputValues: { numOfTickets },
-    BASE_URL,
   } = state;
 
   const navigate = useNavigate();
@@ -37,12 +38,10 @@ const ReservationContainer = () => {
     numOfTickets
   );
 
-  useResContainer({
-    BASE_URL,
-    dispatch,
-  });
+  useResContainer(dispatch);
 
   const props = {
+    seat,
     isMember,
     image: data.state,
     handleContinueButton,
@@ -61,6 +60,6 @@ const ReservationContainer = () => {
   };
 
   return <Reservation {...props} />;
-};
+}
 
 export { ReservationContainer };

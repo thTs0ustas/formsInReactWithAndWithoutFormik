@@ -5,4 +5,5 @@ export const columns = [
   { label: "Duration", accessor: "duration", sortable: true },
   { label: "Genre", accessor: "genre", sortable: true },
   { label: "Release Year", accessor: "release_year", sortable: true },
+  { label: "Delete", accessor: "delete", sortable: false },
 ];

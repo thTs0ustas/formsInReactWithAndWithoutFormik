@@ -8,6 +8,7 @@ const ReservationForm = styled(Form)`
   width: 100%;
   margin: 0 auto;
 `;
+
 const ReservationInfoBar = styled.div`
   z-index: 1;
   margin: 0 auto;

@@ -3,8 +3,7 @@ import styled from "styled-components";
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: auto;
-  margin-bottom: 40px;
+  margin: auto auto 40px;
   width: 50%;
 
   @media screen and (max-width: 768px) {
@@ -35,7 +34,7 @@ const MainTitle = styled.h2`
 `;
 
 const SectionTitle = styled.h3`
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 10px;
   color: #ffebc6;
   font-size: 20px;
@@ -56,7 +55,7 @@ const SectionTitle = styled.h3`
 `;
 
 const Paragraph = styled.p`
-  align-items: left;
+  align-items: flex-start;
   padding-bottom: 10px;
   color: #fff;
   font-size: 18px;
@@ -127,10 +126,11 @@ const SessionDiv = styled.div`
 `;
 
 const SessionButton = styled.a`
+  width: 65px;
   cursor: pointer;
   margin-top: 10px;
   margin-right: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   padding: 5px 10px;
   border: 2px solid transparent;
   background-color: #b09661;

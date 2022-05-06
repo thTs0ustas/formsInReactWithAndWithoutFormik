@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Switch, Ticket } from "../../components";
 
 import { Header, Nav, NavDiv, SignInDiv, SignUpBar } from "../../theme";
@@ -7,17 +8,16 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import NavBar from "../../components/NavBar";
 import { TicketContainer } from "./styledComponents/ticketContainer";
 import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
-import { Link } from "react-router-dom";
 import { LinkToHome } from "../../components/simpleMessage/styledComponents/LinkToHome";
 
-const TicketLayout = ({ username }) => {
+function TicketLayout() {
   return (
     <SignInDiv>
       <Header>
         <SignUpBar>
           <Switch />
           <div>
-            <SignupBarPart username={username} />
+            <SignupBarPart />
           </div>
         </SignUpBar>
 
@@ -48,6 +48,6 @@ const TicketLayout = ({ username }) => {
       <Footer />
     </SignInDiv>
   );
-};
+}
 
 export { TicketLayout };

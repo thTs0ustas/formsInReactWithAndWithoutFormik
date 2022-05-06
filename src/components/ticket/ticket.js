@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { isEmpty } from "lodash";
+import { useReactToPrint } from "react-to-print";
 import { Barcode } from "./barcode/Barcode";
 import { Serial } from "./styledComponents/Serial";
 import { Table } from "./styledComponents/Table";
@@ -9,9 +11,7 @@ import { BiggerTd } from "./styledComponents/BiggerTd";
 import { Cinema, Info, MovieTitle, Title } from "./styledComponents/Misc";
 import { selectors, useProvider } from "../../model";
 import { useTicket } from "./hooks/useTicket";
-import { isEmpty } from "lodash";
 import { ContinueButton } from "../../theme";
-import { useReactToPrint } from "react-to-print";
 
 const pageStyle = `
   @page {
@@ -26,7 +26,7 @@ const pageStyle = `
 
  
 `;
-const Ticket = () => {
+function Ticket() {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -39,7 +39,7 @@ const Ticket = () => {
   ]);
   useTicket();
   const recentTicket = tickets?.at(-1);
-  console.log(recentTicket);
+
   return !isEmpty(tickets) ? (
     <>
       {recentTicket.seats.map(({ id, cost, row, number, barcode, numbers }) => (
@@ -107,6 +107,6 @@ const Ticket = () => {
       ))}
     </>
   ) : null;
-};
+}
 
 export { Ticket };

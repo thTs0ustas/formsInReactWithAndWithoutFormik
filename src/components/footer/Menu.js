@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import SocialIcons from "./SocialIcon";
 import { Column, MenuContainer, Title } from "./styles/Footer.styled";
-import { Link } from "react-router-dom";
 
 export default function Menu() {
   return (
@@ -10,16 +10,16 @@ export default function Menu() {
         <Title>Films</Title>
         <ul>
           <li>
-            <Link to={"/nowPlaying"}>Now Showing</Link>
+            <Link to='/nowPlaying'>Now Showing</Link>
           </li>
           <li>
-            <Link to={"/upcoming"}>Coming soon</Link>
+            <Link to='/upcoming'>Coming soon</Link>
           </li>
           <li>
-            <Link to={"/ticketPrices"}>Ticket Prices</Link>
+            <Link to='/ticketPrices'>Ticket Prices</Link>
           </li>
           <li>
-            <Link to={"/aboutUs"}>History</Link>
+            <Link to='/aboutUs'>History</Link>
           </li>
         </ul>
       </Column>
@@ -28,7 +28,7 @@ export default function Menu() {
         <Title>Contact us</Title>
         <ul>
           <li>
-            <a href='#'>(+18) 6969 696969</a>
+            <a href='#container'>(+18) 6969 696969</a>
           </li>
           <li>
             <a href='mailto:retrocinemas@hotmail.com'>Email Us</a>
