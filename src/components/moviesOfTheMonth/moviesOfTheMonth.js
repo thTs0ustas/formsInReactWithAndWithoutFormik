@@ -1,4 +1,7 @@
 import React from "react";
+import { map } from "lodash";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ColStyled,
   MoviesMonthImg,
@@ -9,10 +12,8 @@ import {
 } from "./styledComponents/styles";
 import { useMoviesOfTheMonth } from "./hooks/useMoviesOfTheMonth";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { map } from "lodash";
-import { Link, useNavigate } from "react-router-dom";
+
 import { NowShowingStackHome } from "../nowShowingMovies/styledComponents/styles";
-import { useSelector } from "react-redux";
 import { BASE_URL } from "../../constants";
 import { movieTime } from "./helpers/movieTime";
 

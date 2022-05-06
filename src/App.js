@@ -38,6 +38,7 @@ function App() {
   return (
     <ThemeProvider theme={theme[themeStyle]}>
       <GlobalStyles />
+
       <div className='App'>
         <Routes>
           <Route path='/'>

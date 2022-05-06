@@ -3,8 +3,7 @@ import styled from "styled-components";
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: auto;
-  margin-bottom: 40px;
+  margin: auto auto 40px;
   width: 50%;
 
   @media screen and (max-width: 768px) {

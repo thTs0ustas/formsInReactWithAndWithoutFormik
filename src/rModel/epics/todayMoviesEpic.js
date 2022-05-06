@@ -5,8 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import { BASE_URL } from "../../constants";
 import { actionTypes } from "../actions/actionTypes";
-import { setError } from "../reducers/errorReducer/errorReducer";
-import { getTodayMovies } from "../reducers/moviePageReducer/moviePageReducer";
+import { getTodayMovies, setError } from "../reducers";
 
 export const todayMoviesEpic = (action$) =>
   action$.pipe(

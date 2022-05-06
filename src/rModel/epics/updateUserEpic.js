@@ -5,8 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import { BASE_URL } from "../../constants";
 import { actionTypes } from "../actions/actionTypes";
-import { setError } from "../reducers/errorReducer/errorReducer";
-import { updateUser } from "../reducers/userReducer/userReducer";
+import { setError, updateUser } from "../reducers";
 
 export const updateUserEpic = (action$) =>
   action$.pipe(

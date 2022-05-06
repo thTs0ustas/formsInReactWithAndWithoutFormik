@@ -48,6 +48,7 @@ export const Nav = styled.nav`
     ${({ isOpen }) =>
       isOpen &&
       `
+      position: fixed;
 		justify-content: center;
 		`}
   }

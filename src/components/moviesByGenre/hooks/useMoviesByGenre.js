@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import moviesByGenreAction from "../actions/moviesByGenreActions";
-import { clearMoviesByGenre } from "../../../rModel/reducers/moviePageReducer/moviePageReducer";
+import { clearMoviesByGenre } from "../../../rModel";
 
 export const useMoviesByGenre = (genre) => {
   const dispatch = useDispatch();

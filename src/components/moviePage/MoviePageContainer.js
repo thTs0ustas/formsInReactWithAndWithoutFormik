@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import MainPhoto from "./MainPhoto";
 import MainText from "./MainText";
-import { clearMovieInfo } from "../../rModel/reducers/moviePageReducer/moviePageReducer";
+import { clearMovieInfo } from "../../rModel";
 import { PlaceholderComp } from "./placeholder/placehorlder";
 import getMovieAction from "../nowShowingMovies/actions/getMovieAction";
 

@@ -10,23 +10,25 @@ const TableStyles = styled.table`
   font-family: "Open Sans", sans-serif;
   color: ${(props) => props.theme.secondary};
   text-align: left;
-  th {
-    background-color: ${(props) => props.theme.dark};
-    padding: 10px;
-    border-bottom: 1px solid ${(props) => props.theme.primary};
-    font-weight: normal;
-    &:first-child {
-      width: 85%;
-    }
-  }
-  td {
-    padding: 10px;
-    border-bottom: 1px solid ${(props) => props.theme.primary};
-    font-weight: normal;
-  }
+  //noinspection CssInvalidPropertyValueth {
+  background-color: ${(props) => props.theme.dark};
+  padding: 10px;
+  border-bottom: 1px solid ${(props) => props.theme.primary};
+  font-weight: normal;
 
-  tr:hover {
-    background-color: ${(props) => props.theme.dark};
+  &:first-child {
+    width: 85%;
   }
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid ${(props) => props.theme.primary};
+  font-weight: normal;
+}
+
+tr:hover {
+  background-color: ${(props) => props.theme.dark};
+}
 `;
 export { TableStyles };
