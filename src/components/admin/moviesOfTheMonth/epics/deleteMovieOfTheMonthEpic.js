@@ -5,9 +5,9 @@ import axios from "axios";
 import moment from "moment";
 
 import { BASE_URL } from "../../../../constants";
-import { setError } from "../../../../rModel";
-import { actionTypes } from "../../../../rModel/actions/actionTypes";
-import { deleteMovieOfTheMonth } from "../../../../rModel/reducers/adminReducer/adminReducer";
+import { setError } from "../../../../features";
+import { actionTypes } from "../../../../features/actions/actionTypes";
+import { deleteMovieOfTheMonth } from "../../../../features/reducers/adminReducer/adminReducer";
 
 export const deleteMovieOfTheMonthEpic = (action$) =>
   action$.pipe(

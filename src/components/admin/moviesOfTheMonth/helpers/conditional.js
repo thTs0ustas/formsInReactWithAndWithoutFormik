@@ -1,3 +1,4 @@
+import { upperFirst } from "lodash";
 import { IconContainer } from "../styledComponents/IconContainer";
 
 const decideTdData = (data, accessor, Icon, index) => {
@@ -5,6 +6,9 @@ const decideTdData = (data, accessor, Icon, index) => {
   switch (accessor) {
     case "#":
       tdData = index + 1;
+      break;
+    case "genre":
+      tdData = upperFirst(data.genre);
       break;
     case "delete":
       tdData = (

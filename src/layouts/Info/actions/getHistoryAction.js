@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { actionTypes } from "../../../rModel/actions/actionTypes";
+import { actionTypes } from "../../../features/actions/actionTypes";
 
 const getHistoryAction = createAction(actionTypes.GET_HISTORY);
 

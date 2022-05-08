@@ -1,4 +1,4 @@
-import { setAdminScreenings } from "../../../../rModel/reducers";
+import { setAdminScreenings } from "../../../../features/reducers";
 
 const handleSorting = (data, setter) => (sortField, sortOrder) => {
   if (sortField) {

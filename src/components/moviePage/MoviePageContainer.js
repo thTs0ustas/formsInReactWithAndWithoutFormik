@@ -1,38 +1,23 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { isEmpty } from "lodash";
-import MainPhoto from "./MainPhoto";
-import MainText from "./MainText";
-import { clearMovieInfo } from "../../rModel";
+import { MainPhoto } from "./PagePhoto/MainPhoto";
+import { MainText } from "./PageText/MainText";
 import { PlaceholderComp } from "./placeholder/placehorlder";
-import getMovieAction from "../nowShowingMovies/actions/getMovieAction";
+import { useMoviePage } from "./hooks/useMoviePage";
 
 function MoviePageContainer() {
-  const dispatch = useDispatch();
-  const { movieInfo = {} } = useSelector((state) => state.nowPlaying);
-  const { movie, screenings } = movieInfo;
-  const { id } = useParams();
-
-  useEffect(() => {
-    if (isEmpty(movieInfo)) {
-      dispatch(getMovieAction(id));
-    }
-    return () => {
-      dispatch(clearMovieInfo());
-    };
-  }, [dispatch]);
+  const { movie, screenings, id } = useMoviePage();
 
   return (
     <div>
       <MainPhoto image={movie?.image} title={movie?.title} />
-      {isEmpty(movieInfo) ? (
+      {isEmpty(movie) ? (
         <PlaceholderComp />
       ) : (
-        <MainText movie={movie} screenings={screenings} id={id} />
+        <MainText movie={movie} screenings={screenings} id={Number(id)} />
       )}
     </div>
   );
 }
 
-export default MoviePageContainer;
+export { MoviePageContainer };

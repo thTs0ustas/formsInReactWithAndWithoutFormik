@@ -1,4 +1,4 @@
-import { setAdminUsers } from "../../../../rModel";
+import { setAdminUsers } from "../../../../features";
 
 const handleSorting = (data, setter) => (sortField, sortOrder) => {
   if (sortField) {

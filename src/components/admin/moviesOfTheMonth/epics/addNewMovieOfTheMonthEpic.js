@@ -5,8 +5,8 @@ import axios from "axios";
 import moment from "moment";
 
 import { BASE_URL } from "../../../../constants";
-import { setError } from "../../../../rModel";
-import { actionTypes } from "../../../../rModel/actions/actionTypes";
+import { setError } from "../../../../features";
+import { actionTypes } from "../../../../features/actions/actionTypes";
 import getAdminMovieOfTheMonthAction from "../actions/getAdminMovieOfTheMonthAction";
 
 export const addNewMovieOfTheMonthEpic = (action$) =>

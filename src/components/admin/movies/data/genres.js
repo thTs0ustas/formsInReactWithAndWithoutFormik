@@ -1,5 +1,5 @@
 const genres = [
-  "Action",
+  "action",
   "Adventure",
   "Animation",
   "Comedy",

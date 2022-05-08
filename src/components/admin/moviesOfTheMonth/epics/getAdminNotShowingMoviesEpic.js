@@ -3,9 +3,9 @@ import { catchError, map } from "rxjs/operators";
 import { from, mergeMap, of } from "rxjs";
 import axios from "axios";
 import moment from "moment";
-import { actionTypes } from "../../../../rModel/actions/actionTypes";
+import { actionTypes } from "../../../../features/actions/actionTypes";
 import { BASE_URL } from "../../../../constants";
-import { setAdminNotPlayingMovies, setError } from "../../../../rModel";
+import { setAdminNotPlayingMovies, setError } from "../../../../features";
 
 export const getAdminNotShowingMoviesEpic = (action$) =>
   action$.pipe(

@@ -7,9 +7,9 @@ import {
   MoviePhoto,
   MovieTitle,
   TrailerButton,
-} from "./styledComponents/MainPhotoStyles";
-import movieTheaterImage from "../../assets/imgs/movie-theater.jpg";
-import { BASE_URL } from "../../constants";
+} from "../styledComponents/MainPhotoStyles";
+import movieTheaterImage from "../../../assets/imgs/movie-theater.jpg";
+import { BASE_URL } from "../../../constants";
 
 function MainPhoto({ image, title }) {
   return (
@@ -28,4 +28,4 @@ MainPhoto.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
-export default MainPhoto;
+export { MainPhoto };

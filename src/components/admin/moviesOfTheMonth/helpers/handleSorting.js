@@ -1,4 +1,4 @@
-import { setAdminMoviesOfTheMonth } from "../../../../rModel";
+import { setAdminMoviesOfTheMonth } from "../../../../features";
 
 const handleSorting = (data, setter) => (sortField, sortOrder) => {
   if (sortField) {

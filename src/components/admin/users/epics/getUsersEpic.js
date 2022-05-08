@@ -3,9 +3,9 @@ import axios from "axios";
 import { catchError, map, switchMap } from "rxjs/operators";
 import moment from "moment";
 import { from, of } from "rxjs";
-import { actionTypes } from "../../../../rModel/actions/actionTypes";
+import { actionTypes } from "../../../../features/actions/actionTypes";
 import { BASE_URL } from "../../../../constants";
-import { setAdminUsers, setError } from "../../../../rModel";
+import { setAdminUsers, setError } from "../../../../features";
 
 const getUsersEpic = (action$) =>
   action$.pipe(

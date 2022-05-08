@@ -3,10 +3,10 @@ import axios from "axios";
 import { catchError, map, switchMap } from "rxjs/operators";
 import moment from "moment";
 import { from, of } from "rxjs";
-import { actionTypes } from "../../../../rModel/actions/actionTypes";
+import { actionTypes } from "../../../../features/actions/actionTypes";
 import { BASE_URL } from "../../../../constants";
-import { setError } from "../../../../rModel";
-import { setAdminScreenings } from "../../../../rModel/reducers";
+import { setError } from "../../../../features";
+import { setAdminScreenings } from "../../../../features/reducers";
 import { screeningsData } from "../../movies/helpers/screeningsData";
 
 const getScreeningsEpic = (action$) =>

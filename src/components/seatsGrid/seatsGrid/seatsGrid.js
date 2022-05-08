@@ -22,7 +22,9 @@ function SeatMatrix() {
           return (
             <Row key={uuid4()}>
               {map(cols, (column, i) => (
-                <Col key={i}> {GenerateSeats(cols[i])}</Col>
+                <Col key={i}>
+                  <GenerateSeats seatNumbers={cols[i]} />
+                </Col>
               ))}
             </Row>
           );

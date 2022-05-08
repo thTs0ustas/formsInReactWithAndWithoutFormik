@@ -11,9 +11,9 @@ import {
   SessionButton,
   SessionDiv,
   TextContainer,
-} from "./styledComponents/MainTextStyles";
-import { BASE_URL } from "../../constants";
-import { movieDates, movieTime } from "./helpers/dateAndTimes";
+} from "../styledComponents/MainTextStyles";
+import { BASE_URL } from "../../../constants";
+import { movieDates, movieTime } from "../helpers/dateAndTimes";
 
 function MainText({ movie, screenings, id }) {
   const navigate = useNavigate();
@@ -74,4 +74,4 @@ MainText.propTypes = {
   id: PropTypes.number.isRequired,
 };
 
-export default MainText;
+export { MainText };

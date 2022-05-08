@@ -1,10 +1,9 @@
 import React from "react";
 import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
-import { Switch } from "../../components";
+import { MoviePageContainer, Switch } from "../../components";
 import NavBar from "../../components/NavBar";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
-import MoviePageContainer from "../../components/moviePage/MoviePageContainer";
 
 function MoviePageLayout() {
   return (

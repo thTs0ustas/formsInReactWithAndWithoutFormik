@@ -2,11 +2,11 @@ import { Toast, ToastHeader } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { ToastContainer } from "./StyledComponents/ToastContainer";
-import { clearError } from "../../rModel";
+import { clearError } from "../../features";
 
-function AlertToast({ error: { message, time } }) {
+function AlertToast({ error }) {
   const dispatch = useDispatch();
-
+  const { message, time } = error;
   return (
     <ToastContainer delay={3000} show={!!message} onClose={() => dispatch(clearError())} autohide>
       <ToastHeader closeButton={false}>
@@ -23,8 +23,6 @@ AlertToast.defaultProps = {
     message: "",
     time: "",
   },
-  message: "",
-  time: "",
 };
 
 AlertToast.propTypes = {
@@ -32,8 +30,6 @@ AlertToast.propTypes = {
     message: PropTypes.string,
     time: PropTypes.string,
   }),
-  message: PropTypes.string,
-  time: PropTypes.string,
 };
 
 export { AlertToast };

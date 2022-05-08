@@ -11,7 +11,7 @@ import image1 from "../../assets/imgs/movie-theater.jpg";
 
 function CarouselHero() {
   const { nowShowing } = useSelector((state) => state.nowPlaying);
-  const carouselMovies = useMemo(() => sampleSize(nowShowing, 4), []);
+  const carouselMovies = useMemo(() => sampleSize(nowShowing, 4), [nowShowing]);
 
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex) => {
