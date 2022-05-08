@@ -6,9 +6,10 @@ import { SeatDiv } from "../styledComponents";
 function GenerateSeats({ seatNumbers }) {
   return (
     <SeatDiv>
-      {seatNumbers.map(({ seatNumber, seatNumber: { row_letter, seat_num, id } }) => (
-        <Seat key={`${row_letter}_${seat_num}`} id={id} seatInfo={seatNumber} />
-      ))}
+      {seatNumbers.map((seatNumber) => {
+        const { row_letter, seat_num, id } = seatNumber;
+        return <Seat key={`${row_letter}_${seat_num}`} id={id} seatInfo={seatNumber} />;
+      })}
     </SeatDiv>
   );
 }

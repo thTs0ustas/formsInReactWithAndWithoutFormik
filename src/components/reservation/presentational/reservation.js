@@ -45,7 +45,7 @@ const ticketPropGetter = (props = {}) => ({
 });
 
 export function Reservation({
-  seat: { ticket, seats: seat },
+  seat: { seatToTicket, seats: seat },
   isMember,
   image,
   handleChange,
@@ -91,7 +91,7 @@ export function Reservation({
                   >
                     -
                   </TicketButton>
-                  <NumberOfTickets>{ticket.student}</NumberOfTickets>
+                  <NumberOfTickets>{seatToTicket.student}</NumberOfTickets>
                   <TicketButton
                     {...ticketPropGetter({
                       type: "student",
@@ -100,7 +100,7 @@ export function Reservation({
                     })}
                     disabled={
                       !screening ||
-                      disabledIncrement(ticket, {
+                      disabledIncrement(seatToTicket, {
                         seats: requests.seats[auditorium[0]],
                         reservedSeats: requests.reservedSeats[screening[0]],
                       })
@@ -135,7 +135,7 @@ export function Reservation({
                   >
                     -
                   </TicketButton>
-                  <NumberOfTickets>{ticket.member}</NumberOfTickets>
+                  <NumberOfTickets>{seatToTicket.member}</NumberOfTickets>
                   <TicketButton
                     {...ticketPropGetter({
                       type: "member",
@@ -144,7 +144,7 @@ export function Reservation({
                     })}
                     disabled={
                       !screening ||
-                      disabledIncrement(ticket, {
+                      disabledIncrement(seatToTicket, {
                         seats: requests.seats[auditorium[0]],
                         reservedSeats: requests.reservedSeats[screening],
                       })
@@ -176,7 +176,7 @@ export function Reservation({
                 >
                   -
                 </TicketButton>
-                <NumberOfTickets>{ticket.adult}</NumberOfTickets>
+                <NumberOfTickets>{seatToTicket.adult}</NumberOfTickets>
                 <TicketButton
                   {...ticketPropGetter({
                     type: "adult",
@@ -185,7 +185,7 @@ export function Reservation({
                   })}
                   disabled={
                     !screening ||
-                    disabledIncrement(ticket, {
+                    disabledIncrement(seatToTicket, {
                       seats: requests.seats[auditorium[0]],
                       reservedSeats: requests.reservedSeats[screening],
                     })
@@ -217,7 +217,7 @@ export function Reservation({
                 >
                   -
                 </TicketButton>
-                <NumberOfTickets>{ticket.child}</NumberOfTickets>
+                <NumberOfTickets>{seatToTicket.child}</NumberOfTickets>
                 <TicketButton
                   {...ticketPropGetter({
                     type: "child",
@@ -226,7 +226,7 @@ export function Reservation({
                   })}
                   disabled={
                     !screening ||
-                    disabledIncrement(ticket, {
+                    disabledIncrement(seatToTicket, {
                       seats: requests.seats[auditorium[0]],
                       reservedSeats: requests.reservedSeats[screening],
                     })
@@ -240,16 +240,16 @@ export function Reservation({
 
             <TicketInfo>
               <p>
-                You chose <strong>{ticket.sum}</strong> ticket(s)
+                You chose <strong>{seatToTicket.sum}</strong> ticket(s)
               </p>
 
               <p>
-                Price: <strong>{price(ticket).toFixed(2)}</strong>€
+                Price: <strong>{price(seatToTicket).toFixed(2)}</strong>€
               </p>
             </TicketInfo>
 
-            <SeatsModal disabled={ticket.sum > 0} sum={ticket?.sum} seat={seat}>
-              <SeatsContainer disable={screening && ticket.sum > 0}>
+            <SeatsModal disabled={seatToTicket.sum > 0} sum={seatToTicket?.sum} seat={seat}>
+              <SeatsContainer disable={screening && seatToTicket.sum > 0}>
                 <SeatsGrid>
                   <SeatMatrix />
                 </SeatsGrid>
@@ -268,14 +268,14 @@ export function Reservation({
                   </div>
                 </SeatLegend>
                 {!username ? (
-                  <GuestModal disabled={ticket.sum - keys(seat).length !== 0}>
+                  <GuestModal disabled={seatToTicket.sum - keys(seat).length !== 0}>
                     <GuestContainer>
                       <GuestSignup />
                     </GuestContainer>
                   </GuestModal>
                 ) : (
                   <ContinueButton
-                    disabled={ticket.sum - keys(seat).length !== 0}
+                    disabled={seatToTicket.sum - keys(seat).length !== 0}
                     onClick={handleContinueButton}
                     type='submit'
                   >

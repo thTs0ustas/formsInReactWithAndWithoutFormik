@@ -1,4 +1,5 @@
-import { addSeatAction, inputChangeAction, removeSeatAction } from "../../../model";
+import { addSeatAction, removeSeatAction } from "../../../model";
+import { setInputValues } from "../../../features";
 
 const handleSeatAdd = (dispatch) => (seat) => {
   dispatch(
@@ -14,7 +15,7 @@ const handleSeatRemove = (dispatch) => (id) => {
 
 const handleChange = (dispatch) => (event) => {
   dispatch(
-    inputChangeAction({
+    setInputValues({
       name: event.target.name,
       value: event.target.value,
     })
