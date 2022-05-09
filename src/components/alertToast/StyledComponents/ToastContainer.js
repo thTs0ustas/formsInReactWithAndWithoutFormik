@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Toast } from "react-bootstrap";
 
 const ToastContainer = styled(Toast)`
-  z-index: auto;
+  z-index: 9999;
   margin-top: 150px;
   margin-right: 5px;
   background-color: ${({ theme }) => theme.primary};

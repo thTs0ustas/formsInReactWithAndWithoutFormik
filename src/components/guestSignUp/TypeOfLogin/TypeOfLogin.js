@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { SignupComponent } from "../signupComponent/SignupComponent";
+import { SignInForm } from "../../signInForm/signupComponent";
 
 const propsGetter = (props) => ({
   "aria-label": "type of signup",
@@ -11,14 +12,14 @@ const propsGetter = (props) => ({
 export function TypeOfLogin({ typeOfLogin, onClick }) {
   return (
     <>
-      <h1>SIGN UP AS A {typeOfLogin ? "GUEST" : "MEMBER"}</h1>
+      <h1>SIGN UP AS A {!typeOfLogin ? "GUEST" : "MEMBER"}</h1>
       <p>
         {!typeOfLogin
-          ? "If your are already a member sign in"
+          ? "If your are already a member sign in "
           : "If you want to continue as a guest press "}
-        <strong {...propsGetter(onClick)}>here</strong>
+        <strong {...propsGetter({ onClick })}>here</strong>
       </p>
-      <SignupComponent />
+      {!typeOfLogin ? <SignupComponent /> : <SignInForm isInModal />}
     </>
   );
 }

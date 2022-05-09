@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import {theme }  from '../../theme/GlobalStyles/index'
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 export const CarouselButton = styled.button`

@@ -18,8 +18,10 @@ import { adminUsersEpics } from "../../components/admin/users/epics";
 import { adminScreeningsEpics } from "../../components/admin/screenings/epics";
 import { paymentEpic } from "../../stripe/epics/paymentEpic";
 import { paymentToTicketEpic } from "../../components/payment/epics/paymentToTicketEpic";
+import { addGuestEpic } from "../../components/guestSignUp/epics/addGuestEpic";
 
 const rootEpic = combineEpics(
+  addGuestEpic,
   getMovieForResEpic,
   paymentEpic,
   paymentToTicketEpic,

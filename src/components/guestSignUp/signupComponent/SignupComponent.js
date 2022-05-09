@@ -1,37 +1,33 @@
 import React, { useState } from "react";
-import axios from "axios";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { InputError, InputField, InputFieldContainer } from "../../../theme";
 import { ContinueButton } from "../../signInForm";
+import addGuestUserAction from "../actions/addGuestUserAction";
 import { useGuestSignup } from "../hooks/useGuestSignup";
-import { errorHandling } from "../errors/errorHandling";
-import { selectors, useProvider } from "../../../model";
 
 function SignupComponent() {
-  const [{ BASE_URL }] = useProvider([selectors.url]);
-  const [error, setError] = useState("");
-  const { setState } = useGuestSignup();
+  const dispatch = useDispatch();
+  const [error] = useState("");
+  const { id } = useParams();
+
+  useGuestSignup(id);
   return (
     <Formik
       initialValues={{ first_name: "", last_name: "", email: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        axios
-          .post(`${BASE_URL}/users/guest`, {
+        dispatch(
+          addGuestUserAction({
             first_name: values.first_name,
             last_name: values.last_name,
             email: values.email,
           })
-          .then((res) => {
-            if (errorHandling(res.data)) {
-              setError(res.data.message);
-              resetForm();
-            } else {
-              resetForm();
-              setState(res.data);
-            }
-          })
-          .then(() => setSubmitting(false));
+        );
+
+        resetForm();
+        setSubmitting(false);
       }}
       validationSchema={Yup.object({
         first_name: Yup.string()

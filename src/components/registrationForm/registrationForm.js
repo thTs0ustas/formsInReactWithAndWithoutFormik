@@ -6,20 +6,10 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ContinueButton } from "../form/styles/styles";
-import { Container, InputBox, UserDetails } from "./styledComponents";
-import registerUserAction from "./actions/registerUserAction";
 
-const INITIAL_STATE = {
-  username: "",
-  password: "",
-  first_name: "",
-  last_name: "",
-  email: "",
-  address: "",
-  postal: "",
-  birth_date: "",
-};
+import { Container, ContinueButton, InputBox, UserDetails } from "./styledComponents";
+import registerUserAction from "./actions/registerUserAction";
+import { INITIAL_STATE } from "./data/initialState";
 
 export function RegistrationForm() {
   const { username } = useSelector((state) => state.user);
@@ -65,7 +55,7 @@ export function RegistrationForm() {
           birth_date: Yup.date("Must be a date")
             .min(new Date(2000, 0, 1))
             .max(new Date())
-            .typeError("A valid (YYYY:MM:DD) date is required")
+            .typeError("A valid date is required")
             .required("Birthdate is required."),
         })}
       >

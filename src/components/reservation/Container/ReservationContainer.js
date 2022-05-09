@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Reservation } from "../presentational/reservation";
@@ -24,11 +24,10 @@ function ReservationContainer() {
   }));
   const dispatch = useDispatch();
   const { seatToTicket } = useSelector((state) => state.seat);
+  const { image } = useSelector((state) => state.reservation.requests.movies);
+
   const [state] = useProvider(["reservation.inputValues", "reservation.response"]);
-
   const navigate = useNavigate();
-
-  const data = useLocation();
 
   const { spinner, setSpinner, handleContinueButton } = useContinueButtonHandler(seatToTicket);
 
@@ -37,7 +36,7 @@ function ReservationContainer() {
   const props = {
     seat,
     isMember,
-    image: data.state,
+    image: `${BASE_URL}${image}`,
     handleContinueButton,
     handleChange: handleChange(dispatch),
     handleSeatRemove: handleSeatRemove(dispatch),

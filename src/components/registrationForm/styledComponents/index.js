@@ -10,7 +10,7 @@ const Container = styled.div`
   //box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 
   & > h1 {
-    color: #f7dabb;
+    color: ${(props) => props.theme.secondary};
     font-weight: 500;
     padding-bottom: 30px;
     text-transform: uppercase;
@@ -18,7 +18,7 @@ const Container = styled.div`
   }
 
   & > h3 {
-    color: #f7dabb;
+    color: ${(props) => props.theme.secondary};
     font-weight: 400;
     text-transform: uppercase;
     position: relative;
@@ -39,7 +39,7 @@ const UserDetails = styled.div`
     flex-direction: column;
     margin-bottom: 20px;
     & span {
-      color: #f7dabb;
+      color: ${(props) => props.theme.secondary};
     }
   }
 `;
@@ -239,5 +239,49 @@ const Button = styled.button`
     box-shadow: 0.2px 0.2px 3px black;
   }
 `;
+const ContinueButton = styled.button`
+  display: inline-block;
+  padding: 10px 25px;
+  margin: 20px 0 0 0;
+  background-color: ${({ theme }) => theme.primary};
+  text-transform: uppercase;
+  text-align: center;
+  border: 0;
+  color: black;
+  font-size: 18px;
 
-export { Container, UserDetails, InputBox, Button };
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s ease-out 0s;
+
+  &:hover {
+    color: black;
+    background-color: ${({ theme }) => theme.secondary};
+  }
+`;
+export const FormOuterDiv = styled.div`
+  width: 100%;
+
+  & h1 {
+    font-size: 40px;
+    color: ${({ theme }) => theme.secondary};
+  }
+  & p {
+    margin-top: 20px;
+    font-size: 18px;
+    color: ${({ theme }) => theme.white};
+  }
+  @media (max-width: 768px) {
+    & h1 {
+      font-size: 20px;
+      color: #ffebc6;
+    }
+    & p {
+      margin-top: 20px;
+      font-size: 12px;
+      color: ${({ theme }) => theme.white};
+    }
+  }
+`;
+
+export { Container, UserDetails, InputBox, Button, ContinueButton };

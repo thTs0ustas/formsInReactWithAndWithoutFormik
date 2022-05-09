@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { useProvider, userLoginAction } from "../../../model";
-
-export const useGuestSignup = () => {
-  const [state, setState] = useState(null);
-  const [, dispatch] = useProvider();
-
+export const useGuestSignup = (id) => {
+  const { error } = useSelector((state) => state.error);
+  const navigate = useNavigate();
   useEffect(() => {
-    if (state && state.accessToken && state.username) {
-      dispatch(
-        userLoginAction({
-          username: state.username,
-          token: state.accessToken,
-          isMember: state.isMember,
-        })
-      );
+    if (error.message) {
+      navigate(`/reservation/${id}`);
     }
-  }, [state]);
-
-  return { state, setState };
+  }, [error]);
 };

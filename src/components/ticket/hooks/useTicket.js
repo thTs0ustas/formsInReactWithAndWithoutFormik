@@ -14,7 +14,6 @@ export const useTicket = () => {
     return { barcodeSchema, numbers };
   };
 
-  console.log(response);
   useEffect(() => {
     if (!isEmpty(response)) {
       const { userWithNewRes, reservedSeats } = response;

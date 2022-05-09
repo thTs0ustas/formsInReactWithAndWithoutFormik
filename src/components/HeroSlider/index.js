@@ -35,9 +35,7 @@ function CarouselHero() {
                 <p>{description}</p>
                 <CarouselButton>
                   <ButtonIcon />
-                  <Link to={`/reservation/${item.id}`} state={`${BASE_URL}${image}`}>
-                    Book Now
-                  </Link>
+                  <Link to={`/reservation/${item.id}`}>Book Now</Link>
                 </CarouselButton>
               </Carousel.Caption>
             </Carousel.Item>

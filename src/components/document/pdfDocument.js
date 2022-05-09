@@ -3,9 +3,6 @@ import { Document, Page, Text, View } from "@react-pdf/renderer";
 import PropTypes from "prop-types";
 import { styles } from "./documentStyles/documentStyles";
 
-// Create styles
-
-// Create Document Component
 function MyDocument({ children }) {
   return (
     <Document>
