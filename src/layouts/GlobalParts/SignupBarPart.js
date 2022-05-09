@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavDropdownDiv } from "../homePage/styledComponents/styles";
 import { SignInButton, SignUpButton } from "../../theme";
 import logoutAction from "./actions/logoutAction";
+import { clearReservation, clearSeats } from "../../features";
 
 export function SignupBarPart() {
   const navigate = useNavigate();
@@ -37,6 +38,8 @@ export function SignupBarPart() {
         eventKey='4.2'
         onClick={() => {
           dispatch(logoutAction({ id, token }));
+          dispatch(clearReservation());
+          dispatch(clearSeats());
 
           navigate("/");
         }}

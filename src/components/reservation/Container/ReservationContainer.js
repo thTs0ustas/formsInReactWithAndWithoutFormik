@@ -24,7 +24,7 @@ function ReservationContainer() {
   }));
   const dispatch = useDispatch();
   const { seatToTicket } = useSelector((state) => state.seat);
-  const { image } = useSelector((state) => state.reservation.requests.movies);
+  const { movies } = useSelector((state) => state.reservation.requests);
 
   const [state] = useProvider(["reservation.inputValues", "reservation.response"]);
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ function ReservationContainer() {
   const props = {
     seat,
     isMember,
-    image: `${BASE_URL}${image}`,
+    image: `${BASE_URL}${movies?.image}`,
     handleContinueButton,
     handleChange: handleChange(dispatch),
     handleSeatRemove: handleSeatRemove(dispatch),

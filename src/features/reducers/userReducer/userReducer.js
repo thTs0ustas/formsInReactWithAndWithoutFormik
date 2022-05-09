@@ -78,6 +78,11 @@ const userReducer = createSlice({
       state.isAdmin = false;
       state.isLoggedIn = false;
       state.error = null;
+      state.address = null;
+      state.postal = null;
+      state.birth_date = null;
+      state.tickets = [];
+      state.history = [];
     },
     setTickets: (state, action) => {
       state.tickets.push(action.payload);
