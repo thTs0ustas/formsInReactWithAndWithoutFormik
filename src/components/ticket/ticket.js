@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { isEmpty } from "lodash";
 import { useReactToPrint } from "react-to-print";
+import { useSelector } from "react-redux";
 import { Barcode } from "./barcode/Barcode";
 import { Serial } from "./styledComponents/Serial";
 import { Table } from "./styledComponents/Table";
@@ -9,9 +10,9 @@ import { TicketContainer } from "./styledComponents/TicketContainer";
 import { Numbers } from "./styledComponents/Numbers";
 import { BiggerTd } from "./styledComponents/BiggerTd";
 import { Cinema, Info, MovieTitle, Title } from "./styledComponents/Misc";
-import { selectors, useProvider } from "../../model";
 import { useTicket } from "./hooks/useTicket";
 import { ContinueButton } from "../../theme";
+import { BASE_URL } from "../../constants";
 
 const pageStyle = `
   @page {
@@ -32,12 +33,8 @@ function Ticket() {
     content: () => componentRef.current,
     pageStyle,
   });
-  const [{ tickets, BASE_URL }] = useProvider([
-    selectors.tickets,
-    selectors.url,
-    selectors.inputMovies,
-  ]);
   useTicket();
+  const { tickets } = useSelector((state) => state.user);
   const recentTicket = tickets?.at(-1);
 
   return !isEmpty(tickets) ? (

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import moment from "moment";
-import { clearAdmin, setError } from "../../../rModel";
+import { clearAdmin, setError } from "../../../features";
 
 const useAdminPage = () => {
   const dispatch = useDispatch();

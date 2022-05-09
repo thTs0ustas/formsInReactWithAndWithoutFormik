@@ -23,20 +23,14 @@ function ReservationContainer() {
     seat: state.seat,
   }));
   const dispatch = useDispatch();
+  const { seatToTicket } = useSelector((state) => state.seat);
   const [state] = useProvider(["reservation.inputValues", "reservation.response"]);
-
-  const {
-    inputValues: { numOfTickets },
-  } = state;
 
   const navigate = useNavigate();
 
   const data = useLocation();
 
-  const { spinner, setSpinner, handleContinueButton } = useContinueButtonHandler(
-    BASE_URL,
-    numOfTickets
-  );
+  const { spinner, setSpinner, handleContinueButton } = useContinueButtonHandler(seatToTicket);
 
   useResContainer(dispatch);
 
@@ -55,7 +49,7 @@ function ReservationContainer() {
     inputValues,
     requests,
     state,
-    numOfTickets,
+    numOfTickets: seatToTicket,
     username,
   };
 

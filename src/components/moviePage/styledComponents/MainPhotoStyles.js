@@ -6,6 +6,11 @@ const Container = styled.div`
   justify-content: center;
   background-color: #000;
   padding: 0 !important;
+  & img {
+    width: 100%;
+    height: 45vw;
+    object-fit: cover;
+  }
 `;
 const Content = styled.div`
   position: absolute;

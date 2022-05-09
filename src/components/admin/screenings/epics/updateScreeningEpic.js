@@ -4,10 +4,10 @@ import { catchError, switchMap } from "rxjs/operators";
 import moment from "moment";
 import { from, map, of } from "rxjs";
 import { reject, sortBy } from "lodash";
-import { actionTypes } from "../../../../rModel/actions/actionTypes";
+import { actionTypes } from "../../../../features/actions/actionTypes";
 import { BASE_URL } from "../../../../constants";
-import { setError } from "../../../../rModel";
-import { updateAdminScreenings } from "../../../../rModel/reducers";
+import { setError } from "../../../../features";
+import { updateAdminScreenings } from "../../../../features/reducers";
 import { screeningsData } from "../../movies/helpers/screeningsData";
 
 const updateScreeningEpic = (action$, store$) =>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { keys, map } from "lodash";
+import { keys, map, upperFirst } from "lodash";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { genres } from "../data/genres";
@@ -84,7 +84,7 @@ function UpdateMovieForm({ data, onHide, show }) {
               <Form.Select
                 onChange={formik.handleChange}
                 name='genre'
-                value={formik.values.genre ? formik.values.genre : ""}
+                value={formik.values.genre ? upperFirst(formik.values.genre) : ""}
                 type='text'
               >
                 <option>Choose...</option>

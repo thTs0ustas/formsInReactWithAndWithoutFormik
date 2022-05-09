@@ -4,9 +4,9 @@ import { forEach, map, omit } from "lodash";
 import { from, mergeMap, of } from "rxjs";
 import axios from "axios";
 import moment from "moment";
-import { actionTypes } from "../../../rModel/actions/actionTypes";
+import { actionTypes } from "../../../features/actions/actionTypes";
 import { BASE_URL } from "../../../constants";
-import { setError, setInputValues, setRequests } from "../../../rModel";
+import { setError, setInputValues, setRequests } from "../../../features";
 
 const getMovieForResEpic = (action$) =>
   action$.pipe(

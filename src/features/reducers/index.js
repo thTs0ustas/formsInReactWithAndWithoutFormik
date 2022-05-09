@@ -50,11 +50,12 @@ export {
   clearReservation,
 } from "./reservationReducer/reservationReducer";
 export {
-  addSeats,
+  addSeat,
   removeSeat,
   addTicket,
   removeTicket,
   addReserved,
+  clearSeats,
 } from "./seatsReducer/seatsReducer";
 export {
   setUser,

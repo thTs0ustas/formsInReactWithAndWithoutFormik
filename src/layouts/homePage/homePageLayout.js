@@ -16,7 +16,7 @@ import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import Footer from "../../components/footer/Footer";
 import NavBar from "../../components/NavBar";
 import CarouselHero from "../../components/HeroSlider";
-import { CardComponent, PromoMember, PromoStudents, Switch } from "../../components";
+import { CardComponent, PromoCards, Switch } from "../../components";
 import { MoviesOfTheMonth } from "../../components/moviesOfTheMonth/moviesOfTheMonth";
 import { TitleHeader } from "../../components/moviesOfTheMonth/styledComponents/styles";
 import { useNowShowingMovies } from "./hooks/useNowShowingMovies";
@@ -55,14 +55,7 @@ function HomePageLayout() {
         <Features>
           <MoviesOfTheMonth />
           <Promos>
-            <Row>
-              <Col md={6}>
-                <PromoMember />
-              </Col>
-              <Col md={6}>
-                <PromoStudents />
-              </Col>
-            </Row>
+            <PromoCards />
           </Promos>
           <br />
           <Typography>

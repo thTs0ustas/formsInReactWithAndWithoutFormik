@@ -1,4 +1,4 @@
-import { setAdminMovies } from "../../../../rModel";
+import { setAdminMovies } from "../../../../features";
 
 const handleSorting = (data, setter) => (sortField, sortOrder) => {
   if (sortField) {

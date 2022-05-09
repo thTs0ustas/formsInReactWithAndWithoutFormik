@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { map, random } from "lodash";
-import { newTicketAction, resetReservation, selectors, useProvider } from "../../../model";
+import { isEmpty, map, random } from "lodash";
+import { useDispatch, useSelector } from "react-redux";
+import { clearReservation, clearSeats, setTickets } from "../../../features";
 
 export const useTicket = () => {
-  const [{ response, movies }, dispatch] = useProvider([
-    selectors.resResponse,
-    selectors.resMovies,
-  ]);
+  const dispatch = useDispatch();
+  const { response } = useSelector((state) => state.reservation);
+  const { movies } = useSelector((state) => state.reservation.requests);
 
   const barcode = () => {
     const numbers = map(Array(12), () => random(0, 9));
@@ -14,13 +14,14 @@ export const useTicket = () => {
     return { barcodeSchema, numbers };
   };
 
+  console.log(response);
   useEffect(() => {
-    if (response) {
+    if (!isEmpty(response)) {
       const { userWithNewRes, reservedSeats } = response;
       const payload = {
-        image: movies.image,
-        title: movies.title,
-        userid: userWithNewRes.id,
+        image: movies?.image,
+        title: movies?.title,
+        userid: userWithNewRes?.id,
         reservationId: userWithNewRes.Reservations.at(-1).id,
         hall: userWithNewRes.Reservations[0].Screening.auditorium_id,
         date: userWithNewRes.Reservations[0].Screening.movie_date.split("T")[0],
@@ -35,10 +36,11 @@ export const useTicket = () => {
         })),
       };
 
-      dispatch(newTicketAction(payload));
+      dispatch(setTickets(payload));
+      dispatch(clearReservation());
+      dispatch(clearSeats());
     }
-    dispatch(resetReservation());
-  }, [dispatch, movies, response]);
+  }, [response]);
 
   return {
     response,

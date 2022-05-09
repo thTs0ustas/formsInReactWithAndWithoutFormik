@@ -41,12 +41,7 @@ function SelectInputs({ handleChange, requests, movie, cinema, auditorium, scree
       </SelectContainer>
 
       <SelectContainer controlId='floatingInput' label='Screenings'>
-        <Input
-          value={screening}
-          name='screening'
-          onChange={(e) => handleChange(e)}
-          disabled={!auditorium}
-        >
+        <Input value={screening} name='screening' onChange={handleChange} disabled={!auditorium}>
           <option value='' aria-label='Choose screening' />
           {requests.screenings?.map(({ id, movie_starts, movie_ends, movie_date }) => (
             <option key={id} value={[id, movie_date]}>

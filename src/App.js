@@ -61,7 +61,7 @@ function App() {
               <Route path='payment_applied' element={<ThanksForYourPaymentLayout />} />
             </Route>
             <Route path='payments/subscription' element={<Subscription />} />
-            <Route path='/:username/tickets/new' element={<TicketLayout />} />
+            <Route path='/user/:id/tickets/new' element={<TicketLayout />} />
             <Route path='/reservation/:id' element={<ReservationLayout />} />
             <Route path='admin'>
               <Route index element={<AdminPage />} />

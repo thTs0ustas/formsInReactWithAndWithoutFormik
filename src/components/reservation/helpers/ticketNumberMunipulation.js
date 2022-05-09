@@ -1,8 +1,8 @@
 import { isEmpty } from "lodash";
 
 const disabledIncrement = (nValues, { seats, reservedSeats }) => {
-  const seatsLength = seats.length;
-  const reservedSeatsLength = reservedSeats.length;
+  const seatsLength = seats?.length;
+  const reservedSeatsLength = reservedSeats?.length;
   return (
     isEmpty(seats) ||
     seatsLength === reservedSeatsLength ||

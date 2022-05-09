@@ -2,15 +2,15 @@ import React from "react";
 import { chunk, groupBy, map } from "lodash";
 import { Col, Row } from "react-bootstrap";
 import { v4 as uuid4 } from "uuid";
+import { useSelector } from "react-redux";
 import { GenerateSeats } from "../generateSeatsRows/GenerateSeats";
 import { Container, Screen, SeatsContainer } from "../styledComponents";
 
-import { selectors, useProvider } from "../../../model";
-
 function SeatMatrix() {
-  const [{ auditorium, seats }] = useProvider([selectors.inputAuditoriums, selectors.resSeats]);
-  const seatsCol = (seatsArg) => map(groupBy(seatsArg, "row_letter"));
+  const { auditorium } = useSelector((state) => state.reservation.inputValues);
+  const { seats } = useSelector((state) => state.reservation.requests);
 
+  const seatsCol = (seatsArg) => map(groupBy(seatsArg, "row_letter"));
   return (
     <Container>
       <Screen>Screen</Screen>
@@ -22,7 +22,9 @@ function SeatMatrix() {
           return (
             <Row key={uuid4()}>
               {map(cols, (column, i) => (
-                <Col key={i}> {GenerateSeats(cols[i])}</Col>
+                <Col key={i}>
+                  <GenerateSeats seatNumbers={cols[i]} />
+                </Col>
               ))}
             </Row>
           );

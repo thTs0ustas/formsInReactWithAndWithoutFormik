@@ -4,10 +4,10 @@ import { catchError, switchMap } from "rxjs/operators";
 import moment from "moment";
 import { from, map, of } from "rxjs";
 import { reject } from "lodash";
-import { actionTypes } from "../../../../rModel/actions/actionTypes";
+import { actionTypes } from "../../../../features/actions/actionTypes";
 import { BASE_URL } from "../../../../constants";
-import { setError } from "../../../../rModel";
-import { updateAdminUsers } from "../../../../rModel/reducers";
+import { setError } from "../../../../features";
+import { updateAdminUsers } from "../../../../features/reducers";
 
 const updateUserEpic = (action$, store$) =>
   action$.pipe(

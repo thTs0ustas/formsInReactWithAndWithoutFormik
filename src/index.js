@@ -7,7 +7,7 @@ import { persistStore } from "redux-persist";
 import App from "./App";
 import { Provider } from "./model";
 import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
-import store from "./rModel/store/store";
+import store from "./features/store/store";
 
 const persistor = persistStore(store);
 

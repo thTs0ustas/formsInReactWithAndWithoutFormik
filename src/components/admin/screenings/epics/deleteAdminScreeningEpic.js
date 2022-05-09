@@ -3,10 +3,10 @@ import axios from "axios";
 import { catchError, switchMap } from "rxjs/operators";
 import moment from "moment";
 import { from, mergeMap, of } from "rxjs";
-import { actionTypes } from "../../../../rModel/actions/actionTypes";
+import { actionTypes } from "../../../../features/actions/actionTypes";
 import { BASE_URL } from "../../../../constants";
-import { setError } from "../../../../rModel";
-import { deleteScreening } from "../../../../rModel/reducers";
+import { setError } from "../../../../features";
+import { deleteScreening } from "../../../../features/reducers";
 
 const deleteAdminScreeningEpic = (action$) =>
   action$.pipe(
