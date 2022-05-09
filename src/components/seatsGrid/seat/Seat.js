@@ -8,13 +8,13 @@ export function Seat({ id, seatInfo }) {
   const { isAlreadyTaken, handleClick, seat, exists } = useSeat(id, seatInfo);
 
   return (
-    <IconDiv id={`seat_${seat.seat_num}`} disabled={isAlreadyTaken} onClick={handleClick}>
+    <IconDiv id={`seat_${seat?.seat_num}`} disabled={isAlreadyTaken} onClick={handleClick}>
       <MdEventSeat size={25} color={isAlreadyTaken ? "black" : exists ? "crimson" : "#FF9D69"} />
     </IconDiv>
   );
 }
 
 Seat.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   seatInfo: PropTypes.object.isRequired,
 };

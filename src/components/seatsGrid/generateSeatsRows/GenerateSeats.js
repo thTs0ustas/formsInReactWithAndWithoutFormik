@@ -14,16 +14,18 @@ function GenerateSeats({ seatNumbers }) {
   );
 }
 
+GenerateSeats.defaultProps = {
+  seatNumbers: [],
+};
+
 GenerateSeats.propTypes = {
   seatNumbers: PropTypes.arrayOf(
     PropTypes.shape({
-      seatNumber: PropTypes.shape({
-        row_letter: PropTypes.string.isRequired,
-        seat_num: PropTypes.number.isRequired,
-        id: PropTypes.string.isRequired,
-      }).isRequired,
+      row_letter: PropTypes.string.isRequired,
+      seat_num: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
     }).isRequired
-  ).isRequired,
+  ),
 };
 
 export { GenerateSeats };

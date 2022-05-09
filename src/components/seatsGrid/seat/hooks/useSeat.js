@@ -1,16 +1,17 @@
 import { keys, some } from "lodash";
-import { selectors, useProvider } from "../../../../model";
+import { useDispatch, useSelector } from "react-redux";
 import { handleSeatAdd, handleSeatRemove } from "../../../reservation/helpers";
 
 export const useSeat = (id, seatInfo) => {
-  const [{ seat, sum, reservedSeats, screening }, dispatch] = useProvider([
-    selectors.resReserved,
-    selectors.inputScreenings,
-    selectors.inputSum,
-    selectors.inputSeats,
-  ]);
+  const dispatch = useDispatch();
+  const {
+    seats,
+    seatToTicket: { sum },
+  } = useSelector((state) => state.seat);
+  const { reservedSeats } = useSelector((state) => state.reservation.requests);
+  const { screening } = useSelector((state) => state.reservation.inputValues);
 
-  const exists = !!seat[id];
+  const exists = !!seats[id];
 
   const isAlreadyTaken = some(
     reservedSeats?.[screening.split(",")[0]],
@@ -21,7 +22,7 @@ export const useSeat = (id, seatInfo) => {
     event.stopPropagation();
     event.preventDefault();
     if (exists) handleSeatRemove(dispatch)(id);
-    else if (keys(seat).length < sum) handleSeatAdd(dispatch)(seatInfo);
+    else if (keys(seats).length < sum) handleSeatAdd(dispatch)(seatInfo);
   };
-  return { isAlreadyTaken, handleClick, seat, exists };
+  return { isAlreadyTaken, handleClick, seats, exists };
 };

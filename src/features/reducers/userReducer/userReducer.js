@@ -80,7 +80,7 @@ const userReducer = createSlice({
       state.error = null;
     },
     setTickets: (state, action) => {
-      state.tickets = action.payload;
+      state.tickets.push(action.payload);
     },
     setHistory: (state, action) => {
       state.history = action.payload;

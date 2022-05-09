@@ -1,4 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "reservation",
+  storage,
+};
 
 const reservationReducer = createSlice({
   name: "reservation",
@@ -24,12 +31,17 @@ const reservationReducer = createSlice({
     },
     clearReservation: (state) => {
       state.requests = {};
-      state.inputValues = {};
+      state.inputValues = {
+        movie: "",
+        cinema: "",
+        auditorium: "",
+        screening: "",
+      };
       state.response = {};
     },
   },
 });
-
+const persistedReducer = persistReducer(persistConfig, reservationReducer.reducer);
 export const { setRequests, setInputValues, setResponse, clearReservation } =
   reservationReducer.actions;
-export default reservationReducer.reducer;
+export default persistedReducer;

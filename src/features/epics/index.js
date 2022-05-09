@@ -16,9 +16,13 @@ import adminMoviesEpics from "../../components/admin/movies/epics";
 import { getMovieForResEpic } from "../../components/reservation/epics/getMovieForResEpic";
 import { adminUsersEpics } from "../../components/admin/users/epics";
 import { adminScreeningsEpics } from "../../components/admin/screenings/epics";
+import { paymentEpic } from "../../stripe/epics/paymentEpic";
+import { paymentToTicketEpic } from "../../components/payment/epics/paymentToTicketEpic";
 
 const rootEpic = combineEpics(
   getMovieForResEpic,
+  paymentEpic,
+  paymentToTicketEpic,
   getMovieEpic,
   getNowShowingEpic,
   requestLoginEpic,

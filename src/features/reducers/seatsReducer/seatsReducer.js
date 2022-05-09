@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { filter } from "lodash/fp";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "seats",
+  storage,
+};
 
 const seatsReducer = createSlice({
   name: "seats",
@@ -32,35 +39,47 @@ const seatsReducer = createSlice({
       const studentSeat = filter({ discount_type: "student" })(state.seats);
 
       if (adultSeat.length < adult)
-        state.reservation.inputValues.seat[action.payload.value.id] = {
+        state.seats[action.payload.value.id] = {
           ...action.payload.value,
           discount_type: "adult",
         };
       else if (childSeat.length < child)
-        state.reservation.inputValues.seat[action.payload.value.id] = {
+        state.seats[action.payload.value.id] = {
           ...action.payload.value,
           discount_type: "child",
         };
       else if (memberSeat.length < member)
-        state.reservation.inputValues.seat[action.payload.value.id] = {
+        state.seats[action.payload.value.id] = {
           ...action.payload.value,
           discount_type: "member",
         };
       else if (studentSeat.length < student)
-        state.reservation.inputValues.seat[action.payload.value.id] = {
+        state.seats[action.payload.value.id] = {
           ...action.payload.value,
           discount_type: "student",
         };
     },
     removeSeat: (state, action) => {
-      state.tickets[action.payload] -= 1;
-      state.tickets.total -= 1;
+      delete state.seats[action.payload];
     },
     addReserved: (state, action) => {
       state.reserved = action.payload;
     },
+    clearSeats: (state) => {
+      state.seats = {};
+      state.seatToTicket = {
+        member: 0,
+        adult: 0,
+        child: 0,
+        student: 0,
+        sum: 0,
+      };
+      state.reserved = [];
+      state.error = null;
+    },
   },
 });
-
-export const { addSeats, removeSeat, addTicket, removeTicket, addReserved } = seatsReducer.actions;
-export default seatsReducer.reducer;
+const persistedReducer = persistReducer(persistConfig, seatsReducer.reducer);
+export const { addSeat, removeSeat, addTicket, removeTicket, addReserved, clearSeats } =
+  seatsReducer.actions;
+export default persistedReducer;

@@ -123,7 +123,6 @@ export function Reservation({
                     {...ticketPropGetter({
                       type: "member",
                       add: false,
-                      subtract: false,
                     })}
                     disabled={
                       !screening ||
