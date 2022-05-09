@@ -37,12 +37,10 @@ export const useTicket = () => {
       };
 
       dispatch(setTickets(payload));
+    }
+    return () => {
       dispatch(clearReservation());
       dispatch(clearSeats());
-    }
+    };
   }, [response]);
-
-  return {
-    response,
-  };
 };
