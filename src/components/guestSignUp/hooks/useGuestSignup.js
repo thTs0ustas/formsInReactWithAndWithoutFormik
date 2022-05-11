@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export const useGuestSignup = (id) => {
-  const { error } = useSelector((state) => state.error);
+  const { message } = useSelector((state) => state.error);
   const navigate = useNavigate();
   useEffect(() => {
-    if (error.message) {
+    if (message) {
       navigate(`/reservation/${id}`);
     }
-  }, [error]);
+  }, [message, navigate, id]);
 };

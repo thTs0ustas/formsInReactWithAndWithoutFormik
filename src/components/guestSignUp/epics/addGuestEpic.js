@@ -4,7 +4,7 @@ import { from, of } from "rxjs";
 import axios from "axios";
 import moment from "moment";
 import { BASE_URL } from "../../../constants";
-import { createUser, setError } from "../../../features";
+import { setError, setUser } from "../../../features";
 import { actionTypes } from "../../../features/actions/actionTypes";
 
 export const addGuestEpic = (action$) =>
@@ -16,10 +16,15 @@ export const addGuestEpic = (action$) =>
           const time = moment().format("HH:mm");
           return data.message
             ? setError({ message: data.message, time })
-            : createUser({
+            : setUser({
+                id: data.id,
                 username: data.username,
-                token: data.token,
+                token: data.accessToken,
                 isMember: data.isMember,
+                isAdmin: data.isAdmin,
+                email: data.email,
+                first_name: data.first_name,
+                last_name: data.last_name,
               });
         }),
         catchError((error) => {
