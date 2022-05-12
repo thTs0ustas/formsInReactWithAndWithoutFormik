@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 import { TableContainer } from "./styledComponents/TableContainer";
 import { TableStyles } from "./styledComponents/TableStyles";

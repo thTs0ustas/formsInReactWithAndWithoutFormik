@@ -1,12 +1,11 @@
 import { ofType } from "redux-observable";
-import { catchError, map, switchMap } from "rxjs/operators";
+import { catchError, mergeMap, switchMap } from "rxjs/operators";
 import { from, of } from "rxjs";
 import axios from "axios";
 import moment from "moment";
 
 import { BASE_URL } from "../../../../constants";
-import { setError } from "../../../../features";
-import { actionTypes } from "../../../../features/actions/actionTypes";
+import { actionTypes, setError } from "../../../../features";
 import { deleteMovieOfTheMonth } from "../../../../features/reducers/adminReducer/adminReducer";
 
 export const deleteMovieOfTheMonthEpic = (action$) =>
@@ -20,13 +19,17 @@ export const deleteMovieOfTheMonthEpic = (action$) =>
           },
         })
       ).pipe(
-        map(({ data }) => {
-          const time = moment().format("HH:mm:ss");
+        mergeMap(({ data }) => {
+          const time = moment().format("HH:mm");
           setError({ message: data.message, time });
-          return deleteMovieOfTheMonth(payload.movieId);
+
+          return [
+            deleteMovieOfTheMonth(payload.movieId),
+            setError({ message: "Movie deleted", time }),
+          ];
         }),
         catchError((error) => {
-          const time = moment().format("HH:mm:ss");
+          const time = moment().format("HH:mm");
           return of(setError({ message: error.message, time }));
         })
       )

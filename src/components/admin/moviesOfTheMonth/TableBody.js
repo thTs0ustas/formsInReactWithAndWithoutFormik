@@ -3,10 +3,10 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { Data } from "./styledComponents/Data";
+import { Data } from "./styledComponents";
 import { decideTdData } from "./helpers/conditional";
 import { AddNewMovieOfTheMonthForm } from "./AddNewMovieOfTheMonthForm/AddNewMovieOfTheMonthForm";
-import deleteMovieOfTheMonthAction from "./actions/deleteMovieOfTheMonthAction";
+import { deleteMovieOfTheMonthAction } from "./actions/deleteMovieOfTheMonthAction";
 import { userSelector } from "./selectors/selectors";
 
 function TableBody({ tableData, columns }) {
@@ -26,8 +26,7 @@ function TableBody({ tableData, columns }) {
           </td>
         </tr>
         <tr>
-          <td />
-          <td />
+          <td colSpan={2} />
           <td>
             <input onChange={(e) => setInclude(e.target.value)} />
           </td>

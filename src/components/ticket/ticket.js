@@ -28,13 +28,15 @@ const pageStyle = `
  
 `;
 function Ticket() {
+  const { tickets } = useSelector((state) => state.user);
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     pageStyle,
   });
+
   useTicket();
-  const { tickets } = useSelector((state) => state.user);
+
   const recentTicket = tickets?.at(-1);
 
   return !isEmpty(tickets) ? (

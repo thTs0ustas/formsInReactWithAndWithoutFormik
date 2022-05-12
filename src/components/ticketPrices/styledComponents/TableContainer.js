@@ -4,7 +4,7 @@ const TableContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
   height: 500px;
-  background-color: ${(props) => props.theme.bgMain};
+
   & h1 {
     color: ${(props) => props.theme.primary};
     text-align: center;

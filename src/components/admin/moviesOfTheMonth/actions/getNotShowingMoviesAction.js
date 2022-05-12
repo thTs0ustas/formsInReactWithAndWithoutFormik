@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { actionTypes } from "../../../../features/actions/actionTypes";
+import { actionTypes } from "../../../../features";
 
 const getNotShowingMoviesAction = createAction(actionTypes.GET_ADMIN_NOT_SHOWING_MOVIES);
 

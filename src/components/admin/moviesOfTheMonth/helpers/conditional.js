@@ -1,5 +1,5 @@
 import { upperFirst } from "lodash";
-import { IconContainer } from "../styledComponents/IconContainer";
+import { IconContainer } from "../styledComponents";
 
 const decideTdData = (data, accessor, Icon, index) => {
   let tdData;

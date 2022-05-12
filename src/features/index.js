@@ -1,3 +1,5 @@
+export { actionTypes } from "./actions/actionTypes";
+
 export {
   setAdminMovies,
   setAdminNotPlayingMovies,

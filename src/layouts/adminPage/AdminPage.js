@@ -3,12 +3,14 @@ import { Tabs } from "react-bootstrap";
 import { Header, Nav, NavDiv, SignUpBar } from "../../theme";
 import { Home, Switch } from "../../components";
 import { SignupBarPart } from "../GlobalParts/SignupBarPart";
-import { ShowMovies } from "../../components/admin/movies/ShowMovies";
-import { ShowUsers } from "../../components/admin/users/ShowUser";
+import {
+  ShowMovies,
+  ShowMoviesOfTheMonth,
+  ShowScreenings,
+  ShowUsers,
+} from "../../components/admin";
 import { TabsContainer } from "./styledComponents/TabsContainer";
 import { TabStyled } from "./styledComponents/Tabs";
-import { ShowScreenings } from "../../components/admin/screenings/ShowScreenings";
-import { ShowMoviesOfTheMonth } from "../../components/admin/moviesOfTheMonth/ShowMoviesOfTheMonth";
 import NavBar from "../../components/NavBar";
 import { useAdminPage } from "./hooks/useAdminPage";
 

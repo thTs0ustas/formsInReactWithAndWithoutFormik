@@ -31,7 +31,6 @@ export {
   updateAdminScreenings,
   deleteScreening,
 } from "./adminReducer/adminReducer";
-
 export { setError, clearError } from "./errorReducer/errorReducer";
 export {
   setMovieInfo,

@@ -5,8 +5,7 @@ import axios from "axios";
 import moment from "moment";
 
 import { BASE_URL } from "../../../../constants";
-import { setError } from "../../../../features";
-import { actionTypes } from "../../../../features/actions/actionTypes";
+import { actionTypes, setError } from "../../../../features";
 import getAdminMovieOfTheMonthAction from "../actions/getAdminMovieOfTheMonthAction";
 
 export const addNewMovieOfTheMonthEpic = (action$) =>

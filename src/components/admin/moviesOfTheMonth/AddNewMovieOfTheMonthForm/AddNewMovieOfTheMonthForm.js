@@ -1,34 +1,10 @@
 import { Button, Form, Modal } from "react-bootstrap";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
-import getNotShowingMoviesAction from "../actions/getNotShowingMoviesAction";
-import addNewMovieOfTheMonthAction from "../actions/addNewMovieOfTheMonthAction";
-import { userAdminSelector } from "../selectors/selectors";
+import { useAddNewMOTM } from "../hooks/useAddNewMOTM";
 
 function AddNewMovieOfTheMonthForm({ onHide, show } = {}) {
-  const { id, token, notPlayingMovies } = useSelector((state) => userAdminSelector(state));
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (show) dispatch(getNotShowingMoviesAction({ id, token }));
-  }, [show]);
-
-  const formik = useFormik({
-    initialValues: {
-      movie_id: 0,
-    },
-    onSubmit: (values) => {
-      dispatch(addNewMovieOfTheMonthAction({ id, token, movie_id: values.movie_id }));
-      onHide();
-      formik.resetForm();
-    },
-    validationSchema: Yup.object({
-      movie_id: Yup.number().required("Title required"),
-    }),
-  });
+  const { formik, notPlayingMovies } = useAddNewMOTM(show, onHide);
 
   return (
     <Modal show={show} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>

@@ -10,8 +10,7 @@ const TableStyles = styled.table`
   font-family: "Open Sans", sans-serif;
   color: ${(props) => props.theme.secondary};
   text-align: left;
-  //noinspection CssInvalidPropertyValueth {
-  background-color: ${(props) => props.theme.dark};
+
   padding: 10px;
   border-bottom: 1px solid ${(props) => props.theme.primary};
   font-weight: normal;
@@ -19,16 +18,25 @@ const TableStyles = styled.table`
   &:first-child {
     width: 85%;
   }
-}
-
-td {
-  padding: 10px;
-  border-bottom: 1px solid ${(props) => props.theme.primary};
-  font-weight: normal;
-}
-
-tr:hover {
-  background-color: ${(props) => props.theme.dark};
-}
+  th {
+    padding: 10px;
+    border-bottom: 1px solid ${(props) => props.theme.primary};
+    font-size: 14px;
+    text-align: left;
+    background-color: ${(props) => props.theme.dark};
+    border-right: 1px solid ${(props) => props.theme.primary};
+    border-left: 1px solid ${(props) => props.theme.primary};
+    border-top: 1px solid ${(props) => props.theme.primary};
+    font-weight: bold;
+  }
+  td {
+    padding: 10px;
+    background-color: ${(props) => props.theme.bgMain};
+    border-bottom: 1px solid ${(props) => props.theme.primary};
+    font-weight: normal;
+  }
+  tr:hover {
+    background-color: ${(props) => props.theme.dark};
+  }
 `;
 export { TableStyles };

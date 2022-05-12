@@ -1,31 +1,37 @@
 import { ofType } from "redux-observable";
-import { catchError, map } from "rxjs/operators";
-import { from, mergeMap, of } from "rxjs";
+import { catchError, mergeMap, switchMap } from "rxjs/operators";
+import { from, of } from "rxjs";
 import axios from "axios";
 import moment from "moment";
-import { actionTypes } from "../../../../features/actions/actionTypes";
+
 import { BASE_URL } from "../../../../constants";
-import { setAdminNotPlayingMovies, setError } from "../../../../features";
+import { actionTypes, setError } from "../../../../features";
+import { updateAdminIndividualMovie } from "../../../../features/reducers/adminReducer/adminReducer";
 
 export const getAdminNotShowingMoviesEpic = (action$) =>
   action$.pipe(
-    ofType(actionTypes.GET_ADMIN_NOT_SHOWING_MOVIES),
-    mergeMap(({ payload }) =>
+    ofType(actionTypes.UPDATE_MOVIE),
+    switchMap(({ payload }) =>
       from(
-        axios.get(`${BASE_URL}/admin/${payload.id}/getMoviesNotPlaying`, {
-          headers: {
-            authorization: `Bearer ${payload.token}`,
-          },
-        })
+        axios.put(
+          `${BASE_URL}/admin/${payload.id}/update/movie/${payload.movieId}`,
+          payload.values,
+          {
+            headers: {
+              authorization: `Bearer ${payload.token}`,
+            },
+          }
+        )
       ).pipe(
-        map(({ data }) => {
-          const time = moment().format("HH:mm:ss");
+        mergeMap(({ data }) => {
+          const time = moment().format("HH:mm");
+
           return data.message
             ? setError({ message: data.message, time })
-            : setAdminNotPlayingMovies(data);
+            : [updateAdminIndividualMovie(data), setError({ message: "Movie Updated", time })];
         }),
         catchError((error) => {
-          const time = moment().format("HH:mm:ss");
+          const time = moment().format("HH:mm");
           return of(setError({ message: error.message, time }));
         })
       )
