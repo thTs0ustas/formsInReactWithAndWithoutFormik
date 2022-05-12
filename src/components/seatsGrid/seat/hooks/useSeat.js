@@ -24,5 +24,5 @@ export const useSeat = (id, seatInfo) => {
     if (exists) handleSeatRemove(dispatch)(id);
     else if (keys(seats).length < sum) handleSeatAdd(dispatch)(seatInfo);
   };
-  return { isAlreadyTaken, handleClick, seats, exists };
+  return { isAlreadyTaken, handleClick, exists };
 };

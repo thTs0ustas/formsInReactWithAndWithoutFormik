@@ -15,7 +15,7 @@ import {
   TicketButton,
 } from "./innerComponents";
 
-import { disabledDecrement, disabledIncrement, price, PRICING } from "../helpers";
+import { disabledDecrement, disabledIncrement, price, PRICING, ticketPropGetter } from "../helpers";
 
 import {
   Container,
@@ -35,16 +35,9 @@ import {
 
 import { ContinueButton } from "../../../theme";
 import { STUDENT_DAY } from "../constants/STUDENT_DAY";
+import { withReservation } from "../Container/withReservation";
 
-const ticketPropGetter = (props = {}) => ({
-  type: "adult",
-  left: true,
-  subtract: true,
-  add: true,
-  ...props,
-});
-
-export function Reservation({
+function Reservation({
   seat: { seatToTicket, seats: seat },
   isMember,
   image,
@@ -295,10 +288,10 @@ export function Reservation({
     </>
   );
 }
+export default withReservation(Reservation);
 
 Reservation.defaultProps = {
   username: null,
-
   auditorium: [],
   seat: {},
   requests: {},

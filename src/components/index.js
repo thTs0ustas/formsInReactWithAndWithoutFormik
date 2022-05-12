@@ -5,7 +5,7 @@ export { MoviesOfTheMonth } from "./moviesOfTheMonth/moviesOfTheMonth";
 export { UpcomingMovies } from "./upcomingMovies/UpcomingMovies";
 export { Ticket } from "./ticket";
 export { SeatMatrix } from "./seatsGrid";
-export { ReservationContainer as Reservation } from "./reservation";
+export { Reservation } from "./reservation";
 export { LoginForm } from "./signInForm";
 export { GuestSignup } from "./guestSignUp";
 export { PromoCards } from "./Promos";

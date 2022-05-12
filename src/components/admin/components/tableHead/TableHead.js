@@ -50,4 +50,4 @@ TableHead.propTypes = {
   ).isRequired,
   handleSorting: PropTypes.func.isRequired,
 };
-export default TableHead;
+export { TableHead };

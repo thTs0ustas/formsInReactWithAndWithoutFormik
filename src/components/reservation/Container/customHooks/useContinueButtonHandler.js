@@ -29,13 +29,3 @@ const useContinueButtonHandler = (tickets) => {
 };
 
 export { useContinueButtonHandler };
-// paymentWithStripe(
-//   url,
-//   {
-//     data: dataForPayment(tickets),
-//     username,
-//   },
-//   { url, seat: inputValues.seat, screening: inputValues.screening[0] },
-//   dispatch,
-//   token
-// ).then((r) => r);

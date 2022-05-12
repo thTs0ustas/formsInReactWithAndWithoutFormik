@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { Provider as ReduxProvider } from "react-redux";
+import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import App from "./App";
-import { Provider } from "./model";
 import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
 import store from "./features/store/store";
 
@@ -14,14 +13,12 @@ const persistor = persistStore(store);
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ReduxProvider store={store}>
+      <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Provider>
-            <ScrollToTop />
-            <App />
-          </Provider>
+          <ScrollToTop />
+          <App />
         </PersistGate>
-      </ReduxProvider>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

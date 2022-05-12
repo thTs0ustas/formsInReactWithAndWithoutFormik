@@ -8,9 +8,8 @@ import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
 import { useAdminUsersTable } from "./hooks/useAdminUsersTable";
-import { PaginationBasic } from "./pagination/Pagination";
 import { adminSelector } from "./selectors/selectors";
-import { TableHead } from "../components";
+import { PaginationBasic, TableHead } from "../components";
 import { TableHeader } from "./styledComponents/TableData";
 
 function ShowUsers({ eventK }) {

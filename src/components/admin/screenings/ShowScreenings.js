@@ -7,8 +7,7 @@ import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
 import { useAdminScreeningsTable } from "./hooks/useAdminScreeningsTable";
-import { PaginationBasic } from "./pagination/Pagination";
-import { TableHead } from "../components";
+import { PaginationBasic, TableHead } from "../components";
 import { TableHeader } from "./styledComponents/TableData";
 import { adminSelector } from "./selectors/selectors";
 

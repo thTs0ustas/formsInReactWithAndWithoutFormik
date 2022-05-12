@@ -3,13 +3,13 @@ import { chunk, keys } from "lodash";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-// import TableHead from "./TableHead";
+
 import TableBody from "./TableBody";
 import { handleSorting } from "./helpers/handleSorting";
 import { columns } from "./data/columns";
 import { useMoviesTable } from "./hooks/useMoviesTable";
-import { PaginationBasic } from "./pagination/Pagination";
-import { TableHead } from "../components";
+
+import { PaginationBasic, TableHead } from "../components";
 import { TableHeader } from "./styledComponents/TableData";
 
 function ShowMovies({ eventK }) {

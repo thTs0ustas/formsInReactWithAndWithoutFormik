@@ -4,7 +4,7 @@ export { GuestModal } from "./guestModal/GuestModal";
 
 export { SeatsModal } from "./seatsModal/SeatsModal";
 
-export { TicketButton } from "./ticketButton/ticketButton";
+export { TicketButton } from "./ticketButton/TicketButton";
 
 export { MoviePoster } from "./moviePoster/MoviePoster";
 
