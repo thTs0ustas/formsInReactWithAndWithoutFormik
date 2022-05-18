@@ -3,7 +3,8 @@
 Clone the project (client side) from [GitHub](https://github.com/thTs0ustas/groupProjectTeam2s-client.git).\
 Start with `npm install`.
 Then run `npm start`.\
-And prepare to be amazed by the awesomeness of the project.
+
+You will need to clone server side from [GitHub](https://github.com/thTs0ustas/groupProjectTeam2s.git).
 
 ## Modules and Packages
 
