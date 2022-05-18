@@ -6,7 +6,7 @@ Then run `npm start`.\
 The master branch uses only React and react's Context Api
 In the development I moved the project to Redux and Redux Observables
 
-You will need to clone server side from [GitHub](https://github.com/thTs0ustas/groupProjectTeam2s.git).
+You will need to clone the server side from [GitHub](https://github.com/thTs0ustas/groupProjectTeam2s.git).
 
 ## Modules and Packages
 
