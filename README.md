@@ -3,6 +3,8 @@
 Clone the project (client side) from [GitHub](https://github.com/thTs0ustas/groupProjectTeam2s-client.git).\
 Start with `npm install`.
 Then run `npm start`.\
+The master branch uses only React and react's Context Api
+In the development I moved the project to Redux and Redux Observables
 
 You will need to clone server side from [GitHub](https://github.com/thTs0ustas/groupProjectTeam2s.git).
 
