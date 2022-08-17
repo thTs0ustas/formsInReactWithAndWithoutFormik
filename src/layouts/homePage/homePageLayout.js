@@ -1,4 +1,3 @@
-import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 import {
@@ -12,11 +11,11 @@ import {
 
 import { Header, SignUpBar } from "../../theme";
 
-import { SignupBarPart } from "../GlobalParts/SignupBarPart";
-import Footer from "../../components/footer/Footer";
-import NavBar from "../../components/NavBar";
-import CarouselHero from "../../components/HeroSlider";
 import { CardComponent, MoviesOfTheMonth, PromoCards, Switch, TitleHeader } from "../../components";
+import Footer from "../../components/footer/Footer";
+import CarouselHero from "../../components/HeroSlider";
+import NavBar from "../../components/NavBar";
+import { SignupBarPart } from "../GlobalParts/SignupBarPart";
 import { useNowShowingMovies } from "./hooks/useNowShowingMovies";
 
 function HomePageLayout() {

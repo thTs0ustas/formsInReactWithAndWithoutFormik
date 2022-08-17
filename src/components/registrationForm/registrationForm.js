@@ -48,8 +48,8 @@ export function RegistrationForm() {
           address: Yup.string().required("Address is required."),
           email: Yup.string().email("Invalid email format.").required("Email is required."),
           postal: Yup.number("Must be a number.")
-            .min(5, "Must be 5 numbers")
-            .max(5, "Must be 5 numbers")
+            // .min(4, "Must be 5 numbers")
+            // .max(6, "Must be 5 numbers")
             .typeError("A number is required")
             .required("Postal is required."),
           birth_date: Yup.date("Must be a date")

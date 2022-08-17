@@ -8,6 +8,6 @@ const PRICING = {
 };
 
 const price = (tickets) =>
-  reduce(keys(tickets).slice(0, -1), (sum, ticket) => sum + PRICING[ticket] * tickets[ticket], 0);
+  reduce(keys(tickets).slice(), (sum, ticket) => sum + PRICING[ticket] * tickets[ticket], 0);
 
 export { PRICING, price };
