@@ -36,7 +36,7 @@ function App() {
   } = useSelector((state) => state);
 
   return (
-    <ThemeProvider theme={theme[themeStyle]}>
+    <ThemeProvider theme={theme?.[themeStyle]}>
       <GlobalStyles />
 
       <div className='App'>

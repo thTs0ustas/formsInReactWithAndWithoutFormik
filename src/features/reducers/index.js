@@ -6,8 +6,10 @@ import seatReducer from "./seatsReducer/seatsReducer";
 import movieInfoReducer from "./moviePageReducer/moviePageReducer";
 import errorReducer from "./errorReducer/errorReducer";
 import themeReducer from "./themeReducer/themeReducer";
+import { getHistoryApi } from "../queries/useGetHistoryQuery";
 
 export default combineReducers({
+  [getHistoryApi?.reducerPath]: getHistoryApi?.reducer,
   user: userReducer,
   admin: adminReducer,
   reservation: reservationReducer,

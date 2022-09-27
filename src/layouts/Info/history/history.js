@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { map } from "lodash";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   BottomDiv,
   CardNum,
@@ -12,17 +12,20 @@ import {
   TopDiv,
 } from "./historyElements";
 import { BASE_URL } from "../../../constants";
-import getHistoryAction from "../actions/getHistoryAction";
+import { useGetHistoryQuery } from "../../../features/queries/useGetHistoryQuery";
 
 function History() {
-  const { id, history } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.user);
+  const { data } = useGetHistoryQuery(id);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getHistoryAction(id));
-  }, []);
+  // console.log(data, error, isLoading);
+  // useEffect(() => {
+  //   dispatch(getHistoryAction(id));
+  // }, []);
 
-  const data2 = history?.[0]?.Reservations;
+  const data2 = data?.[0]?.Reservations;
+
   const reservation = map(data2, (item) => item);
 
   return (

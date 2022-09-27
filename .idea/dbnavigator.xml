@@ -67,7 +67,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="ab8c3061-8f81-4346-be6e-7c3e79c21d1f" active="false" signed="false">
+      <connection id="ab8c3061-8f81-4346-be6e-7c3e79c21d1f" active="true" signed="false">
         <database>
           <name value="Retro_cinema" />
           <description value="" />
@@ -192,6 +192,7 @@
         <object-type name="FUNCTION" sorting-type="NAME" />
         <object-type name="PROCEDURE" sorting-type="NAME" />
         <object-type name="ARGUMENT" sorting-type="POSITION" />
+        <object-type name="TYPE ATTRIBUTE" sorting-type="POSITION" />
       </sorting>
       <default-editors>
         <object-type name="VIEW" editor-type="SELECTION" />
@@ -238,11 +239,11 @@
         <nulls-first value="true" />
         <max-sorting-columns value="4" />
       </sorting>
-      <tracking-columns>
-        <columnNames value="" />
+      <audit-columns>
+        <column-names value="" />
         <visible value="true" />
         <editable value="false" />
-      </tracking-columns>
+      </audit-columns>
     </dataset-grid-settings>
     <dataset-editor-settings>
       <text-editor-popup>
